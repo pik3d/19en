@@ -4,7 +4,7 @@ pik3d v.19.3 framework
 
 When exploring the properties of a time-varying surface, it is convenient
 to store, process and display a set of images (frames/matrices) as a whole.
-Such a sequence is called a STACK of images (perhaps from one frame).
+Such a sequence is called a STACK of images ( perhaps from one frame ).
 
 The framework offers a data storage/exchange standard: ###-format and
 base set of commands for processing and displaying stacks.
@@ -43,15 +43,15 @@ The launcher technology is used ("launch" - to launch, start). Launcher
 encapsulates the starting configuration of the JAVA machine.
 
 The user does not encounter JAVA anywhere. It doesn't even need to be installed.
-It is enought to expand the JAVA installation archive in some folder.
-Launchers find out its position through an environment variable.
+It is enought to unpack the JAVA installation archive in some folder.
+Launchers find out its location through an environment variable.
 
 The framework has simple tools for creating a new command in JAVA. Additional
 commands can be implemented in any other convenient algorithmic language.
 
 In a simple case, the processing program is a script ( .bat or .cmd).
 From command to command, data is transferred in the form of ###-format files
-or by means of "pipe"(this saves time and disk space).
+or by means of "pipe"( this saves time and disk space ).
 
 The framework can be installed on Windows 7, 10.
 Version 19.3 is compiled with JAVA-19 using javaFX .
@@ -59,6 +59,7 @@ Version 19.3 is compiled with JAVA-19 using javaFX .
 Description of the framework, formats and install procedure in the file:
 pik3d_DOC.html (contained in the install archive: pik3d.zip).
 
+To exchange large data ###-format includes binary data presentation.
 For reading the ###-format in the ImageJ editor, ###_Reader_ImageJ.jar plugin
 is implemented. To read/write ###-matrices in PYTHON - package: kadr.py.
 
