@@ -70,5 +70,5 @@ To download and install:
   - read the section "INSTALLING pik3d";
   - after install, scripts(_run.cmd) in demo folders are available to execute.
 
-author: K.A. Ilyashenko, e-mail: kilyashenko@gmail.com
+<p>author: K.A. Ilyashenko, e-mail: kilyashenko@gmail.com</p>
 Error messages, comments, suggestions  are  welcome.
