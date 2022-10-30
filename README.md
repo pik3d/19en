@@ -1,4 +1,4 @@
-THis is only README.md translation:  https://github.com/pik3d/19
+THis is only translation to ENGLISH:  https://github.com/pik3d/19
 
 pik3d v.19.3 framework
 
