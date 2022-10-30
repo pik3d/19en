@@ -1,3 +1,5 @@
+THis is only README.md translation:  https://github.com/pik3d/19
+
 pik3d v.19.3 framework
 
     PROCESSING AND 3D-DISPLAY OF MATRICES/FRAMES AND THEIR SEQUENCES
