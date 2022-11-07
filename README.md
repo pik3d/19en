@@ -1,5 +1,5 @@
 ![head](/assets/images/830x290.jpg)
-pik3d v.19.3 framework
+pik3d v.19.3 framework, Russian version: https://github.com/pik3d/19
 
     PROCESSING AND 3D-DISPLAY OF MATRICES/FRAMES AND THEIR SEQUENCES
 
@@ -50,7 +50,7 @@ Launchers find out its location through an environment variable.
 The framework has simple tools for creating a new command in JAVA. Additional
 commands can be implemented in any other convenient algorithmic language.
 
-In a simple case, the processing program is a script ( .bat or .cmd).
+In a simple case, the processing program is a script( .bat or .cmd ).
 From command to command, data is transferred in the form of ###-format files
 or by means of "pipe"( this saves time and disk space ).
 
@@ -68,7 +68,7 @@ Example images:
 ![4_view](/assets/images/4view.jpg)
 ![minMAJ](/assets/images/MajMin_830.jpg)
 To download and install:
-  - in the table (top of the page) click the file: pik3den.zip;
+  - in the table (top of the page) click the file: pik3d.zip;
   - in the window that opens, on the right, click the button: Download (~ 1MB);
   - unpack the file: pik3d.zip in some folder;
   - click the file: pik3d_DOC.html - it should open in the default browser;
