@@ -1,5 +1,4 @@
-THis is only translation to ENGLISH:  https://github.com/pik3d/19
-
+![head](/assets/images/830x290.jpg)
 pik3d v.19.3 framework
 
     PROCESSING AND 3D-DISPLAY OF MATRICES/FRAMES AND THEIR SEQUENCES
@@ -65,8 +64,11 @@ To exchange large data ###-format includes binary data presentation.
 For reading the ###-format in the ImageJ editor, ###_Reader_ImageJ.jar plugin
 is implemented. To read/write ###-matrices in PYTHON - package: kadr.py.
 
+Example images:
+![4_view](/assets/images/4view.jpg)
+![minMAJ](/assets/images/MajMin_830.jpg)
 To download and install:
-  - in the table (top of the page) click the file: pik3d.zip;
+  - in the table (top of the page) click the file: pik3den.zip;
   - in the window that opens, on the right, click the button: Download (~ 1MB);
   - unpack the file: pik3d.zip in some folder;
   - click the file: pik3d_DOC.html - it should open in the default browser;

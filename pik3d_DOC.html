@@ -1,0 +1,1718 @@
+<html>
+<head><meta http-equiv=Content-Type content="text/html; charset=windows-1251">
+<title>pik3d_DOC</title>
+<style><!--
+body {background:white; color:Black; font-size:14px; line-height:13px;}
+a:link, a:visited {color:blue; text-decoration:none;}
+o{font-weight:bold; Color:#a300a3;} a{font-weight:bold;}
+r{Color:RED;font-weight:bold;}
+g{Color:#3db84e;font-weight:bold;}
+n{Color:#0050ff;font-weight:bold;}
+f{font-weight:normal; Color:#0047b3; font-family:'Lucida Console'; font-size:11px}
+--></style></head><body><!--onload="document.location.href='#gel'">-->
+
+<h5><pre><a name='s3d'><f>pik3d - framework for processing and 3d-display of matrices and their sequences
+        Help has standard HTML navigation: &lt;Home>, &lt;End>, &lt;Alt+Left>, <a href="#ins">links</a> ...
+</f><a name='ogl'></a>
+<a href='#fwk'>DESCRIPTION of&nbsp; pik3d &nbsp;v.19.3.2 </a>
+<a href="#ins">pik3d INSTALLATION </a>
+<a href="#dat">###-format of the data: FRAME, STACK </a>
+<a href="#cmd">COMMANDS </a>
+
+  <a href='#sss'>s3d -"Surface-3D" </a>                             ! 3D-display of the Frame, Stack
+
+  <a href='#40' >stk  ii  [jj=1  [kk=1  [v=0]]] </a>                ! Create new Stack
+  <a href='#fmt'>fmt    Stk  [ T|I2|F4|D8  [ BE|LE ]] </a>          ! Convert format
+  <a href='#tt' >...| tt /</a>                                      ! Output Std.Out to Console == | fmt #
+  <a href='#ren'>renam  Stk  name  [index=1] </a>                   ! Rename Frames:  name_NN
+
+  <a href='#djk'>      STACK PART: Stk[ di, dj, dk ] </a>           ! index subset/ Slice
+  <a href='#get'>get          Stk     [ di, dj, dk ] </a>           ! get Slice of the Stack
+  <a href='#sep'>sep   Part   Stk     [ di, dj, dk ] </a>           ! set Slice of the Stack
+  <a href='#dim'>dim32        Stk </a>                              ! matrix 3d --> 2d
+  <a href='#put'>put   Part   Stk     [i=1 [j=1 [k=1]]] </a>        ! put continuous Part
+  <a href='#add'>add   Part   Stk     [i=1 [j=1 [k=1]]] </a>        ! add continuous Part
+  <a href='#sec'>sec          Stk      i=n| j=n| k=n </a>           ! Full Cross-Section --> Matrix
+
+  <a href="#60" >gauss         [r=2 [ width=3 ]] </a>               ! normalized Gaussian filter
+  <a href="#bel">bell  K "x y h r"   ["x1 y1 h1 r1"    ["x2 y2 h2 r2"   ]] </a>! add Gaussian "Bell"
+  <a href="#wav">wave  K "x y h r a" ["x1 y1 h1 r1 a1" ["x2 y2 h2 r2 a2"]] </a>! add Gaussian "Wave"
+  <a href="#gel">gen3d  config </a>                                 ! "3d-Stack Generator"
+
+  <a href="#mul">mul   A  B </a>                                    ! Matrix Multiplication
+  <a href="#dif">dif   A  0 | A  1 |  A  B </a>                     ! Difference of the Matrix/ Stack
+  <a href="#inv">inv   A </a>                                       ! Invert Matrix
+  <a href="#sys">sys   A  b </a>                                    ! Linear System Solver
+  <a href="#mnk">lss   XY   [N=1]  [/vis] </a>                      ! Spline by <r>L</r>east <r>S</r>quares <r>S</r>pline
+  <a href="#spl">spl  SPL X </a>                                    ! get values of the Spline
+
+  <a href="#tra">tra    Stk </a>                                    ! all Stack Frames Transposition
+  <a href="#tra">rot90  Stk </a>                                    ! Rotate Frames on 90 degrees
+  <a href="#120">sv  S  (+-*/'|exp|ln|db)  value </a>               ! Stack-Value operations
+  <a href="#130">ss  A  (+-*/')            B </a>                   ! Stack-Stack operations
+
+  <a href="#140">noise     Stk  [amp =.1] </a>                      ! add "White Noise"
+  <a href="#145">gnoise    Stk  [R=.1] </a>                         ! add "Gaussian Noise", sigma=R/2
+  <a href="#160">top       Stk   level </a>                         ! "Cut Top"
+  <a href="#170">bot       Stk  [level=0] </a>                      ! "Cut Bottom"
+  <a href="#180">blur      Stk  [R=2] </a>                          ! Smoothing, "Gaussian Blur"
+  <a href="#190">filtr     Stk   Fltr </a>                          ! Filter
+
+  <a href="#210">ma    Stk  [ N=5 ] </a>                            ! Moving Average
+  <a href="#220">sma   Stk  [ N=5     [ level=0  ]] </a>            ! Subtract Moving Average
+  <a href="#his">hist  Stk  [ Frame=1 [ Nint=200 ]] </a>            ! Frame Histogram
+
+  <a href="#vis">vic   Stk  [Frame=1] [jx=0] j1 [j2 [j3 [...]]]</a> ! Visualize Columns
+  <a href="#vis">vics  ---"---"---"---"---"---"---"---"---"--- </a> ! --"---"---"---"-- with <r>Spline</r>
+  <a href="#vip">vimp  config </a>                                  ! --"---"---"---"-- <r>Multiple Stacks</r>
+
+<a href="#gra">Use of 2D-graphics </a>
+
+  <a href="#tif">tif   File.tif | Config  [Npro=99999] </a>         ! Show .TIF-clips
+
+  <a href="#jj" >jj    File.java  [arg1 ...] </a>                   ! Execute File.java
+
+<a href="#pik">Most used pik.io methods </a>
+<a href="#jc" >Create New pik3d Command, prepare Launcher </a>
+________________________________________________________________________________________
+<a name='sss'></a>
+  <o>command: s3d -"Surface-3D" display Matrix/ Frame and their sequences
+</o>
+	 <a href='#bb'>Startup, initial parameters</a>
+	 <a href='#st'>Stack viewing</a>
+	 <a href='#os'>Map,  Axes,  smooth/ blur</a>
+	 <a href='#cf'>Configuration</a>
+	 <a href='#pp'>Load Stack, Details, Lines</a>
+	 <a href='#ss'>Cross Sections</a>
+	 <a href='#pal'>Colors</a>
+
+    <o>Coordinate system  and  viewing / lighting  angles</o>
+
+Let's represent the matrix as a rectangle (diagram below).
+Axis OX - "Rows" - direction from top to bottom.
+Axis OY - "Columns" - direction to the right.
+The upward direction above the XOY plane corresponds to the axis: OZ.
+
+Consider a matrix element that is in the <r>i</r>-row, <r>j</r>-column and has the value <r>m[i,j]</r>
+
+	O_____<r>j</r>_______Y        |<r>Z</r>
+	|     |     |          |
+	|     |     | ---3D--> |  <r>z=m[i,j]</r>
+	|     |     |          |   |
+	<r>i</r>_____<r>m[i,j]</r>|         O|___|__<r>y=j</r>______
+	|           |          /   |  /     / Y
+	|           |         /    | /     /
+	|___________|       <r>x=i</r>____|/     /
+	|                   /            /
+	X                  /____________/
+	                 X/
+The matrix element can be displayed as a point in 3D-space: X - matrix row,
+Y - matrix column, Z - element value. The set of such points forms a 3D-surface.
+
+A strict mapping would consist of a set of vertical rectangular bars.
+To simplify perception, the surface is smoothed.
+
+On the XOY plane, the element m[i,j ] corresponds to the square:  i-1&lt; x &lt;i,  j-1&lt; y &lt;j
+The corresponding surface element can be inclined, convex, concave ...
+The display is not entirely accurate, in other words - <r>illustrative</r>.
+
+The <o>observation point</o> is given by two angles ("Astronomical equatorial system"):
+ -"hour angle" - in the plane of the matrix from the OX-axis to the right to the OY-axis
+                 in the interval [-180, +180] degrees;
+ -"declination"- angle above the plane of the matrix: [-90,90] degrees.
+
+Viewing angles can be changed with the mouse while pressing the button and
+in the &lt;Ctrl+C> configuration( will be referenced as <o>^С</o> below ).
+
+The <o>position of the light source</o> is set by lighting angles.
+These angles can be changed with the keyboard: &lt;Ctrl> + &lt;arrows> and in the
+configuration: ^C.
+
+Angles are measured in degrees and displayed in the window title:  v(a,b),  *(c,d)
+where:
+       v - "view"  - <o>viewing  angles</o>: a - "hour", b - "declination"
+       * - "Light" - <o>lighting angles</o>: c - "hour", d - "declination"
+
+All angles are saved in configuration parameters and can be set at startup.
+
+Lighting angles greatly affect the view of a 3D-scene when they are close to viewing
+angles. It is convenient to first select the viewing angles and then set lighting close
+to view for fine tuning. This can be done by calling the config: <o>^C</o> and explicitly set.
+<a name='bb'></a>
+	<o>Startup, initial parameters</o>
+
+> s3d [ Stk [ config | _ [ main [ delaySec ]]]]
+
+> s3d                           - a prompt to select a stack is displayed
+> s3d   Stk                     - display Stack: Stk ;
+> s3d   Stk   config            - display Stack: Stk with config. of the 3D-scene
+                                  By default config. file has extention: .s3d,
+                                  if config. is absent, default scene config. is used;
+> s3d   Stk   config       main - it is possible to run several <r>s3d</r>, all follow up
+                                  windows will be synchronized with main, i.e. will show
+                                  frame number as main.
+> s3d   Stk            _   main - default config. for main.
+> s3d   Stk   config       main   <r>delay</r>  - delayed start, i.e. start Stack-clip after
+                                  <r>delay</r> second.
+Example( start 4 synchronized s3d-windows ):
+  It is useful to start several windows with synchronization from <r>.bat</r> or <r>.cmd</r> script
+<f>
+  rem            text after '!' is comment, it must be removed from script file
+  s3d  q      1  <r>main</r>   3    ! Stack q    , config=1.s3d, "main" with delay = 3 sec.
+  s3d  qAR2   2              ! Stack qAR2 , config=2.s3d
+  s3d  qmd    3              ! Stack qmd  , config=3.s3d
+  s3d  qmd15  4              ! Stack qmd15, config=4.s3d
+</f>
+	<o>Shortening and denotation used in Help:
+</o>
+<r>^Кey  = &lt;Ctrl + Key></r> - simultaneously pressed &lt;Ctrl> and  &lt;Key>
+<r>menu> - Context Menu</r> is calling in any place of the s3d-window by pressing <r>Right Mouse</r>
+        Almost all commands of the Context Menu can be executed with a key combination
+<r>^C    -"Config"</r> - call the Configuration Editor
+<a name='st'></a>
+	<o>menu>  Stack View</o>
+
+<r>&lt;Left> / &lt;Right></r> - (arrow keys) previous / next  frame;
+<r>&lt;Home> / &lt;End></r>   - "initial( 1-st )"/ "End( Last )" stack frame;
+<r>&lt;Mouse Wheel></r>    - frame "paging":  "Down"- forward, "Up"- backward;
+
+<r>&lt;Space></r>- Start/ Stop of the Clip( sequential show frame by frame );
+<r>^K</r>     - call dialog to define a frame number per second for clip;
+<a name='s3F2'></a><r>&lt;F2></r>   - save clip in the multipage .tif-file( prompt to select file );
+         Show clip - <a href='#tif'>command: tif </a>.
+         To copy window image to clipboard: <r>&lt;Alt + PrtSc></r>.
+
+<r>&lt;Drag></r> - Mouse movement while any button is pressed - rotate 3D-scene :
+         angles are showing in the window title: a-"alpha" and b-"beta".
+         Right/Left - rotation around a Vertical   Axis - config.param. <r>a</r>[deg.]
+         Up / Down  - rotation around a Horizontal Axis - config.param. <r>b</r>[deg.]
+<r>^+ / ^-</r>   - increase / decrease by ~10%  3D-scene image - config.param. <r>K</r>
+<r>&lt;Shift + H/L></r> - increase / decrease  Vertical size of 3D-scene - config.param. <r>Kh</r>
+<r>&lt;Shift + Left| Right| Up| Dn ></r> - shift 3D-scene in the window  - config.param. <r>sx, sy</r>
+<a name='os'></a>
+	<o>menu>  Map,  Axes,  smooth/ Blur</o>
+
+<r>^D -"Map Down"</r>- Lower/Raise "Map" half the height of the OZ axis.
+         Standard Map position is on the minimum value of the OZ axis.
+
+<r>^M -"Map Only"</r>- ON/ OFF TOP view of the matrix/ frame, i.e. standard matrix view:
+         rows to the Down, columns to the Right, value has color from "palette".
+
+<r>^+Mouse CLick</r>-"Read Value" pointed by cursor and Write it to the editable window.
+         Cursor must point to the "Map"(must be "Map Down" or "Map Only").
+         Record contains:  <r>Frame number:  [ row, column ] = value</r>.
+         To save text in the editable window: select text and click ^C (copy).
+         Paste (^V) it in any convenient Text Editor.
+         This functionality may be used to draw <a href="#lin">lines<a> on the "Map".
+
+<r>^A -"Axis"</r>- ON/ OFF Axis display.
+<a name='cob'></a>
+<r>^O -"Z-axis: min/MAX"</r> - call dialog to define parameters of the vertical Z-axis.
+     If the checkbox: "Automatic" is checked - min/MAX are found from the Stack data.
+     Clear it by pressing checkbox or <r>&lt;Tab></r> - transfer focus to the next component.
+     Sliders can be moved by Mouse or Keyboard: <r>&lt;Left>,&lt;Right>, &lt;Home>,&lt;End></r>.
+     While changing value by slider image changes immediately. It gives opportunity
+     to do fine adjustment of min/MAX and surface colors.
+     value can be entered from the keyboard. To activate new value press &lt;Enter>.
+     Image will be updated. If <r>&lt;Esc></r> is pressed, the dialog closes and the frame
+     is returned to its original state.
+
+<r>^B - Smoothing("Gaussian Blur")</r> - call Smoothing dialog.
+     The parameter is <r>"RADIUS of Gaussian bell"= 2*sigma</r> - is the visual size and
+     characteristic smoothing size( fragments > RADIUS remain after filtering ).
+     Fine tuning can be done by holding down the key: <r>&lt;Left></r> or <r>&lt;Right></r>.
+     At the end of the dialog, you need to click the button: <r>Save</r>. In case of <r>&lt;Esc></r>
+     the dialog closes and the frame is returned to its original state.
+
+     <r>DURING DIALOGUES: ^O and ^B  angles can be changed and ^A, ^D, ^M can be used</r>
+
+<r>&lt;Ctrl+F2></r> -Save Stack after ^B,^O (data can be changed by min/MAX cutting and smoothing)
+     Prompt to select Stack name. New Stack is saved in <a href='#bin'>binary ###-format F4 BE</a>.
+
+  Example (contains useful tricks for working with <r>^O and ^B</r> ):
+  Go to folder: pik3d\demo\bell2, start: _run.cmd, stop at frame 10-14 &lt;space>.
+  Press the buttons in sequence:
+
+  <r>^B</r> &lt;Tab> <r>2</r> &lt;Enter> &lt;Enter>
+  <r>^O</r> &lt;Tab> &lt;Tab> <r>12</r> &lt;Tab> &lt;Tab> <r>-6</r> &lt;Enter> &lt;Enter>
+
+  From the slider to slider in ^O dialog  you can navigate  using the arrows: UP/DOWN.
+
+  <r>^B</r>
+     <r>&lt;arrow RIGHT></r>  press and hold until the picture stops.
+     <r>&lt;arrow LEFT> </r>  press and hold until the picture stops.
+  <r>&lt;Esc></r>
+<a name='cf'></a>
+	<o>menu>  Configuration</o>
+
+All parameters: window position, dimensions, angles, colors, enabled functions ...
+are stored in structure "CONFIGURATION". In the process of working with s3d, the user
+sets these parameters, to get the desired display. A successful configuration can be
+temporarily saved to memory ^S and later restore - ^R. Restoring a saved configuration
+or the configurationwhat was at the moment of last stack loading.
+
+Viewing, editing and saving configuration in a file is possible after <r>^C</r> -"Config".
+An editable text box is displayed with parameters ?? that differ  from  default values.
+The window can be closed without saving changes: <r>&lt;Esc></r>.
+When editing, you can change, remove or add  any  valid parameters.  After editing,
+the configuration can be installed immediately or saved in a File. If some parameter is
+removed from the config window, then  during  installation / loading  it will  receive
+default value. It is usful  to set in config.editor  angles  of  view/ lighting.
+
+The new configuration can be :
+   button:  <r>Set</r>          - set immediately;
+   button:  <r>Save in File</r> - save for later loading.
+
+Config.file can be uploaded in 3 ways:
+- <r>at the start of s3d</r> specify the name of the config.file after the stack name;
+- <r>^L</r> - loading config file during operation (file selection dialog);
+- <r>^N</r> - loading the next stack and config.file ( config.parameter: <r>Next: Stk Cfg</r> );
+       It is useful when viewing multiple stacks sequentially  or  one stack in several
+       configurations( palettes, angles, blur ... ).
+
+List of config. parameters [default values] - <r>how to set/ call</r> :
+
+  max: [from Stack]  - maximum value of the vertical axis - <r>^O</r> ;
+  min: [from Stack]  - minimum value of the vertical axis - <r>^O</r> ;
+
+  x:       [ 612]  - screen x-coordinate of the upper left corner of s3d-window in pix.;
+  y:       [ 222]  - screen y-coordinate of the upper left corner of s3d-window in pix.;
+  w:       [ 640]  - window width  in pixels ;
+  h:       [ 520]  - window height in pixels ;
+  sx:      [  0 ]  - horizontal shift of the scene in the window - <r>&lt;Shift + Left/Right></r>;
+  sy:      [  0 ]  - vertical   shift of the scene in the window - <r>&lt;Shift + Up/Dn></r> ;
+
+  K:       [  1 ]  - scene  size   increase - <r>^+ / ^-</r> ( +/- ~10% );
+  Kh:      [  1 ]  - vertical axis increase - <r>&lt;Shift + H / L></r> (Higher/Lower) ;
+
+  a[deg]:  [ 20 ]  - rotate the scene around   a vertical   axis ("hour" angle );
+  b[deg]:  [ 25 ]  - rotate the scene around the horizontal axis ("declination");
+
+  aLight:  [-60 ]  - "hour"angle of the lighting( around   a vert. axis) - <r>^Left/^Right</r>;
+  bLight:  [ 30 ]  - declination of the lighting( around the horiz.axis) - <r>^Up / ^Down </r>;
+
+  blur:    [  0 ]  - blur/ smoothing   - <r>^B</r> ;
+  Ksec:    [ 10 ]  - Frames per second - <r>^K</r> ;
+
+  Dn:      [  0 ]  - mode: "Map Down"  - <r>^D</r> ;
+  Axis:    [  1 ]  - mode: "show Axes" - <r>^A</r> ;
+  Map:     [  0 ]  - mode: "Map Only"  - <r>^M</r> ;
+
+  Fon:     R G B   - window background color: def.[ 242 242 242 ] - <r>^9</r> ;
+  Text: h  R G B a - Details Font:  size,  Color(R G B),  Opacity(from 0 up to 1) - <r>^8</r> ;
+                          default:   14     99  99  99     1 .
+
+  Pal:  [null]     - file "Palette"    - <r>^P</r> - prompt  to select file ;
+  Data: [null]     - file "Details"    - <r>^7</r> - prompt  to select file ;
+  Line: [null] [0] - file "Lines", 0   - <r>^1</r> - prompt  to select file ;
+                                       - <r>^2</r> - ON/ OFF display( default=0 );
+
+  Next: [Stk=current(,)] [Cfg=current] - Next Stack and config. - <r>^N</r> (demo\lines\*.s3d).
+<a name='pp'></a>
+	<o>menu>   Stack,  Details,  Lines</o>
+
+<r>^F</r> - Load Stack, prompt to select file. Current config. is saved as if <r>^S</r> was pressed.
+
+<r>^N</r> - Load Next Stack/Config. in case current config. contains parameter: Next .
+
+<r>^7</r> - Load <r>"Details"</r>, prompt to select file. Lines of this text file will be displayed
+     in top right corner after frame number. The line number in the file corresponds
+     to the frame number( see demo\warp\*.s3d, Text.txt ).
+
+<a name='lin'></a>
+<r>^1</r> - Load <r>"Lines"</r>, prompt to select file( extention: <r>.lin</r> ).
+     The text file contains descriptions of 2D and 3D-lines( can be mixed in one file ).
+
+     The 2D-Line is given by the coordinates of the points that lie on the "Map".
+     Points allowed outside the "Map", but only fragments of lines that are on the "Map"
+     will be displayed.
+
+     Points 3D-lines contains 3 coordinates( X,Y,Z-Vertical). Only fragments of 3D-lines
+     which are inside the axes box will be displayed.
+
+     Line coordinates are specified in <a href='#dat'>text ###-format</a>.
+     The number of columns = 2 or 3 corresponds to 2D or 3D-Line.
+     The number of rows = the number of the Line points(may be =1 -sphere is displayed).
+     Point coordinates are NOT required to be integer( may contain decimal point ).
+
+     The header contains <r>2 additional parameters</r>:
+         <r>c=RRGGBB</r> - color  in  hexadecimal  format, default: c=0 - BLACK;
+         <r>w=N_pix </r> - Line width/ diameter in pixels, default: w=1 .
+
+Examples:<f>
+  ### 3D-Rect.Arc[ 4, 3 ] w=<r>17.5</r> c=99ffcc
+    40 100 180
+    40 20  500
+    20 20  500
+    20 100 180
+
+  ### 3D-Sphere[ <r>1,</r> 3 ] C=ff9999 w=60
+    27 57 430
+
+  ### 2D-Rectangle[ 5, <r>2</r> ]  ! <r>by default: c=0 w=1</r>
+    50   90
+    50  107
+    12  107
+    12   90
+    50   90
+</f>
+<r>^2</r> - ON/ OFF all( 2D,3D ) Lines Display in all frames.
+
+With 2D-lines, you can make additional markup of the "Map", for example:
+trajectories, coordinate grids, defining boundaries, zoning ...
+3D-lines allow you to display: 3D-markers(e.g. balls), 3D-paths, 3D-trajectories ...
+Examples can be viewed in demo\lines\*.lin .
+<a name='ss'></a>
+	<o>menu>  Cross Sections </o>
+
+View as 2D-graphs all values of i-row, j-column and value[i,j] through all Stack.
+<r>^V</r> -ON/ OFF sections, cursor must point ij-element on the "Map".
+    Two lines: <r>i-row</r>, <n>j-column</n> will show on the "Map"  and  three new 2D-windows.
+    Pressing <r>^V</r> again turns OFF Sections.
+
+Moving Sections by arrow keys :
+<r>&lt;Alt + Dn></r>    - go to  <r>Next      row</r>
+<r>&lt;Alt + Up></r>    - go to  <r>Previous  row</r>
+<n>&lt;Alt + Right></n> - go to  <n>Next     column</n>
+<n>&lt;Alt + Left> </n> - go to  <n>Previous column</n>
+
+	<o>menu>  Colors</o>
+
+<r>^P -Load Palette"</r>, prompt to select a Palette file( default extantion <r>.pal</r> ).
+
+"Palette"- a Set of Colors which define the color of the element,depending on the value.
+Specified by a file in the <a href='#dat'> ###-format </a> and  consists of strings that
+associate  a value  and  a color. The minimum corresponds to 0, the maximum --> 1.
+Can have any number of intermediate values.
+
+Color of the element is calculated as a linear interpolation between neighboring
+table values. Points below the minimum have the color of the minimum.
+              Points above the maximum have the color of the maximum.
+
+The color in the palette can be set in 2 ways::
+  - <r>Red</r>  <g>Green</g>  <n>Blue</n>  ! three values:  0 <= <r>Red</r>, <g>Green</g>, <n>Blue</n> <=255;
+  - <r>RR</r><g>GG</g><n>BB</n>            ! hexadecimal color representation.
+
+Example:  Standard Palette   (definitions are equivalent):
+<f>
+  ### Stand.Palet [ 6, <r>4</r> ]  !   ### Stand.Pal16 [ 6, <r>2</r> ]
+  !Value   R     G     B    !   !Value  RRGGBB
+    0     255   255   255   !     0     ffffff
+    .2    166   255    77   !     .2    a6ff4d
+    .35     0   255   255   !     .35   00ffff
+    .57    79   134   236   !     .57   4f86ec
+    .8    255     0     0   !     .8    ff0000
+    1     255   217   102   !     1     ffd966
+</f>
+The user can create any number of palettes for different cases.
+To get RGB colors, you can use the dialogs: <r>^8 or ^9</r> ( Custom Color.../ RGB| WEB ).
+
+<r>^0 = &lt;Ctrl + Zero ></r> - Load "Standard Palette"
+
+<r>^9 -"Background Color"</r>- opens the dialog to select the color of the 3D-scene.
+   The Opacity of the Background is always = 1 ( 100 % ).
+   The Background Color can be associated with a specific stack type.
+   Default: [ <r>242</r> <g>242</g> <n>242</n> ] = f2f2f2 .
+
+<r>^8 -"Details Color"></r> - calls the dialog to select: Font size, Color, Opacity.
+   Default: [ 14  <r>99</r> <g>99</g> <n>99</n>  1 ].
+
+The Palette file  and  selected colors  can be seen/ edited in CONFIGURATION: <r>^C</r> .
+They can be saved/ restored:  <r>^S/ ^R</r> .
+
+Examples can be viewed in  demo\lines\*.pal .
+Good reviews of the Colors & Palettes :
+<a href="https://eos.org/features/visualizing-science-how-color-determines-what-we-see">
+   By S. Zeller and D. Rogers, 21 May 2020
+   https://eos.org/features/visualizing-science-how-color-determines-what-we-see</a>
+<a href="https://www.kennethmoreland.com/color-maps/ColorMapsExpanded.pdf">
+   https://www.kennethmoreland.com/color-maps/ColorMapsExpanded.pdf </a>
+________________________________________________________________________________________
+<a name='fwk'></a>
+<o>   PROCESSING AND 3D DISPLAY OF MATRIXES/FRAMES AND THEIR SEQUENCES
+</o>
+When examining the properties of a time-varying surface, it is convenient to store,
+process and display a set of images/ frames/ matrices as a whole.
+Such an image sequence is often referred to as a STACK of images.
+Displaying of the stack in the "frame by frame" mode is perceived as a video clip.
+
+Framework  <o>pik3d</o>  offers a data storage/sharing standard and a basic set of commands
+processing and displaying stacks.The methods for reading and writing files in <a href="dat">###-format</a>
+implemented in JAVA are stored in the library: lib\pik.jar and described: <a href="pik">pik.io methods</a>
+Package: kadr.py is implemented for PYTHON language ( stored: ext\###_PYTHON.zip ).
+To use the ###-format in the ImageJ graphical editor, a plugin is implemented
+( ext\###_Reader_ImageJ.jar, copy to ImageJ\plugins\3D ).
+
+Framework commands are executable(.exe) modules and their set is not fixed.
+The launcher technology is used ("launch" - to launch, start). Launcher encapsulates
+the starting configuration of the JAVA machine.
+
+The framework contains simple tools for creating <a href="jc">new command on JAVA</a>.
+Additional commands can be implemented in any convenient algorithmic language.
+
+In a simple case, the processing program is a script ( .bat or .cmd ).
+From command to command, Stacks are transferred in the form of the <a href="dat">###-format</a> files
+or by means of <r>"pipe"</r>( this saves time and disk space ).
+
+Most of the commands  output the result  to the standard output stream. If commands
+chained in to the pipe-line the next command gets data from the standard stream.
+To denote standard stream symbol <r>'#'</r> id used. In case of several Stacks in the output:
+<r>#(2), #(3)</r> ... It looks like:
+
+  cmd1 a b <r>|</r> cmd2 c <r>#</r> <r>|</r> cmd3 d <r>#</r> d(3) <r>#(2)</r> ... <r>|</r> cmdN <r>#</r> p <r>></r> File
+
+The framework can be installed on Windows 7, 10.
+Version 19.3 compiled with JAVA-19 using javaFX.
+________________________________________________________________________________________
+<a name='ins'></a>
+				<o>pik3d INSTALLATION
+</o>
+ 1. Download <r>Open JDK+FX( Full ) v.19</r> installation zip-archive for Windows( x86 64bit ).
+    Recommended builds (follow one of the links):
+
+       <a href="https://www.azul.com/downloads/?version=java-19-sts&os=windows&architecture=x86-64-bit&package=jdk-fx"
+>Azul:          JDK  FX  </a>   ! Java 19, Windows, x86 64-bit, JDK FX
+       <a href="https://axiomjdk.ru/pages/downloads/#/java-19-current"
+>BellSoft(RU):  Full JDK </a>
+
+    Since the framework does not require a full JAVA installation ( <r>only unzip</r> ),
+    builds can be easily changed. If another version of JAVA is installed on the system,
+    the framework with JAVA-19 will not affect it in any way.
+
+ 2. Expand JAVA archive, for example to: D:\jdk. There should be a folder:
+    D:\jdk\bin  with  <r>java.exe</r> .
+
+ 3. Expand the archive: <r>pik3d.zip</r> in a folder, for example:  E:\pik3d .
+
+ 4. Create system environment variable: <r>PIK3D_JAVA</r> :
+    - Control Panel / System and Security / System / Additional Parameters /
+      Environment Variables/ Create/ <r>PIK3D_JAVA</r>
+    - Enter value: <r>&lt;folder with java.exe>; &lt;class-path></r>
+      In our example: D:\jdk\bin; E:\pik3d\lib\*
+
+ 5. Add the path to the pik3d\exe executables to the  <r>Path</r>  environment variable
+    In our example: ...;E:\pik3d\exe
+
+ 6. Create launchers:  go to the <r>pik3d\exe</r> folder,  run <r>_Launch.exe</r> .
+
+ 7. If an antivirus is installed in the system, you can "introduce" all launchers
+    to the antivirus  using  pik3d\exe\<r>_antivir.bat</r> .
+
+ 8. Check if the installation is correct: console> <r>gauss| s3d #</r>
+    The "Gauss Bell" should be displayed.
+    In case of error, check <r>PIK3D_JAVA</r> and <r>Path</r>:
+       > echo %PIK3D_JAVA%
+       > echo %Path%
+    You may need to restart Windows.
+    Also, the cause may be a conflict with the antivirus (it will pass after a while).
+
+ 9. In the folder: <r>pik3d\demo</r> several demos are collected ( run: > _run.cmd ).
+    If stop viewing by &lt;space>, you can change view angles by moving the pressed Mouse.
+    The lighting angles can be changed by: <r>&lt;Ctrl + arrows</r>: Up, Down, Right, Left >.
+    It is recommended to press in different sequences:
+    <r>&lt;F1></r>, <r>^D</r> -Map Down, <r>^A</r> -Axes, <r>^M</r> -Map</r>, <r>^2</r> -Lines ( <r>^</r> - means pressed &lt;Ctrl> key )
+________________________________________________________________________________________
+<a name='dat'></a>
+			<o>###-format of the data: FRAME, STACK
+</o>
+The file may contain one or more frames and stacks in text and/or in binary format.
+Frame = Matrix in the mathematical sense: rows are counted down, columns - to the right.
+Stack - a sequence of frames. Stack ends with the end of file or a line: <r>### &lt;eos></r> -
+"End Of Stack". If file A.dat contains several stacks, then A.dat(2) - access to the 2nd
+stack, A.dat(3) - to the 3rd, access to the 1st: A.dat or A.dat(1) .
+
+The frame data is preceded by a header: <r>### frame_name [ Row_number, Column_number ]</r>.
+The frame name can be any text( may be with spaces or even empty ).
+<r>Space</r> after <r>"###"</r> is important !  Matrix size is specified in parentheses: [ ] or ( ).
+If the number of columns = 1, it can be omitted.
+
+Text or binary data files may contain comments.
+Comments start with <r>!</r>  or  a single <r>#</r>  and  ends at the end of the line.
+An empty line is also considered a comment.
+
+In  <r>Text Format</r>, the header line is followed by data lines. The data is considered as
+real numbers, even if they do not contain a decimal point.
+<r>+-.0123456789eE</r>  are considered as Data Symbols. The rest can serve as delimiters.
+
+A string can be divided into any number of substrings  with comments between them.
+The only limitation is that you cannot break a numeric value.  Example(correct frame):
+
+ ### test [ 3, 5 ]    ! 3-rows, 5-columns
+
+   11.123, 12.34, 13  # comment
+
+                        -14, 15.56     ! integers can be used:
+
+   21.32 22.54 -23.33 24.765 -.25E+8   # real: with  decimal point
+   31 32 3.3e1 340e-7    9e9           !             and/or exponent
+<a name='bin'></a>
+<r>Binary Format</r> has an extended header. The matrix size is ??followed by the binary
+data type: <r>I2 | F4 | D8</r> and possibly a "Byte Order Indicator": <r>BE | LE</r> .
+
+    <r>I2</r> - 2-byte integers, value range from <r>-32768</r> to <r>+32767</r>
+
+    <r>F4</r> - 4-byte real single precision, <r>~ 7</r> significant digits:
+                            <r>1.4e-45</r> < absolute value < <r>3.4e+38</r>
+
+    <r>D8</r> - 8-byte real double precision, <r>~ 15</r> significant digits:
+                            <r>4.9e-324</r> < absolute value < <r>1.8e+308</r>
+    <r>BE</r> - "Big-Endian"
+    <r>LE</r> - "Little-Endian" - "LOW bytes first" - default( may be omitted).
+
+The binary block starts after byte=0x10=#0A("Line Feed") and does not contain comments!
+Comments can be placed only before the header or after the binary block !
+
+The data is output to the binary block sequentially by lines without separators !
+
+In files with binary blocks, you can add/ change comments and headers using editors
+that support binary format ( Notepad++, SlickEdit ... )
+<r>
+    ALL BASIC COMMANDS READ DATA IN ANY FORMAT (specified in the header)
+    MOST COMMANDS OUTPUT DATA IN THE FORMAT: <o>F4 BE</o> - 4-byte real !
+</r>
+The command: <a href="#fmt"> fmt -"format"</a> converts a file to the specified format (text by default).
+For example: display the result of a command or pipeline on the screen ><r> ...| fmt #</r>
+Due to the frequency use of: <r>| fmt #</r>  short form is introduced: <r>| tt</r>  - <a href='#tt'>"Type Terminal"</a>
+
+Methods for working with data in  ###-format  are given in  <a href="#pik">pik.io methods</a> .
+________________________________________________________________________________________
+<a name='cmd'></a>
+				<o>COMMANDS:
+</o>
+The command consists of two parts:
+ - functional part, implemented and compiled with JAVA, are stored: pik3d\lib\*.jar
+ - launcher - exe module that passes parameters and starts the JVM: pik3d\exe\*.exe
+
+Launcher actions:
+ - starts the JAVA machine in the configuration required by the command: keys, paths ...
+ - passes a link to the JAVA class of the command (compiled command code);
+ - passes arguments to the command;
+ - after starting the JAVA-machine and passing parameters, exits .
+
+All launchers have the same code. The difference is in the start parameters and the link
+to the command class. How create new command and prepare launcher:  <a href="#jc">jj, jc, new command</a>.
+<r>
+   At the first call of the command, a conflict with the antivirus may occur.
+   After checking the launcher with the antivirus, this passes.
+   You can "introduce" all launchers to antivirus by executing: pik3d\exe\antivir.bat
+</r>
+Command name = launcher name and is not fixed. You can rename any launcher as you like.
+
+The launcher receives information about the JAVA machine and the path to the libraries
+from the environment variable:  <r>PIK3D_JAVA</r>  see <a href="#ins">pik3d installation</a>.
+This technology allows you to have several JAVA machines and libraries in the system.
+
+When called without parameters or with the key: <r>/?</r> most commands show their short
+description. If the command does not show anything, it must be run with the key: <r>/dbg</r> -
+debug mode. Also, some diagnostic messages are only visible in debug mode.
+
+Most commands (with the exception of visual commands) send the result to the standard
+input/output stream. If you do not specify <r>> File</r> at the end of the command - the output
+will be performed to the console/ screen.
+
+The standard stream allows the use of <r>"pipe-line"</r> technology.
+If intermediate data is not important, it can be passed from one command to next command
+directly, bypassing the file on disk. This saves disk space and improves performance.
+To use the pipeline, the commands are written on one line and separated by <r>'|'</r>.
+
+If the command receives a stack from the pipeline, then this parameter is replaced by <r>#</r>.
+A pipeline as a file can contain several stacks, in this case N-th stack will be called:
+<r>#(N)</r>. At the moment all standard commands pass one stack to the file/pipeline. Example:
+
+   stk 70 90 <r>|</r> noise <r>#</r> <r>|</r> bell <r>#</r> "20 30 .3 10" <r>|</r> wave <r>#</r> "50 60 .2 15 45" <r>></r> Land
+
+<r>   !!! None of the input files must have name of result (in the example: Land) !!!</r>
+
+It makes sense to save the worked out command sequences in files: .cmd or .bat .
+Filenames can be call parameters ( %1, %2 ...). To organize loops or branch points, you
+can use the ability to get the value of a variable from the standard stream.  Example:
+
+   for /f %q in (<r>'check.exe p1 p2 ...'</r>) do ( set <r>VAR</r>=%q )
+   echo ___result = %VAR%
+
+<r>'check.exe p1 p2 ...'</r> - call a program or command (required in quotes) that outputs
+value, which the <r>VAR</r> will receive to control the loop or branch.
+For debugging, you can use the system command: <r>echo text</r> :
+
+   for /f %q in (<r>'echo -123.4567'</r>) do ( set <r>VAR</r>=%q )
+________________________________________________________________________________________
+<a name='40'></a>
+	<o>stk  ii  [jj=1  [kk=1  [v=0]]]  >  File    ! Create a new STACK in File
+</o>
+     ii - number of rows;
+     jj - number of columns;
+     kk - number of frames;
+     v  - value to fill all stack elements[ default 0 ].
+
+Examples:
+   stk 22 33 > b2233         ! 1 frame: 33 rows 33 columns filled with 0
+   stk 25 46 1 -1 > b2233_1  ! 1 frame: 25 rows 46 columns, filled -1
+   stk 22 33 50 > s50        ! stack of 50 frames: [ 22,33 ], filled 0
+   stk 42 65 99 .2 > s99_02  ! stack of 99 frames: [ 42,65 ], filled 0.2
+   stk 999,,-1 > column      ! frame = column[999,1] = column[999] filled with -1
+________________________________________________________________________________________
+<a name='fmt'></a>
+	<o>fmt  Stk  [ T |I2 |F4 |D8  [ BE| LE]]  >  File  ! Convert Stk to another format
+</o>
+A stack can be a folder ( arranging files alphabetically ).
+
+Accepted formats:
+    T  - text
+    I2 - binary:  short integer    2 bytes
+    F4 - binary:  floating point   4 bytes
+    D8 - binary:  double precision 8 bytes
+
+rules:
+  - If format is omitted, TEXT is assumed
+  - If byte order is not specified - BE ="Big Endian"( Java Standard ) is used
+  - Lowercase may be used:  t|i2|f4|d8, be|le
+
+Examples:
+  fmt q d8 LE > qd8         ! convert q to qd8: D8 LE
+  fmt stk                   ! output Stk to the screen in text format
+  ...| fmt # i2 le > qi2le  ! save the result of "pipe-line" as: I2 LE
+  ...| fmt #                ! the result of "pipe-line" to the screen as text = ...| tt
+________________________________________________________________________________________
+<a name='tt'></a>
+	<o>...| tt  == ...| fmt #  == "pipe-line to text"  ! Short form of:  ...| fmt #
+</o>
+It is recommended to use <r>| tt</r> instead of: <r>| fmt #</r> .
+Advantages:
+  - shorter ;
+  - the no problem with Russian text when outputting to the console.
+
+> stk 2 4 3| renam # РУССКИЙ_ШРИФТ| fmt #
+> stk 2 4 3| renam # РУССКИЙ_ШРИФТ| fmt # | tt <r>
+> stk 2 4 3| renam # РУССКИЙ_ШРИФТ| tt    ! is recommended</r>
+________________________________________________________________________________________
+<a name='ren'></a>
+	<o>renam  Stk  name  [index=1]  >  File   ! Rename Frames
+</o>
+Create new Stack which has old Frames with new consecutive names:
+name_NN, name_&lt;NN+1>, name_&lt;NN+2> ...
+
+	<r>!!! INPUT STACK CANNOT BE A FOLDER !!!</r>
+
+> renam  q  data     > qDAT   ! in qDAT frames: data_1 , data_2   ...
+> renam  q  back -2  > q_50   ! in q_50 frames: back_-2, back_-1, back_0, back_1 ...
+________________________________________________________________________________________
+<a name='djk'></a>
+	<o>STACK PART: A[ di, dj, dk ], index subsets
+</o>
+Description of a stack part = description of a index subset: di, dj, dk .
+
+Subset descriptions are separated by commas.
+If the description contains a comma, it must be enclosed in parentheses.
+If there is no subset (examples: A[,dj,dk], A[di,,dk], A[,,dk] ) - index = 1.
+Parentheses and spaces can be used to improve readability.
+
+   <o>Rules for describing a subset on the columns example( N-number of frame columns )</o>
+
+1. Index counting start from <r>1</r> !!!
+
+2. Can contain lists and cycles in any quantity (separated by commas).
+   - <r>list</r> = sequence of indices: <r>j1, j2 ...</r> (possibly one).
+   - <r>loop</r> contains one or 2 symbols <r>:</r> or symbol <r>#</r>.
+
+3. Cycle (general case): <r>a: b: s</r>
+   <r>a, b</r> - the beginning and the end of the loop  <r>INCLUSIVE !!!</r>
+   <r>s</r>    -"Step" - sequence and order of sampling.
+
+   a &lt; b and s>0 -->  for( j=a; j&lt;=b; j+=s )   ! s>0: from smallest to largest
+   a > b and s>0 -->  for( j=b; j&lt;=a; j+=s )   ! ---:---:---:---:---:---:---
+   a &lt; b and s<0 -->  for( j=b; j>=a; j+=s )   ! s&lt;0: largest to smallest
+   a > b and s&lt;0 -->  for( j=a; j>=b; j+=s )   ! ---:---:---:---:---:---:---
+
+4. Cycle:  default/ omitted values :
+
+   a - value <r>to the left of the first</r>   ':'|'#' default = <r>1</r>
+   b - value <r>to the right of the first</r>  ':'|'#' ---:--- = <r>N</r>
+   s - value <r>to the right of the second</r> ':'     ---:--- = <r>1</r>, examples:
+
+   :b - all columns from 1 to b inclusive;
+   :b:s - from 1 to b , sequence and order given by s:
+          s > 0  --> for( j=1; j&lt;=b; j+=s )
+          s &lt; 0  --> for( j=b; j>=1; j+=s ) - in reverse order
+
+   := ::= 1:N:1  --> for( j=1; j&lt;=N; j++  ) - ALL
+   ::-1 = 1:N:-1 --> for( j=N; j>=1; j--  ) - ALL in reverse order
+
+5. <r>a # b : s</r> = a: a+b-1: s ,  i.e. <r>b = the number of elements</r>, b>0 !!!
+
+6. <r>a &lt; 0</r> - means: a = N + a
+   <r>b &lt; 0</r> - means: b = N + b
+
+Examples:
+   Stk[ :, :, ::-1 ]                    - stack with reverse frame order
+   Stk[ ::-1, :, : ]                    - frames with opposite order of rows
+   Stk[ :, (2,3,(4:7:-1),9), : ]        - all rows and frames, columns: 2,3,7,6,5,4,9
+   Stk[ :, :, -3:  ]                    - frames: K-3, K-2, K-1, K   !K=number of frames
+   Stk[ :, :, -4:-1:-1 ]                - frames: K-1, K-2, K-3, K-4
+   Stk[ 2#5, 7#3:-1]                    - matrix[5,3], lines: 2,3,4,5,6; columns: 9,8,7
+   Stk[ 2#3,3#3,4#3] = Stk[2:4,3:5,4:6] - 3x3x3 cube
+________________________________________________________________________________________
+<a name='get'></a>
+	<o>get  Stk [ di, dj, dk ]  >  File
+</o>
+Get the Stk part according to <a href="#djk">index subsets</a>.
+Examples:
+  get Stk[:,2#3, 7] - matrix consisting of 3 columns(2,3,4) of the 7-frame
+  get Stk[:,:,::-1] - frames in reverse order
+  get Stk[:,:,:: 3] - every 3rd frame
+
+obtaining sections:
+  get Stk[2#9, 7, #5] - 9x5 section on 7-column
+  get Stk  [3, :, : ] - full section on 3-line = sec Stk i=3 (see below: <a href="#sec">sec</a>)
+
+In case of sections: Stk[ i, dj,dk], Stk[di, j, dk] - <a href="#dim">dim32</a> command is useful.
+________________________________________________________________________________________
+<a name='sep'></a>
+<o>	sep Part Stk [ di, dj, dk ] > File  - "<r>SE</r>t <r>P</r>art"
+</o>
+Part is copied sequentially to Stk according to <a href="#djk">index subsets</a>.
+Unlike the command: <a href="#put"> put </a> all indices must belong to Stk.
+
+The operation is  reversed to  <n>get Stk [ di, dj, dk ] > Part</n>
+You can check this:
+
+> stk 8 9 7 | noise #     > A  ! created stack A[8,9,7] and filled with random numbers
+> get A [::2, 2#7, 2::]   > P  ! we get    part [4,7,6] from A
+> fmt P                        ! view P
+> stk 4 7 6               > Z  ! created zero stack (filled with zeros)
+
+> sep Z A [::2, 2#7, 2::] > A0 ! put zeros in to  A --> A0
+> dif A A0                     ! look at the difference(not zeros): A != A0
+
+> sep P A0[::2, 2#7, 2::] > A1 ! zeros replaced with saved "Part"
+> dif A A1                     ! look at the difference( should be: 0,0,0 ): A == A1
+________________________________________________________________________________________
+<a name='dim'></a>
+	<o>dim32  Stk  - "<r>DIM</r>ension: <r>3d -> 2d</r>"
+</o>
+If one of the 3D-Stack sizes = <r>1</r>, the stack is converted to a 2d-matrix.
+This situation occurs when getting a section of the stack with the command <a href="#get">get</a>
+(take stack A from <a href="#sep">sep</a> example, see above):
+
+> get A[ <r>3</r>,  :, : ] |tt   !section consists of 7 frames[ <r>1</r>, 9 ]
+> get A[ :,  <r>5</r>, : ] |tt   !section consists of 7 frames[ 8, <r>1</r> ]
+> get A[ #5, <r>3</r>, #4] |tt   !section consists of 4 frames[ 5, <r>1</r> ]
+
+Try:
+> get A[ 3,  :, : ] | dim32 # |tt  ! 1 frame [ 9, 7 ]
+> get A[ :,  5, : ] | dim32 # |tt  ! 1 frame [ 8, 7 ]
+> get A[ #5, 3, #4] | dim32 # |tt  ! 1 frame [ 5, 4 ]
+
+For full sections: A[ 3,:,: ], A[ :,5,: ] it is recommended to use the command <a href="#sec">sec</a> .
+________________________________________________________________________________________
+<a name='put'></a>
+      <o>put Part Stk [i=1 [j=1 [k=1]]]  >  File
+</o>
+Place Part in to Stk, i,j,k - coordinates of Stk where the upper left corner of the Part
+will be placed. The command is similar to  <a href="#sep">sep</a>.  The difference is in the description
+of the index subset  and  that top left corner of the Part  <r>can be outside</r>  of the Stk.
+
+		<r>INTERSECTION of Stk and Part is changed</r>
+
+!!! <r>i,j,k</r>  can be  <r>&lt;=0</r>  ( middle graph )
+
+2D-example: Stk(.),          Part(*),           Result( <r>p</r> )
+
+   put Part Stk 3 4      put Part Stk -1 -2     put Part Stk 5 8
+
+   ................      *********              .............
+   ................      *********              .............
+   ...<r>ppppppppp</r>....      ***<r>pppppp</r>.........     .............
+   ...<r>ppppppppp</r>....      ***<r>pppppp</r>.........     .............
+   ...<r>ppppppppp</r>....      ***<r>pppppp</r>.........     .......<r>pppppp</r>***
+   ...<r>ppppppppp</r>....      ***<r>pppppp</r>.........     .......<r>pppppp</r>***
+   ...<r>ppppppppp</r>....      ***<r>pppppp</r>.........     .......<r>pppppp</r>***
+   ...<r>ppppppppp</r>....         ...............     .......<r>pppppp</r>***
+   ...<r>ppppppppp</r>....         ...............     .......<r>pppppp</r>***
+   ................         ...............            *********
+   ................         ...............            *********
+________________________________________________________________________________________
+<a name='add'></a>
+      <o>add Part Stk [i=1 [j=1 [k=1]]]  >  File
+</o>
+The new Stack is obtained by adding the Part stack to the Stk part.
+The commands:  <r>put</r> and  <r>add</r>  act almost the same way.  The difference is that <r>put</r> puts
+the values from  Part,  <r>add</r>  is the sum of the values.
+
+Example for comparing  <r>put</r>  and  <r>add</r> :
+1. Generating <r>Part</r> with <a href="#gel">gen3d</a> :
+<f>
+# file: part.gen:
+   base: 9, 23, 15
+   movie:
+     bell:
+      h: (1 1) (8 6) (15 1)
+      x:5
+      y: 5 1
+      r:4
+</f>
+> gen3d part.gen > <r>Part</r> ! generation
+> s3d <r>Part</r> ! viewing
+
+2. Create <r>Stk</r> :
+> stk 32 48 33 1| noise#.3| blur # .7 > <r>Stk</r>
+
+3. Do 3 times <r>put</r> and look:
+> <r>put</r> Part Stk 2 2 2| <r>put</r> Part <r>#</r> 12 27 17| <r>put</r> Part <r>#</r> 23 15 9| s3d <r>#</r>
+
+4. Do 3 times <r>add</r> and look:
+> <r>add</r> Part Stk 2 2 2| <r>add</r> Part <r>#</r> 12 27 17| <r>add</r> Part <r>#</r> 23 15 9| s3d <r>#</r>
+________________________________________________________________________________________
+<a name='sec'></a>
+     <o>sec  Stk i=n | j=n | k=n  >  File    ! "<r>SEC</r>tion"( single matrix ),  n>0
+</o>
+              k                      k    <r>j=n</r>                k
+             /__________            /_____<r>V</r>_____            /__________
+            /          /|          /     <r>/|</r>    /|          /          /|
+           /          / |         /     <r>/</r> <r>|</r>   / |         /<r>__________</r>/ |
+          /          /  |        /     <r>/</r>  <r>|</r>  /  |        /<r>|</r>         /<r>|</r> |
+         /__________/_j |       /_____<r>/</r>___<r>|</r>_/_j |       /_<r>|</r>________/j<r>|</r> |
+         |   <r>_______</r>|<r>___</r>|       |     <r>|   |</r> |   |       | <r>|</r>        | <r>|</r> |
+         |  <r>/</r>       |  <r>/</r>|       |     <r>|   |</r> |   |       | <r>|</r>        | <r>|</r> |
+         | <r>/</r>        | <r>/</r> |       |     <r>|   /</r> |   /       | <r>|</r>        | <r>|</r> /
+    <r>i=n-></r>|<r>/_________</r>|<r>/</r> /        |     <r>|  /</r>  |  /        | <r>|________</r>|<r>_|&lt;-k=n</r>
+         |          | /         |     <r>| /</r>   | /         |          | /
+         |__________|/          |_____<r>|/</r>____|/          |__________|/
+        i|                     i|                      i|
+
+  > sec  Stk i=n  >  Si  ! section Stk on n-row    :  Si[ jj, kk ]
+  > sec  Stk j=n  >  Sj  ! сечение Stk по n-column :  Sj[ ii, kk ]
+  > sec  Stk k=n  >  Sk  ! n-frame Stk             :  Sk[ ii, jj ]
+________________________________________________________________________________________
+<a name='60'></a>
+	<o>gauss  [ R=8 [ width=3 ]]  >  File
+</o>
+Output the normalized Gaussian filter of the given Radius and aperture(width) to File:
+The filter performs <r>"BLUR / SMOOTHING"</r> image without displacement - "Gauss Blur".
+Normalized means:  the sum of all filter values = 1.
+
+For the Gaussian distribution, it is convenient to assume <r>Radius = 2*sigma</r>.
+This is the visually perceived radius of the "Gaussian Bell" and  the characteristic
+size of "SMOOTHING".
+
+    <r>After smoothing, only details remain that are larger than the Radius.</r>
+
+Filter aperture or width (2nd parameter) measured in Radii, default = 3*R = 6*sigm .
+On "Center Point Demand" width rounds UP to nearest odd number: 3*8=24 --> 25 .
+
+> gauss 3.5 2.8 > filtr   ! 3.5*2.8 = 9.8 --> 11,   size:  11 x 11 points.
+________________________________________________________________________________________
+<a name='bel'></a>
+	<o>bell  K  "x y h r"  ["x1 y1 h1 r1"  ["x2 y2 h2 r2"]...]   >  File
+</o>
+The command only affects the first frame of the stack and ouputs stack with one frame.
+Add to specified location: <r>x, y</r> "Gaussian Bell" of given height and radius:  <r>h, r</r>
+The x,y parameters can be &lt;=0, i.e. the central point is outside the frame.
+If h&lt;0 - "hole", r>0 is always !
+
+"Bells" parameters <r>specified in quotes!</r> No default values!
+You can set <r>several</r> "Bells" in one command.
+The radius of the "Bell" = 2*sigma ( in terms of the Gaussian function ).
+
+> stk 17 33 | <r>bell # "9 11 9 9" "9 22 -9 9"</r> | s3d#
+________________________________________________________________________________________
+<a name='wav'></a>
+	<o>wave  K  "x y h r a"  ["x1 y1 h1 r1 a1"  ["x2 y2 h2 r2 a2"]...]   >  File
+</o>
+The command only affects the first frame of the stack and ouputs stack with one frame.
+Add a straight "Wave" of Gauss to the frame:  width = 2*r = 4*sigma,  height = h.
+Position of the "Wave": x,y - coordinates of the point through which the "Wave" passes.
+a - the angle is measured in degrees from the vertical axis ANTI-CLOCKWISE, i.e.
+if we look at the frame as a matrix, then the direction down ("at 6 o'clock")=0 degrees,
+to the right ("at 3 o'clock")=90 degrees, to the right up ("at 1 o'clock")= 90+66 = 156.
+
+The x,y parameters can be &lt;=0, i.e. the point is outside the frame,
+h&lt;0 - "hole",  r>0 is always!  "Waves" parameters  <r>set in quotes!</r>  No default values!
+You can specify <r>several</r> "Waves" in one command.
+
+> stk 23 33 | <r>wave # "12 17 -9 7 60" "12 17 11 9 -45"</r> | s3d#
+________________________________________________________________________________________
+<a name='gel'></a>
+    <o>gen3d  config  >  File   ! "<r>GEN</r>nerator <r>3D</r>-stack"
+</o>
+Often, for debugging and demonstration purposes, it is necessary to create test stacks.
+This task is solved by the command:  <r>gen3d</r> - creat a stack with fixed and moving
+figures. The <r>config</r> file defines stack parameters, shapes  and  their movement,
+noise and smoothing.
+
+Config file may contain:
+  - empty lines and comments( line starts with # or ! );
+  - section names;
+  - names of figures and their parameters.
+
+Each section, figure, parameter starts with a name that ends with <r>:</r>.
+
+Config file Consists of 2 sections:  <r>base:</r> and <r>movi:</r>.
+
+<r>base:</r> frame is generated once and is used in all <r>movi</r> frames as a base.
+Can be empty, can contain  any number of fixed figures, noise, blur, offset
+
+The <r>base:</r> section defines:
+  - stack sizes: <r>ii jj [kk=1]</r>,  where: ii,jj,kk - number of lines/ columns/ frames.
+      or
+  - <r>@File</r> - reference to the existing stack.
+
+If the base stack( <r>@File</r>) is specified, then for each frame of this stack
+the <r>base:</r>  and  the <r>movi:</r>  frames  will be added.
+
+Parameter value is a real number ( possibly &lt; 0 ).
+If the parameter is not set, the default value is used.
+
+		<o>Optional sections parameters:</o>
+
+  <r>add: V</r>      ! V - offset is added to all matrix/frame elements;
+  <r>noise: A</r>    ! A - amplitude of UNIFORM noise: [-A, A ];
+  <r>gnoise: R</r>   ! Gaussian noise, R=2*sigma ;
+  <r>blur: R</r>     ! Gaussian blur(smoothing): R=2*sigma .
+
+The default value of this parameters = 0, this means: parameter is inactive.
+
+Base frame  and  movie frame  can have different  noise and blur  parameters.
+Movi parameters are applied  at the end  of the frame construction !
+
+
+The section with <r>changing</r> parameters and shapes starts with the line: <r>movi:</r>
+The value of  <r>any parameter</r> ( including: add, noise, blur ) can:
+
+- <r>be a constant</r> ;
+- <r>depend on time</r>( frame number k ). There are two ways to set this dependency:
+
+  - Polynom <r>Pn(k)</r> of degree <r>n&lt;=3</r>, passes through the set of points:
+    <r>param:  (k1,v1) (k2,v2) ...</r>,  where: <r>vi</r> - param.value in frame <r>ki, i=1,2...n+1</r>;
+
+  - Parameter value for each frame from the file:  <r>param:  @File</r>
+    If the number of lines &lt; kk, missing values ??= last available.
+    Exception:  <r>dxy:</r> - there is a loop (repetition from the first values).
+
+Examples:
+  r:  7                                             ! Constant
+  y:  (1,2)          (25,76)          (50,10)       ! dependence on t as P2(k)
+! y in 1-frame =2, in 25-frame =76, in 50-frame =10
+
+  x: (1 26) (17,6) (35 40) (50,34)                  ! change of x(k):    P3(k)
+
+  h: @Heights.dat                                   ! values in file: Heights.dat
+!     ### hhh[ N ]                                  ! header
+!       1  .95  .8  .6  ...                         ! N values
+
+In current version, 3 types/ names of figures are possible:
+
+  - <r>bell:</r> - Bell / hill;
+  - <r>poly:</r> - Closed Polygon( the last point connects to the first one);
+  - <r>wave:</r> - Wave.
+
+The figure is specified by the name and subsequent lines with parameters.
+The order of the parameters is not fixed.
+
+		<o>Standard Figure Paramaters:</o>
+
+The position of the figures is set by the coordinates of the <r>"Figure CENTER"</r>( FC ): X, Y
+  <r>x: X</r> - coordinate along the 0X-axis - "down the rows of matrix";
+  <r>y: Y</r> - coordinate along the 0Y-axis - "to the right along the columns".
+
+You can set the movement of the figure around the point (X,Y). Real coordinates:
+x = X + <r>dxy[k,0]</r>
+y = Y + <r>dxy[k,1]</r>  where: increments for k-frame are taken from the k-line of the File:
+
+  <r>dxy: @File [Mx=1 [My=Mx]]</r> - <a href="#dat">###-format</a> File contains dx, dy for the frames
+                              ### dxy[ N, 2 ] ! preferably N=kk - the number of frames
+                                dx1 dy1
+                                dx2 dy2 ...
+
+If the movement is cyclic, it is enough to specify only one cycle.
+If parameters <r>Mx, My -"Multipliers"</r> are given, then real  dx = Mx*dx, dy = My*dy.
+If <r>only Mx</r> is given, then <r>My = Mx</r> .
+
+Example:
+  dxy: @cirс1 <r>7</r>  ! if file circ1 defines circle R=1, then movement will be with <r>R=7</r>
+
+More complicated movement may be defined by time dependent  <r>X(k), Y(k)</r>  with  <r>dxy:</r>
+
+The FC for the <r>"bell"</r> is the maximum/ minimum point - the center of symmetry.
+For the <r>"poly:"</r>-closed polygon  and  the<r> "wave:"</r> - FC is the point, relative to which
+polygon/ wave coordinates are set. It is convenient to set the line relative to the
+point (0,0), which will have coordinates <r>x:X, y:Y</r> when displayed.
+The coordinates of the FC  and  real figure coordinates  can go beyond the frame.
+
+  <r>h: H</r> - the height of the shape.
+
+  <r>r: R</r> - "apparent Radius/half-width" of figure, for Gaussian exponent R = 2*sigma.
+
+  <r>form: exp</r> or <r>cos</r> - sets the shape in vertical section of the figure:
+  - <r>exp</r> - H(r) = exp( -2*(r/R)^2 )     - calculated from 0 to R*2;
+  - <r>cos</r> - H(r) = .5*( 1+cos( pi*r/R))  - calculated from 0 to R .
+          The default: <r>form: exp</r> .
+          If you set   <r>form: cos</r>  and  R = 1.25*Rexp, then the forms are pretty close.
+
+  <r>a: A</r>  -"Angle"- rotation angle in degrees around the vertical axis through the FC
+          A > 0 - counterclockwise, A &lt; 0 - clockwise.
+
+  <r>m: M</r>  -"Multiplier", if set, then all <r>polygon/wave</r> coordinates are multiplied by <r>M</r> .
+          The FC does not change. There is an increase / decrease of the figure.
+
+  <r>k01: (k1,k2) ...</r> - "turn ON/ OFF" the figure. If parameter: k01 is not set -
+                     figure is always visible.
+Example:
+  k01: (4,9) (12,19) (21,39)   ! figure is visible on the frames:  4..9, 12..19, 21..39
+                               ! on the rest frames it is absent.
+
+		<o>Nonstandard Figure Paramaters:</o>
+<r>bell:</r>
+  <r>ry: Ry</r> - radius in the Y direction. If specified, then the section is an ELLIPSE.
+           When calculating  H(r) = H(x,y),  where: r = sqrt( (x/R)^2 + (y/Ry)^2 )
+           If we specify  r != ry , we get a "flattened" Bell.
+
+<r>poly:</r> - closed polygon, all points inside have height <r>h: H</r>
+  <r>p[]: (x1,y1) (x2,y2)...</r> - array of polygon coordinates relative to FC,
+                            possibly multiple text lines
+        or
+  <r>p[]: @File</r> - coordinates are stored in File <a href="#dat">###-format</a>:
+               ### polygon[ N, <r>2</r> ]  ! N-point polygon
+                   x1 y1 x2 y2 ... xN yN
+
+<r>wave:</r> - wave, if <r>xyh:</r> is not set - the wave line is straight along the OX axis.
+        The section shape is given by: <r>h: H</r>, <r>r: R</r> and <r>form: exp/cos</r>.
+        <r>a: A</r> - rotates the wave.
+
+  <r>xyh: @File</r> - line and height coordinates in File <a href="#dat">###-format</a>:
+               ### wave[ N, <r>3</r> ]  ! N-point line with <r>HEIGHTS !!!</r>
+                   x1 y1 <r>h1</r> x2 y2 <r>h2</r> ... xN yN <r>hN</r>
+               Wave section height = H * <r>hi</r> (possibly: <r>hi&lt;0</r> ).
+
+The stack is generated in the format: <a href="#dat">F4 BE</a> .
+Date and config.file  are placed  at the beginning of the stack as a comment.
+
+Config.file example:  <r>spiral2.cfg</r>  "Two rotating spirals":
+<f>
+base: 160 160,20       # it is enough 10 frames
+movi:
+blur: 5
+
+  wave:
+    x: 79.5
+    y: 79.5
+    xyh: @<r>spiral</r>
+    a: (1 0)(2 18)     # turning speed 18 degrees/ frame
+    r: 5
+    h: 2
+    form: cos
+
+  wave:
+    x: 79.5
+    y: 79.5
+    xyh: @<r>spiral</r>
+    a: (1 180)(2 198)  # the second spiral is rotated 180 degrees
+    r: 5
+    h: 2
+    form: cos
+</f>
+File:  <r>spiral</r>  is received by the program:  pik3d\usr\Spiral.java
+it can be run(<a href='#jj'> jj File.java</a>)> jj Spiral.java > <r>spiral</r>
+<f>
+package usr;
+public class Spiral {
+  static public void main( String[] a ) {
+    int i, n=20, nn=n*3;
+    double f=0, df=-2*Math.PI/n, r=10, dr=2, h=1, dh=-.015;
+
+    System.out.println("### xyh [ "+nn+", 3 ]");
+    for(i=0; i&lt;nn; i++) {
+      System.out.println( r*Math.cos( f )+" \t"+r*Math.sin( f )+" \t"+h );
+      r+=dr; f+=df; h+=dh;
+    }
+  }
+}</f>
+To see result >  <r>gen3d spiral2.cfg | s3d #</r>  ! do not forget to press &lt;space>
+________________________________________________________________________________________
+<a name='mul'></a>
+	<o>mul   A  B   >  File       ! Matrix Multiplication, a standard matrix operation
+</o>
+<r>! use only 1-st frames  of A and B !</r>
+The number of columns A must be equal to the number of rows B.
+Result dimensions: rows = number of rows A, columns = number columns B.
+
+> stk 7 99 | noise # > B   ! create B[7,99] and fill by random values
+> tra B| mul B # | tt      ! B * tra.B --> res[7,7] --> console
+________________________________________________________________________________________
+<a name='dif'></a>
+	<o>dif  A 0 |  A 1 |  A B     ! "<r>dif</r>ference" of the Stacks
+</o>
+Two stacks are compared: maximum, average and root-mean-square deviations are searched.
+There are three options for comparison:
+   - <r>dif A</r> or <r>dif A 0</r>   - compare with zero matrix/ stack ;
+   - <r>dif A 1</r>            - compare with the Identity matrix( all 0, diagonal 1 );
+   - <r>dif A B</r>            - difference between A and B .
+
+> stk 99 99| noise # > A           ! create B[55,99] and fill by random values
+> inv A| mul A # | dif # 1         ! A * invA = I, difference from Identity<f>
+  ### dif[ 3 ]
+  ! Max            mean             r.m.s.
+  3.5776937e-14    2.7335064e-15    3.76508564e-15</f>
+________________________________________________________________________________________
+<a name='inv'></a>
+	<o>inv  A        >  File      ! "<r>Inv</r>ert" Matrix
+</o>
+Matrix A must be square( number of rows = number of columns ).
+The result, when multiplied by A, gives the Identity Matrix.
+
+> stk 400 400 | noise # 10 > A     ! create and fill by random values
+> inv A | mul # A | dif # 1        ! invert, multiply by original, difference from I<f>
+  ### dif[ 3 ]
+  ! Max            mean             r.m.s.
+  3.5776937e-14    2.7335064e-15    3.76508564e-15</f>
+________________________________________________________________________________________
+<a name='sys'></a>
+	<o>sys  A  b   >  File        ! solve a System of Linear Equations: [A]*x = b
+</o>
+Matrix A must be square( number of rows = number of columns ).
+Example( using A from the previous example ):
+> stk 400 | noise # 5     > b      ! create and fill vector b[400]
+> sys A b | mul A # | dif # b      ! difference [A]*x from b
+<f>  ### dif[ 3 ]
+  ! Max            mean             r.m.s.
+  5.36459765e-13   1.40668449e-13   1.75696574e-13</f>
+________________________________________________________________________________________
+<a name='mnk'></a>
+	<o>lss XY [N=3] [/vis] > SPL  ! <r>L</r>east <r>S</r>quares <r>S</r>pline of N parts
+</o>
+The XY stack contains at least 2 columns: arguments and function values. The data can be
+not ordered. The command will order them in ascending of the argument if necessary.
+A spline consisting of N parts is drawn using the <r>Least Squares Method</r>.
+If the key: <r>/vis</r> is present, the plot of XY points and spline is displayed.
+The <r>root mean square deviation</r> is indicated on the chart and in the File.
+
+File[ N, 5 ] contains the Spline Coefficients - <r>N lines of 5 values</r>:
+  xi - the beginning of the interval of this part,
+  s0, s1, s2, s3 : S(x) = s0 + s1*t + s2*t*t + s3*t*t*t,   where: t = x-xi .
+
+Spline coefficients SPL can be used in the command: <a href='#spl'>spl</a> to calculate spline
+values for a given set of arguments.
+
+In addition, File(2) - the second stack of File contains matrix of 3 columns:
+<r>X[], Y[], Spline(X)</r>. It may be viewed in simple way: > vic File(2) 1 2 3
+
+Example (for data generation used: pik3d\usr\TestLSS.java ):
+<f>
+package usr;
+public class TestLSS {
+  static public void main( String[] a ) {
+    int i, n=30, nn=n*3;
+    double dx=2*Math.PI/n, x=.6, f;
+    System.out.println("### XYF [ "+nn+", 3 ]");  // XY +Function
+    for(i=0; i&lt;nn; i++) {
+      f = 3*Math.sin( x )*Math.exp( -x/7 );
+      System.out.println( x+" \t"+(f+(Math.random()-.5))+" \t"+f);
+      x+=dx;
+    }
+  }
+}</f>
+> jj TestLSS.java  | lss # 7 /vis  ! only visualize, nothing is saved
+> jj TestLSS.java  > XY            ! generation: XY[ 90,2 ] + Fun -> XY[ 90,3 ]
+> lss  XY  7  /vis > SPL           ! LSS of 7 parts, coefficients -> SPL
+________________________________________________________________________________________
+<a name='spl'></a>
+	<o>spl   SPL  X   >  File     ! Getting Spline Values
+</o>
+Arranges X values if necessary, computes spline values( SPL from <a href='#mnk'>lss</a> ),
+<r>appends!</r> to X a new column of values and outputs to File.
+
+Example (using XY and SPL stacks from the previous example):
+
+> spl SPL XY| vics # 1 2,-1 3.0 "4 8 1"                ! nothing is saved
+> spl SPL XY > XYS                                     ! XY[ 90,3 ] +spl -> XYS[ 90,4 ]
+> vics XYS 1 "2,-1 Data" "3,0 Function" "4 8 1 Spline" ! Data[:,2],Fun[:,3], Spline[:,4]
+________________________________________________________________________________________
+<a name='tra'></a>
+	<o>tra    Stk  >  File
+</o>
+<r>TRA</r>nsposing ALL FRAMES OF THE STACK,i.e. the frame columns become the rows in new stack.
+It can be considered as frame  <r>turn over the diagonal</r> :  upper left - lower right.
+
+	<o>rot90 Stk> File
+</o>
+Rotation STACK FRAME 90 degrees can be considered as a <r>rotation about the center</r> of the
+frame at 90 degrees COUNTERCLOCK-WISE.
+Example for frame[ m, n ] - m-rows, n-columns:
+
+            frame[ m, n ]   result[ n, m ]
+                 ( 1, 1 )   --->  ( n, 1 )
+                 ( m, 1 )   --->  ( n, m )
+                 ( m, n )   --->  ( 1, m )
+                 ( 1, n )   --->  ( 1, 1 )
+________________________________________________________________________________________
+<a name='120'></a>
+	<o>sv  Stk  ( +,-,x,/,', exp,ln,db )  Value  >  File  !"<r>S</r>tack-<r>V</r>alue" operations
+</o>
+Operations are applied to <r>each stack element</r> and <r>value</r>.
+
+  Arithmetic operations:
+    +, -, <r>x-multiply(Latin:x)</r>, /-divide, <r>'-raise to a power(single quote)</r>
+
+  Functions &lt;Stack element> / value:
+    exp = exp  ( stk / value ) - "e" to the power ratio: &lt;Stack element>/value
+    ln  = ln   ( stk / value ) - natural logarithm( base "e" )
+    db  = 10*lg( stk / value ) - power decibel( decibel log.)
+
+    sv  Stk  + 200   >  F    ! add 200 to all elements
+    sv  Stk  - 100   >  F    !
+    sv  Stk  x -1    >  F    ! x - multiply by -1 == change the sign of all elements
+    sv  Stk  / 4     >  F    !
+    sv  Stk  ' 2     >  F    ! square all elements
+    sv  Stk  ' .5    >  F    ! take the square root of all elements (power of 1/2)
+
+*you can omit the space before value:
+    sv Stk +1; sv Stk /2; sv Stk '.5;
+    sv Stkq - -3 == sv Stk --3 == sv Stk +3 !!!
+
+*function name can be abbreviated to ONE letter( e, l, d ):
+    sv Stk e -2 == sv Stk exp -2 == exp( -stk/2 )
+________________________________________________________________________________________
+<a name='130'></a>
+	<o>ss  A  ( +, -, x, /, ' )  B  >  File   !"<r>S</r>tack-<r>S</r>tack" operations
+</o>
+Element-by-element stack operations:
+
+  ss A + B > F ! element-wise ADDITION:          Fij = Aij + Bij
+  ss A - B > F ! --:--:--:--  SUBTRACT:          Fij = Aij - Bij
+  ss A x B > F ! --:--:--:--  MULTIPLY(<r>Latin x</r>): Fij = Aij x Bij
+  ss A / B > F ! --:--:--:--  DIVISION:          Fij = Aij / Bij
+  ss A ' B > F ! --:--:--:--  RAISE TO A POWER:  Fij = Aij ' Bij
+
+* STACKS MUST HAVE FRAMES OF THE SAME SIZE !
+* Number of result frames = number of <r>shorter</r> stack.
+* Raise to a power - single quote.
+________________________________________________________________________________________
+<a name='140'></a>
+	<o>noise  Stk  [amp=.1]  >  File
+</o>
+Add to each element  <r>UNIFORM (WHITE) NOISE</r>  with amplitude amp. It has an even
+distribution on the interval: [-amp, amp ], default amp = 0.1 .
+
+> stk 1000000 | noise # | hist #   ! get NOISE histogram
+________________________________________________________________________________________
+<a name='145'></a>
+	<o>gnoise  Stk  [R=.1]   >  File
+</o>
+Add to each element  <r>GAUSSIAN NOISE</r>  with  mean=0  and  R=2*sigma.
+The default is R=0.1 ( sigma=.05 ).
+
+> stk 1000000| gnoise # .2| hist # ! get G.noise histogram( R=.2, sigma=.1 )
+                                   ! enable estimation of the GAUSSIAN distribution - <r>^G</r>
+________________________________________________________________________________________
+<a name='160'></a>
+	<o>top  Stk  level  >  F      ! 2 required parameters!
+</o>
+<r>"Cut TOP"</r> - replace with level  all <r>values > level</r>.
+________________________________________________________________________________________
+<a name='170'></a>
+	<o>bot  Stk  [level=0]  >  F
+</o>
+<r>"Cut Bottom"</r>  - replace with level  all <r>values &lt; level</r>.
+________________________________________________________________________________________
+<a name='180'></a>
+	<o>blur  Stk  [R=2]  >  F
+</o>
+Apply <r>"Gaussian Blur"</r> smooth filter of given Radius R=2*sigma to all frames.
+Radius - characteristic blur size (smaller elements will disappear).
+By default R=2, but can be for example: 1.2, 1.75, 3.5 ...
+Filter width (aperture) = 3*R = 6*sigma, i.e. at R=2 summation for each point
+will be done on a 7x7 square( 3*R=3*2, +1 - "Center Point Claim").
+________________________________________________________________________________________
+<a name='190'></a>
+	<o>filtr  Stk  Fltr  >  F
+</o>
+Apply <r>Digital Filter</r> to all Stk frames. Fltr - <a href="#dat">###-matrix</a> with filter coefficients.
+For example, the filter can be obtained like this: > <a href="#60">gauss</a> 3.5 2.8 > Fltr ! size: 11x11
+The filter may be NOT normalized( the sum of the coefficients != 1 ).
+Filter normalization is done automatically by the command.
+________________________________________________________________________________________
+<a name='210'></a><o>Simple time smoothing (through the frames):
+
+	ma Stk [ N=5 ] > F</o> ! "<r>M</r>oving <r>A</r>verage"- over N frames.
+
+<r>WARNING!</r> Usually, a moving average means the SUM of N-1 previous values and the current
+one divided by N. This leads to  lag = N/2  of filtered values.
+In <o>ma, sma :</o> commands
+
+  <r>&lt;MOVING AVERAGE> = ( &lt;sum of PREV N/2> + current + &lt;sum of NEXT N/2> ) / N</r>
+  If N=2*k is given - commands use the value 2*k+1 !!!
+  At the beginning and the end of the stack, the division is made by the real number
+  of summed values.
+
+The MOVING AVERAGE is calculated for each frame point.
+________________________________________________________________________________________
+<a name='220'></a><o>Removing Slowly Changing Variations - "Detrending":
+
+	sma Stk [ N=5 [ level=0 ]] > F
+</o>
+"<r>S</r>ubtract the <r>M</r>oving <r>A</r>verage" - over N frames.
+level specifies the "cutoff"( values below are replaced by level ).
+________________________________________________________________________________________
+<a name='his'></a>
+	<o>hist Stk [ Frame=1 [ Nint=100 ]]   ! Histogram of the frame values
+</o>
+where:	Nint - the Number of Intervals in the range [min,max], default: 100.
+	Don't make it too big - the spread of the histogram values increases.
+	Valid range for Nint is from 20 to 2000 .
+
+In the opened Histogram window, you can change the Number of Intervals:
+in the upper right corner <r>enter a new value and press &lt;Enter></r>.
+
+<r>&lt;F3>    </r> - Save the Histogram to a file.
+<r>&lt;Ctrl+G></r> - ON/ OFF estimation of the Normal/ Gaussian distribution:
+
+  1. Find min, max values in the frame.
+  2. The width of the interval = ( max-min )/Nint .
+  3. All frame values are sorted by intervals.
+     The number of values that fell into the interval = the value of the Histogram.
+  4. The least squares method is used to find estimation of the distribution function.
+  5. Displayed: Histogram, Xo(distribution center), +/-sigma, 3*sigma .
+
+It is convenient to view a narrow distribution peaks using a <a href="#gra">ZOOM</a>.
+
+Example: get histogram of the GAUSSIAN NOISE [R=2*sigma=.1]
+  > stk 1000000 | gnoise # | hist #
+________________________________________________________________________________________
+<a name='vis'></a>
+  <o>vic[s] - <r><u>VI</u></r>sualize <r><u>C</u></r>olumn [with <r> <u>S</u></r>pline]
+</o>
+The parameters for the <o>vic</o> and <o>vics</o> commands are the same.
+Sign <r>,</r> in the command means default value.
+
+<r>Only the columns of the first frame are displayed</r>
+To display columns of the 7-frame:  <a href="#sec">sec</a> Stk k=7 | <o>vic # ...</o>
+In case of lines   of the 9-frame:  <a href="#sec">sec</a> Stk k=9 | <a href="#tra">tra</a> # | <o>vic # ...</o>
+If you need to display Stk[3,5,:]:  <a href="#sec">sec</a> Stk i=3 | <a href="#tra">tra</a> # | <o>vic # , 5 ...</o>
+
+<r>vic Stk jX j1 j2 ... [xy: X Y W H] [/dbg]</r> , where:
+    Stk - stack name, ONLY 1-frame is always used
+        jX - column X[] -"argument values":
+                 <r>0</r>: X[] = 1, 2, 3, 4 ... - default, <r>"scan by numbers"</r>;
+                 N: X[] = N-column values;
+            (V dV): X[] = V, V+dV, V+2*dV, V+3*dV ... ;
+
+           j1 j2 j3... - columns ( no more than 12 ) will be shown as functions of X[]
+                         default j1=1, if jK&lt;0 - only markers without a line
+              xy: X Y W H - position: X, Y -top left corner & window size: <r>W</r>idth, <r>H</r>eight
+                            default: xy: 0 0 640 400
+                     /dbg - allows you to see error message
+examples:
+  vic                            !get HELP or > vic /?
+  vic q                          !stack q: "by numbers" 1-column == q,, == q,1 == q 1 1
+  vic q,4                        !---:---:---:---:---   4-column
+  vic q (2 .5) 6 7 xy:,,999 555  !---:---: X=2,2.5,3... 6,7-columns, window[0,0,999,555]
+
+default <r>"Legend"</r> contains:  colored line with marker,  stack name  and  column number.
+"Legend" can be dragged. Before saving, you can add texts(^T) and lines(^L) to the chart
+&lt;F1> - additional graphics options( ^T, ^L, ZOOM ... ), <a href="#gra">more abour 2D-graphics</a>.
+
+         c = Colors[ 11 ]:     m = Markers[ 10 ]:
+         <b>0 - black             </b>0 - LINE WITHOUT MARKER
+         <font color=0000d8><b>1 - blue</font>              </b>1 - small filled square
+         <font color=228b22><b>2 - green</font>             </b>2 - diamond
+         <font color=ff8c00><b>3 - orange</font>            </b>3 - triangle
+         <font color=04b4ff><b>4 - cyan</font>              </b>4 - square
+         <font color=d500d5><b>5 - lilac</font>             </b>5 - pentagon
+         <font color=00de00><b>6 - light green</font>       </b>6 - inverted triangle
+         <font color=777777><b>7 - gray</font>              </b>7 - "butterfly"
+         <font color=eb0000><b>8 - red</font>               </b>8 - +
+         <font color=005c81><b>9 - gray-green</font>        </b>9 - x
+        <font color=753838><b>10 - brown</font>            </b>10 - O or circle
+
+With a large number of graphs, colors repeat in a cycle: 0-10 (from 1), markers: <r><u>1</u></r>-10
+
+<r>"DETAILS"</r> is required to set color, line without marker and/or text in <r>"Legend"</r>:
+<r>"j c [ m [ text ]]"</r> !!! QUOTATION MARKS ARE OBLIGATORY if there is a SPACE in <r>"DETAILS"</r>
+ <r>j</r> - column number if j &lt; 0 - only markers without a line
+   <r>c</r> - color or ',' or hexadecimal value( <u>6 digits:</u> <r>RR</r><g>GG</g><n>BB </n>, example: <font color=4b0082>4b0082 - Indigo</font> )
+       <r>m</r> - marker or ',' - if m &lt; 0 - only markers without a line
+           <r>text</r> - if set - "Legend" will contain this text
+examples:
+  vic q,,2 -3 5,0 7,-1      !col.: 1,2,3,5,7: 3-markers only, 5-line only, 7-squares
+  vic q (2 .1) 2,0 3,0 4,0  !X[]: 2, 2.1, 2.2, 2.3... columns: 2,3,4 - lines only
+
+  vic q,  3,,Blue  5,,Green  7,,Orange   !"by numbers", columns: 3, 5, 7
+
+  vic q,,2 8,,dt,ms -7 "4 4b0082, Delay" 15.0 "9 7, Limit [ms]"
+      q-stack( 1st frame ), "scan by numbers"(1st comma) of the following columns:
+        1: (2nd comma - default) blue line, square, no text;
+         2: green line, diamond, no text;
+           8: (details without spaces) orange line, triangle, text="dt,ms";
+                     7: blue square, no line, no text;
+                        4: Indigo( 4b0082 ) line, 5-gon, text="Delay";
+                                         15: purple line, no markers, no text;
+                                               9: gray line, inv.triangle,"Limit [ms]"
+________________________________________________________________________________________
+<a name='vip'></a>
+  <o>vimp - "<r><u>VI</u></r>sualize <r><u>M</u></r>ultiple stacks <r><u>P</u></r>lots" in one window
+</o>
+  <r>vimp config</r>
+
+where: config is a text file.
+May contain empty lines and comments (start with # or ! ).
+
+Optional parameter: <r>xy: X Y W H</r>
+where: X, Y - the position of the upper left corner of the window in pixels,
+       W, H - width, height of the window.
+If absent or X=-1, then defaults:  X=0,Y=0, W=640,H=400  are used.
+If present, must be the first semantic parameter (before <r>vic and vics</r> ).
+
+Column display options: <r>vic Stk ... and vics Stk ...</r>
+exactly match the command <a href="#vis">vic[s] Stk ... </a>
+
+  Example config file:
+
+# this is      a comment
+! this is also a comment
+
+xy: 88 222, 480  ! position & size of the chart window
+
+vic p5
+vic q,,2 3
+vics q25, -3 "4 4b0082, Delay" "9 7, Limit [ms]"
+
+# config END.
+________________________________________________________________________________________
+<a name='gra'></a>
+	<o>Use of 2D-graphics</o>
+
+  &lt;F1>      - quick help.
+  &lt;^S>      - save image in .WMF format
+  &lt;^+/ ^->  - quick increase/ decrease of the window by ~10%.
+                    Size of the window can be changed using standard Windows tools.
+
+Subject coordinates( SC ) of the cursor are displayed in the window title.
+<r>When CLICKING with any mouse button, SC are copied to the CLIPBOARD.</r>
+This allows you to build a table of measurements: after clicking go to the text editor
+and "Paste" the value from the clipboard( &lt;Ctrl+V> or &lt;Shift+Ins> ).
+
+You can select and enlarge a fragment of the chart - <r>ZOOM</r>:
+1. Press Left Mouse button and "Drag" <r>DOWN RIGHT</r>.
+2. Without releasing the mouse button, select the size of the rectangle.
+3. Release the mouse and <r>click in the rectangle</r> - a new ZOOM window will appear.
+4. Select the size of the new ZOOM window.
+5. Select the position of ZOOM in the main window - "Drag" rectangle.
+6. The size of the rectangle can be changed: "Drag & Drop" any corner of the rectangle.
+7. The rectangle in the main window exists until ZOOM window is closed.
+
+You can add <r>TEXT</r> and/or <r>LINE</r> anywhere in the window:
+
+  - <r>&lt;Ctrl+T></r> - add TEXT;
+  - in the dialog that appears, select Color, Size, enter text;
+  - <r>drag</r> text to the desired location, press OK or &lt;Enter> ;
+
+  - <r>&lt;Ctrl+L></r> - add LINE ;
+  - dragging the active points of the Bezier curve, get the desired line;
+  - <r>&lt;X></r> - turn a Bezier curve into a straight line and vice versa;
+  - <r>&lt;A>/&lt;D></r> -"Add"/"Delete" - add/remove an additional line fragment;
+  - <r>&lt;+>/&lt;-></r> - increase/decrease line thickness ;
+
+  - <r>&lt;Ctrl+Z></r> - remove last text/line in case of error ;
+               a few clicks remove previous texts/lines.
+
+	<r>SETTING OFFSET( PADDING )</r> of the graphics from the border of the window:
+
+  - <r>&lt;Ctrl></r> + move the cursor to the border of the window. The cursor should change to
+  an arrow. While holding down <r>&lt;Ctrl> and &lt;Left Mouse Button></r> drag the window border
+  to a new location. You can add lines and text to the freed space.
+  Padding does not change when the window is resized.
+  If Padding Settings mode is in effect after release - press <r>&lt;Ctrl></r> once more.
+
+The image of the main window and ZOOM can be saved in <r>WMF</r> format.
+"Windows Meta File" is a vector graphics format that scales well.
+Supports MS Word, ACDSee, Total Commander &lt;F3> ...
+
+To save, click the selected window and press <r>&lt;Ctrl+S></r>.
+Enter a file name in the file selection window that appears.
+<o>
+       Graphics Features:
+</o>
+- THE SIZE OF THE AXIS SIGNATURES IS FIXED ( does not increase with an
+  increase of the window). If the document needs large axis labels, select a small
+  window size  before ^S.
+
+- When resizing the window, the position( in subject coordinates ) of the lower left
+  corner of the texts remains unchanged. "Legend" base point - its upper right corner.
+
+- The aspect ratio of the image can only be changed until is saved: ^S  .
+
+- <r>WMF</r> is a vector format( LINES, NO pixels ), so it scales well.
+  In the document, stretch the image to the desired size.
+
+- When manipulating a <r>WMF</r> image, the font will resize according to the image size.
+________________________________________________________________________________________
+<a name='tif'></a><o>
+	command: tif File.tif [ Npro=99999 ]  - Show   one    tif file
+		 tif  Config  [ Npro=99999 ]  - Show multiple tif files
+</o>
+You can save a clip as a multi-pages tif-file by the command <a href="#s3F2"> s3d: &lt;F2> </a>.
+You can use multi-pages tif-files created in other programs ( ImageJ ...)
+
+All pages are displayed sequentially. The cycle is repeated Npro times.
+This parameter should not be specified unless required fixed number of views.
+
+To display multiple tif files synchronously, <r>config file is required:
+
+	&#9556&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9559
+	&#9553 dt[ms] = &lt;frame interval> &#9553
+	&#9553                           &#9553
+	&#9553 File1.tif, x1, y1, w1, h1 &#9553
+	&#9553 File2.tif, x2, y2, w2, h2 &#9553
+	&#9553       ...                 &#9553
+	&#9553 FileN.tif, xN, yN, wN, hN &#9553
+	&#9562&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9565
+</r>
+where:  dt[ms] - time interval in milliseconds between frames, default=200 ;
+        xk, yk - coordinates of the upper left corner of the k-image ;
+        wk, hk - width, height of the k-image,  k=1,2,3...N .
+
+Show can be:
+  - stop/continue: <r>&lt;Mouse Right click>  or  &lt;space></r>;
+  - speed up/ slow down: <r>&lt;Ctrl+Right>/ &lt;Ctrl+Left></r>,  default: 5 frames/sec.
+
+Frames can be scrolled by rotating the <r>Mouse Wheel</r> or keys: <r>&lt;Left>/&lt;Right>, &lt;Home>/&lt;End></r>
+________________________________________________________________________________________
+<a name='jj'></a>
+  <o>command: jj File.java [a0 a1...] -"Java.java"- execute source code of the File.java
+</o>
+The simplest way to use it is to generate data in the <a href="#dat">###-format</a> :
+The header and data are output to the standard input/output stream.
+
+Example 1: <r>"minor MAJOR"</r>( in folder: pik3d\usr, file: MinMaj.java ):
+  Chords  =  additions of three harmonics with frequencies:
+    minor chord:  1, <r>6/5</r>, 3/2  - tonic, minor third, quint
+    MAJOR chord:  1, <r>5/4</r>, 3/2  - tonic, MAJOR third, quint
+<f>
+package usr;
+public class MinMaj {
+  static public void main( String[] a ) {
+    System.out.println("### minMAJ [ 201, 3 ]");                 // ### Header
+    for(int i=0; i&lt;=200; i++) {
+       var t = i*( 2*Math.PI/10 );                               // 10 points/period
+       var k = Math.sin( t ) + Math.sin( t*3/2 );                // tonic + quint
+       System.out.println( i/10.+"\t"+( k + Math.sin( t*6/5 ))   // minor
+                                +"\t"+( k + Math.sin( t*5/4 ))); // MAJOR
+    }
+  }
+}</f>
+> jj MinMaj.java
+> jj MinMaj.java | vic #1 2 3.8
+> jj MinMaj.java | vics # 1 "2 1 0 minor_: 1, 6/5, 3/2" "3 8 0 MAJOR: 1, 5/4, 3/2"
+
+By the way, pay attention to the failure of the frequency for the minor on 5th and 15th
+periods - this is the reason on which the minor sounds sad.
+
+It is recommended to experiment with graphics:
+  - stretch the graphic window to the width of the screen;
+  - drag the "Legend" to a convenient place;
+  - add text : ^T, change size and color, drag to the right place;
+  - add lines: ^L, change color and thickness, +/-/X;
+  - try to delete added texts and lines: ^Z;
+  - ^S - save the window in a .WMF file: with subsequent insertion into a Word document;
+  - try to work with a ZOOM: drag down-right while holding down the mouse button;
+  - drag ZOOM rectangle.
+
+A more advanced way to use the <r>command: jj</r> is to process <a href="#dat">###-files</a>.
+To do this, the class must inherit the I/O library <r>pik.io</r>.
+
+Example 2: <r>"Stack with Frames in Reverse order"</r>( pik3d\usr\Reverse.java ):
+<f>
+package usr;
+import pik.io;                         // library
+
+public class Reverse extends io {
+  public static void main( String[] arg ) throws Exception {
+    er1("reverse", arg, "Stk > ktS");  // checking input parameters
+
+    var stk = inStk( arg[0] );         // stk[ kk ][ ii ][ jj ]
+
+    int k = stk length;
+    while(--k >=0 ) ttKadr( stk[k] );  // out Frames in Reverse
+    clott();
+  }
+}</f>
+> jj Reverse.java Stk > ktS              // save result
+> jj Reverse.java Stk | s3d #            // display
+________________________________________________________________________________________
+<a name='pik'></a><o>
+	Most used pik.io methods
+
+Read/Write to standard stream:  <r>System.in/ System.out</r>,  static methods :</o>
+<f>
+  void er1( String cmd, String[] arg, String help ) </f>// checking arg[] parameters
+       // If arg is empty or arg[0]=<r>"/?"</r>, then help is displayed and the program exits
+
+  <f>float [][]   inKadr( String file ) </f>// read the 1st frame of the stack into <r>float [][]</r>
+
+  <f>float [][][] inStk ( String file ) </f>// read stack into <r>float [][][]</r>
+  <f>double[][][] inStk8( String file ) </f>// read stack into <r>double[][][]</r>
+
+  <f>void ttStk ( float [][][] ff ) </f>// stack output: <r>float [][][]</r>  in  <a href="#bin">bin.format F4 BE</a>
+  <f>void ttStk8( double[][][] dd ) </f>// stack output: <r>double[][][]</r>  in  <a href="#bin">bin.format D8 BE</a>
+
+  <f>void tt( String s ) </f>// output string to stream: System.out
+  <f>void <r>ee</r>( String s ) </f>// output string to stream: <r>System.err</r>
+
+  <f>void ttKadr ( float [][] ff )  </f>// frame output: <r>float [][]</r>    in  <a href="#bin">bin.format F4 BE</a>
+  <f>void ttKadr8( double[][] dd )  </f>// frame output: <r>double[][]</r>    in  <a href="#bin">bin.format D8 BE</a>
+
+  <f>void clott()</f> // close/clean up pik.io resources, should <r>ALWAYS</r> be called at the end !
+
+Frame is 2-dimensional array <r>frame    [ ii ][ jj ]</r>, e.g. 3-row  : <f>var s3 = frame[ 2 ];</f>
+Stack is 3-dimensional array <r>stk[ kk ][ ii ][ jj ]</r>, e.g. 5-frame: <f>var k5 = stk  [ 4 ];</f>
+You can use file names with stack number (see below): "A.dat(3)", "#(4)"
+
+If the stacks are small and there is enough memory to accommodate them entirely,
+the author recommends use these <o>static methods</o> - don't use reader (see below).
+
+<o>Read Frame:</o>
+
+  <f>io reader = new io( String file )</f> // constructor: create a reader of the File,
+                                     // if <r>file ="#"</r>, then reading from <r>System.in</r>.
+If the file/stream contains multiple stacks separated by lines <r>### &lt;eos></r> (End Of Stack),
+then the filename might look like this: <r>Stk(3), #(4)</r>. Last means: 4th stack in <r>System.in</r>
+
+  <f>float [][]   reader.inKadr () </f>// read frame into <r>float [][]</r>   - 2d-array ;
+  <f>double[][]   reader.inKadr8() </f>// read frame into <r>double[][]</r>   - 2d-array ;
+                                 // Frame can be in any format:<a href="#dat"> Text,I2,F4,D8<a>
+  <f>float [][][] reader.inStk () </f> // read stack into <r>float [][][]</r> - 3d-array ;
+  <f>double[][][] reader.inStk8() </f> // read stack into <r>double[][][]</r> - 3d-array ;
+
+The reader reads frame by frame sequentially. If it encounters end of file or
+<r>### &lt;eos></r> (End Of Stack), then the methods <f>inKadr(), inKadr8()</f> return null,
+and <f>inStk(), inStk8()</f> ends reading and returns a 3d array. In the case of several
+stacks in the file/stream, the reader is ready to read the next stack.
+
+  <f>void reader.skipStk( int n ) </f> // Skip n stacks.
+  <f>void reader.reset() </f>          // "rewind" file/ input stream to the beginning.
+
+reader does not need to be closed, readers are closed at the end by the method: <f>clott()</f>.
+
+A package to read/write  ###-files  in  <r>PYTHON</r>:  <r>kadr.py</r>  - pik3d\ext\###_PYTHON.zip .
+________________________________________________________________________________________
+<a name='jc'></a>
+	<o>Create New pik3d Command, prepare Launcher
+</o>
+The description uses <r>Fun.java and fun</r> as the name of the java file and command.
+
+1. Debug <r>Fun.java</r> and functionality with ><a href="#jj"> jj Fun.java</a>.
+   If additional libraries are required, they must be added to the environment variable:
+   <r>PIK3D_JAVA</r>, <a href="#ins">see INSTALLATION</a> (at the end of the variable text, separator ';').
+
+2. COMPILING: > <o>jc Fun.java</o> . If successful, <r>Fun.class</r> should appear.
+
+3. Copy <r>Fun.java and Fun.class</r> to the library: <r>pik3d\lib\usr.jar\<o>usr</o>\</r> .
+   The .jar files are ZIP archives, so any ZIP utility will work for copying.
+   <r>! Copy to folder: <o>usr</o> of the archive: usr.jar !</r>
+
+4. Create LAUNCHER: go to pik3d\exe, run > <r>_Launch fun: java usr.Fun</r> .
+   A <r>fun.exe</r> will be created that runs <r>usr.Fun.class</r> .
+________________________________________________________________________________________
+<f>
+                              author: K.A. Ilyashenko, e-mail: kilyashenko@gmail.com
+                              Error messages, comments, suggestions  are  welcome
+</f></pre></h5></body></html>
