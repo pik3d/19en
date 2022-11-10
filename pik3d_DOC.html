@@ -14,7 +14,7 @@ f{font-weight:normal; Color:#0047b3; font-family:'Lucida Console'; font-size:11p
 <h5><pre><a name='s3d'><f>pik3d - framework for processing and 3d-display of matrices and their sequences
         Help has standard HTML navigation: &lt;Home>, &lt;End>, &lt;Alt+Left>, <a href="#ins">links</a> ...
 </f><a name='ogl'></a>
-<a href='#fwk'>DESCRIPTION of&nbsp; pik3d &nbsp;v.19.3.4 </a>
+<a href='#fwk'>DESCRIPTION of&nbsp; pik3d &nbsp;v.19.3.5 </a>
 <a href="#ins">pik3d INSTALLATION </a>
 <a href="#dat">###-format of the data: FRAME, STACK </a>
 <a href="#cmd">COMMANDS </a>
@@ -624,17 +624,37 @@ A pipeline as a file can contain several stacks, in this case N-th stack will be
 <r>   !!! None of the input files must have name of result (in the example: Land) !!!</r>
 
 It makes sense to save the worked out command sequences in files: .cmd or .bat .
-Filenames can be call parameters ( %1, %2 ...). To organize loops or branch points, you
-can use the ability to get the value of a variable from the standard stream.  Example:
+Stack names and parameters can be considered as call arguments ( %1, %2 ...).
+If necessary  to provide  loops  and  branch points  at the  batch file  level,
+commands can be used:
 
-   for /f %q in (<r>'check.exe p1 p2 ...'</r>) do ( set <r>VAR</r>=%q )
-   echo ___result = %VAR%
+   <r>call varkbd VAR</r> prompt [default]        ! get the value entered from the keyboard
+   <r>call varstk VAR</r> Stk [i=1 [j=1[ k=1]]]   ! get value of the Stk[ i, j, k ] element
 
-<r>'check.exe p1 p2 ...'</r> - call a program or command (required in quotes) that outputs
-value, which the <r>VAR</r> will receive to control the loop or branch.
-For debugging, you can use the system command: <r>echo text</r> :
+They are implemented as .cmd files, so using the word:  <r>call - REQUIRED</r> .
+<r>VAR</r> is an environment variable that can be used in the  <r>IF</r>  command.
+Example( exe\stkelm.cmd - get element: Stk[i,j,k] ):<f>
+@echo OFF
+::          stkelm.cmd  Stk  ! get Stk Element, %1 = Stack Name
+IF [%1]==[] goto end
 
-   for /f %q in (<r>'echo -123.4567'</r>) do ( set <r>VAR</r>=%q )
+:cycle
+call varkbd <r>i</r> "input i" 3
+call varkbd <r>j</r> "input j" 7
+call varkbd <r>k</r> "input k(999=exit)" 999
+
+<r>IF</r> %<r>k</r>% equ 999 goto end
+
+call varstk <r>elm</r> %1 %<r>i</r>% %<r>j</r>% %<r>k</r>%
+echo %1[ %<r>i</r>%, %<r>j</r>%, %<r>k</r>%] = %<r>elm</r>%
+echo.
+goto cycle
+
+:end
+</f>
+1. Get a stack for experiments in the folder: demo\bell2
+   console> gen3d bell2.gen> Stk
+2. console> stkelm Stk
 ________________________________________________________________________________________
 <a name='40'></a>
 	<o>stk  ii  [jj=1  [kk=1  [v=0]]]  >  File    ! Create a new STACK in File
