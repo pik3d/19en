@@ -14,10 +14,10 @@ f{font-weight:normal; Color:#0047b3; font-family:'Lucida Console'; font-size:11p
 <h5><pre><a name='s3d'><f>pik3d - framework for processing and 3d-display of matrices and their sequences
         Help has standard HTML navigation: &lt;Home>, &lt;End>, &lt;Alt+Left>, <a href="#ins">links</a> ...
 </f><a name='ogl'></a>
-<a href='#fwk'>DESCRIPTION of&nbsp; pik3d &nbsp;v.19.3.5 </a>
-<a href="#ins">pik3d INSTALLATION </a>
-<a href="#dat">###-format of the data: FRAME, STACK </a>
-<a href="#cmd">COMMANDS </a>
+<a href='#fwk'>DESCRIPTION of&nbsp; pik3d &nbsp;v.19.3.7</a>
+<a href="#ins">pik3d INSTALLATION</a>
+<a href="#dat">###-format of the data: FRAME, STACK</a>
+<a href="#cmd">COMMANDS</a>
 
   <a href='#sss'>s3d -"Surface-3D" </a>                             ! 3D-display of the Frame, Stack
 
@@ -43,7 +43,7 @@ f{font-weight:normal; Color:#0047b3; font-family:'Lucida Console'; font-size:11p
   <a href="#dif">dif   A  0 | A  1 |  A  B </a>                     ! Difference of the Matrix/ Stack
   <a href="#inv">inv   A </a>                                       ! Invert Matrix
   <a href="#sys">sys   A  b </a>                                    ! Linear System Solver
-  <a href="#mnk">lss   XY   [N=1]  [/vis] </a>                      ! Spline by <r>L</r>east <r>S</r>quares <r>S</r>pline
+  <a href="#mnk">lss   XY   [N=3]  [/vis]  [add:File]</a>           ! <r>L</r>east <r>S</r>quares <r>S</r>pline of N parts
   <a href="#spl">spl  SPL X </a>                                    ! get values of the Spline
 
   <a href="#tra">tra    Stk </a>                                    ! all Stack Frames Transposition
@@ -60,7 +60,7 @@ f{font-weight:normal; Color:#0047b3; font-family:'Lucida Console'; font-size:11p
 
   <a href="#210">ma    Stk  [ N=5 ] </a>                            ! Moving Average
   <a href="#220">sma   Stk  [ N=5     [ level=0  ]] </a>            ! Subtract Moving Average
-  <a href="#his">hist  Stk  [ Frame=1 [ Nint=200 ]] </a>            ! Frame Histogram
+  <a href="#his">hist  Stk  [ Frame=1 [ Nint=200 ]] [add:File]</a>  ! Frame Histogram
 
   <a href="#vis">vic   Stk  [Frame=1] [jx=0] j1 [j2 [j3 [...]]]</a> ! Visualize Columns
   <a href="#vis">vics  ---"---"---"---"---"---"---"---"---"--- </a> ! --"---"---"---"-- with <r>Spline</r>
@@ -1197,23 +1197,27 @@ Example( using A from the previous example ):
   5.36459765e-13   1.40668449e-13   1.75696574e-13</f>
 ________________________________________________________________________________________
 <a name='mnk'></a>
-	<o>lss XY [N=3] [/vis] > SPL  ! <r>L</r>east <r>S</r>quares <r>S</r>pline of N parts
+	<o>lss XY [N=3] [/vis] [add:File]  > SPL  ! <r>L</r>east <r>S</r>quares <r>S</r>pline of N parts
 </o>
 The XY stack contains at least 2 columns: arguments and function values. The data can be
 not ordered. The command will order them in ascending of the argument if necessary.
 A spline consisting of N parts is drawn using the <r>Least Squares Method</r>.
-If the key: <r>/vis</r> is present, the plot of XY points and spline is displayed.
-The <r>root mean square deviation</r> is indicated on the chart and in the File.
 
-File[ N, 5 ] contains the Spline Coefficients - <r>N lines of 5 values</r>:
-  xi - the beginning of the interval of this part,
+If the key: <r>/vis</r> is present, the plot of XY points and spline is displayed.
+The root mean square deviation is indicated on the chart and in the File.
+
+if option <r>add:File</r> is present, Additional Graphics from File[.add] is added
+to the chart( see <a href='#gra'>Use of 2D-graphics</a> ).
+
+SPL[ N, 5 ] contains the Spline Coefficients - N lines of 5 values:
+  xi - the beginning of the interval of i-part,
   s0, s1, s2, s3 : S(x) = s0 + s1*t + s2*t*t + s3*t*t*t,   where: t = x-xi .
 
-Spline coefficients SPL can be used in the command: <a href='#spl'>spl</a> to calculate spline
-values for a given set of arguments.
+Spline coefficients SPL can be used in the command:<a href='#spl'> spl </a>to calculate spline values
+for a given set of arguments.
 
-In addition, File(2) - the second stack of File contains matrix of 3 columns:
-<r>X[], Y[], Spline(X)</r>. It may be viewed in simple way: > vic File(2) 1 2 3
+In addition, SPL(2) - the second stack of the file contains matrix of 3 columns:
+<r>X[], Y[], Spline(X)</r>. It may be viewed in simple way: > vic SPL(2) 1 2 3
 
 Example (for data generation used: pik3d\usr\TestLSS.java ):
 <f>
@@ -1373,11 +1377,14 @@ ________________________________________________________________________________
 level specifies the "cutoff"( values below are replaced by level ).
 ________________________________________________________________________________________
 <a name='his'></a>
-	<o>hist Stk [ Frame=1 [ Nint=100 ]]   ! Histogram of the frame values
+	<o>hist Stk [ Frame=1 [ Nint=100 ]]  [add:File]   ! Histogram of the frame values
 </o>
-where:	Nint - the Number of Intervals in the range [min,max], default: 100.
+where:	<r>Nint</r> - the Number of Intervals in the range [min,max], default: 100.
 	Don't make it too big - the spread of the histogram values increases.
 	Valid range for Nint is from 20 to 2000 .
+
+if option <r>add:File</r> is present, Additional Graphics from File[.add] is added
+to the chart( see <a href='#gra'>Use of 2D-graphics</a> ).
 
 In the opened Histogram window, you can change the Number of Intervals:
 in the upper right corner <r>enter a new value and press &lt;Enter></r>.
@@ -1410,7 +1417,7 @@ To display columns of the 7-frame:  <a href="#sec">sec</a> Stk k=7 | <o>vic # ..
 In case of lines   of the 9-frame:  <a href="#sec">sec</a> Stk k=9 | <a href="#tra">tra</a> # | <o>vic # ...</o>
 If you need to display Stk[3,5,:]:  <a href="#sec">sec</a> Stk i=3 | <a href="#tra">tra</a> # | <o>vic # , 5 ...</o>
 
-<r>vic Stk jX j1 j2 ... [xy: X Y W H] [/dbg]</r> , where:
+<r>vic  Stk jX j1 j2 ... [xy: X Y W H] [add: file[.add]] [/dbg]</r> , where:
     Stk - stack name, ONLY 1-frame is always used
         jX - column X[] -"argument values":
                  <r>0</r>: X[] = 1, 2, 3, 4 ... - default, <r>"scan by numbers"</r>;
@@ -1421,7 +1428,8 @@ If you need to display Stk[3,5,:]:  <a href="#sec">sec</a> Stk i=3 | <a href="#t
                          default j1=1, if jK&lt;0 - only markers without a line
               xy: X Y W H - position: X, Y -top left corner & window size: <r>W</r>idth, <r>H</r>eight
                             default: xy: 0 0 640 400
-                     /dbg - allows you to see error message
+                 add:file - add to chart previously saved by &lt;Alt+A>: texts,lines,graphs
+                     /dbg - allows you to see error messages
 examples:
   vic                            !get HELP or > vic /?
   vic q                          !stack q: "by numbers" 1-column == q,, == q,1 == q 1 1
@@ -1430,7 +1438,7 @@ examples:
 
 default <r>"Legend"</r> contains:  colored line with marker,  stack name  and  column number.
 "Legend" can be dragged. Before saving, you can add texts(^T) and lines(^L) to the chart
-&lt;F1> - additional graphics options( ^T, ^L, ZOOM ... ), <a href="#gra">more abour 2D-graphics</a>.
+&lt;F1> - additional graphics options( ^T, ^L, ^A, ZOOM ... ), <a href="#gra">more abour 2D-graphics</a>.
 
          c = Colors[ 11 ]:     m = Markers[ 10 ]:
          <b>0 - black             </b>0 - LINE WITHOUT MARKER
@@ -1481,23 +1489,28 @@ Optional parameter: <r>xy: X Y W H</r>
 where: X, Y - the position of the upper left corner of the window in pixels,
        W, H - width, height of the window.
 If absent or X=-1, then defaults:  X=0,Y=0, W=640,H=400  are used.
-If present, must be the first semantic parameter (before <r>vic and vics</r> ).
 
-Column display options: <r>vic Stk ... and vics Stk ...</r>
-exactly match the command <a href="#vis">vic[s] Stk ... </a>
+Optional parameter: <r>add: File[.add]</r>
+File contains Add.Graphics: Texts(^T), Lines(^L), Add.Graphisc(^A).
+
+Options must be before semantic parameters( vic and vics ).
+
+Column display parameters :  <r>vic Stk ...  and  vics Stk ...</r>
+exactly match the commands:  <a href="#vis">vic Stk ...  and  vics Stk ...</a>
 
   Example config file:
-
+<f>
 # this is      a comment
 ! this is also a comment
 
-xy: 88 222, 480  ! position & size of the chart window
+<r>xy: </r> 88 222, 480  ! position & size of the chart window
+<r>add:</r> qq2.add      ! Add.Graphics
 
-vic p5
-vic q,,2 3
-vics q25, -3 "4 4b0082, Delay" "9 7, Limit [ms]"
+<r>vic </r> p5
+<r>vic </r> q,,2 3
+<r>vics</r> q25, -3 "4 4b0082, Delay" "9 7, Limit [ms]"
 
-# config END.
+# config END.</f>
 ________________________________________________________________________________________
 <a name='gra'></a>
 	<o>Use of 2D-graphics</o>
@@ -1524,32 +1537,36 @@ You can select and enlarge a fragment of the chart - <r>ZOOM</r>:
 You can add <r>TEXT</r> and/or <r>LINE</r> anywhere in the window:
 
   - <r>&lt;Ctrl+T></r> - add TEXT;
-  - in the dialog that appears, select Color, Size, enter text;
-  - <r>drag</r> text to the desired location, press OK or &lt;Enter> ;
+      - in the dialog that appears, select Color, Size, enter text;
+      - <r>drag</r> text to the desired location, press OK or &lt;Enter> ;
 
   - <r>&lt;Ctrl+L></r> - add LINE ;
-  - dragging the active points of the Bezier curve, get the desired line;
-  - <r>&lt;X></r> - turn a Bezier curve into a straight line and vice versa;
-  - <r>&lt;A>/&lt;D></r> -"Add"/"Delete" - add/remove an additional line fragment;
-  - <r>&lt;+>/&lt;-></r> - increase/decrease line thickness ;
+      - dragging the active points of the Bezier curve, get the desired line;
+      - <r>&lt;X></r> - turn a Bezier curve into a straight line and vice versa;
+      - <r>&lt;A>/&lt;D></r> -"Add"/"Delete" - Last line fragment;
+      - <r>&lt;+>/&lt;-></r> - increase/decrease line thickness .
 
-  - <r>&lt;Ctrl+Z></r> - remove last text/line in case of error ;
-               a few clicks remove previous texts/lines.
+  - <r>&lt;Alt +A></r> - Save to File  Add.Graphics: Texts, Lines, previously loaded Add.Graphics.
+               Add.Graphics is not tied to subject coordinates. It exists in  window
+               coordinates !  One Graph  can be used  in  different charts.
+  - <r>&lt;Ctrl+A></r> - Add to chart Add.Graphics from File[.add]( saved by &lt;Alt+A>).
+               May be done several times  with  different addons.
 
-	<r>SETTING OFFSET( PADDING )</r> of the graphics from the border of the window:
+  - <r>&lt;Ctrl+Z></r> - Delete Last Added: Text, Line, Add.Graphics. May be done several times.
+
+  - <r>&lt;Ctrl+B></r> - ON/ OFF  Background Color  of the chart.
+
+  - <r>&lt;Ctrl+S></r> - Save chart in <r>"Windows Meta File"</r> format - vector graphics format that
+               scales well and is supported by MS Word, ACDSee, Total Commander &lt;F3> ...
+
+             <r>SETTING OFFSET( PADDING )</r> of the graphics from the window border:
 
   - <r>&lt;Ctrl></r> + move the cursor to the border of the window. The cursor should change to
   an arrow. While holding down <r>&lt;Ctrl> and &lt;Left Mouse Button></r> drag the window border
   to a new location. You can add lines and text to the freed space.
-  Padding does not change when the window is resized.
-  If Padding Settings mode is in effect after release - press <r>&lt;Ctrl></r> once more.
+  It is convenient  to adjust the corners of the window  standing  diagonally.
+  If <r>Set Padding mode</r> is in effect after release buttons - press <r>&lt;Ctrl></r> once more.
 
-The image of the main window and ZOOM can be saved in <r>WMF</r> format.
-"Windows Meta File" is a vector graphics format that scales well.
-Supports MS Word, ACDSee, Total Commander &lt;F3> ...
-
-To save, click the selected window and press <r>&lt;Ctrl+S></r>.
-Enter a file name in the file selection window that appears.
 <o>
        Graphics Features:
 </o>
