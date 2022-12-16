@@ -14,7 +14,7 @@ f{font-weight:normal; Color:#0047b3; font-family:'Lucida Console'; font-size:11p
 <h5><pre><a name='s3d'><f>pik3d - framework for processing and 3d-display of matrices and their sequences
         Help has standard HTML navigation: &lt;Home>, &lt;End>, &lt;Alt+Left>, <a href="#ins">links</a> ...
 </f><a name='ogl'></a>
-<a href='#fwk'>DESCRIPTION of&nbsp; pik3d &nbsp;v.19.3.7</a>
+<a href='#fwk'>DESCRIPTION of&nbsp; pik3d &nbsp;v.19.3.8</a>
 <a href="#ins">pik3d INSTALLATION</a>
 <a href="#dat">###-format of the data: FRAME, STACK</a>
 <a href="#cmd">COMMANDS</a>
@@ -1518,7 +1518,7 @@ ________________________________________________________________________________
   &lt;F1>      - quick help.
   &lt;^S>      - save image in .WMF format
   &lt;^+/ ^->  - quick increase/ decrease of the window by ~10%.
-                    Size of the window can be changed using standard Windows tools.
+              Size of the window can be changed using standard Windows tools.
 
 Subject coordinates( SC ) of the cursor are displayed in the window title.
 <r>When CLICKING with any mouse button, SC are copied to the CLIPBOARD.</r>
@@ -1532,29 +1532,39 @@ You can select and enlarge a fragment of the chart - <r>ZOOM</r>:
 4. Select the size of the new ZOOM window.
 5. Select the position of ZOOM in the main window - "Drag" rectangle.
 6. The size of the rectangle can be changed: "Drag & Drop" any corner of the rectangle.
-7. The rectangle in the main window exists until ZOOM window is closed.
+7. The rectangle in the main window exists as long as ZOOM window is not closed.
 
-You can add <r>TEXT</r> and/or <r>LINE</r> anywhere in the window:
+You can add <r>TEXT, LINE or FIGURE( box, oval, romb )</r> anywhere in the window:
 
-  - <r>&lt;Ctrl+T></r> - add TEXT;
+  - <r>&lt;Ctrl+T></r> - add  <r>TEXT</r> :
       - in the dialog that appears, select Color, Size, enter text;
-      - <r>drag</r> text to the desired location, press OK or &lt;Enter> ;
+      - <r>&#8593;/&#8595;</r>  - increase/ decrease  FONT Size;
+      - <r>drag</r> text to the desired location, press OK or &lt;Enter>.
 
-  - <r>&lt;Ctrl+L></r> - add LINE ;
+  - <r>&lt;Ctrl+L></r> - add  <r>LINE</r> :
       - dragging the active points of the Bezier curve, get the desired line;
-      - <r>&lt;X></r> - turn a Bezier curve into a straight line and vice versa;
-      - <r>&lt;A>/&lt;D></r> -"Add"/"Delete" - Last line fragment;
-      - <r>&lt;+>/&lt;-></r> - increase/decrease line thickness .
+      - <r>X</r>    - turn the Last Bezier fragment into a straight line and vice versa;
+      - <r>A/D</r>  -"Add/ Delete" - the Last Line fragment;
+      - <r>&#8592;/&#8594;</r>  - ON/ OFF  <r>ARROW</r>  at the  Beginning/ End  of the Last Fragment;
+      - <r>&#8593;/&#8595;</r>  - increase/ decrease  <r>ARROW Size</r>.
+      - <r>+/-</r>  - increase/ decrease Line Width/ thickness;
+      - <r>Right Mouse Drag</r> any Red Hotspot  -  Moving  the whole LINE.
 
-  - <r>&lt;Alt +A></r> - Save to File  Add.Graphics: Texts, Lines, previously loaded Add.Graphics.
-               Add.Graphics is not tied to subject coordinates. It exists in  window
-               coordinates !  One Graph  can be used  in  different charts.
+  - <r>&lt;Ctrl+F></r> - add standard  <r>FIGURE </r>: Rectangle, Oval, Romb - select Radio Button.
+        The size and position are adjusted by Red Hot Points. You can Fill the Figure
+        by selecting check box and color. To redefine fill color click color once more.
+      - <r>+/-</r>  - increase/ decrease Line Width/ thickness of the Figure Border;
+      - <r>Right Mouse Drag</r> any Red Hotspot  -  Moving  the whole FIGURE.
+
+  - <r>&lt;Alt +A></r> - Save to File <r>Additonal Graphics</r>: Texts,Lines,Figures, previous Add.Graph.
+               Add.Graphics is not tied to the subject coordinates. It exists in the
+               window coordinates !  One Graph  can be used  in  different charts.
   - <r>&lt;Ctrl+A></r> - Add to chart Add.Graphics from File[.add]( saved by &lt;Alt+A>).
                May be done several times  with  different addons.
 
   - <r>&lt;Ctrl+Z></r> - Delete Last Added: Text, Line, Add.Graphics. May be done several times.
 
-  - <r>&lt;Ctrl+B></r> - ON/ OFF  Background Color  of the chart.
+  - <r>&lt;Ctrl+B></r> - ON/ OFF  <r>Background</r> Color  of the chart.
 
   - <r>&lt;Ctrl+S></r> - Save chart in <r>"Windows Meta File"</r> format - vector graphics format that
                scales well and is supported by MS Word, ACDSee, Total Commander &lt;F3> ...
@@ -1570,9 +1580,8 @@ You can add <r>TEXT</r> and/or <r>LINE</r> anywhere in the window:
 <o>
        Graphics Features:
 </o>
-- THE SIZE OF THE AXIS SIGNATURES IS FIXED ( does not increase with an
-  increase of the window). If the document needs large axis labels, select a small
-  window size  before ^S.
+- THE SIZE OF THE AXIS SIGNATURES IS FIXED ( does not increase with an increase of the
+  window).If the document needs large axis labels, select a small window size before ^S.
 
 - When resizing the window, the position( in subject coordinates ) of the lower left
   corner of the texts remains unchanged. "Legend" base point - its upper right corner.
@@ -1580,7 +1589,7 @@ You can add <r>TEXT</r> and/or <r>LINE</r> anywhere in the window:
 - The aspect ratio of the image can only be changed until is saved: ^S  .
 
 - <r>WMF</r> is a vector format( LINES, NO pixels ), so it scales well.
-  In the document, stretch the image to the desired size.
+  In the  MS Word document  you can stretch the image  to the desired size.
 
 - When manipulating a <r>WMF</r> image, the font will resize according to the image size.
 ________________________________________________________________________________________
