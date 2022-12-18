@@ -14,7 +14,7 @@ f{font-weight:normal; Color:#0047b3; font-family:'Lucida Console'; font-size:11p
 <h5><pre><a name='s3d'><f>pik3d - framework for processing and 3d-display of matrices and their sequences
         Help has standard HTML navigation: &lt;Home>, &lt;End>, &lt;Alt+Left>, <a href="#ins">links</a> ...
 </f><a name='ogl'></a>
-<a href='#fwk'>DESCRIPTION of&nbsp; pik3d &nbsp;v.19.3.8</a>
+<a href='#fwk'>DESCRIPTION of&nbsp; pik3d &nbsp;v.19.3.9</a>
 <a href="#ins">pik3d INSTALLATION</a>
 <a href="#dat">###-format of the data: FRAME, STACK</a>
 <a href="#cmd">COMMANDS</a>
@@ -1541,20 +1541,31 @@ You can add <r>TEXT, LINE or FIGURE( box, oval, romb )</r> anywhere in the windo
       - <r>&#8593;/&#8595;</r>  - increase/ decrease  FONT Size;
       - <r>drag</r> text to the desired location, press OK or &lt;Enter>.
 
-  - <r>&lt;Ctrl+L></r> - add  <r>LINE</r> :
-      - dragging the active points of the Bezier curve, get the desired line;
-      - <r>X</r>    - turn the Last Bezier fragment into a straight line and vice versa;
-      - <r>A/D</r>  -"Add/ Delete" - the Last Line fragment;
-      - <r>&#8592;/&#8594;</r>  - ON/ OFF  <r>ARROW</r>  at the  Beginning/ End  of the Last Fragment;
-      - <r>&#8593;/&#8595;</r>  - increase/ decrease  <r>ARROW Size</r>.
-      - <r>+/-</r>  - increase/ decrease Line Width/ thickness;
-      - <r>Right Mouse Drag</r> any Red Hotspot  -  Moving  the whole LINE.
+  - <r>&lt;Ctrl+L></r> - add  <r>LINE</r>
+        A line can consist of several fragments: Bezier curves and/or straight lines.
+        Form is controled by Hotspots( HS ). <r>YELLOW HS</r> are used in Bezier curves,
+        which provide a continuous second derivative. YELLOW HS can only be dragged.
+        If they are turned off(X-function), you can get fragment of straight line.
 
-  - <r>&lt;Ctrl+F></r> - add standard  <r>FIGURE </r>: Rectangle, Oval, Romb - select Radio Button.
-        The size and position are adjusted by Red Hot Points. You can Fill the Figure
-        by selecting check box and color. To redefine fill color click color once more.
+        The <r>RED HS</r> define the start and end of the fragment.
+        When the cursor is hovered over a HS, RED HS is activated - the cursor changes
+        shape to a "hand". When RED HS is activated, you can execute the functions by
+        pressing the keyboard: <r>A/D, X, &#8592;/&#8594;</r>.
+        If no one HS is active - the function is applied to the Last Line Fragment.
+
+      - <r>A/D</r>  -"Add/ Delete"  Active Point  or  Last Line Fragment;
+      - <r> X</r>   - ON/ OFF  Yellow  Hotspots  -  Shape  Controls;
+      - <r>&#8592;/&#8594;</r>  - ON/ OFF  <r>ARROW</r>  at the Hotspot or at the start/end of the Last Fragment.
+
+      - <r>+/-</r>  - increase/ decrease  the <r>Line Width</r>
+      - <r>&#8593;/&#8595;</r>  - increase/ decrease  <r>ARROW Size</r>.
+      - <r>Right Mouse Drag  any  Red Hotspot  moves  the whole  LINE !</r>
+
+  - <r>&lt;Ctrl+F></r> - add standard  <r>FIGURE </r>: Rectangle, Oval, Romb - select by Radio Button.
+        The size and position are adjusted by Red Hotspots. You can Fill the Figure
+        by selecting check box and color. To redefine Fill Color click color once more.
       - <r>+/-</r>  - increase/ decrease Line Width/ thickness of the Figure Border;
-      - <r>Right Mouse Drag</r> any Red Hotspot  -  Moving  the whole FIGURE.
+      - <r>Right Mouse Drag  any  Red Hotspot  moves  the whole  FIGURE !</r>
 
   - <r>&lt;Alt +A></r> - Save to File <r>Additonal Graphics</r>: Texts,Lines,Figures, previous Add.Graph.
                Add.Graphics is not tied to the subject coordinates. It exists in the
