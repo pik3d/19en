@@ -1553,8 +1553,8 @@ You can add <r>TEXT, LINE or FIGURE( box, oval, romb )</r> anywhere in the windo
         pressing the keyboard: <r>A/D, X, &#8592;/&#8594;</r>.
         If no one HS is active - the function is applied to the Last Line Fragment.
 
-      - <r>A/D</r>  -"Add/ Delete"  Active Point  or  Last Line Fragment;
-      - <r> X</r>   - ON/ OFF  Yellow  Hotspots  -  Shape  Controls;
+      - <r>A/D</r>  -"Add" new RED HS after this/ "Delete" HS or Last Fragment;
+      - <r> X</r>   - ON/ OFF  YELLOW HS for this HS  - Shape Controls for Besier curve;
       - <r>&#8592;/&#8594;</r>  - ON/ OFF  <r>ARROW</r>  at the Hotspot or at the start/end of the Last Fragment.
 
       - <r>+/-</r>  - increase/ decrease  the <r>Line Width</r>
@@ -1696,6 +1696,11 @@ public class Reverse extends io {
 }</f>
 > jj Reverse.java Stk > ktS              // save result
 > jj Reverse.java Stk | s3d #            // display
+
+To create a stack for experiments( pik3d must be installed ):
+  1. go to folder:  pik3d\demo\bell2
+  2. in console  >  gen3d bell2.gen > Stk
+  3. to see it   >  s3d Stk
 ________________________________________________________________________________________
 <a name='pik'></a><o>
 	Most used pik.io methods
