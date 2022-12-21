@@ -15,7 +15,7 @@ f{font-weight:normal; Color:#0047b3; font-family:'Lucida Console'; font-size:11p
         Help has standard HTML navigation: &lt;Home>, &lt;End>, &lt;Alt+Left>, <a href="#ins">links</a> ...
 </f><a name='ogl'></a>
 <a href='#fwk'>DESCRIPTION of&nbsp; pik3d &nbsp;v.19.3.9</a>
-<a href="#ins">pik3d INSTALLATION</a>
+<a href="#ins">INSTALL pik3d </a>
 <a href="#dat">###-format of the data: FRAME, STACK</a>
 <a href="#cmd">COMMANDS</a>
 
@@ -252,7 +252,7 @@ temporarily saved to memory ^S and later restore - ^R. Restoring a saved configu
 or the configurationwhat was at the moment of last stack loading.
 
 Viewing, editing and saving configuration in a file is possible after <r>^C</r> -"Config".
-An editable text box is displayed with parameters ?? that differ  from  default values.
+An editable text box is displayed with parameters  that differ  from  default values.
 The window can be closed without saving changes: <r>&lt;Esc></r>.
 When editing, you can change, remove or add  any  valid parameters.  After editing,
 the configuration can be installed immediately or saved in a File. If some parameter is
@@ -465,7 +465,7 @@ The framework can be installed on Windows 7, 10.
 Version 19.3 compiled with JAVA-19 using javaFX.
 ________________________________________________________________________________________
 <a name='ins'></a>
-				<o>pik3d INSTALLATION
+				<o>INSTALL pik3d 
 </o>
  1. Download <r>Open JDK+FX( Full ) v.19</r> installation zip-archive for Windows( x86 64bit ).
     Recommended builds (follow one of the links):
@@ -546,7 +546,7 @@ The only limitation is that you cannot break a numeric value.  Example(correct f
    21.32 22.54 -23.33 24.765 -.25E+8   # real: with  decimal point
    31 32 3.3e1 340e-7    9e9           !             and/or exponent
 <a name='bin'></a>
-<r>Binary Format</r> has an extended header. The matrix size is ??followed by the binary
+<r>Binary Format</r> has an extended header. The matrix size is followed by the binary
 data type: <r>I2 | F4 | D8</r> and possibly a "Byte Order Indicator": <r>BE | LE</r> .
 
     <r>I2</r> - 2-byte integers, value range from <r>-32768</r> to <r>+32767</r>
@@ -1005,7 +1005,7 @@ The value of  <r>any parameter</r> ( including: add, noise, blur ) can:
     <r>param:  (k1,v1) (k2,v2) ...</r>,  where: <r>vi</r> - param.value in frame <r>ki, i=1,2...n+1</r>;
 
   - Parameter value for each frame from the file:  <r>param:  @File</r>
-    If the number of lines &lt; kk, missing values ??= last available.
+    If the number of lines &lt; kk, missing values = last available.
     Exception:  <r>dxy:</r> - there is a loop (repetition from the first values).
 
 Examples:

@@ -72,7 +72,7 @@ To download and install:
   - in the window that opens, on the right, click the button: Download (~ 1MB);
   - unpack the file: pik3d.zip in some folder;
   - click the file: pik3d_DOC.html - it should open in the default browser;
-  - read the section "INSTALLING pik3d";
+  - read the section "INSTALL pik3d";
   - after install, scripts(_run.cmd) in demo folders are available to execute.
 
 <p>author: K.A. Ilyashenko, e-mail: kilyashenko@gmail.com</p>
