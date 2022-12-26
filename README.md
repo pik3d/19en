@@ -1,5 +1,5 @@
 ![head](/assets/images/830x290.jpg)
-pik3d v.19.3 framework, Russian version: https://github.com/pik3d/19
+pik3d v.19.4 framework, Russian version: https://github.com/pik3d/19
 
     PROCESSING AND 3D-DISPLAY OF MATRICES/FRAMES AND THEIR SEQUENCES
 
@@ -55,7 +55,7 @@ From command to command, data is transferred in the form of ###-format files
 or by means of "pipe"( this saves time and disk space ).
 
 The framework can be installed on Windows 7, 10.
-Version 19.3 is compiled with JAVA-19 using javaFX .
+Version 19.4 is compiled with JAVA-19 using javaFX .
 
 Description of the framework, formats and install procedure in the file:
 pik3d_DOC.html (contained in the install archive: pik3d.zip).
@@ -66,7 +66,7 @@ is implemented. To read/write ###-matrices in PYTHON - package: kadr.py.
 
 Example images:
 ![4_view](/assets/images/4view.jpg)
-![minMAJ](/assets/images/MajMin_830.jpg)
+![minMAJ](/assets/images/2dgra.png)
 To download and install:
   - in the table (top of the page) click the file: pik3d.zip;
   - in the window that opens, on the right, click the button: Download (~ 1MB);

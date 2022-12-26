@@ -14,7 +14,7 @@ f{font-weight:normal; Color:#0047b3; font-family:'Lucida Console'; font-size:11p
 <h5><pre><a name='s3d'><f>pik3d - framework for processing and 3d-display of matrices and their sequences
         Help has standard HTML navigation: &lt;Home>, &lt;End>, &lt;Alt+Left>, <a href="#ins">links</a> ...
 </f><a name='ogl'></a>
-<a href='#fwk'>DESCRIPTION of&nbsp; pik3d &nbsp;v.19.3.9</a>
+<a href='#fwk'>DESCRIPTION of&nbsp; pik3d &nbsp;v.19.4</a>
 <a href="#ins">INSTALL pik3d </a>
 <a href="#dat">###-format of the data: FRAME, STACK</a>
 <a href="#cmd">COMMANDS</a>
@@ -437,8 +437,8 @@ Such an image sequence is often referred to as a STACK of images.
 Displaying of the stack in the "frame by frame" mode is perceived as a video clip.
 
 Framework  <o>pik3d</o>  offers a data storage/sharing standard and a basic set of commands
-processing and displaying stacks.The methods for reading and writing files in <a href="dat">###-format</a>
-implemented in JAVA are stored in the library: lib\pik.jar and described: <a href="pik">pik.io methods</a>
+processing and displaying stacks.The methods for reading and writing files in <a href="#dat">###-format</a>
+implemented in JAVA are stored in the library: lib\pik.jar and described: <a href="#pik">pik.io methods</a>
 Package: kadr.py is implemented for PYTHON language ( stored: ext\###_PYTHON.zip ).
 To use the ###-format in the ImageJ graphical editor, a plugin is implemented
 ( ext\###_Reader_ImageJ.jar, copy to ImageJ\plugins\3D ).
@@ -447,11 +447,11 @@ Framework commands are executable(.exe) modules and their set is not fixed.
 The launcher technology is used ("launch" - to launch, start). Launcher encapsulates
 the starting configuration of the JAVA machine.
 
-The framework contains simple tools for creating <a href="jc">new command on JAVA</a>.
+The framework contains simple tools for creating <a href="#jc">new command on JAVA</a>.
 Additional commands can be implemented in any convenient algorithmic language.
 
 In a simple case, the processing program is a script ( .bat or .cmd ).
-From command to command, Stacks are transferred in the form of the <a href="dat">###-format</a> files
+From command to command, Stacks are transferred in the form of the <a href="#dat">###-format</a> files
 or by means of <r>"pipe"</r>( this saves time and disk space ).
 
 Most of the commands  output the result  to the standard output stream. If commands
@@ -462,7 +462,7 @@ To denote standard stream symbol <r>'#'</r> id used. In case of several Stacks i
   cmd1 a b <r>|</r> cmd2 c <r>#</r> <r>|</r> cmd3 d <r>#</r> d(3) <r>#(2)</r> ... <r>|</r> cmdN <r>#</r> p <r>></r> File
 
 The framework can be installed on Windows 7, 10.
-Version 19.3 compiled with JAVA-19 using javaFX.
+Version 19.4 compiled with JAVA-19 using javaFX.
 ________________________________________________________________________________________
 <a name='ins'></a>
 				<o>INSTALL pik3d 
