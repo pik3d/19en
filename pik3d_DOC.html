@@ -9,12 +9,12 @@ r{Color:RED;font-weight:bold;}
 g{Color:#3db84e;font-weight:bold;}
 n{Color:#0050ff;font-weight:bold;}
 f{font-weight:normal; Color:#0047b3; font-family:'Lucida Console'; font-size:11px}
---></style></head><body><!--onload="document.location.href='#gel'">-->
+--></style></head><body>
 
 <h5><pre><a name='s3d'><f>pik3d - framework for processing and 3d-display of matrices and their sequences
         Help has standard HTML navigation: &lt;Home>, &lt;End>, &lt;Alt+Left>, <a href="#ins">links</a> ...
 </f><a name='ogl'></a>
-<a href='#fwk'>DESCRIPTION of&nbsp; pik3d &nbsp;v.19.4</a>
+<a href='#fwk'>DESCRIPTION of&nbsp; pik3d &nbsp;v.19.4.1</a>
 <a href="#ins">INSTALL pik3d </a>
 <a href="#dat">###-format of the data: FRAME, STACK</a>
 <a href="#cmd">COMMANDS</a>
@@ -465,7 +465,7 @@ The framework can be installed on Windows 7, 10.
 Version 19.4 compiled with JAVA-19 using javaFX.
 ________________________________________________________________________________________
 <a name='ins'></a>
-				<o>INSTALL pik3d 
+				<o>INSTALL pik3d
 </o>
  1. Download <r>Open JDK+FX( Full ) v.19</r> installation zip-archive for Windows( x86 64bit ).
     Recommended builds (follow one of the links):
@@ -1417,7 +1417,7 @@ To display columns of the 7-frame:  <a href="#sec">sec</a> Stk k=7 | <o>vic # ..
 In case of lines   of the 9-frame:  <a href="#sec">sec</a> Stk k=9 | <a href="#tra">tra</a> # | <o>vic # ...</o>
 If you need to display Stk[3,5,:]:  <a href="#sec">sec</a> Stk i=3 | <a href="#tra">tra</a> # | <o>vic # , 5 ...</o>
 
-<r>vic  Stk jX j1 j2 ... [xy: X Y W H] [add: file[.add]] [/dbg]</r> , where:
+<r>vic  Stk jX j1 j2 ... [xy: X Y W H] [add: file[.add]] [/dbg] [/blank]</r> , where:
     Stk - stack name, ONLY 1-frame is always used
         jX - column X[] -"argument values":
                  <r>0</r>: X[] = 1, 2, 3, 4 ... - default, <r>"scan by numbers"</r>;
@@ -1430,11 +1430,22 @@ If you need to display Stk[3,5,:]:  <a href="#sec">sec</a> Stk i=3 | <a href="#t
                             default: xy: 0 0 640 400
                  add:file - add to chart previously saved by &lt;Alt+A>: texts,lines,graphs
                      /dbg - allows you to see error messages
+
+/blank - mode to prepare chart without data-curves and axes.
+         Only  Figures, Texts, Lines  will be saved by ^S in WMF-file.
+         This mode can be used to create illustrations, flowcharts, additional graphics.
+         Aspect ratio of the chart  <r>is fixed</r>.  For the convenience  of  drawing,
+         an additional grid is displayed. It can be considered as a centimeter markup.
+         The final drawing  can be limited by  <a href="#pad">OFFSET from the window border</a>.
+
 examples:
   vic                            !get HELP or > vic /?
   vic q                          !stack q: "by numbers" 1-column == q,, == q,1 == q 1 1
   vic q,4                        !---:---:---:---:---   4-column
   vic q (2 .5) 6 7 xy:,,999 555  !---:---: X=2,2.5,3... 6,7-columns, window[0,0,999,555]
+
+  vic /blank                     !prepare blank chart to create illustration
+  vic add: AddGraph /blank       !with add.graphics( it can be loaded later ^A ).
 
 default <r>"Legend"</r> contains:  colored line with marker,  stack name  and  column number.
 "Legend" can be dragged. Before saving, you can add texts(^T) and lines(^L) to the chart
@@ -1579,7 +1590,7 @@ You can add <r>TEXT, LINE or FIGURE( box, oval, romb )</r> anywhere in the windo
 
   - <r>&lt;Ctrl+S></r> - Save chart in <r>"Windows Meta File"</r> format - vector graphics format that
                scales well and is supported by MS Word, ACDSee, Total Commander &lt;F3> ...
-
+<a name='pad'></a>
              <r>SETTING OFFSET( PADDING )</r> of the graphics from the window border:
 
   - <r>&lt;Ctrl></r> + move the cursor to the border of the window. The cursor should change to
