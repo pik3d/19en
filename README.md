@@ -1,5 +1,5 @@
 ![head](/assets/images/830x290.jpg)
-pik3d v.19.4 framework, Russian version: https://github.com/pik3d/19
+pik3d v.19.4 framework, Russian version 19.3: https://github.com/pik3d/19
 
     PROCESSING AND 3D-DISPLAY OF MATRICES/FRAMES AND THEIR SEQUENCES
 
@@ -45,7 +45,6 @@ encapsulates the starting configuration of the JAVA machine.
 
 The user does not encounter JAVA anywhere. It doesn't even need to be installed.
 It is enought to unpack the JAVA installation archive in some folder.
-Launchers find out its location through an environment variable.
 
 The framework has simple tools for creating a new command in JAVA. Additional
 commands can be implemented in any other convenient algorithmic language.
@@ -64,7 +63,6 @@ To exchange large data ###-format includes binary data presentation.
 For reading the ###-format in the ImageJ editor, ###_Reader_ImageJ.jar plugin
 is implemented. To read/write ###-matrices in PYTHON - package: kadr.py.
 
-Example images:
 ![4_view](/assets/images/4view.jpg)
 ![minMAJ](/assets/images/2dgra.png)
 To download and install:
