@@ -14,7 +14,7 @@ f{font-weight:normal; Color:#0047b3; font-family:'Lucida Console'; font-size:11p
 <h5><pre><a name='s3d'><f>pik3d - framework for processing and 3d-display of matrices and their sequences
         Help has standard HTML navigation: &lt;Home>, &lt;End>, &lt;Alt+Left>, <a href="#ins">links</a> ...
 </f><a name='ogl'></a>
-<a href='#fwk'>DESCRIPTION of&nbsp; pik3d &nbsp;v.19.4.2</a>
+<a href='#fwk'>DESCRIPTION of&nbsp; pik3d &nbsp;v.19.4.3</a>
 <a href="#ins">INSTALL pik3d </a>
 <a href="#dat">###-format of the data: FRAME, STACK</a>
 <a href="#cmd">COMMANDS</a>
@@ -480,33 +480,30 @@ ________________________________________________________________________________
     the framework with JAVA-19 will not affect it in any way.
 
  2. Expand JAVA archive, for example to: D:\jdk. There should be a folder:
-    D:\jdk\bin  with  <r>java.exe</r> .
+    D:\jdk\bin  with  <r>java.exe</r>.  It will be pointed  in Launchers config.
 
  3. Expand the archive: <r>pik3d.zip</r> in a folder, for example:  E:\pik3d .
 
- 4. Create system environment variable: <r>PIK3D_JAVA</r> :
-    - Control Panel / System and Security / System / Additional Parameters /
-      Environment Variables/ Create/ <r>PIK3D_JAVA</r>
-    - Enter value: <r>&lt;folder with java.exe>; &lt;class-path></r>
-      In our example: D:\jdk\bin; E:\pik3d\lib\*
+ 4. Create Launchers:
+    a. Go to the <r>pik3d\exe</r> folder ;
+    b. Edit config <r>_Launch.cfg</r> :
+       - set parameter: <r>jdk/bin:</r>,  in our example:  D:\jdk\bin ;
+       - set parameter: <r>lib/jar:</r>,  --:--:--:--:--:  E:\pik3d\lib\*
+         if need, this parameter may be extended:   E:\pik3d\lib\*<r>;C:\ws\prj;...</r> ;
+    c. run <r>_Launch.exe</r> .
 
- 5. Add the path to the pik3d\exe executables to the  <r>Path</r>  environment variable
-    In our example: ...;E:\pik3d\exe
+ 5. If need to "introduce" all Launchers to the antivirus, use  pik3d\exe\<r>_antivir.bat</r>.
 
- 6. Create launchers:  go to the <r>pik3d\exe</r> folder,  run <r>_Launch.exe</r> .
+ 6. Add  path to Launchers  to the <r>Path environment variable</r>
+    in our example:  ...;E:\pik3d\exe
 
- 7. If an antivirus is installed in the system, you can "introduce" all launchers
-    to the antivirus  using  pik3d\exe\<r>_antivir.bat</r> .
-
- 8. Check if the installation is correct: console> <r>gauss| s3d #</r>
+ 7. Check if the installation is correct:  console> <r>gauss| s3d #</r>
     The "Gauss Bell" should be displayed.
-    In case of error, check <r>PIK3D_JAVA</r> and <r>Path</r>:
-       > echo %PIK3D_JAVA%
-       > echo %Path%
-    You may need to restart Windows.
+    In case of error:  check  <r>pik3d\exe\_Launch.cfg</r>,  check <r>Path</r>: > echo %Path%
+    Possibly, you may need to restart Windows.
     Also, the cause may be a conflict with the antivirus (it will pass after a while).
 
- 9. In the folder: <r>pik3d\demo</r> several demos are collected ( run: > _run.cmd ).
+ 8. In the folder: <r>pik3d\demo</r> several demos are collected ( run: > _run.cmd ).
     If stop viewing by &lt;space>, you can change view angles by moving the pressed Mouse.
     The lighting angles can be changed by: <r>&lt;Ctrl + arrows</r>: Up, Down, Right, Left >.
     It is recommended to press in different sequences:
@@ -1772,20 +1769,34 @@ ________________________________________________________________________________
 <a name='jc'></a>
 	<o>Create New pik3d Command, prepare Launcher
 </o>
-The description uses <r>Fun.java and fun</r> as the name of the java file and command.
+The description uses  <r>Fun.java</r>  and  <r>fun</r>  as the name of the java file  and  command.
+For the beginning use java <f>package usr</f> .
 
-1. Debug <r>Fun.java</r> and functionality with ><a href="#jj"> jj Fun.java</a>.
-   If additional libraries are required, they must be added to the environment variable:
-   <r>PIK3D_JAVA</r>, <a href="#ins">see INSTALLATION</a> (at the end of the variable text, separator ';').
+1. Debug <r>Fun.java</r> and functionality with  ><a href="#jj"> jj Fun.java</a>.
 
-2. COMPILING: > <o>jc Fun.java</o> . If successful, <r>Fun.class</r> should appear.
+2. COMPILING:  > <f>jc Fun.java</f> . If successful,  <r>Fun.class</r>  should appear.
 
-3. Copy <r>Fun.java and Fun.class</r> to the library: <r>pik3d\lib\usr.jar\<o>usr</o>\</r> .
-   The .jar files are ZIP archives, so any ZIP utility will work for copying.
+3. Copy <r>Fun.java</r> and <r>Fun.class</r> to the library: <r>pik3d\lib\usr.jar\<o>usr</o>\</r> .
+   The .jar files are ZIP archives, so any ZIP utility is suitable, e.g. Total Commander
    <r>! Copy to folder: <o>usr</o> of the archive: usr.jar !</r>
 
-4. Create LAUNCHER: go to pik3d\exe, run > <r>_Launch fun: java usr.Fun</r> .
-   A <r>fun.exe</r> will be created that runs <r>usr.Fun.class</r> .
+4. Add new line  to the  pik3d\exe\<r>_Launch.cfg</r>:<f>  fun:  java  usr.Fun </f>.
+
+5. Create all Launchers:  go to  pik3d\exe,  run > <r>_Launch.exe</r> .
+
+This is the simplest way to create new Launcher.
+In fact, <r>pik3d Launcher technology</r> can be used  to create  Lancher for any runnable
+class( has function: main() ) for any JAVA version 8 or later.
+
+Only <r>_Launch.exe</r>  and  <r>pik3d\lib\run.jar</r> ( it is compiled with JAVA-8 ) are needed.
+Let us assume <f><b>[cp]</b></f> is a list of archives for new Launcher( class-path ).
+<f># test.cfg - Launcher config for class: <r>c:\workspace\project\pkg\test.java</r>:
+
+  jdk/bin:   c:\java_11\bin                                    # use this JAVA
+  lib/jar:   <b><r>c:\workspace\project</r>;[cp]</b>;E:\pik3d\lib\run.jar   # class-path
+  test01:    java  <r>pkg.test</r>                                    # main-class
+</f>
+> _Launch test.cfg             # test01.exe will be created, run.jar is excluded from cp
 ________________________________________________________________________________________
 <f>
                               author: K.A. Ilyashenko, e-mail: kilyashenko@gmail.com
