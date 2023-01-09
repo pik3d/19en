@@ -1697,7 +1697,7 @@ public class Reverse extends io {
 
     var stk = inStk( arg[0] );         // stk[ kk ][ ii ][ jj ]
 
-    int k = stk length;
+    int k = stk.length;
     while(--k >=0 ) ttKadr( stk[k] );  // out Frames in Reverse
     clott();
   }
@@ -1775,6 +1775,8 @@ For the beginning use java <f>package usr</f> .
 1. Debug <r>Fun.java</r> and functionality with  ><a href="#jj"> jj Fun.java</a>.
 
 2. COMPILING:  > <f>jc Fun.java</f> . If successful,  <r>Fun.class</r>  should appear.
+   If java file contains non-english characters, <f>-encoding &lt;code-page></f>  must be used,
+   e.g. russian: <f>jc -encoding cp1251 Fun.java</f>
 
 3. Copy <r>Fun.java</r> and <r>Fun.class</r> to the library: <r>pik3d\lib\usr.jar\<o>usr</o>\</r> .
    The .jar files are ZIP archives, so any ZIP utility is suitable, e.g. Total Commander
@@ -1797,6 +1799,7 @@ Let us assume <f><b>[cp]</b></f> is a list of archives for new Launcher( class-p
   test01:    java  <r>pkg.test</r>                                    # main-class
 </f>
 > _Launch test.cfg             # test01.exe will be created, run.jar is excluded from cp
+                               # run.jar is only needed to create exe-file.
 ________________________________________________________________________________________
 <f>
                               author: K.A. Ilyashenko, e-mail: kilyashenko@gmail.com
