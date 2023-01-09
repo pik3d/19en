@@ -1,5 +1,5 @@
 ![head](/assets/images/830x290.jpg)
-pik3d v.19.4 framework, Russian version 19.3: https://github.com/pik3d/19
+Framework pik3d v.19.4
 
     PROCESSING AND 3D-DISPLAY OF MATRICES/FRAMES AND THEIR SEQUENCES
 
