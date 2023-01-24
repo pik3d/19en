@@ -14,7 +14,7 @@ f{font-weight:normal; Color:#0047b3; font-family:'Lucida Console'; font-size:11p
 <h5><pre><a name='s3d'><f>pik3d - framework for processing and 3d-display of matrices and their sequences
         Help has standard HTML navigation: &lt;Home>, &lt;End>, &lt;Alt+Left>, <a href="#ins">links</a> ...
 </f><a name='ogl'></a>
-<a href='#fwk'>DESCRIPTION of&nbsp; pik3d &nbsp;v.19.4.4</a>
+<a href='#fwk'>DESCRIPTION of&nbsp; pik3d &nbsp;v.19.4.5</a>
 <a href="#ins">INSTALL pik3d </a>
 <a href="#dat">###-format of the data: FRAME, STACK</a>
 <a href="#cmd">COMMANDS</a>
@@ -1387,14 +1387,14 @@ In the opened Histogram window, you can change the Number of Intervals:
 in the upper right corner <r>enter a new value and press &lt;Enter></r>.
 
 <r>&lt;F3>    </r> - Save the Histogram to a file.
-<r>&lt;Ctrl+G></r> - ON/ OFF estimation of the Normal/ Gaussian distribution:
+<r>&lt;Ctrl+G></r> - ON/ OFF an estimate of the Normal/ Gaussian distribution:
 
   1. Find min, max values in the frame.
   2. The width of the interval = ( max-min )/Nint .
   3. All frame values are sorted by intervals.
      The number of values that fell into the interval = the value of the Histogram.
-  4. The least squares method is used to find estimation of the distribution function.
-  5. Displayed: Histogram, Xo(distribution center), +/-sigma, 3*sigma .
+  4. "Coordinate descent" is used to find an estimate of the Gaussian distribution.
+  5. Display: estimation, Number of intervals, mean, +/-sigma, 3*sigma .
 
 It is convenient to view a narrow distribution peaks using a <a href="#gra">ZOOM</a>.
 
