@@ -14,7 +14,7 @@ f{font-weight:normal; Color:#0047b3; font-family:'Lucida Console'; font-size:11p
 <h5><pre><a name='s3d'><f>pik3d - framework for processing and 3d-display of matrices and their sequences
         Help has standard HTML navigation: &lt;Home>, &lt;End>, &lt;Alt+Left>, <a href="#ins">links</a> ...
 </f><a name='ogl'></a>
-<a href='#fwk'>DESCRIPTION of&nbsp; pik3d &nbsp;v.19.4.5</a>
+<a href='#fwk'>DESCRIPTION of&nbsp; pik3d &nbsp;v.19.4.6</a>
 <a href="#ins">INSTALL pik3d </a>
 <a href="#dat">###-format of the data: FRAME, STACK</a>
 <a href="#cmd">COMMANDS</a>
@@ -68,9 +68,11 @@ f{font-weight:normal; Color:#0047b3; font-family:'Lucida Console'; font-size:11p
 
 <a href="#gra">Use of 2D-graphics </a>
 
-  <a href="#tif">tif   File.tif | Config  [Npro=99999] </a>         ! Show .TIF-clips
-
-  <a href="#jj" >jj    File.java  [arg1 ...] </a>                   ! Execute File.java
+  <a href="#tif">tif  File.tif | Config  [Npro=99999] </a>          ! Show .TIF-files/clip
+                                                             <a href="#jj">jj-Technology</a>
+  <a href="#jj" >jj   File.java  [arg0 arg1 ... ]        [/c]</a>   ! Execute  "single source-file"
+  <a href="#jj" >jj   File.jj    [arg0 arg1 ... ]  [/s]  [/c]</a>   ! ---:---  .jj = "simple" JAVA
+  <a href="#jc" >jj  "jcmd1; jcmd2; jcmd3;  ... "  [/s]  [/c]</a>   ! ---:---   several JAVA commands
 
 <a href="#pik">Most used pik.io methods </a>
 <a href="#jc" >Create New pik3d Command, prepare Launcher </a>
@@ -1643,20 +1645,29 @@ Show can be:
 
 Frames can be scrolled by rotating the <r>Mouse Wheel</r> or keys: <r>&lt;Left>/&lt;Right>, &lt;Home>/&lt;End></r>
 ________________________________________________________________________________________
-<a name='jj'></a>
-  <o>command: jj File.java [a0 a1...] -"Java.java"- execute source code of the File.java
-</o>
-The simplest way to use it is to generate data in the <a href="#dat">###-format</a> :
-The header and data are output to the standard input/output stream.
+<a name='jj'></a><f>jj - Technology</f><o>
 
-Example 1: <r>"minor MAJOR"</r>( in folder: pik3d\usr, file: MinMaj.java ):
+  command: jj ... -"JAVA.java"- execute "single source-file":  File.java or .jj
+
+    jj   File.java  [arg0 arg1 ... ]        [/c]   ! Execute  "single source-file"
+    jj   File.jj    [arg0 arg1 ... ]  [/s]  [/c]   ! ---:---  .jj = "simple" JAVA
+    jj  "jcmd1; jcmd2; jcmd3;  ... "  [/s]  [/c]   ! ---:---   several JAVA commands
+</o>
+<r>       ATTENTION: if file contains NON-ENGLISH characters, ENCODING must be UTF-8 !!!
+</r>
+Modern JAVA supports direct execution of "single source-file". In general case, you need
+to specify path to JAVA and class-path. Since  these parameters are already set in the
+framework, no need to point them in <o>command jj</o>. Short JAVA programs  may be used
+to generate data in the <a href="#dat">###-format</a>: the header and values  are output to the std.output.
+
+Example 1, minMAJ.java: <r>"minor MAJOR"</r>:
   Chords  =  additions of three harmonics with frequencies:
     minor chord:  1, <r>6/5</r>, 3/2  - tonic, minor third, quint
     MAJOR chord:  1, <r>5/4</r>, 3/2  - tonic, MAJOR third, quint
 <f>
 package usr;
-public class MinMaj {
-  static public void main( String[] a ) {
+public class minMAJ {
+  static public void main( String[] a ) <r>{</r>
     System.out.println("### minMAJ [ 201, 3 ]");                 // ### Header
     for(int i=0; i&lt;=200; i++) {
        var t = i*( 2*Math.PI/10 );                               // 10 points/period
@@ -1664,11 +1675,12 @@ public class MinMaj {
        System.out.println( i/10.+"\t"+( k + Math.sin( t*6/5 ))   // minor
                                 +"\t"+( k + Math.sin( t*5/4 ))); // MAJOR
     }
-  }
+  <r>}</r>
 }</f>
-> jj MinMaj.java
-> jj MinMaj.java | vic #1 2 3.8
-> jj MinMaj.java | vics # 1 "2 1 0 minor_: 1, 6/5, 3/2" "3 8 0 MAJOR: 1, 5/4, 3/2"
+> jj minMAJ.java                                                 ! output to the console
+> jj minMAJ.java /c                                              ! only compile
+> jj minMAJ.java | vics # 1 2 3.8                                ! simple display
+> jj minMAJ.java | vics # 1 "2 1 0 minor_: 1, 6/5, 3/2" "3 8 0 MAJOR: 1, 5/4, 3/2"
 
 By the way, pay attention to the failure of the frequency for the minor on 5th and 15th
 periods - this is the reason on which the minor sounds sad.
@@ -1683,37 +1695,85 @@ It is recommended to experiment with graphics:
   - try to work with a ZOOM: drag down-right while holding down the mouse button;
   - drag ZOOM rectangle.
 
-A more advanced way to use the <r>command: jj</r> is to process <a href="#dat">###-files</a>.
-To do this, the class must inherit the I/O library <r>pik.io</r>.
+If you need to input and process <a href="#dat">###-files</a>, program must inherit the I/O library <r>pik.io</r>.
+Example 2, Reverse.java: <r>"Stack with Frames in Reverse order"</r>:
+<f>package usr;
+import java.util.*;
+import pik.*;
 
-Example 2: <r>"Stack with Frames in Reverse order"</r>( pik3d\usr\Reverse.java ):
-<f>
-package usr;
-import pik.io;                         // library
+public class Reverse extends io implements jjstd {
+  public static void main( String[] arg ){
+    try{ new Reverse(arg); clott();}
+    catch( Exception e ){ e.printStackTrace();}
+  }
+  Reverse(String[] arg) throws Exception
+  <r>{</r>
+    er1("Reverse", arg, "Stk > ktS");               // check input arg[]
 
-public class Reverse extends io {
-  public static void main( String[] arg ) throws Exception {
-    er1("reverse", arg, "Stk > ktS");  // checking input parameters
-
-    var stk = inStk( arg[0] );         // stk[ kk ][ ii ][ jj ]
+    var stk = inStk( arg[0] );                      // stk[ kk ][ii][jj]
 
     int k = stk.length;
-    while(--k >=0 ) ttKadr( stk[k] );  // out Frames in Reverse
-    clott();
-  }
+    while(k-->0) ttKadr( stk[k], arg[0]+"_"+(k+1)); // output in reverse
+  <r>}</r>
 }</f>
-> jj Reverse.java Stk > ktS              // save result
-> jj Reverse.java Stk | s3d #            // display
+> jj Reverse.java Stk > ktS                           // save result
+> jj Reverse.java Stk | s3d #                         // display
 
 To create a stack for experiments( pik3d must be installed ):
   1. go to folder:  pik3d\demo\bell2
   2. in console  >  gen3d bell2.gen > Stk
   3. to see it   >  s3d Stk
+
+A more advanced way to use  "single source-file"  in the  <o>pik3d</o>  is to use  files<r>.jj</r> .
+File<r>.jj</r> contains only <r>subject part</r> of the program( marked with red curly braces ).
+Example 3, pik3d\usr\Reverse<r>.jj</r> (functionality is the same as previous example):<f>
+<r>{</r>
+    er1("Reverse", arg, "Stk > ktS");               // check input arg[]
+
+    var stk = inStk( arg[0] );                      // stk[ kk ][ii][jj]
+
+    int k = stk.length;
+    while(k-->0) ttKadr( stk[k], arg[0]+"_"+(k+1)); // output in reverse
+<r>}</r></f>
+> jj Reverse Stk > ktS                                // save result
+> jj Reverse Stk | s3d #                              // display
+
+<r>jj - Technology</r>  provides :
+  - import most of the required libraries ;
+  - correct program header from the beginning to the open <r>{</r> ;
+  - it creates correct java file( in our case: Reverse.java ), which can be saved( <r>/s</r> );
+  - run JAVA to execute "single source-file";
+  - if you need .class files (result of compilation), use key: <r>/c</r> - only compilation.
+
+The general form of <b><r>code.jj</r></b> is :   (more examples: pik3d\usr\*.jj)
+<f>
+  [ import pkg;  // NON-STANDARD  JAVA, pik  packages ]
+  [ comments:  /* text ... */  or  // text ... ]
+  <r>{</r>
+      JAVA :  body of <r>code</r>( String arg[] )
+  <r>}</r>
+  [ methods,  classes(not public),  static ... ]</f>
+<a name='jc'></a>
+An additional very handy feature of <r>jj - Technology</r> is to execute the sequence of JAVA
+commands directly from the command line. In this case  file: Noname.java  is produced
+and executed.  It takes less than 1 second.
+           ________________________________________________________________
+          |                                                                |
+          |                      !!! ATTENTION !!!                         |
+          |                                                                |
+          |  Since  JAVA <r>double quote</r> character  cannot be used correctly  |
+          |  on the command line, it must be replaced with a <r>single quote</r>. |
+          |    e.g.  jj "tt(<r>'</r>Hello World<r>'</r>)"                                |
+          |  Before compilation it will be changed back to a <r>double quote</r>. |
+          |________________________________________________________________|
+Examples:
+> jj "for(int i=0;i&lt;9;i++)tt(' i='+i)"         <f>// print: i=0 \n i=1 \n i=2 ... \n i=8</f>
+> jj "tt('### [101,2]');for(var x=0.;x&lt;=20;x+=.2)tt(x,exp(-x/7)*sin(x))"| vics # 1 2
 ________________________________________________________________________________________
 <a name='pik'></a><o>
 	Most used pik.io methods
 
-Read/Write to standard stream:  <r>System.in/ System.out</r>,  static methods :</o>
+Read/Write to standard streams:  <r>System.in/ System.out</r>,  static methods :</o>
 <f>
   void er1( String cmd, String[] arg, String help ) </f>// checking arg[] parameters
        // If arg is empty or arg[0]=<r>"/?"</r>, then help is displayed and the program exits
@@ -1723,16 +1783,23 @@ Read/Write to standard stream:  <r>System.in/ System.out</r>,  static methods :<
   <f>float [][][] inStk ( String file ) </f>// read stack into <r>float [][][]</r>
   <f>double[][][] inStk8( String file ) </f>// read stack into <r>double[][][]</r>
 
-  <f>void ttStk ( float [][][] ff ) </f>// stack output: <r>float [][][]</r>  in  <a href="#bin">bin.format F4 BE</a>
-  <f>void ttStk8( double[][][] dd ) </f>// stack output: <r>double[][][]</r>  in  <a href="#bin">bin.format D8 BE</a>
+  <f>void ttStk ( float [][][] ff )</f>// stack output: <r>float [][][]</r>  in  <a href="#bin">bin.format F4 BE</a>
+  <f>void ttStk8( double[][][] dd )</f>// stack output: <r>double[][][]</r>  in  <a href="#bin">bin.format D8 BE</a>
 
-  <f>void tt( String s ) </f>// output string to stream: System.out
-  <f>void <r>ee</r>( String s ) </f>// output string to stream: <r>System.err</r>
+  <f>void tt( String s )  </f>//output string to stream: System.out
+  <f>void <r>ee</r>( String s )  </f>//output string to stream: <r>System.err</r>
+
+  <f>void tt( double... x)</f>//output to System.out double[](may be float): tt(1,.2f,9e9,-1);
+  <f>void <r>ee</r>( double... x)</f>//output to <r>System.err</r> ---:---:---:---:---:---
 
   <f>void ttKadr ( float [][] ff )  </f>// frame output: <r>float [][]</r>    in  <a href="#bin">bin.format F4 BE</a>
   <f>void ttKadr8( double[][] dd )  </f>// frame output: <r>double[][]</r>    in  <a href="#bin">bin.format D8 BE</a>
 
+  <f>void ttKadr ( float [][] ff, String kName ) </f>// the same as previous with <f>Kadr Name</f>
+  <f>void ttKadr8( double[][] dd, String kName ) </f>
+
   <f>void clott()</f> // close/clean up pik.io resources, should <r>ALWAYS</r> be called at the end !
+  If you use <a href="#jj">jj-Technology</a>, this call is already in jj-header !
 
 Frame is 2-dimensional array <r>frame    [ ii ][ jj ]</r>, e.g. 3-row  : <f>var s3 = frame[ 2 ];</f>
 Stack is 3-dimensional array <r>stk[ kk ][ ii ][ jj ]</r>, e.g. 5-frame: <f>var k5 = stk  [ 4 ];</f>
@@ -1741,7 +1808,7 @@ You can use file names with stack number (see below): "A.dat(3)", "#(4)"
 If the stacks are small and there is enough memory to accommodate them entirely,
 the author recommends use these <o>static methods</o> - don't use reader (see below).
 
-<o>Read Frame:</o>
+<o>Read Frame, NON-static methods :</o>
 
   <f>io reader = new io( String file )</f> // constructor: create a reader of the File,
                                      // if <r>file ="#"</r>, then reading from <r>System.in</r>.
@@ -1769,28 +1836,25 @@ ________________________________________________________________________________
 <a name='jc'></a>
 	<o>Create New pik3d Command, prepare Launcher
 </o>
-The description uses  <r>Fun.java</r>  and  <r>fun</r>  as the name of the java file  and  command.
-For the beginning use java <f>package usr</f> .
+It is highly recommended to use <a href="#jj">jj-Technology</a> !
+The description uses  <r>fun.jj</r>  and  <r>fun</r>  as the name of the  file  and  command.
 
-1. Debug <r>Fun.java</r> and functionality with  ><a href="#jj"> jj Fun.java</a>.
+1. Debug <r>fun.jj</r> and functionality with  ><a href="#jj"> jj fun</a>
 
-2. COMPILING:  > <f>jc Fun.java</f> . If successful,  <r>Fun.class</r>  should appear.
-   If java file contains non-english characters, <f>-encoding &lt;code-page></f>  must be used,
-   e.g. russian: <f>jc -encoding cp1251 Fun.java</f>
+2. COMPILE:  > <f>jj fun /c</f> .  If successful,  <r>fun.class</r>  should appear.
 
-3. Copy <r>Fun.java</r> and <r>Fun.class</r> to the library: <r>pik3d\lib\usr.jar\<o>usr</o>\</r> .
+3. Copy  <r>fun.jj</r> and <r>fun.class</r>  to the library:  <r>pik3d\lib\usr.jar\usr\</r>
    The .jar files are ZIP archives, so any ZIP utility is suitable, e.g. Total Commander
-   <r>! Copy to folder: <o>usr</o> of the archive: usr.jar !</r>
 
-4. Add new line  to the  pik3d\exe\<r>_Launch.cfg</r>:<f>  fun:  java  usr.Fun </f>.
+4. Add new line  to the  pik3d\exe\<r>_Launch.cfg</r>:<f>  fun:  java  usr.fun </f>
 
-5. Create all Launchers:  go to  pik3d\exe,  run > <r>_Launch.exe</r> .
+5. Create all Launchers:  go to  pik3d\exe,  run > <r>_Launch.exe</r>
 
-This is the simplest way to create new Launcher.
+This is an easy way to create a new Launcher.
 In fact, <r>pik3d Launcher technology</r> can be used  to create  Lancher for any runnable
-class( has function: main() ) for any JAVA version 8 or later.
+class, which has function: main(),  for any JAVA version 8 or later.
 
-Only <r>_Launch.exe</r>  and  <r>pik3d\lib\run.jar</r> ( it is compiled with JAVA-8 ) are needed.
+Only  <r>_Launch.exe</r>  and  <r>pik3d\lib\run.jar</r>  are needed  (they are compiled with JAVA-8).
 Let us assume <f><b>[cp]</b></f> is a list of archives for new Launcher( class-path ).
 <f># test.cfg - Launcher config for class: <r>c:\workspace\project\pkg\test.java</r>:
 
