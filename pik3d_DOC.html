@@ -664,11 +664,11 @@ ________________________________________________________________________________
      v  - value to fill all stack elements[ default 0 ].
 
 Examples:
-   stk 22 33 > b2233         ! 1 frame: 33 rows 33 columns filled with 0
-   stk 25 46 1 -1 > b2233_1  ! 1 frame: 25 rows 46 columns, filled -1
-   stk 22 33 50 > s50        ! stack of 50 frames: [ 22,33 ], filled 0
-   stk 42 65 99 .2 > s99_02  ! stack of 99 frames: [ 42,65 ], filled 0.2
-   stk 999,,-1 > column      ! frame = column[999,1] = column[999] filled with -1
+> stk 22 33 > b2233         ! 1 frame: 33 rows 33 columns filled with 0
+> stk 25 46 1 -1 > b2233_1  ! 1 frame: 25 rows 46 columns, filled -1
+> stk 22 33 50 > s50        ! stack of 50 frames: [ 22,33 ], filled 0
+> stk 42 65 99 .2 > s99_02  ! stack of 99 frames: [ 42,65 ], filled 0.2
+> stk 999,,-1 > column      ! frame = column[999,1] = column[999] filled with -1
 ________________________________________________________________________________________
 <a name='fmt'></a>
 	<o>fmt  Stk  [ T |I2 |F4 |D8  [ BE| LE]]  >  File  ! Convert Stk to another format
@@ -687,10 +687,10 @@ rules:
   - Lowercase may be used:  t|i2|f4|d8, be|le
 
 Examples:
-  fmt q d8 LE > qd8         ! convert q to qd8: D8 LE
-  fmt stk                   ! output Stk to the screen in text format
-  ...| fmt # i2 le > qi2le  ! save the result of "pipe-line" as: I2 LE
-  ...| fmt #                ! the result of "pipe-line" to the screen as text = ...| tt
+> fmt stk                   ! output Stk to the screen in text format  =  tt &lt; stk 
+> fmt q d8 LE > qd8         ! convert q to qd8: D8 LE
+> ...| fmt # i2 le > qi2le  ! save the result of "pipe-line" as: I2 LE
+> ...| fmt #                ! the result of "pipe-line" to the screen as text = ...| tt
 ________________________________________________________________________________________
 <a name='tt'></a>
 	<o>...| tt  == ...| fmt #  == "pipe-line to text"  ! Short form of:  ...| fmt #
@@ -700,6 +700,7 @@ Advantages:
   - shorter ;
   - the no problem with Russian text when outputting to the console.
 
+> tt &lt; stk                                ! output Stk to the screen in text format
 > stk 2 4 3| renam # –”—— »…_ÿ–»‘“| fmt #
 > stk 2 4 3| renam # –”—— »…_ÿ–»‘“| fmt # | tt <r>
 > stk 2 4 3| renam # –”—— »…_ÿ–»‘“| tt    ! is recommended</r>
@@ -762,26 +763,26 @@ Parentheses and spaces can be used to improve readability.
    <r>b &lt; 0</r> - means: b = N + b
 
 Examples:
-   Stk[ :, :, ::-1 ]                    - stack with reverse frame order
-   Stk[ ::-1, :, : ]                    - frames with opposite order of rows
-   Stk[ :, (2,3,(4:7:-1),9), : ]        - all rows and frames, columns: 2,3,7,6,5,4,9
-   Stk[ :, :, -3:  ]                    - frames: K-3, K-2, K-1, K   !K=number of frames
-   Stk[ :, :, -4:-1:-1 ]                - frames: K-1, K-2, K-3, K-4
-   Stk[ 2#5, 7#3:-1]                    - matrix[5,3], lines: 2,3,4,5,6; columns: 9,8,7
-   Stk[ 2#3,3#3,4#3] = Stk[2:4,3:5,4:6] - 3x3x3 cube
+> Stk[ :, :, ::-1 ]                     ! stack with reverse frame order
+> Stk[ ::-1, :, : ]                     ! frames with opposite order of rows
+> Stk[ :, (2,3,(4:7:-1),9), : ]         ! all rows and frames, columns: 2,3,7,6,5,4,9
+> Stk[ :, :, -3:  ]                     ! frames: K-3, K-2, K-1, K   !K=number of frames
+> Stk[ :, :, -4:-1:-1 ]                 ! frames: K-1, K-2, K-3, K-4
+> Stk[ 2#5, 7#3:-1]                     ! matrix[5,3], lines: 2,3,4,5,6; columns: 9,8,7
+> Stk[ 2#3,3#3,4#3] = Stk[2:4,3:5,4:6]  ! 3x3x3 cube
 ________________________________________________________________________________________
 <a name='get'></a>
 	<o>get  Stk [ di, dj, dk ]  >  File
 </o>
 Get the Stk part according to <a href="#djk">index subsets</a>.
 Examples:
-  get Stk[:,2#3, 7] - matrix consisting of 3 columns(2,3,4) of the 7-frame
-  get Stk[:,:,::-1] - frames in reverse order
-  get Stk[:,:,:: 3] - every 3rd frame
+> get Stk[:,2#3, 7]     ! matrix consisting of 3 columns(2,3,4) of the 7-frame
+> get Stk[:,:,::-1]     ! frames in reverse order
+> get Stk[:,:,:: 3]     ! every 3rd frame
 
 obtaining sections:
-  get Stk[2#9, 7, #5] - 9x5 section on 7-column
-  get Stk  [3, :, : ] - full section on 3-line = sec Stk i=3 (see below: <a href="#sec">sec</a>)
+> get Stk[2#9, 7, #5]   ! 9x5 section on 7-column
+> get Stk  [3, :, : ]   ! full section on 3-line = sec Stk i=3 (see below: <a href="#sec">sec</a>)
 
 In case of sections: Stk[ i, dj,dk], Stk[di, j, dk] - <a href="#dim">dim32</a> command is useful.
 ________________________________________________________________________________________
@@ -1624,16 +1625,16 @@ You can use multi-pages tif-files created in other programs ( ImageJ ...)
 All pages are displayed sequentially. The cycle is repeated Npro times.
 This parameter should not be specified unless required fixed number of views.
 
-To display multiple tif files synchronously, <r>config file is required:
-
-	&#9556&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9559
-	&#9553 dt[ms] = &lt;frame interval> &#9553
-	&#9553                           &#9553
-	&#9553 File1.tif, x1, y1, w1, h1 &#9553
-	&#9553 File2.tif, x2, y2, w2, h2 &#9553
-	&#9553       ...                 &#9553
-	&#9553 FileN.tif, xN, yN, wN, hN &#9553
-	&#9562&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9552&#9565
+To display multiple tif files synchronously, <r>Config file is required:
+       ___________Config__________
+      |                           |
+      | dt[ms] = &lt;frame interval> |
+      |                           |
+      | File1.tif, x1, y1, w1, h1 |
+      | File2.tif, x2, y2, w2, h2 |
+      |       ...                 |
+      | FileN.tif, xN, yN, wN, hN |
+      |___________________________|
 </r>
 where:  dt[ms] - time interval in milliseconds between frames, default=200 ;
         xk, yk - coordinates of the upper left corner of the k-image ;
@@ -1762,13 +1763,13 @@ and executed.  It takes less than 1 second.
           |                      !!! ATTENTION !!!                         |
           |                                                                |
           |  Since  JAVA <r>double quote</r> character  cannot be used correctly  |
-          |  on the command line, it must be replaced with a <r>single quote</r>. |
-          |    e.g.  jj "tt(<r>'</r>Hello World<r>'</r>)"                                |
+          |  on the command line, it must be replaced with a <r>grave accent</r>, |
+          |    e.g.  jj "tt(<r>`</r>Hello World<r>`</r>)"                                |
           |  Before compilation it will be changed back to a <r>double quote</r>. |
           |________________________________________________________________|
 Examples:
-> jj "for(int i=0;i&lt;9;i++)tt(' i='+i)"         <f>// print: i=0 \n i=1 \n i=2 ... \n i=8</f>
-> jj "tt('### [101,2]');for(var x=0.;x&lt;=20;x+=.2)tt(x,exp(-x/7)*sin(x))"| vics # 1 2
+> jj "for(int i=0;i&lt;9;i++)tt(` i=`+i)"         <f>// print: i=0 \n i=1 \n i=2 ... \n i=8</f>
+> jj "tt(`### [101,2]`);for(var x=0.;x&lt;=20;x+=.2)tt(x,exp(-x/7)*sin(x))"| vics # 1 2
 ________________________________________________________________________________________
 <a name='pik'></a><o>
 	Most used pik.io methods
