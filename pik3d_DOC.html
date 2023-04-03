@@ -15,7 +15,7 @@ x{background:#333333; color:#00FF00; font-size:13px; line-height:13px; font-fami
 <h5><pre><a name='s3d'><f>pik3d - framework for processing and 3d-display of matrices and their sequences
         Help has standard HTML navigation: &lt;Home>, &lt;End>, &lt;Alt+Left>, <a href="#ins">links</a> ...
 </f><a name='ogl'></a>
-<a href='#fwk'>DESCRIPTION of&nbsp; pik3d &nbsp;v.19.5.1</a>
+<a href='#fwk'>DESCRIPTION of&nbsp; pik3d &nbsp;v.19.5.2</a>
 <a href="#ins">INSTALL pik3d </a>
 <a href="#dat">###-format of the data: FRAME, STACK</a>
 <a href="#cmd">COMMANDS</a>
@@ -31,6 +31,7 @@ x{background:#333333; color:#00FF00; font-size:13px; line-height:13px; font-fami
   <a href='#get'>get          Stk     [ di, dj, dk ] </a>           ! get Slice of the Stack
   <a href='#sep'>sep   Part   Stk     [ di, dj, dk ] </a>           ! set Slice of the Stack
   <a href='#dim'>dim32        Stk </a>                              ! matrix 3d --> 2d
+  <a href='#csv'>csv   CSV-file   [di,dj]  [D8]</a>                 ! read <r>"Comma-Separated Values"</r> file
   <a href='#put'>put   Part   Stk     [i=1 [j=1 [k=1]]] </a>        ! put continuous Part
   <a href='#add'>add   Part   Stk     [i=1 [j=1 [k=1]]] </a>        ! add continuous Part
   <a href='#sec'>sec          Stk      i=n| j=n| k=n </a>           ! Full Cross-Section --> Matrix
@@ -147,7 +148,7 @@ to view for fine tuning. This can be done by calling the config: <o>^C</o> and e
 > s3d [ Stk [ config | , [ main [ delaySec ]]]]
 
 > s3d                              # a prompt to select a stack will be displayed
-> s3d   Stk                        # display Stack: Stk 
+> s3d   Stk                        # display Stack: Stk
 > s3d   Stk   config               # display Stack: Stk with config. of the 3D-scene
                                      By default config. file has extention: .s3d,
                                      if config. is absent, default config. is used
@@ -494,9 +495,9 @@ ________________________________________________________________________________
     b. Edit config <r>_Launch.cfg</r> :
        - set parameter: <r>jdk/bin:</r>,  in our example:  D:\jdk\bin     <x> ~/jdk/bin  </x>
        - set parameter: <r>lib/jar:</r>,  --:--:--:--:--:  E:\pik3d\lib\* <x> ~/pik3d/lib/* </x>
-	   
+
     c. run <r>_Launch.exe</r> <x> <b>./_Launch</b>  # ALL Launchers are copied to ~/bin !!!</x>
-	
+
 	               <x> in Linux  skip steps  5., 6.  and  go to 7. </x>
 
  5. If need to "introduce" all Launchers to the antivirus, use  pik3d\exe\<r>_antivir.bat</r>.
@@ -517,7 +518,7 @@ ________________________________________________________________________________
     <r>&lt;F1></r>, <r>^D</r> -Map Down, <r>^A</r> -Axes, <r>^M</r> -Map</r>, <r>^2</r> -Lines ( <r>^</r> - means pressed &lt;Ctrl> key )
 ________________________________________________________________________________________
 <a name='dat'></a>
-			<o>###-format of the data: FRAME, STACK
+		<o>###-format of the data: FRAME, STACK
 </o>
 The file may contain one or more frames and stacks in text and/or in binary format.
 Frame = Matrix in the mathematical sense: rows are counted down, columns - to the right.
@@ -854,6 +855,32 @@ Try:
 
 For full sections: A[ 3,:,: ], A[ :,5,: ] it is recommended to use the command <a href="#sec">sec</a> .
 ________________________________________________________________________________________
+<a name='csv'></a>
+      <o>csv  CSV-file  [di,dj]  [F4|D8]  >  ###-file
+</o>
+Read  <r>"Comma-Separated Values"-file</r>  and  convert to the  <a href="#dat">binary ###-file</a>
+
+  [di,dj]  - <a href="#djk">index subsets</a>  of Lines and Columns
+             if absent, it means the entire CVS-file
+
+  F4 or D8 - format of ###-file( default=F4 - 4-bytes real )
+
+  <r>ATTENTION:  ONLY ASCENDING  index sequences  are  ALLOWED
+              Literal and Error Values are replaced by 3.4e+38</r>
+Examples:
+  csv  float.csv        >  flodat       # float.csv --> flodat  (entire file)
+  csv  data.csv  D8     >  dat8         # data.csv  --> dat8( Double,8-bytes real)
+  csv  big.csv [3:,:]   >  big4         # big.csv from 3-line to the end, all col.
+  csv  big.csv [500#200, (2,3,5,7)] d8  > d501  # lin.: 500-699, col.: 2,3,5,7
+
+  csv  graph.csv [:,:4] | vic - 1 2 3 4 # read and display col.2,3,4 as function of 1
+
+Input file can be taken <r>from the WEB</r>:
+  csv https://perso.telecom-paristech.fr/eagan/class/igr204/data/cereal.csv [3:,4:] |tt
+
+It is also possible to read a <r>compressed(.zip ) CSV-file</r> (locally, not WEB):
+  csv cereal.zip [3:,4:] |tt
+________________________________________________________________________________________
 <a name='put'></a>
       <o>put  Part  Stk  [i=1 [j=1 [k=1]]]  > File
 </o>
@@ -930,7 +957,7 @@ ________________________________________________________________________________
         i|                     i|                      i|
 
   > sec  Stk i=n  >  Si  ! section Stk on n-row    :  Si[ jj, kk ]
-  > sec  Stk j=n  >  Sj  ! сечение Stk по n-column :  Sj[ ii, kk ]
+  > sec  Stk j=n  >  Sj  ! section Stk on n-column :  Sj[ ii, kk ]
   > sec  Stk k=n  >  Sk  ! n-frame Stk             :  Sk[ ii, jj ]
 ________________________________________________________________________________________
 <a name='60'></a>
@@ -1620,7 +1647,7 @@ You can add <r>TEXT, LINE or FIGURE( box, oval, romb )</r> anywhere in the windo
                If the chart uses characters  of a code page  other  than cp1252,
                this code page  must be specified  after  the file name  with comma,
                for example (Cyrillic):  chart.wmf<r>, cp1251</r>
-                
+
 <a name='pad'></a>
              <r>Setting graphics indents( PADDING )</r> from window borders:
 
@@ -1805,7 +1832,7 @@ Examples( ^C/^V  to test jj, pik3d ):
 > jj "tt( max(.9,pi/2,pi-1),4*pi,sin(-pi/4))" ! use of <r>'varargs'</r>
 > jj "for(int i=0;i&lt;9;i++)tt(<r>^</r> i=<r>^</r>+i)"        ! print: i=0 \n i=1 \n i=2 ... \n i=8
 > jj "tt(<r>^</r>### [101,2]<r>^</r>);for(var x=0.;x&lt;=20;x+=.2)tt(x,exp(-x/7)*sin(x))"| vics - 1 2
-<div style='background:#333333; color:#00FF00;'>  Linux: 
+<div style='background:#333333; color:#00FF00;'>  Linux:
 $ jj <r>'</r>tt( max(.9,pi/2,pi-1),4*pi,sin(-pi/4))<r>'</r> ! use of <r>'varargs'</r>
 $ jj <r>'</r>for(int i=0;i&lt;9;i++)tt(<r>"</r> i=<r>"</r>+i)<r>'</r>        ! print: i=0 i=1 ... i=8
 $ jj <r>'</r>tt(<r>"</r>### [101,2]<r>"</r>);for(var x=0.;x&lt;=20;x+=.2)tt(x,exp(-x/7)*sin(x))<r>'</r>| vics - 1 2</div>
