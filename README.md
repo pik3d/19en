@@ -68,7 +68,7 @@ Description of the framework, formats and install procedure in the file:
 pik3d_DOC.html (contained in the install archive: pik3d.zip).
 
 To exchange large data ###-format includes binary data presentation.
-version 19.5.2 added the ability to convert CSV-file to binary ###-format.
+Version 19.5.2 added the ability to convert CSV-file to binary ###-format.
 For reading the ###-format in the ImageJ editor, ###_Reader_ImageJ.jar plugin
 is implemented. To read/write ###-matrices in PYTHON - package: kadr.py.
 
