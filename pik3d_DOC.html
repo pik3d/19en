@@ -15,7 +15,7 @@ x{background:#333333; color:#00FF00; font-size:13px; line-height:13px; font-fami
 <h5><pre><a name='s3d'><f>pik3d - framework for processing and 3d-display of matrices and their sequences
         Help has standard HTML navigation: &lt;Home>, &lt;End>, &lt;Alt+Left>, <a href="#ins">links</a> ...
 </f><a name='ogl'></a>
-<a href='#fwk'>DESCRIPTION of&nbsp; pik3d &nbsp;v.19.5.2</a>
+<a href='#fwk'>DESCRIPTION of&nbsp; pik3d &nbsp;v.19.5.3</a>
 <a href="#ins">INSTALL pik3d </a>
 <a href="#dat">###-format of the data: FRAME, STACK</a>
 <a href="#cmd">COMMANDS</a>
@@ -465,24 +465,24 @@ To denote standard stream symbol <r>'-'</r> id used. In case of several Stacks i
   cmd1 a b <r>|</r> cmd2 c <r>-</r> <r>|</r> cmd3 d <r>-</r> d(3) <r>-(2)</r> ... <r>|</r> cmdN <r>-</r> p <r>></r> File
 
 The framework can be installed on Windows 7, 10, Linux(tested in Mint 21.1).
-Version 19.5 compiled with JAVA-19 using javaFX.
+Version 19.5.3 compiled with JAVA-20 using javaFX.
 ________________________________________________________________________________________
 <a name='ins'></a>
 				<o>INSTALL pik3d
 </o>
     <x> Linux specific steps will appear like this.</x>
 
- 1. Download <r>Open JDK+FX( Full ) v.19</r> installation zip-archive for Windows( x86 64bit ).
+ 1. Download <r>Open JDK+FX( Full ) v.20</r> installation zip-archive for Windows( x86 64bit ).
     Recommended builds (follow one of the links):
 
-       <a href="https://www.azul.com/downloads/?version=java-19-sts&os=windows&architecture=x86-64-bit&package=jdk-fx"
->Azul:          JDK  FX  </a>   ! Java <r>19</r>, x86 64-bit, <r>JDK FX !</r>
-       <a href="https://axiomjdk.ru/pages/downloads/#/java-19-current"
+       <a href="https://www.azul.com/downloads/?version=java-20-sts&os=windows&architecture=x86-64-bit&package=jdk-fx#zulu"
+>Azul:          JDK  FX  </a>   ! Java <r>20</r>, x86 64-bit, <r>JDK FX !</r>
+       <a href="https://axiomjdk.ru/pages/downloads/#/java-20-current"
 >BellSoft(RU):  Full JDK </a>
 
     Since the framework does not require a full JAVA installation ( <r>only unzip</r> ),
     builds can be easily changed. If another version of JAVA is installed on the system,
-    the framework with JAVA-19 will not affect it in any way.
+    the framework with JAVA-20 will not affect it in any way.
 
  2. Expand JAVA archive, for example to: D:\jdk <x> ~/jdk </x>. There should be a folder:
     D:\jdk\bin  <x> ~/jdk/bin </x>  with  <r>java.exe</r>.  It will be pointed  in Launchers config.
@@ -1706,7 +1706,7 @@ Frames can be scrolled by rotating the <r>Mouse Wheel</r> or keys: <r>&lt;Left>/
 ________________________________________________________________________________________
 <a name='jj'></a><f>jj = "java-JAVA" Technology</f><o>
 
-command: jj ... - execute "single source-file":  File.java or .jj
+command: jj ... - execute "single source-file":  .java or .jj
 
   jj  File.java  [arg0 arg1 ...]      [/c] ! Execute "single source-file"
   jj  File[.jj]  [arg0 arg1 ...] [/s] [/c] ! ---:--- .jj = "simple" JAVA
@@ -1759,9 +1759,7 @@ public class Reverse extends io implements jjstd {
   Reverse(String[] arg) throws Exception
   <r>{</r>
     er1("Reverse", arg, "Stk > ktS");               // check input arg[]
-
     var stk = inStk( arg[0] );                      // stk[ kk ][ii][jj]
-
     int k = stk.length;
     while(k-->0) ttKadr( stk[k], arg[0]+"_"+(k+1)); // output in reverse
   <r>}</r>
@@ -1780,9 +1778,7 @@ File<r>.jj</r> contains only <r>subject part</r> of the program( marked with red
 Example 3, pik3d\usr\Reverse<r>.jj</r> (functionality is the same as previous example):<f>
 <r>{</r>
     er1("Reverse", arg, "Stk > ktS");               // check input arg[]
-
     var stk = inStk( arg[0] );                      // stk[ kk ][ii][jj]
-
     int k = stk.length;
     while(k-->0) ttKadr( stk[k], arg[0]+"_"+(k+1)); // output in reverse
 <r>}</r></f>
@@ -1805,6 +1801,8 @@ Example 3, pik3d\usr\Reverse<r>.jj</r> (functionality is the same as previous ex
    pow( a, p ) - a^p,  e.g. pow(5,2)=25; pov(9,.5)=3
    sqr( a )    - square root of a
    rnd()       - random value: 0 &lt;= rnd() &lt;=1
+
+If File<r>.jj</r> is located in folder: <r>pik3d\usr</r> - no need to specify full path, name enough.
 
 The general form of <b><r>code.jj</r></b> is :   (more examples: pik3d\usr\*.jj)
 <f>
@@ -1836,6 +1834,11 @@ Examples( ^C/^V  to test jj, pik3d ):
 $ jj <r>'</r>tt( max(.9,pi/2,pi-1),4*pi,sin(-pi/4))<r>'</r> ! use of <r>'varargs'</r>
 $ jj <r>'</r>for(int i=0;i&lt;9;i++)tt(<r>"</r> i=<r>"</r>+i)<r>'</r>        ! print: i=0 i=1 ... i=8
 $ jj <r>'</r>tt(<r>"</r>### [101,2]<r>"</r>);for(var x=0.;x&lt;=20;x+=.2)tt(x,exp(-x/7)*sin(x))<r>'</r>| vics - 1 2</div>
+Since <o>pik3d 19.5.3</o> it is possible to use <r>Java options</r> in jj-command like:
+<r>--enable-preview, --source=20, --add-modules=jdk.incubator.vector ...</r>
+It is useful to test new features of Java (see: pik3d/usr/jep438.jj - Vector API):
+> jj --enable-preview --source=20 --add-modules=jdk.incubator.vector  jep438.jj /s
+
 <a name='pik'></a><o>
 		Most used pik.io methods
 
