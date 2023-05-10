@@ -80,7 +80,7 @@ is implemented. To read/write ###-matrices in PYTHON - package: kadr.py.
 ![4_view](/assets/images/4view.jpg)
 ![minMAJ](/assets/images/2dgra.png)
 To download and install:
-  - at the top of this page right click on the file: pik3d.zip or pik3d_Linux.zip, select: "Save Link as..." (download ~ 1MB);
+  - at the top of this page right click on the file: pik3d.zip or pik3d_Linux.zip, select: "Save Link as..."(download ~ 1MB);
   - unpack install archive in some folder;
   - click the file: pik3d_DOC.html - it should open by default browser;
   - read the section "INSTALL pik3d";
