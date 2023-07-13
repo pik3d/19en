@@ -66,7 +66,7 @@ From command to command, data is transferred in the form of ###-format files
 or by means of "pipe"( this saves time and disk space ).
 
 The framework can be installed on Windows 7, 10, Linux (tested in Mint 21.1).
-Version 19.5.3 is compiled with JAVA-20 using javaFX .
+Current version 19.5.4 is compiled with JAVA-20 using javaFX .
 
 Description of the framework, formats and install procedure in the file:
 pik3d_DOC.html (contained in the install archive: pik3d.zip).
