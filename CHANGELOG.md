@@ -1,5 +1,4 @@
 v.19.5.4,  14.07.2023
-
     - fix known bugs
 	- commands: vic, lss, hist  commad keys:
         /x /y /w /h /add /logx, /logy, /logxy
@@ -12,4 +11,6 @@ v.19.5.4,  14.07.2023
       - bugs fixed;
       - most used pik.io methods: added simple graphics methods;
       - vic-cmd: new functionality: Log.Axes;
-________________________________________________________________________________
+
+v.19.5.5,  17.07.2023
+    - Fix bug in 2d-graph: show title with coordinates always visible.
