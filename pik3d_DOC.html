@@ -15,63 +15,66 @@ x{background:#333333; color:#00FF00; font-size:13px; line-height:13px; font-fami
 <h5><pre><a name='s3d'><f>pik3d - framework for processing and 3d-display of matrices and their sequences
         Help has standard HTML navigation: &lt;Home>, &lt;End>, &lt;Alt+Left>, <a href="#ins">links</a> ...
 </f><a name='ogl'></a>
-<a href='#fwk'>DESCRIPTION of&nbsp; pik3d &nbsp;v.19.5.5</a>
+<a href='#fwk'>DESCRIPTION of&nbsp; pik3d &nbsp;v.19.5.6</a>
 <a href="#ins">INSTALL pik3d </a>
 <a href="#dat">###-format of the data: FRAME, STACK</a>
 <a href="#cmd">COMMANDS</a>
 
-  <a href='#sss'>s3d -"Surface-3D" </a>                             ! 3D-display of the Frame, Stack
+  <a href='#sss'>s3d -"Surface-3D" </a>                           ! <r>3D</r>-display of the Frame, Stack
 
-  <a href='#40' >stk  ii  [jj=1  [kk=1  [v=0]]] </a>                ! Create new Stack
-  <a href='#fmt'>fmt    Stk  [ T|I2|F4|D8  [ BE|LE ]] </a>          ! Convert format
-  <a href='#tt' >...| tt /</a>                                      ! Output Std.Out to Console == | fmt -
-  <a href='#ren'>renam  Stk  name  [index=1] </a>                   ! Rename Frames:  name_NN
+  <a href='#40' >stk  ii  [jj=1 [kk=1]]  [v=&lt;value>]  [D8]</a>    ! Create new <r>St</r>ac<r>k</r>
+  <a href='#fmt'>fmt  Stk  [T|I2|F4|D8| n*w.pS]  [BE|LE]</a>      ! Print or Convert Stack <r>f</r>or<r>m</r>a<r>t</r>
+  <a href='#tt' >...| tt </a>                                     ! ==...| fmt - <r>T</r>ype pipe-Stack as <r>T</r>ext
+  <a href='#ren'>renam  Stk  name  [N=1] </a>                     ! <r>Renam</r>e Frames: name_N, name_&lt;N+1> ...
 
-  <a href='#djk'>      STACK PART: Stk[ di, dj, dk ] </a>           ! index subset/ Slice
-  <a href='#get'>get          Stk     [ di, dj, dk ] </a>           ! get Slice of the Stack
-  <a href='#sep'>sep   Part   Stk     [ di, dj, dk ] </a>           ! set Slice of the Stack
-  <a href='#dim'>dim32        Stk </a>                              ! matrix 3d --> 2d
-  <a href='#csv'>csv   CSV-file   [di,dj]  [D8]</a>                 ! read <r>"Comma-Separated Values"</r> file
-  <a href='#put'>put   Part   Stk     [i=1 [j=1 [k=1]]] </a>        ! put continuous Part
-  <a href='#add'>add   Part   Stk     [i=1 [j=1 [k=1]]] </a>        ! add continuous Part
-  <a href='#sec'>sec          Stk      i=n| j=n| k=n </a>           ! Full Cross-Section --> Matrix
+  <a href='#djk'>      STACK PART: Stk[ di, dj, dk ] </a>         ! index subset
+  <a href='#get'>get          Stk     [ di, dj, dk ] </a>         ! <r>get</r> Part of the Stack
+  <a href='#sep'>sep   Part   Stk     [ di, dj, dk ] </a>         ! <r>se</r>t <r>p</r>art to the Stack
+  <a href='#dim'>dim32        Stk </a>                            ! convert <r>3d</r>-Stack --> <r>2d</r>-Matrix
+  <a href='#csv'>csv   CSV-file   [di,dj]  [D8]</a>               ! read <r>"Comma-Separated Values"</r> file
+  <a href='#put'>put   Part   Stk     [i=1 [j=1 [k=1]]] </a>      ! put continuous Part
+  <a href='#add'>add   Part   Stk     [i=1 [j=1 [k=1]]] </a>      ! add continuous Part
+  <a href='#sec'>sec          Stk      i=n| j=n| k=n </a>         ! cross-<r>sec</r>tion --> Matrix
 
-  <a href="#60" >gauss         [r=2 [ width=3 ]] </a>               ! normalized Gaussian filter
-  <a href="#bel">bell  K "x y h r"   ["x1 y1 h1 r1"    ["x2 y2 h2 r2"   ]] </a>! add Gaussian "Bell"
-  <a href="#wav">wave  K "x y h r a" ["x1 y1 h1 r1 a1" ["x2 y2 h2 r2 a2"]] </a>! add Gaussian "Wave"
-  <a href="#gel">gen3d  config </a>                                 ! "3d-Stack Generator"
+  <a href="#60" >gauss         [r=2 [ width=3 ]] </a>             ! normalized Gaussian filter
+  <a href="#bel">bell  K "x y h r"   ["x1 y1 h1 r1"] </a>         ! add Gaussian "Bell"
+  <a href="#wav">wave  K "x y h r a" ["x1 y1 h1 r1 a1"] </a>      ! add Gaussian "Wave"
+  <a href="#gel">gen3d  config </a>                               ! "3d-Stack Generator"
 
-  <a href="#mul">mul   A  B </a>                                    ! Matrix Multiplication
-  <a href="#dif">dif   A  0 | A  1 |  A  B </a>                     ! Difference of the Matrix/ Stack
-  <a href="#inv">inv   A </a>                                       ! Invert Matrix
-  <a href="#sys">sys   A  b </a>                                    ! Linear System Solver
-  <a href="#mnk">lss   XY   [N=3]  [/vis]  [/add=File]</a>          ! <r>L</r>east <r>S</r>quares <r>S</r>pline of N parts
-  <a href="#spl">spl  SPL X </a>                                    ! get values of the Spline
+  <a href="#mul">mul   A  B </a>                                  ! Matrix <r>mul</r>tiplication
+  <a href="#dif">dif   A  0 | A  1 |  A  B </a>                   ! <r>dif</r>ference of the Matrix/ Stack
+  <a href="#inv">inv   A </a>                                     ! <r>inv</r>ert Matrix
+  <a href="#sys">sys   A  b </a>                                  ! Linear <r>sys</r>tem solver
+  <a href="#mnk">lss   XY   [N=3]  [/vis]  [/add=File]</a>        ! <r>L</r>east <r>S</r>quares <r>S</r>pline of N parts
+  <a href="#spl">spl  SPL X </a>                                  ! get values of the <r>Spl</r>ine
 
-  <a href="#tra">tra    Stk </a>                                    ! all Stack Frames Transposition
-  <a href="#tra">rot90  Stk </a>                                    ! Rotate Frames on 90 degrees
-  <a href="#120">sv  S  [+-x/'|exp|ln|db]  value </a>               ! Stack-Value operations
-  <a href="#130">ss  A  [+-x/']            B </a>                   ! Stack-Stack operations
+  <a href="#tra">tra    Stk </a>                                  ! all Stack Frames <r>Tra</r>nsposition
+  <a href="#tra">rot90  Stk </a>                                  ! <r>Rot</r>ate Frames on <r>90</r> degrees
+  <a href="#120">sv  S  [+-x/'|exp|ln|db]  value </a>             ! <r>S</r>tack-<r>V</r>alue operations
+  <a href="#130">ss  A  [+-x/']            B </a>                 ! <r>S</r>tack-<r>S</r>tack operations
 
-  <a href="#140">noise     Stk  [amp =.1] </a>                      ! add "White Noise"
-  <a href="#145">gnoise    Stk  [R=.1] </a>                         ! add "Gaussian Noise", sigma=R/2
-  <a href="#160">top       Stk   level </a>                         ! "Cut Top"
-  <a href="#170">bot       Stk  [level=0] </a>                      ! "Cut Bottom"
-  <a href="#180">blur      Stk  [R=2] </a>                          ! Smoothing, "Gaussian Blur"
-  <a href="#190">filtr     Stk   Fltr </a>                          ! Filter
+  <a href="#140">noise     Stk  [amp =.1] </a>                    ! add "Uniform <r>Noise</r>"
+  <a href="#145">gnoise    Stk  [R=.1] </a>                       ! add "<r>G</r>aussian <r>Noise</r>", sigma=R/2
+  <a href="#160">top       Stk   level </a>                       ! "Cut <r>Top</r>"
+  <a href="#170">bot       Stk  [level=0] </a>                    ! "Cut <r>Bot</r>tom"
+  <a href="#180">blur      Stk  [R=2] </a>                        ! Smoothing, "Gaussian <r>Blur</r>"
+  <a href="#190">filtr     Stk   Fltr </a>                        ! Filter
 
-  <a href="#210">ma    Stk  [ N=5 ] </a>                            ! Moving Average
-  <a href="#220">sma   Stk  [ N=5  [ level=0  ]] </a>               ! Subtract Moving Average
-  <a href="#his">hist  Stk  [ Fr=1 [ Nint=100 ]] [/add=File]</a>    ! Frame Histogram
+  <a href="#210">ma     Stk  [N=5 ] </a>                          ! <r>M</r>oving <r>A</r>verage
+  <a href="#220">sma    Stk  [N=5  [level=0 ]] </a>               ! <r>S</r>ubtract <r>M</r>oving <r>A</r>verage
+  <a href="#his">hist   Stk  [Fr=1 [Nint=100]] [/add=File]</a>    ! Frame <r>Hist</r>ogram
 
-  <a href="#vis">vic   Stk  jX j1 j2 j3 ... [keys]</a>              ! Visualize Columns
-  <a href="#vip">vimp  config  [keys]</a>                           ! --"---"---"---"-- <r>Multiple Stacks</r>
-  <a href="#gra">Use of 2D-graphics </a>
+  <a href="#vis">vic(s) Stk  jX j1 j2 j3 ... [keys]</a>           ! <r>Vi</r>sualize <r>C</r>olumns (<r>S</r>pline)
+  <a href="#vip">vimp   config  [keys]</a>                        ! --"---"---"---"-- <r>M</r>ultiple Stack <r>P</r>lots
 
-  <a href="#tif">tif  File.tif | Config  [Npro=99999] </a>          ! Show .TIF-files/clip
+<a href="#gra">Use of 2D-graphics </a>
 
-<a href="#jj" >jj-Technology - "simple" JAVA</a>
-<a href="#jc" >jj "jcmd1; jcmd2; jcmd3 ... "  [/s] [/c] </a>        ! Execute several JAVA commands
+  <a href="#tif">tif  File.tif | Config  [Npro=99999] </a>        ! Show <r>.TIF</r>-files/clip
+  <a href="#eeh">ee  [text] </a>                                  ! print to std.<r>ERR</r> current time & text
+  <a href="#hhh">hhh  Stk </a>                                    ! print to std.<r>ERR</r> Stk-<r>H</r>eader & comments
+
+<a href="#jj" >jj  File[.jj] or FIle.java     [/s] [/c] </a>      ! "<r>j</r>ava-<r>J</r>AVA"-Technology(<r>"simple"</r> JAVA)
+<a href="#jc" >jj "jcmd1; jcmd2; jcmd3 ... "  [/s] [/c] </a>      ! Execute several JAVA commands
 
 <a href="#pik">Most used pik.io methods </a>
 <a href="#jc" >Create New pik3d Command, prepare Launcher </a>
@@ -436,33 +439,33 @@ process and display a set of images/ frames/ matrices as a whole.
 Such an image sequence is often referred to as a STACK of images.
 Displaying of the stack in the "frame by frame" mode is perceived as a video clip.
 
-Framework  <o>pik3d</o>  offers a data storage/sharing standard and a basic set of commands
+Framework <o>pik3d</o> offers a data storage/sharing standard and a basic set of commands for
 processing and displaying stacks.The methods for reading and writing files in <a href="#dat">###-format</a>
 implemented in JAVA are stored in the library: lib\pik.jar and described: <a href="#pik">pik.io methods</a>
 Package: kadr.py is implemented for PYTHON language ( stored: ext\###_PYTHON.zip ).
-To use the ###-format in the ImageJ graphical editor, a plugin is implemented
+To use the ###-format in the <r>ImageJ</r> graphical editor, a plugin is implemented
 ( ext\###_Reader_ImageJ.jar, copy to ImageJ\plugins\3D ).
 
 Framework commands are executable(.exe) modules and their set is not fixed.
 The launcher technology is used ("launch" - to launch, start). Launcher encapsulates
-the starting configuration of the JAVA machine.
+the starting configuration of the Virtual JAVA Machine (JVM).
 
 The framework contains simple tools for creating <a href="#jc">new command on JAVA</a>.
 Additional commands can be implemented in any convenient algorithmic language.
 
 In a simple case, the processing program is a batch script.
 From command to command, Stacks are transferred in the form of the <a href="#dat">###-format</a> files
-or by means of <r>"pipe"</r>( this saves time and disk space ).
+or by means of <r>"pipe"</r>( it can reduce disk usage and increase performance ).
 
 Most of the commands  output the result  to the standard output stream. If commands
-chained in to the pipe-line the next command gets data from the standard stream.
+chained in to the pipe-line the next command can get data from the standard stream.
 To denote standard stream symbol <r>'-'</r> id used. In case of several Stacks in the output:
-<r>-(2), -(3)</r> ... It looks like:
+<r>-(2), -(3)</r> ... Stacks are delimited by: <r>### &lt;eos></r> -"End Of Stack". It looks like:
 
   cmd1 a b <r>|</r> cmd2 c <r>-</r> <r>|</r> cmd3 d <r>-</r> d(3) <r>-(2)</r> ... <r>|</r> cmdN <r>-</r> p <r>></r> File
 
-The framework can be installed on Windows 7, 10, Linux(tested in Mint 21.1).
-Version 19.5.3 compiled with JAVA-20 using javaFX.
+The framework can be installed on Windows 7, 10, Linux (tested in Mint 21.1).
+Version 19.5 is compiled with JAVA-20 using javaFX.
 ________________________________________________________________________________________
 <a name='ins'></a>
 				<o>INSTALL pik3d
@@ -482,7 +485,7 @@ ________________________________________________________________________________
     the framework with JAVA-20 will not affect it in any way.
 
  2. Expand JAVA archive, for example to: D:\jdk <x> ~/jdk </x>. There should be a folder:
-    D:\jdk\bin  <x> ~/jdk/bin </x>  with  <r>java.exe</r>.  It will be pointed  in Launchers config.
+    D:\jdk\bin  <x> ~/jdk/bin </x>  with  <r>java.exe</r>.  It will be pointed in Launchers config.
 
  3. Expand the archive: <r>pik3d.zip</r> <x> pik3d_Linux.zip </x> in a folder, for example:
     E:\pik3d &nbsp;&nbsp; <x> ~/pik3d &nbsp; </x>
@@ -510,7 +513,7 @@ ________________________________________________________________________________
 
  8. Several demos are collected in the folder: <r>pik3d\demo</r>,  run:  > _run.cmd <x> ./run  </x>
     If stop viewing by &lt;space>, you can change view angles by moving the pressed Mouse.
-    The lighting angles can be changed by: <r>&lt;Ctrl + arrows</r>: Up, Down, Right, Left >.
+    The lighting angles can be changed by: <r>&lt;Ctrl + arrows</r>: Left, Right, Up, Down >.
     It is recommended to press in different sequences:
     <r>&lt;F1></r>, <r>^D</r> -Map Down, <r>^A</r> -Axes, <r>^M</r> -Map</r>, <r>^2</r> -Lines ( <r>^</r> - means pressed &lt;Ctrl> key )
 ________________________________________________________________________________________
@@ -528,9 +531,18 @@ The frame name can be any text( may be with spaces or even empty ).
 <r>Space</r> after <r>"###"</r> is important !  Matrix size is specified in parentheses: [ ] or ( ).
 If the number of columns = 1, it can be omitted.
 
-Text or binary data files may contain comments.
-Comments start with <r>!</r>  or  a single <r>#</r>  and  ends at the end of the line.
+If need to consider data as <r>Double Presion (8-byte)</r>, parameter <r>D8</r> must be used after <r>[]</r>.
+If <r>D8</r> is absent, data are considered as "FLoating Point single precision"(F4,see below).
+
+Text or binary data files may contain <r>comments</r>.
+Comments start with <r>!</r>  or  a single <r>#</r>  and  continues to the end of the line.
 An empty line is also considered a comment.
+
+<r>Any text</r> (even without leading symbols: !|# ) <r>before 1st. ###-header is comment</r> too.
+It is good practice to include data description in to the important files.
+This can be done by means of text editor.
+
+To see header with commemts  use commad: <a href="#hhh">hhh Stk</a> .
 
 In  <r>Text Format</r>, the header line is followed by data lines. The data is considered as
 real numbers, even if they do not contain a decimal point.
@@ -542,7 +554,6 @@ The only limitation is that you cannot break a numeric value.  Example(correct f
  ### test [ 3, 5 ]    ! 3-rows, 5-columns
 
    11.123, 12.34, 13  # comment
-
                         -14, 15.56     ! integers can be used:
 
    21.32 22.54 -23.33 24.765 -.25E+8   # real: with  decimal point
@@ -553,28 +564,34 @@ data type: <r>I2 | F4 | D8</r> and possibly a "Byte Order Indicator": <r>BE | LE
 
     <r>I2</r> - 2-byte integers, value range from <r>-32768</r> to <r>+32767</r>
 
-    <r>F4</r> - 4-byte real single precision, <r>~ 7</r> significant digits:
+    <r>F4</r> - 4-byte real("Floating Point") single precision, <r>~ 7</r> significant digits:
                             <r>1.4e-45</r> < absolute value < <r>3.4e+38</r>
 
     <r>D8</r> - 8-byte real double precision, <r>~ 15</r> significant digits:
                             <r>4.9e-324</r> < absolute value < <r>1.8e+308</r>
-    <r>BE</r> - "Big-Endian"
-    <r>LE</r> - "Little-Endian" - "LOW bytes first" - default( may be omitted).
+
+    <r>LE</r> - "Little-Endian" -"LOW bytes first" like in memory - default( may be omitted).
+    <r>BE</r> - "Big-Endian"    - more useful reverse order( standard in JAVA ).
 
 The binary block starts after byte=0x10=#0A("Line Feed") and does not contain comments!
 Comments can be placed only before the header or after the binary block !
 
 The data is output to the binary block sequentially by lines without separators !
 
-In files with binary blocks, you can add/ change comments and headers using editors
+Stack may contain both text and binary frames( even with different "Byte Order").
+
+    <r>The amount of Stack Data should not exceed 2GB !
+    This is the limitation of the current JAVA technology.</r>
+
+In files with binary frames, you can add/ change comments and headers using editors
 that support binary format ( Notepad++, SlickEdit ... )
 <r>
-    ALL BASIC COMMANDS READ DATA IN ANY FORMAT (specified in the header)
-    MOST COMMANDS OUTPUT DATA IN THE FORMAT: <o>F4 BE</o> - 4-byte real !
+    RULE  for ALL  commands :
+    the Precision of Data Processing  and  the Binary Format of Result
+    (F4 BE / D8 BE)  depend on the format  of the input Stack (F4 / D8)
 </r>
-The command: <a href="#fmt"> fmt -"format"</a> converts a file to the specified format (text by default).
-For example: display the result of a command or pipeline on the screen ><r> ...| fmt -</r>
-Due to the frequency use of: <r>| fmt -</r>  short form is introduced: <r>| tt</r>  - <a href='#tt'>"Type Terminal"</a>
+The command:<a href="#fmt"> fmt </a>- "format" converts a file to the specified format (text by default).
+E.g. display the result of a command or pipeline on the screen ><a href="#fmt"> ...| fmt -</a> or <a href="#tt">...| tt</a>
 
 JAVA methods to work with data in  ###-format  are given in  <a href="#pik">pik.io methods</a> .
 ________________________________________________________________________________________
@@ -586,10 +603,10 @@ The command consists of two parts:
  - launcher - exe module that passes parameters and starts the JVM: pik3d\exe\*.exe
 
 Launcher actions:
- - starts the JAVA machine in the configuration required by the command: keys, paths ...
- - passes a link to the JAVA class of the command (compiled command code);
+ - starts the JVM in the required configuration:  paths, keys, options ...
+ - passes to JVM a link to compiled code;
  - passes arguments to the command;
- - after starting the JAVA-machine and passing parameters, exits .
+ - exits after starting the JVM and passing parameters.
 
 All launchers have the same code. The difference is in the start parameters and the link
 to the command class. How create new command and prepare launcher:  <a href="#jc">jj, jc, new command</a>.
@@ -601,12 +618,12 @@ to the command class. How create new command and prepare launcher:  <a href="#jc
 Command name = launcher name and is not fixed. You can rename any launcher as you like.
 
 The launcher receives information about the JAVA machine and the path to the libraries
-from the environment variable:  <r>PIK3D_JAVA</r>  see  <a href="#ins">INSTALL pik3d</a>.
-This technology allows you to have several JAVA machines and libraries in the system.
+at the time of creation, parameters: <r>jdk/bin, lib/jar</r> of the <r>_Launch.cfg</r> file.
+This technology allows you to have several JVM and libraries in the system.
 
 When called without parameters or with the key: <r>/?</r> most commands show their short
-description. If the command does not show anything, it must be run with the key: <r>/dbg</r> -
-debug mode. Also, some diagnostic messages are only visible in debug mode.
+description. If the command does not show anything, it must be run with the key: <r>/dbg</r>
+- debug mode. Also, some diagnostic messages are only visible in debug mode.
 
 Most commands (with the exception of visual commands) send the result to the standard
 input/output stream. If you do not specify <r>> File</r> at the end of the command - the output
@@ -614,49 +631,61 @@ will be performed to the console/ screen.
 
 The standard stream allows the use of <r>"pipe-line"</r> technology.
 If intermediate data is not important, it can be passed from one command to next command
-directly, bypassing the file on disk. This saves disk space and improves performance.
-To use the pipeline, the commands are written on one line and separated by <r>'|'</r>.
+directly, bypassing the file on disk. This may improve disk usage and performance.
+
+   <r>Experience shows that a pipe should not be used when processing large Stacks > 1GB.</r>
+
+To use the pipe-line, the commands are written on one line and separated by <r>'|'</r>.
 
 If the command receives a stack from the pipeline, then this parameter is replaced by <r>-</r>.
-A pipeline as a file can contain several stacks, in this case N-th stack will be called:
-<r>-(N)</r>. At the moment all standard commands pass one stack to the file/pipeline. Example:
+A pipe as a file may contain several stacks. N-th stack will be called: <r>-(N)</r>.
 
    stk 70 90 <r>|</r> noise <r>-</r> <r>|</r> bell <r>-</r> "20 30 .3 10" <r>|</r> wave <r>-</r> "50 60 .2 15 45" <r>></r> Land
 
-<r>   !!! None of the input files must have name of result (in the example: Land) !!!</r>
-
+<r>   None of the input files must have a result name (in the example: Land )
+   Commands: <o>s3d, hist, lss /vis, vi.., ee, hhh, tif</o>  STOP pipe-line
+</r>
 It makes sense to save the worked out command sequences as batch scripts.
 Stack names and parameters can be considered as call arguments ( %1, %2 ...).
-If necessary  to provide  loops  and  branch points  at the  batch file  level,
-command:  <r>setvar - get value from Keyboard or Stack</r>  can be used:
+If necessary  to provide  loops  and  branch points  at the  batch file, use
 
-  setvar  kbd  prompt [ default value ]   !print prompt and read value from Kayboard
-  setvar  stk  Stack  [i=1 [j=1 [k=1]]]   !get Stack element [ i, j, k ]
+  command:  <r>setvar</r> - get value from Keyboard or Stack and out to std.stream.
+
+    setvar  kbd  prompt [ default value ]   !print prompt and read value from Kayboard
+    setvar  stk  Stack  [i=1 [j=1 [k=1]]]   !get Stack element [ i, j, k ]
+
+word:  <r>kbd</r> or <r>stk</r>  - is mandatory !
+This command is used to deal with system variables.
 
 <div style='background:#333333; color:#00FF00;'># Linux example(~/bin/stkelm): $ stkelm Stk&nbsp;
   s=$1
   if [ -z "$1" ];then
-    s=`setvar kbd "input Stk.name" q`
+    s=`<r>setvar kbd</r> "input Stk.name" q`
   fi
 
   while [ true ];do
-    i=`setvar kbd "input i" 3`
-    j=`setvar kbd "input j" 7`
-    k=`setvar kbd "input k(999=exit)" 999`
+    i=`<r>setvar kbd</r> "input i" 3`
+    j=`<r>setvar kbd</r> "input j" 7`
+    k=`<r>setvar kbd</r> "input k(999=exit)" 999`
 
     if [ $k = 999 ];then
       exit; fi
 
-    v=`setvar stk $s $i $j $k`
+    v=`<r>setvar stk</r> $s $i $j $k`
     echo $s[ $i, $j, $k ] = $v; echo
   done
 </div>
-Windows:
+Windows( <r>setvar</r> is used in .cmd-scripts to set <r>VAR</r>iable ):
+
   <r>call varkbd VAR</r> prompt [default]        !get the value entered from the keyboard
   <r>call varstk VAR</r> Stk [i=1 [j=1[ k=1]]]   !get value of the Stk[ i, j, k ] element
+e.g.
+  > set VVV=0 & <r>call varkbd VVV</r> "inp.value" -999 & echo %VVV%   !var.name is <r>VVV</r>
+  > set VVV=0 & <r>call varstk VVV</r>  Stk  5 4        & echo %VVV%   !<r>VVV</r> = Stk[5,4,1]
 
 They are implemented as scripts (.cmd), so using the word:  <r>call - REQUIRED</r> .
-<r>VAR</r> is an environment variable that can be used in the  <r>IF</r>  command.
+<r>VAR</r> is an environment variable that can be used in the <r>IF</r> script command.
+
 Example( exe\stkelm.cmd - get element: Stk[i,j,k] ):<f>
 @echo OFF
 ::          get Stk Element, %1 = Stack Name
@@ -682,61 +711,77 @@ goto cycle
 ________________________________________________________________________________________
 
 <a name='40'></a>
-	<o>stk ii [jj=1 [kk=1 [v=0]]]  > File    !Create a new STACK
+	<o>stk ii [jj=1 [kk=1]] [v=&lt;value>] [D8]  > File
 </o>
-     ii - number of rows;
-     jj - number of columns;
-     kk - number of frames;
-     v  - value to fill all stack elements[ default 0 ].
+Create a new STACK, where:
+    <r>ii</r> - number of rows;
+    <r>jj</r> - number of columns;
+    <r>kk</r> - number of frames;
+    <r>v=&lt;value></r> - value to fill all stack elements (default 0), text: <r>"v="</r> is mandatory;
+    <r>D8</r> - optional parameter if need a Stack of Double Precision, default: F4.
 
 Examples:
-> stk 22 33 > b2233          !1 frame: 33 rows 33 columns filled with 0
-> stk 25 46 1 -1 > b2233_1   !1 frame: 25 rows 46 columns, filled -1
-> stk 22 33 50 > s50         !stack of 50 frames: [ 22,33 ], filled 0
-> stk 42 65 99 .2 > s99_02   !stack of 99 frames: [ 42,65 ], filled 0.2
-> stk 999,,-1 > column       !frame = column[999,1] = column[999] filled with -1
+> stk 22 33        > b2233     !1 frame: 22 rows 33 columns  , F4, filled with 0
+> stk 25 46  v=-1  > b2233_1   !1 frame: 25 rows 46 columns  , F4, filled -1
+> stk 22 33 50 d8  > d50       !stack of 50 frames: [ 22,33 ], D8, filled 0
+> stk 42 65  v=.2  > s99_02    !stack of 99 frames: [ 42,65 ], F4, filled 0.2
+> stk 999 v=-1 d8  > column    !column[999,1] = column[999]  , D8, filled with -1
 ________________________________________________________________________________________
 <a name='fmt'></a>
-	<o>fmt  Stk  [ T |I2 |F4 |D8 [ BE| LE]]  > File
+	<o>fmt  Stk  [T|I2|F4|D8| n*w.pS]  [BE|LE]  > File
 </o>
-Convert Stk to another format. Stack can be a folder ( arranging files alphabetically ).
+Convert Stk to another format. If output File is absent, print to the console.
+A stack can be a folder( arranging files/frames alphabetically ).
 
 Accepted formats:
-    T  - text
-    I2 - binary:  short integer    2 bytes
-    F4 - binary:  floating point   4 bytes
-    D8 - binary:  double precision 8 bytes
+    <r>T</r>  - text format is default( can be omitted )
+    <r>I2</r> - binary:  short integer    2 bytes
+    <r>F4</r> - binary:  floating point   4 bytes
+    <r>D8</r> - binary:  double precision 8 bytes
+    <r>n*w.pS</r> - user text format, where:
+             n  -"number" of values in row
+             '*'- mandatory symbol
+             w  -"width" of one value
+             '.'- mandatory symbol
+             p  - number of decimal "places", may be 0
+             S  = <r>f|e|g</r> - "Symbol" of format
+                  <r>f</r> - floating point without exponent( if p=0 - integer )
+                  <r>e</r> - exponent is present (scientific notation)
+                  <r>g</r> - if possible - floating, if not - scientific
+    e.g.
+         20*4.0f  - 20 integers, each has width=4
+         10*10.5f - 10 floating, width=10, 5 decimal places
+         5*20.10g - 5 values, width=20, 10 decimal places, e or f format
 
+    <r>BE|LE</r> - byte order for binary formats: "Big-Endian" or "Little-Endian"
+            default is BE - Java Standard
 rules:
-  - If format is omitted, TEXT is assumed
-  - If byte order is not specified - BE ="Big Endian"( Java Standard ) is used
-  - Lowercase may be used:  t|i2|f4|d8, be|le
+  - If format is omitted, standard TEXT format is assumed
+  - Lowercase may be used:  t|i2|f4|d8,  be|le
+  - If byte order is absent in ###-File Frame Header, LE is assumed !!!
 
 Examples:
 > fmt stk                    !output Stk to the screen in text format  ==  tt &lt; stk
+> ...| fmt -                 !the result of pipe to the screen as text == ...| tt
 > fmt q d8 LE > qd8          !convert q to qd8: D8 LE
 > ...| fmt - i2 le > qi2le   !save the result of "pipe-line" as: I2 LE
-> ...| fmt -                 !the result of "pipe-line" to the screen as text = ...| tt
+> ...| fmt - 20*4.0f         !pipe to the screen in user text format (integer)
 ________________________________________________________________________________________
 <a name='tt'></a>
-	<o>...| tt == ...| fmt - == "Stack from pipe-line to text"
+	<o>...| tt == ...| fmt -   !Print Stack from pipe as Text
 </o>
 This is short form of <a href="#fmt">...| fmt -</a>
-It is recommended to use <r>| tt</r> instead of: <r>| fmt -</r> .
-Advantages:
-  - shorter ;
-  - no problems with Russian text when outputting to the console.
-
-> tt &lt; stk  ==  tt&lt;stk                    !output Stk to the screen in text format
-> stk 2 4 3| renam - –”—— »…_ÿ–»‘“| fmt -
-> stk 2 4 3| renam - –”—— »…_ÿ–»‘“| fmt - | tt <r>
-> stk 2 4 3| renam - –”—— »…_ÿ–»‘“| tt         !is recommended</r>
+It is recommended to use <r>| tt</r> instead of: <r>| fmt -</r>  it's just shorter.
+Examples:
+     tt&lt; stk  ==  fmt stk            !output Stk to the screen in text format
+...| tt  20*5.0f                     !user text format(see <a href="#fmt">fmt command</a>)
+stk 3 7| noise - 1| tt               !shows random matrix [3,7]
 ________________________________________________________________________________________
 <a name='ren'></a>
-	<o>renam  Stk  name  [index=1]  > File   !Rename Frames
+	<o>renam  Stk  name  [ N=1 ]  > File   !Rename Frames
 </o>
-Create new Stack which has old Frames with new consecutive names:
-name_NN, name_&lt;NN+1>, name_&lt;NN+2> ...
+Create new Stack which has old data Frames with new consecutive names:
+name_N, name_&lt;N+1>, name_&lt;N+2> ...
 
 	<r>!!! INPUT STACK CANNOT BE A FOLDER !!!</r>
 
@@ -744,60 +789,64 @@ name_NN, name_&lt;NN+1>, name_&lt;NN+2> ...
 > renam  q  back -2  > q_50   !in q_50 frames: back_-2, back_-1, back_0, back_1 ...
 ________________________________________________________________________________________
 <a name='djk'></a>
-	<o>STACK PART: A[ di, dj, dk ], index subsets
+	<o>STACK PART:  Stk[ di, dj, dk ],  index subsets
 </o>
 Description of a stack part = description of a index subset: di, dj, dk .
 
 Subset descriptions are separated by commas.
 If the description contains a comma, it must be enclosed in parentheses.
-If there is no subset (examples: A[,dj,dk], A[di,,dk], A[,,dk] ) - index = 1.
+If subset is <r>omitted</r> (examples: Stk[,dj,dk], Stk[di,,dk], Stk[,,dk] ) - <r>index = 1</r>.
 Parentheses and spaces can be used to improve readability.
 
-   <o>Rules for describing a subset:</o>
-   ( on the columns example, N-number of columns )
+	<o>Rules for describing a subset of indices:</o>
 
-1. Index counting start from <r>1</r> !!!
+—onsider the rules on the example of columns(1,2,3...N), where: N-the last column.
+We will use non-negative number p, i.e.  p=0,1,2,3...N   and  -p=-1,-2,-3 ...
 
-2. Can contain lists and cycles in any quantity (separated by commas).
+1. Index counting <r>starts from 1</r> !!!  i.e. real indices are 1,2,3 ... N.
+
+2. Index <r>0</r> denotes <r>Last index</r> ( in our case N ).
+
+3. Index <r>-p</r> denotes <r>N-p</r> index.
+
+4. Index subset can contain lists and cycles in any quantity (separated by commas).
    - <r>list</r> = sequence of indices: <r>j1, j2 ...</r> (possibly one).
-   - <r>loop</r> contains one or 2 symbols <r>:</r> or symbol <r>#</r>.
+   - <r>cycle</r>  contains symbol <r>':'</r> or <r>'#'</r>.
 
-3. Cycle (general case): <r>a: b: s</r>
-   <r>a, b</r> - the beginning and the end of the loop  <r>INCLUSIVE !!!</r>
+5. Cycle (general case):  <r>b: e: s</r>
+   <r>b, e</r> - the beginning and the end of the cycle  <r>INCLUSIVE !!!</r>
    <r>s</r>    -"Step" - sequence and order of sampling.
 
-   a &lt; b and s>0 -->  for( j=a; j&lt;=b; j+=s )   !s>0: from smallest to largest
-   a > b and s>0 -->  for( j=b; j&lt;=a; j+=s )   !---:---:---:---:---:---:---
-   a &lt; b and s<0 -->  for( j=b; j>=a; j+=s )   !s&lt;0: largest to smallest
-   a > b and s&lt;0 -->  for( j=a; j>=b; j+=s )   !---:---:---:---:---:---:---
+   b &lt; e and s= p -->  for( j=b; j&lt;=e; j+=p )   !from smallest to largest: <r>s>0</r>
+   b > e and s= p -->  for( j=e; j&lt;=b; j+=p )   ! ---:---:---:---:---:---:---
+   b &lt; e and s=-p -->  for( j=e; j>=b; j-=p )   !from largest to smallest: <r>s&lt;0</r>
+   b > e and s=-p -->  for( j=b; j>=e; j-=p )   ! ---:---:---:---:---:---:---
 
-4. Cycle:  default/ omitted values :
+6. Cycle:  omitted/ default  values :
 
-   a - value <r>to the left of the first</r>   ':'|'#' default = <r>1</r>
-   b - value <r>to the right of the first</r>  ':'|'#' ---:--- = <r>N</r>
-   s - value <r>to the right of the second</r> ':'     ---:--- = <r>1</r>, examples:
+   b - value <r>to the left  of the first  ':'</r>  default = <r>1</r>
+   e - value <r>to the right of the first  ':'</r>  ---:--- = <r>N</r>
+   s - value <r>to the right of the second ':'</r>  ---:--- = <r>1</r>, examples:
 
-   :b - all columns from 1 to b inclusive;
-   :b:s - from 1 to b , sequence and order given by s:
-          s > 0  --> for( j=1; j&lt;=b; j+=s )
-          s &lt; 0  --> for( j=b; j>=1; j+=s ) - in reverse order
+   :e - all columns from 1 to e inclusive;
+   :e:s - from 1 to e , sequence and order given by s:
 
-   := ::= 1:N:1  --> for( j=1; j&lt;=N; j++  ) - ALL
+   : =:: =1:N:1  --> for( j=1; j&lt;=N; j++  ) - ALL
    ::-1 = 1:N:-1 --> for( j=N; j>=1; j--  ) - ALL in reverse order
 
-5. <r>a # b : s</r> = a: a+b-1: s ,  i.e. <r>b = the number of elements</r>, b>0 !!!
+7. <r>b # p = b#p</r> = b: b+p-1,  i.e. <r>#p = the number of elements starting from b</r>,  p>0 !!!
 
-6. <r>a &lt; 0</r> - means: a = N + a
-   <r>b &lt; 0</r> - means: b = N + b
+8. <r>b =-p</r> - means: b = N-p,  e.g. -2: =( N-2, N-1, N ),  <r>b=0</r>  e.g. <r>0: = 0# = 0  = N</r>
+   <r>e =-p</r> - means: e = N-p,  e.g. :-2 =( 1,2 ... N-2 ),  <r>e=0</r>  e.g. <r>:0 = :</r> =(1,2...N)
 
 Examples:
+> Stk[ :, :, <r>0</r> ]                         !<r>Last</r> frame of the stack
 > Stk[ :, :, ::-1 ]                      !stack with reverse frame order
 > Stk[ ::-1, :, : ]                      !frames with opposite order of rows
-> Stk[ :, (2,3,(4:7:-1),9), : ]          !all rows and frames, columns: 2,3,7,6,5,4,9
-> Stk[ :, :, -3:  ]                      !frames: K-3, K-2, K-1, K   !K=number of frames
-> Stk[ :, :, -4:-1:-1 ]                  !frames: K-1, K-2, K-3, K-4
-> Stk[ 2#5, 7#3:-1]                      !matrix[5,3], lines: 2,3,4,5,6; columns: 9,8,7
-> Stk[ 2#3,3#3,4#3] = Stk[2:4,3:5,4:6]   !3x3x3 cube
+> Stk[ :, <r>(2,3,(4:7:-1),9)</r>, : ]          !ALL rows and frames, columns: <r>2,3,7,6,5,4,9</r>
+> Stk[ :, :, -3:  ]                      !frames: K-3, K-2, K-1, K  !K=number of frames
+> Stk[ :, :, 0:-3:-1 ]                   !frames: K, K-1, K-2, K-3  =  [:,:,-3::-1]
+> Stk[ 2#3,3#3,4#3] = Stk[2:4,3:5,4:6]   !cube: 3x3x3
 ________________________________________________________________________________________
 <a name='get'></a>
 	<o>get  Stk [ di, dj, dk ]  > File
@@ -815,7 +864,7 @@ obtaining sections:
 In case of sections: Stk[ i, dj,dk], Stk[di, j, dk] - <a href="#dim">dim32</a> command is useful.
 ________________________________________________________________________________________
 <a name='sep'></a>
-	<o>sep Part Stk [ di, dj, dk ]  > File  - "<r>SE</r>t <r>P</r>art"
+	<o>sep Part Stk [ di, dj, dk ]  > File   !"<r>SE</r>t <r>P</r>art"
 </o>
 Part is copied sequentially to Stk according to <a href="#djk">index subsets</a>.
 Unlike the command: <a href="#put"> put </a> all indices must belong to Stk.
@@ -841,6 +890,7 @@ If one of the 3D-Stack sizes = <r>1</r>, the stack is converted to a 2d-matrix.
 This situation occurs when getting a section of the stack with the command <a href="#get">get</a>
 (take stack A from <a href="#sep">sep</a> example, see above):
 
+> stk 8 9 7 | noise -      > A   !prepare stack: A
 > get A[ <r>3</r>,  :, : ] |tt   !section consists of 7 frames[ <r>1</r>, 9 ]
 > get A[ :,  <r>5</r>, : ] |tt   !section consists of 7 frames[ 8, <r>1</r> ]
 > get A[ #5, <r>3</r>, #4] |tt   !section consists of 4 frames[ 5, <r>1</r> ]
@@ -850,27 +900,27 @@ Try:
 > get A[ :,  5, : ] | dim32 - |tt   !1 frame [ 8, 7 ]
 > get A[ #5, 3, #4] | dim32 - |tt   !1 frame [ 5, 4 ]
 
-For full sections: A[ 3,:,: ], A[ :,5,: ] it is recommended to use the command <a href="#sec">sec</a> .
+To get <r>full sections</r>: A[<r>3,:,:</r>], A[<r>:,5,:</r>] it is recommended to use the command <a href="#sec">sec</a> .
 ________________________________________________________________________________________
 <a name='csv'></a>
-      <o>csv  CSV-file  [di,dj]  [F4|D8]  > ###-file
+      <o>csv  CSV-file  [di,dj]  [D8]  > ###-file
 </o>
 Read  <r>"Comma-Separated Values"-file</r>  and  convert to the  <a href="#dat">binary ###-file</a>
 
-  [di,dj]  - <a href="#djk">index subsets</a>  of Lines and Columns
-             if absent, it means the entire CVS-file
+  [di,dj] - <a href="#djk">index subsets</a>  of Lines and Columns
+            if absent, it means the entire CVS-file
 
-  F4 or D8 - format of ###-file( default=F4 - 4-bytes real )
+  D8      - output file as Double(D8), default: Float(F4)
 
   <r>ATTENTION:  ONLY ASCENDING  index sequences  are  ALLOWED
-              Literal and Error Values are replaced by 3.4e+38</r>
+              Literal and Error Values are replaced with 3.4e+38</r>
 Examples:
   csv  float.csv        >  flodat       !float.csv --> flodat  (entire file)
   csv  data.csv  D8     >  dat8         !data.csv  --> dat8( Double,8-bytes real)
   csv  big.csv [3:,:]   >  big4         !big.csv from 3-line to the end, all col.
-  csv  big.csv [500#200, (2,3,5,7)] d8  > d501  # lin.: 500-699, col.: 2,3,5,7
+  csv  big.csv [500#200, (2,3,5,7)] d8 > d501   !lin.: 500-699, col.: 2,3,5,7
 
-  csv  graph.csv [:,:4] | vic - 1 2 3 4 # read and display col.2,3,4 as function of 1
+  csv  graph.csv [:,:4] | vic - 1 2 3 4 !read and display col.: 2,3,4 as function of 1
 
 Input file can be taken <r>from the WEB</r>:
   csv https://perso.telecom-paristech.fr/eagan/class/igr204/data/cereal.csv [3:,4:] |tt
@@ -968,7 +1018,7 @@ For the Gaussian distribution, it is convenient to assume <r>Radius = 2*sigma</r
 This is the visually perceived radius of the "Gaussian Bell" and  the characteristic
 size of "SMOOTHING".
 
-    <r>After smoothing, only details remain that are larger than the Radius.</r>
+	<r>After smoothing, only details that exceed the Radius remain</r>
 
 Filter aperture or width (2nd parameter) measured in Radii, default = 3*R = 6*sigm .
 On "Center Point Demand" width rounds UP to nearest odd number: 3*8=24 --> 25 .
@@ -1200,7 +1250,7 @@ public class Spiral {
     }
   }
 }</f>
-To see result >  <r>gen3d spiral2.cfg | s3d -</r>  ! do not forget to press &lt;space>
+To see result >  <r>gen3d spiral2.cfg | s3d -</r>   !do not forget to press &lt;space>
 ________________________________________________________________________________________
 <a name='mul'></a>
     <o>mul  A  B  > File  !Matrix Multiplication (standard matrix operation)
@@ -1654,8 +1704,8 @@ You can add <r>TEXT, LINE or FIGURE( box, oval, romb )</r> anywhere in the windo
 - When manipulating a <r>WMF</r> image, the font will resize according to the image size.
 ________________________________________________________________________________________
 <a name='tif'></a><o>
-    command: tif File.tif [ Npro=99999 ]   !Show   one    tif file
-             tif  Config  [ Npro=99999 ]   !Show multiple tif files
+     command:  tif  File.tif  [Npro=99999]   !Show   one    tif file
+               tif  Config    [Npro=99999]   !Show multiple tif files
 </o>
 You can save a clip as a multi-pages tif-file by the command <a href="#s3F2"> s3d: &lt;F2> </a>.
 You can use multi-pages tif-files created in other programs ( ImageJ ...)
@@ -1684,9 +1734,63 @@ Show can be:
 
 Frames can be scrolled by rotating the <r>Mouse Wheel</r> or keys: <r>&lt;Left>/&lt;Right>, &lt;Home>/&lt;End></r>
 ________________________________________________________________________________________
+<a name='eeh'></a><o>
+     command:  ee  [text]   ! print to std.ERR current time & text
+</o>
+—an be used to mark execution steps and timing of a script or pipe-line.
+Since this command stop pipe-line, it is recommended to use it as 1st. or the last when
+joining commands to a pipe-line. And use symbol <r>'&'</r> after and before it !
+E.g. ><f> ee _______start <r>&</r> get Stk[#3,#5] <r>|</r> tt <r>&</r> ee _______ End.</f>
+
+Result looks like:<f>
+  02:44:12.715  _______start
+
+  ### p1 [ 3, 5 ]
+   337           326           310           294           283
+   339           334           318           295           273
+   336           321           328           312           292
+  02:44:13.330  _______ End.</f>
+________________________________________________________________________________________
+<a name='hhh'></a><o>
+     command:  hhh  Stk     !print to std.ERR Stk-Header & comments
+</o>
+Fast look at the Stack parameters( 1st. Frame header ):  name, size, format, byte order.
+On the std.ERR (usually console) print 1st. header of the Stack and  comments before it.
+All text, even without leading symbols: #|! , are comments( since no header yet ).
+
+	<r>  It is useful to describe the data before the 1st. header</r>
+Examples:
+  1. > gauss | hhh -    !print description of Gauss Blur Filter & header
+
+  2. In folder:  pik3d\demo\bell2  run command:> <f>gen3d bell2.gen > bell2</f>
+  3. gen3d  creates 3d-Stack  with comments before data( inserts generation config ).
+  4. Look at the header and comments:> hhh bell2
+
+Result looks like:<f>
+  gen3d: 2023.08.04 03:06:33         </f>// generation time<f>
+
+  base: 80 120 40                    </f>// gen.config: bell2.gen<f>
+  noise: 120
+  blur:  8
+
+  movi:
+  gnoise: 8
+    bell:
+          h: 130
+          r: 12
+          x: (1 9)(20 55)(40 71 )
+          y: (1 9)(20 60)(40 111)
+    bell:
+          h: 130
+          r: 12
+          x: (1 71 )(20 25)(40 9)
+          y: (1 111)(20 60)(40 9)
+
+  ### bell2.gen_1 [ 80, 120 ] F4 BE  </f>// 1st. Frame header
+________________________________________________________________________________________
 <a name='jj'></a><f>jj = "java-JAVA" Technology</f><o>
 
- command: jj  ...   !execute "single source-file":  .java or .jj
+     command: jj  ...   !execute "single source-file":  .java or .jj
 
  jj  File.java  [arg0 arg1 ...]      [/c]  !Execute "single source-file"
  jj  File[.jj]  [arg0 arg1 ...] [/s] [/c]  !---:--- .jj = "simple" JAVA
@@ -1754,7 +1858,7 @@ To create a stack for experiments( pik3d must be installed ):
   3. to see it   >  s3d Stk
 
 
-A more advanced way to use  "single source-file"  in the  <o>pik3d</o>  is to use  files<r>.jj</r> .
+A more advanced way to use "single source-file" in the <o>pik3d</o> is to use  <r>jj-technology</r>.
 File<r>.jj</r> contains only <r>subject part</r> of the program( marked with red curly braces ).
 Example 3, pik3d\usr\Reverse<r>.jj</r> (functionality is the same as previous example):<f>
 <r>{</r>
@@ -1789,7 +1893,9 @@ Example 3, pik3d\usr\Reverse<r>.jj</r> (functionality is the same as previous ex
    sin(a),cos(a),tg(a),  asin(a),acos(a),atg(a),  exp(a),ln(a),lg(a)
    constants:  pi=3.1415..., rad=180/pi
 
-If File<r>.jj</r> is located in folder: <r>pik3d\usr</r> - no need to specify full path, name enough.
+Folder: <r>pik3d/usr</r> is default repository for <r>jj</r> - no need to specify file path when run.
+By default file consider <r>.jj</r> and extension may be omitted.
+E.g. _> jj dbg123  _> jj dbg.java
 
 The general form of <b><r>code.jj</r></b> is :   (more examples: pik3d\usr\*.jj)
 <f>
@@ -1813,77 +1919,78 @@ and executed.  It takes less than 1 second.
           |  Before compilation <r>^</r> will be replaced back with <r>"</r> .           |
           |________________________________________________________________|
 
+Commands are delimited by <r>';'</r> (last before closed <r>"</r> may be omitted ).
 Examples( ^C/^V  to test jj, pik3d ):
-> jj "tt( max(.9, pi/2, pi-1), 4*pi, sin(-pi/4))"  !use of <r>'varargs'</r>
-> jj "for(int i=0;i&lt;9;i++) tt(<r>^</r> i=<r>^</r>+i)"            !print: i=0 \n i=1 \n i=2 ... \n i=8
+<f>
+> jj "tt( max(.9, pi/2, pi-1), 4*pi, sin(-pi/4))"   !use of <r>'varargs'</r>
+> jj "for(int i=0;i&lt;9;i++) tt(<r>^</r> i=<r>^</r>+i)"             !print: i=0\n i=1\n i=2...\n i=8
 > jj "hh(101,2); for(var x=0.;x<=20;x+=.2) tt(x,exp(-x/7)*sin(x))"| vics - 1 2
+</f>
 <div style='background:#333333; color:#00FF00;'>  Linux:
-$ jj <r>'</r>tt( max(.9, pi/2, pi-1), 4*pi, sin(-pi/4))<r>'</r>  !use of <r>'varargs'</r>
-$ jj <r>'</r>for(int i=0;i&lt;9;i++) tt(<r>"</r> i=<r>"</r>+i)<r>'</r>            !print: i=0 i=1 ... i=8
+$ jj <r>'</r>tt( max(.9, pi/2, pi-1), 4*pi, sin(-pi/4))<r>'</r>   !use of <r>'varargs'</r>
+$ jj <r>'</r>for(int i=0;i&lt;9;i++) tt(<r>"</r> i=<r>"</r>+i)<r>'</r>             !print: i=0 i=1 ... i=8
 $ jj <r>'</r>hh(101,2); for(var x=0.;x&lt;=20;x+=.2) tt(x,exp(-x/7)*sin(x))<r>'</r>| vics - 1 2</div>
-Since <o>pik3d 19.5.3</o> it is possible to use <r>Java options</r> in jj-command like:
-<r>--enable-preview, --source=20, --add-modules=jdk.incubator.vector ...</r>
-It is useful to test new features of Java (see: pik3d/usr/jep438.jj - Vector API):
-> jj --enable-preview --source=20 --add-modules=jdk.incubator.vector  jep438.jj /s
+<r>JAVA options</r> can be used with <r>jj-command</r>. It is useful to test new features of Java.
+Example( Vector API: pik3d/usr/jep438.jj ):
 
+<f>> jj  <r>--enable-preview  --source=20  --add-modules=jdk.incubator.vector</r>  jep438 </f>
+________________________________________________________________________________________
 <a name='pik'></a><o>
 		Most used pik.io methods
 
-Read/Write to standard streams:  <r>System.in/ System.out</r>,  static methods :</o>
+Read/Write to standard streams: <r>System.in/ System.out</r>, <u>static</u> methods:</o>
 <f>
-  void er1( String cmd, String[] arg, String help ) </f>// checking arg[] parameters
-       // If arg is empty or arg[0]=<r>"/?"</r>, then help is displayed and the program exits
+  double getdbl( String s ) </f>//get double value from String,if need int: <f>(int)getdbl(s)</f>
+                             //e.g.> <f>jj "tt( (int)getdbl(^-3^) )"
 
-  <f>float [][]   inKadr( String file ) </f>// read the 1st frame of the stack into <r>float [][]</r>
+  void er1( String cmd, String[] arg, String help ) </f>//checking arg[] parameters
+             //If arg is empty or arg[0]=<r>"/?"</r>, then help is displayed and program stop
 
-  <f>float [][][] inStk ( String file ) </f>// read stack into <r>float [][][]</r>
-  <f>double[][][] inStk8( String file ) </f>// read stack into <r>double[][][]</r>
+  <f>float [][]  inKadr ( String file ) </f> //read the <r>1st frame</r> of the stack into <r>float [][]</r>
+  <f>double[][]  inKadr8( String file ) </f> //read the <r>1st frame</r> of the stack into <r>double[][]</r>
 
-  <f>void ttStk ( float [][][] ff )</f>// stack output: <r>float [][][]</r>  in  <a href="#bin">bin.format F4 BE</a>
-  <f>void ttStk8( double[][][] dd )</f>// stack output: <r>double[][][]</r>  in  <a href="#bin">bin.format D8 BE</a>
+  <f>float [][][] inStk ( String file ) </f> //read stack into <r>float [][][]</r>
+  <f>double[][][] inStk8( String file ) </f> //read stack into <r>double[][][]</r>
 
-  <f>void tt( String s )  </f>//output string to stream: System.out
-  <f>void <r>ee</r>( String s )  </f>//output string to stream: <r>System.err</r>
+  <f>void tt( String s )  </f> //output string to stream: System.out
+  <f>void <r>ee</r>( String s )  </f> //output string to stream: <r>System.err</r>
+  <f>void tt( double... x)</f> //output to System.out double[](may be float): tt(1,.2f,9e9,-1)
+  <f>void <r>ee</r>( double... x)</f> //output to <r>System.err</r> ---:---:---:---:---:---
 
-  <f>void tt( double... x)</f>//output to System.out double[](may be float): tt(1,.2f,9e9,-1);
-  <f>void <r>ee</r>( double... x)</f>//output to <r>System.err</r> ---:---:---:---:---:---
-
-  <f>void ttKadr ( float [][] ff )  </f>// frame output: <r>float [][]</r>    in  <a href="#bin">bin.format F4 BE</a>
-  <f>void ttKadr8( double[][] dd )  </f>// frame output: <r>double[][]</r>    in  <a href="#bin">bin.format D8 BE</a>
-
-  <f>void ttKadr ( float [][] ff, String kName ) </f>// the same as previous with <f>Kadr Name</f>
-  <f>void ttKadr8( double[][] dd, String kName ) </f>
+  <f>void ttKadr( Object <r>F</r> ) </f>//<r>F</r>rame out: <r>float[][] or double[][]</r>, <a href="#bin">bin.format F4|D8 BE</a>
+  <f>void ttKadr( Object <r>F</r>, String name ) </f>//the same as previous with <f>Frame_Name</f>
+  <f>void ttStk ( Object <r>S</r> )</f> //<r>S</r>tack out: <r>float[][][] or double[][][]</r>, <a href="#bin">bin.format F4|D8 BE</a>
 
   <f>void clott()</f> // close/clean up pik.io resources, should <r>ALWAYS</r> be called at the end !
   If you use <a href="#jj">jj-Technology</a>, this call is already present !
 
 Frame is 2-dimensional array <r>frame    [ ii ][ jj ]</r>, e.g. 3-row  : <f>var s3 = frame[ 2 ];</f>
-Stack is 3-dimensional array <r>stk[ kk ][ ii ][ jj ]</r>, e.g. 5-frame: <f>var k5 = stk  [ 4 ];</f>
+Stack is 3-dimensional array <r>stk[ <u>kk</u> ][ ii ][ jj ]</r>, e.g. 5-frame: <f>var k5 = stk  [ 4 ];</f>
 You can use file names with stack number (see below): "A.dat(3)", "-(4)"
 
 If the stacks are small and there is enough memory to accommodate them entirely,
-the author recommends use these <o>static methods</o> - don't use reader (see below).
+it is recommended to use these  <o><u>static</u> methods</o>.
 
-<o>Read Frame, instance methods :</o>
+<o>Read Frame, <u>instance</u> methods:</o>
 
   <f>io reader = new io( String file )</f> // constructor: create a reader of the File,
-                                     // if <r>file ="-"</r>, then reading from <r>System.in</r>.
+                                      // if <r>file ="-"</r>, then reading from <r>System.in</r>.
 If the file/stream contains multiple stacks separated by lines <r>### &lt;eos></r> (End Of Stack),
 then the filename might look like this: <r>Stk(3), -(4)</r>. Last means: 4th stack in <r>System.in</r>
 
-  <f>float [][]   reader.inKadr () </f>// read frame into <r>float [][]</r>   - 2d-array ;
-  <f>double[][]   reader.inKadr8() </f>// read frame into <r>double[][]</r>   - 2d-array ;
-                                 // Frame can be in any format:<a href="#dat"> Text,I2,F4,D8<a>
-  <f>float [][][] reader.inStk () </f> // read stack into <r>float [][][]</r> - 3d-array ;
-  <f>double[][][] reader.inStk8() </f> // read stack into <r>double[][][]</r> - 3d-array ;
+  <f>float [][]   reader.inKadr () </f> //read frame into <r>float [][]</r>   - 2d-array ;
+  <f>double[][]   reader.inKadr8() </f> //read frame into <r>double[][]</r>   - 2d-array ;
+                                  // Frame can be in any format:<a href="#dat"> Text,I2,F4,D8<a>
+  <f>float [][][] reader.inStk () </f>  //read stack into <r>float [][][]</r> - 3d-array ;
+  <f>double[][][] reader.inStk8() </f>  //read stack into <r>double[][][]</r> - 3d-array ;
 
 The reader reads frame by frame sequentially. If it encounters end of file or
 <r>### &lt;eos></r> (End Of Stack), then the methods <f>inKadr(), inKadr8()</f> return null,
 and <f>inStk(), inStk8()</f> ends reading and returns a 3d array. In the case of several
 stacks in the file/stream, the reader is ready to read the next stack.
 
-  <f>void reader.skipStk( int n ) </f> // Skip n stacks.
-  <f>void reader.reset() </f>          // "rewind" file/ input stream to the beginning.
+  <f>void reader.skipStk( int n ) </f>  //Skip n stacks.
+  <f>void reader.reset() </f>           //"rewind" file/ input stream to the beginning.
 
 reader does not need to be closed, readers are closed at the end by the method: <f>clott()</f>.
 A package to read/write  ###-files  in  <r>PYTHON</r>:  <r>kadr.py</r>  - pik3d\ext\###_PYTHON.zip .
