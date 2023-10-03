@@ -65,7 +65,7 @@ From command to command, data is transferred in the form of ###-format files
 or by means of "pipe" (it can reduce disk usage and increase performance).
 
 The framework can be installed on Windows 7, 10, Linux (tested in Mint 21.1).
-Current version 19.5 is compiled with JAVA-20 using javaFX .
+Current version 19.5.7 is compiled with JAVA-21 using javaFX .
 
 Description of the framework, formats and install procedure in the file:
 pik3d_DOC.html (contained in the install archive: pik3d.zip).
@@ -78,7 +78,7 @@ In addition CSV-file can be convertrd to binary ###-format file.
 To download and install:
   - at the top of this page click file: pik3d.zip or pik3d_Linux.zip;
   - on the opened page on the right select download( ~ 1MB );
-  - unpack install archive in some folder;
+  - unpack archive in some folder;
   - click the file: pik3d_DOC.html - it should open by default browser;
   - read the section "INSTALL pik3d";
   - after install, scripts(_run.cmd) in demo folders are available to execute.

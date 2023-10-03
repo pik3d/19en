@@ -40,3 +40,9 @@ v.19.5.6,  06.08.2023
 
     - fixed some methods in libraries: pik.jar and cmd.jar ;
     - improoved description of some features in Help: pik3d_DOC.html .
+
+v.19.5.7,  03.10.2023
+    - correct and recompile Framework and jj-command with JAVA-21 ;
+	- fix error (non stop warning timer) in Linux version of commands: vic, vics ;
+	- improve some methods in pik.mat.java, pik.io.java ;
+	- fix some bugs in pik3d_DOC.html .
