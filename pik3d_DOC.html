@@ -15,7 +15,7 @@ x{background:#333333; color:#00FF00; font-size:13px; line-height:13px; font-fami
 <h5><pre><a name='s3d'><f>pik3d - framework for processing and 3d-display of matrices and their sequences
         Help has standard HTML navigation: &lt;Home>, &lt;End>, &lt;Alt+Left>, <a href="#ins">links</a> ...
 </f><a name='ogl'></a>
-<a href='#fwk'>DESCRIPTION of&nbsp; pik3d &nbsp;v.19.5.6</a>
+<a href='#fwk'>DESCRIPTION of&nbsp; pik3d &nbsp;v.19.5.7</a>
 <a href="#ins">INSTALL pik3d </a>
 <a href="#dat">###-format of the data: FRAME, STACK</a>
 <a href="#cmd">COMMANDS</a>
@@ -465,24 +465,24 @@ To denote standard stream symbol <r>'-'</r> id used. In case of several Stacks i
   cmd1 a b <r>|</r> cmd2 c <r>-</r> <r>|</r> cmd3 d <r>-</r> d(3) <r>-(2)</r> ... <r>|</r> cmdN <r>-</r> p <r>></r> File
 
 The framework can be installed on Windows 7, 10, Linux (tested in Mint 21.1).
-Version 19.5 is compiled with JAVA-20 using javaFX.
+Version 19.5.7 is compiled with JAVA-21 using javaFX.
 ________________________________________________________________________________________
 <a name='ins'></a>
 				<o>INSTALL pik3d
 </o>
     <x> Linux specific steps will appear like this.</x>
 
- 1. Download <r>Open JDK+FX( Full ) v.20</r> installation zip-archive for Windows( x86 64bit ).
+ 1. Download <r>Open JDK+FX( Full ) v.21</r> installation zip-archive for Windows( x86 64bit ).
     Recommended builds (follow one of the links):
 
-       <a href="https://www.azul.com/downloads/?version=java-20-sts&os=windows&architecture=x86-64-bit&package=jdk-fx#zulu"
->Azul:          JDK  FX  </a>   ! Java <r>20</r>, x86 64-bit, <r>JDK FX !</r>
-       <a href="https://axiomjdk.ru/pages/downloads/#/java-20-current"
+       <a href="https://www.azul.com/downloads/?version=java-21-sts&os=windows&architecture=x86-64-bit&package=jdk-fx#zulu"
+>Azul:          JDK  FX  </a>   ! Java <r>21</r>, x86 64-bit, <r>JDK FX !</r>
+       <a href="https://axiomjdk.ru/pages/downloads/#/java-21-current"
 >BellSoft(RU):  Full JDK </a>
 
     Since the framework does not require a full JAVA installation ( <r>only unzip</r> ),
     builds can be easily changed. If another version of JAVA is installed on the system,
-    the framework with JAVA-20 will not affect it in any way.
+    the framework with JAVA-21 will not affect it in any way.
 
  2. Expand JAVA archive, for example to: D:\jdk <x> ~/jdk </x>. There should be a folder:
     D:\jdk\bin  <x> ~/jdk/bin </x>  with  <r>java.exe</r>.  It will be pointed in Launchers config.
@@ -1800,14 +1800,14 @@ ________________________________________________________________________________
 <r>       ATTENTION: if file contains NON-ENGLISH characters, ENCODING must be UTF-8 !!!
 </r>
 Modern JAVA supports direct execution of "single source-file". In general case, you need
-to specify path to JAVA and class-path. Since  these parameters are already set in the
-framework, no need to point them in <o>command jj</o>. Short JAVA programs  may be used
-to generate data in the <a href="#dat">###-format</a>  or  for simple data processing.
+to specify JVM parameters and class-path. Since  these parameters are already set in the
+framework, no need to point them in command <o>jj</o>.  Small programs may be used to generate
+data in the <a href="#dat">###-format</a>  or  for simple data processing.
 
-Example 1, minMAJ.java: <r>"minor MAJOR"</r>:
+Example 1, minMAJ.java: "<n>minor</n> <r>MAJOR</r>":
   Chords  =  additions of three harmonics with frequencies:
-    minor chord:  1, <r>6/5</r>, 3/2  - tonic, minor third, quint
-    MAJOR chord:  1, <r>5/4</r>, 3/2  - tonic, MAJOR third, quint
+    <n>minor</n> chord:  1, <n>6/5</n>, 3/2  - tonic, <n>minor</n> third, quint
+    <r>MAJOR</r> chord:  1, <r>5/4</r>, 3/2  - tonic, <r>MAJOR</r> third, quint
 <f>
 package usr;
 public class minMAJ {
@@ -1824,7 +1824,7 @@ public class minMAJ {
 }</f>
 > jj minMAJ.java                                                 !output to the console
 > jj minMAJ.java /c                                              !only compile
-> jj minMAJ.java | vics - 1 2 3.8                                !simple display
+> jj minMAJ.java | vics - 1 2 3,8                                !simple display
 > jj minMAJ.java | vics - 1 "2 1 0 minor_: 1, 6/5, 3/2" "3 8 0 MAJOR: 1, 5/4, 3/2"
 <f>By the way, pay attention to the failure of the frequency for the minor on 5th
 and 15th periods - this is the reason why the minor sounds sad.</f>
@@ -1836,7 +1836,7 @@ Example 2, Reverse.java: <r>"Stack with Frames in Reverse order"</r>:
 import java.util.*;
 import pik.*;
 
-public class Reverse extends io implements jjstd {
+public class Reverse extends io {
   public static void main( String[] arg ){
     try{ new Reverse(arg); clott();}
     catch( Exception e ){ e.printStackTrace();}
@@ -1895,7 +1895,7 @@ Example 3, pik3d\usr\Reverse<r>.jj</r> (functionality is the same as previous ex
 
 Folder: <r>pik3d/usr</r> is default repository for <r>jj</r> - no need to specify file path when run.
 By default file consider <r>.jj</r> and extension may be omitted.
-E.g. _> jj dbg123  _> jj dbg.java
+E.g. > <f>jj pro123</f>  ; > <f>jj dbg.java</f>
 
 The general form of <b><r>code.jj</r></b> is :   (more examples: pik3d\usr\*.jj)
 <f>
@@ -1906,6 +1906,16 @@ The general form of <b><r>code.jj</r></b> is :   (more examples: pik3d\usr\*.jj)
   <r>}</r>
   [ methods,  classes(not public),  static ... ]</f>
 <a name='jc'></a>
+Example 1(above) in <r>jj-form</r>, file: minMAJ.jj <f>
+<r>{</r>
+   hh( 201, 3 );                                   // ### Header
+   for(int i=0; i&lt;=200; i++) {
+      var t = i*( 2*pi/10 );                       // 10 points/period
+      var k = sin( t ) + sin( t*3/2 );             // tonic + quint
+      tt( i/10., k+sin( t*6/5 ), k+sin( t*5/4 ));  // t  minor  MAJOR
+   }
+<r>}</r></f>
+
 An additional very handy feature of <r>jj - Technology</r> is to execute the sequence of JAVA
 commands directly from the command line. In this case  file: Noname.java  is produced
 and executed.  It takes less than 1 second.
@@ -1933,7 +1943,7 @@ $ jj <r>'</r>hh(101,2); for(var x=0.;x&lt;=20;x+=.2) tt(x,exp(-x/7)*sin(x))<r>'<
 <r>JAVA options</r> can be used with <r>jj-command</r>. It is useful to test new features of Java.
 Example( Vector API: pik3d/usr/jep438.jj ):
 
-<f>> jj  <r>--enable-preview  --source=20  --add-modules=jdk.incubator.vector</r>  jep438 </f>
+<f>> jj  <r>--enable-preview  --source=21  --add-modules=jdk.incubator.vector</r>  jep438 </f>
 ________________________________________________________________________________________
 <a name='pik'></a><o>
 		Most used pik.io methods
