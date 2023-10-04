@@ -1,6 +1,3 @@
-.md pre.plaintext {
-    line-height: 1.3em;
-}
 ### v.19.5.4,  14.07.2023 :
   - fix known bugs ;
   - commands: vic[s], lss, hist  commad keys:
