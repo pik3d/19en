@@ -1,4 +1,4 @@
-## v.19.5.4,  14.07.2023 :
+### v.19.5.4,  14.07.2023 :
   - fix known bugs ;
   - commands: vic[s], lss, hist  commad keys:
     - syntax of window position/size: /x=v /y=v /w=v /h=v ;
@@ -14,10 +14,10 @@
     - most used pik.io methods: added simple graphics methods ;
     - vic-cmd: new functionality: Log.Axes ;
 
-## v.19.5.5, 17.07.2023 : 
+### v.19.5.5, 17.07.2023 : 
   - Fix bug in 2d-graph: show title with coordinates always visible .
 
-## v.19.5.6, 06.08.2023 :
+### v.19.5.6, 06.08.2023 :
   - added new helper commands:  ee [text] !time text  and  hhh Stk !Header of Stack ;
 
   - changed Stack creation: stk ii [jj=1 [kk=1]] [v=&lt;value>] [D8] ;
@@ -43,7 +43,7 @@
   - fixed some methods in libraries: pik.jar and cmd.jar ;
   - improoved description of some features in Help: pik3d_DOC.html .
 
-## v.19.5.7, 03.10.2023 :
+### v.19.5.7, 03.10.2023 :
   - correct and recompile Framework and jj-command with JAVA-21 ;
   - fix error (non stop warning timer) in Linux version of commands: vic, vics ;
   - improve some methods in pik.mat.java, pik.io.java ;
