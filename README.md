@@ -1,5 +1,5 @@
 ![head](/assets/images/830x290.jpg)
-Framework pik3d v.19.5
+Framework pik3d v.20.0
 
     PROCESSING AND 3D-DISPLAY OF MATRICES/FRAMES AND THEIR SEQUENCES
 
@@ -34,6 +34,9 @@ constitutes the functionality of the command: s3d -"Surface-3D".
 You can view the stack in the "frame by frame" mode, like a video clip.
 During clip you can stop it and change the angles of view, colors, lighting.
 
+The functionality of version 20 is extended by Eigen/Singular Values Decomposition of Matrix
+and Regression analyses based on "The Apache Commons Mathematics Library".
+
 The framework has simple but effective 2D-graphics tools for displaying
 columns and rows of matrices. Simple graph-editor can add text, lines, figures to chart.
 2D-graphics can be saved in vector format: WMF - "Windows Meta File".
@@ -63,9 +66,10 @@ To read ###-format in the ImageJ editor, ext/###_Reader_ImageJ.jar plugin is imp
 In a simple case, the processing program is a script (.bat, .cmd ...).
 From command to command, data is transferred in the form of ###-format files
 or by means of "pipe" (it can reduce disk usage and increase performance).
+Any command can save the pipe-output to the file for further processing( add to command @file).
 
 The framework can be installed on Windows 7, 10, Linux (tested in Mint 21.1).
-Current version 19.5.7 is compiled with JAVA-21 using javaFX .
+Current version 20.0 is compiled with JAVA-21 using javaFX .
 
 Description of the framework, formats and install procedure in the file:
 pik3d_DOC.html (contained in the install archive: pik3d.zip).
@@ -82,6 +86,9 @@ To download and install:
   - click the file: pik3d_DOC.html - it should open by default browser;
   - read the section "INSTALL pik3d";
   - after install, scripts(_run.cmd) in demo folders are available to execute.
+  - if you plane to use Eigen/Singular Values Decomposition, you need to dowload
+    <a href='https://commons.apache.org/proper/commons-mat'>The Apache Commons Mathematics Library(~2MB)</a>
+	and place .jar-file to the  pik3d/lib  folder.	
 
 <p>author: K.A. Ilyashenko, e-mail: kilyashenko@gmail.com</p>
 Error messages, comments, suggestions  are  welcome.
