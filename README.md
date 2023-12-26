@@ -87,8 +87,8 @@ To download and install:
   - read the section "INSTALL pik3d";
   - after install, scripts(_run.cmd) in demo folders are available to execute.
   - if you plane to use Eigen/Singular Values Decomposition, you need to dowload
-    <a href='https://commons.apache.org/proper/commons-mat'>The Apache Commons Mathematics Library(~2MB)</a>
-	and place .jar-file to the  pik3d/lib  folder.	
+    <a href='https://commons.apache.org/proper/commons-math'>The Apache Commons Mathematics Library(~2MB)</a>
+	and place .jar file to the  pik3d/lib  folder.	
 
 <p>author: K.A. Ilyashenko, e-mail: kilyashenko@gmail.com</p>
 Error messages, comments, suggestions  are  welcome.
