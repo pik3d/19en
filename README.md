@@ -35,7 +35,7 @@ You can view the stack in the "frame by frame" mode, like a video clip.
 During clip you can stop it and change the angles of view, colors, lighting.
 
 The functionality of version 20 is extended by Eigen/Singular Values Decomposition of Matrix
-and Regression analyses based on "The Apache Commons Mathematics Library".
+and Regression analyses based on <a href='https://commons.apache.org/proper/commons-math/'>"The Apache Commons Mathematics Library"</a>.
 
 The framework has simple but effective 2D-graphics tools for displaying
 columns and rows of matrices. Simple graph-editor can add text, lines, figures to chart.
