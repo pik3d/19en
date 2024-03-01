@@ -4,24 +4,25 @@
 <style><!--
 body {background:white; color:Black; font-size:14px; line-height:13px; font-family:'Monospace'}
 a:link, a:visited {color:blue; text-decoration:none;} a{font-weight:bold;}
-o{font-weight:bold; Color:#a300a3; font-size:14px; font-style:italic;}
+o{font-weight:bold; Color:#8b218b; font-size:14px; font-style:italic;}
 r{Color:RED;font-weight:bold;}
 g{Color:#3db84e;font-weight:bold;}
 n{Color:#0050ff;font-weight:bold;}
-m{Color:#777777}
+m{Color:#8b218b}
 f{font-weight:normal; Color:#0047b3; font-size:12px; font-style:italic;}
 x{background:#333333; color:#00FF00; font-size:13px; line-height:13px; font-family:'Courier'; font-weight: normal;}
 --></style></head><body>
 
 <h5><pre><a name='s3d'><f>pik3d - framework for processing and 3d-display of matrices and their sequences
-        Help has standard HTML navigation: &lt;Home>, &lt;End>, &lt;Alt+Left>, <a href="#ins">links</a> ...
+        Help has standard HTML navigation:  &lt;Home>,  &lt;End>,  <a href="#ins">links</a>
 </f><a name='ogl'></a>
-<a href='#fwk'>DESCRIPTION of&nbsp; pik3d &nbsp;v.20.0</a>
+<a href='#fwk'>DESCRIPTION of&nbsp; pik3d &nbsp;v.21.0</a>
 <a href="#ins">INSTALL pik3d </a>
 <a href="#dat">###-format of the data: FRAME, STACK</a>
 <a href="#cmd">COMMANDS</a>
 
   <a href='#sss'>s3d -"Surface-3D" </a>                           ! <r>3D</r>-display of the Stack
+  <a href='#b3d'>b3d -"Body-3D" </a>                              ! <r>3D</r>-display of the Body or Figure
 
 Stack: create, view, info:
   <a href='#40' >stk  ii  [ jj=1 [kk=1]]  [v=&lt;value>]  [D8]</a>   ! Create new <r>St</r>ac<r>k</r>
@@ -85,7 +86,7 @@ Element-wise Calculations:
   <a href="#gra">Use of 2D-graphics </a>
   <a href="#tif">tif  File.tif | Config  [Npro=99999] </a>        ! Show <r>.TIF</r>-files/clip
 
-<a href="#jj" >jj  File[.jj] or FIle.java     [/s] [/c] </a>      ! "<r>j</r>ava-<r>J</r>AVA" or <r>simple JAVA</r> Technology
+<a href="#jj" >jj  File[.jj] or FIle.java     [/s] [/c] </a>      ! <r>"java-JAVA"</r> or <m>simple JAVA</m> Technology
 <a href="#jc" >jj "jcmd1; jcmd2; jcmd3 ... "  [/s] [/c] </a>      ! Execute several JAVA commands
 
 <a href="#pik">Most used pik.io methods </a>
@@ -159,25 +160,25 @@ to view for fine tuning. This can be done by calling the config: <o>^C</o> and e
 
 > s3d [ Stk [ config | , [ main [ delaySec ]]]]
 
-> s3d                              # a prompt to select a stack will be displayed
-> s3d   Stk                        # display Stack: Stk
-> s3d   Stk   config               # display Stack: Stk with config. of the 3D-scene
-                                     By default config. file has extention: .s3d,
-                                     if config. is absent, default config. is used
-> s3d   Stk   config       <r>main</r>    # it is possible to run several <r>s3d</r>, all follow up
-                                     windows will be synchronized with this,
-                                     i.e.  will show  frame number  as main.
-> s3d   Stk            <r>,</r>   main    # <r>default config.</r> for main.
+> s3d                                # a prompt to select a stack will be displayed
+> s3d   Stk                          # display Stack: Stk
+> s3d   Stk   config                 # display Stack: Stk with config. of the 3D-scene
+                                     # By default config. file has extention: .s3d,
+                                     # if config. is absent, default config. is used
+> s3d   Stk   config       <r>main</r>      # it is possible to run several <r>s3d</r>, all follow up
+                                     # windows will be synchronized with this,
+                                     # i.e.  will show  frame number  as main.
+> s3d   Stk            <r>,</r>   main      # <r>default config.</r> for main.
 > s3d   Stk   config       main   <r>delaySec</r>    # delayed start.
 
 Example( start 4 synchronized s3d-windows ):
   It is useful to start several windows with synchronization from <r>.bat</r> or <r>.cmd</r> script
-<f>
-  s3d  q      1  <r>main</r>   3    # Stack q    , config=1.s3d, "main" with delay = 3 sec.
-  s3d  qAR2   2              # Stack qAR2 , config=2.s3d
-  s3d  qmd    3              # Stack qmd  , config=3.s3d
-  s3d  qmd15  4              # Stack qmd15, config=4.s3d
-</f>
+<n>
+  s3d  q      <r>1</r>   <r>main   3</r>   # Stack q    , config=<r>1.s3d</r>, <r>"main"</r> with delay = <r>3</r> sec.
+  s3d  qAR2   <r>2</r>              # Stack qAR2 , config=<r>2.s3d</r>
+  s3d  qmd    <r>3</r>              # Stack qmd  , config=<r>3.s3d</r>
+  s3d  qmd15  <r>4</r>              # Stack qmd15, config=<r>4.s3d</r>
+</n>
 	<o>Shortening and denotation used in Help:
 </o>
 <r>^Êey  = &lt;Ctrl + Key></r> - simultaneously pressed &lt;Ctrl> and  &lt;Key>
@@ -222,12 +223,12 @@ Example( start 4 synchronized s3d-windows ):
 
 <r>^A -"Axis"</r>- ON/ OFF Axis display.
 <a name='cob'></a>
-<r>^O -"Z-axis: min/MAX"</r> - call dialog to define parameters of the vertical Z-axis.
-     If the checkbox: "Automatic" is checked - min/MAX are found from the Stack data.
+<r>^X -"MAX/min of Z-axis"</r> - call dialog to define parameters of the vertical Z-axis.
+     If the checkbox: "Automatic" is checked - MAX/min are found from the Stack data.
      Clear it by pressing checkbox or <r>&lt;Tab></r> - transfer focus to the next component.
      Sliders can be moved by Mouse or Keyboard: <r>&lt;Left>,&lt;Right>, &lt;Home>,&lt;End></r>.
      While changing value by slider image changes immediately. It gives opportunity
-     to do fine adjustment of min/MAX and surface colors.
+     to do fine adjustment of MAX/min and surface colors.
      value can be entered from the keyboard. To activate new value press &lt;Enter>.
      Image will be updated. If <r>&lt;Esc></r> is pressed, the dialog closes and the frame
      is returned to its original state.
@@ -239,24 +240,29 @@ Example( start 4 synchronized s3d-windows ):
      At the end of the dialog, you need to click the button: <r>Save</r>. In case of <r>&lt;Esc></r>
      the dialog closes and the frame is returned to its original state.
 
-     <r>DURING DIALOGUES: ^O and ^B  angles can be changed and ^A, ^D, ^M can be used</r>
+     <r>DURING DIALOGUES: ^X, ^B, ^O  angles can be changed  and  ^A, ^D, ^M  can be used</r>
 
-<r>&lt;Ctrl+F2></r> -Save Stack after ^B,^O (data can be changed by min/MAX cutting and smoothing)
+<r>&lt;Ctrl+F2></r> -Save Stack after ^B,^X (data can be changed by MAX/min cutting and smoothing)
      Prompt to select Stack name. New Stack is saved in <a href='#bin'>binary ###-format F4 BE</a>.
 
-  Example (contains useful tricks for working with <r>^O and ^B</r> ):
+  Example (contains useful tricks for working with <r>^X, ^B, ^O</r> ):
   Go to folder: pik3d\demo\bell2, start: _run.cmd, stop at frame 10-14 &lt;space>.
   Press the buttons in sequence:
 
-  <r>^B</r> &lt;Tab> <r>2</r> &lt;Enter> &lt;Enter>
-  <r>^O</r> &lt;Tab> &lt;Tab> <r>12</r> &lt;Tab> &lt;Tab> <r>-6</r> &lt;Enter> &lt;Enter>
+  <n>^B</n> &lt;Tab> <n>2</n> &lt;Enter> &lt;Enter>
+  <n>^X</n> &lt;Tab> &lt;Tab> <n>12</n> &lt;Tab> &lt;Tab> <n>-6</n> &lt;Enter> &lt;Enter>
 
-  From the slider to slider in ^O dialog  you can navigate  using the arrows: UP/DOWN.
+  From the slider to slider in <n>^X</n> dialog  you can navigate  using the arrows: UP/DOWN.
 
-  <r>^B</r>
-     <r>&lt;arrow RIGHT></r>  press and hold until the picture stops.
-     <r>&lt;arrow LEFT> </r>  press and hold until the picture stops.
-  <r>&lt;Esc></r>
+  <n>^B</n>                 ! <r>Blur</r> changing:
+     <n>&lt;arrow RIGHT></n>   ! press and hold until the picture stops.
+     <n>&lt;arrow LEFT> </n>   ! press and hold until you reach a convenient Blur.
+  <n>&lt;Esc></n>
+
+  <n>^O</n>                 ! <r>Opacity</r> changing:
+     <n>&lt;arrow LEFT> </n>   ! press and hold until Surface disappears.
+     <n>&lt;arrow RIGHT></n>   ! press and hold until you reach a convenient Opacity.
+  <n>&lt;Enter></n>
 <a name='cf'></a>
 	<o>menu>  Configuration</o>
 
@@ -285,44 +291,46 @@ Config.file can be uploaded in 3 ways:
        It is useful when viewing multiple stacks sequentially  or  one stack in several
        configurations( palettes, angles, blur ... ).
 
-List of config. parameters [default values] - <r>how to set/ call</r> :
+List of <n>config. parameters [default values]</n> - <r>how to set/ call</r> :
 
-  max: [from Stack]  - maximum value of the vertical axis - <r>^O</r> ;
-  min: [from Stack]  - minimum value of the vertical axis - <r>^O</r> ;
+  <n>max: [from Stack]</n>  - maximum value of the vertical axis - <r>^X</r> ;
+  <n>min: [from Stack]</n>  - minimum value of the vertical axis - <r>^X</r> ;
 
-  x:       [ 612]  - screen x-coordinate of the upper left corner of s3d-window in pix.;
-  y:       [ 222]  - screen y-coordinate of the upper left corner of s3d-window in pix.;
-  w:       [ 640]  - window width  in pixels ;
-  h:       [ 520]  - window height in pixels ;
-  sx:      [  0 ]  - horizontal shift of the scene in the window - <r>&lt;Shift + Left/Right></r>;
-  sy:      [  0 ]  - vertical   shift of the scene in the window - <r>&lt;Shift + Up/Dn></r> ;
+  <n>x:       [ 612]</n>  - screen x-coordinate of the upper left corner of s3d-window in pix.;
+  <n>y:       [ 222]</n>  - screen y-coordinate of the upper left corner of s3d-window in pix.;
+  <n>w:       [ 640]</n>  - window width  in pixels ;
+  <n>h:       [ 520]</n>  - window height in pixels ;
+  <n>sx:      [  0 ]</n>  - horizontal shift of the scene in the window - <r>&lt;Shift + Left/Right></r>;
+  <n>sy:      [  0 ]</n>  - vertical   shift of the scene in the window - <r>&lt;Shift + Up/Dn></r> ;
 
-  K:       [  1 ]  - scene  size   increase - <r>^+ / ^-</r> ( +/- ~10% );
-  Kh:      [  1 ]  - vertical axis increase - <r>&lt;Shift + H / L></r> (Higher/Lower) ;
+  <n>K:       [  1 ]</n>  - scene  size   increase - <r>^+ / ^-</r> ( +/- ~10% );
+  <n>Kh:      [  1 ]</n>  - vertical axis increase - <r>&lt;Shift + H / L></r> (Higher/Lower) ;
 
-  a[deg]:  [ 20 ]  - rotate the scene around   a vertical   axis ("hour" angle );
-  b[deg]:  [ 25 ]  - rotate the scene around the horizontal axis ("declination");
+  <n>a[deg]:  [ 20 ]</n>  - rotate the scene around   a vertical   axis ("hour" angle );
+  <n>b[deg]:  [ 25 ]</n>  - rotate the scene around the horizontal axis ("declination");
 
-  aLight:  [-60 ]  - "hour"angle of the lighting( around   a vert. axis) - <r>^Left/^Right</r>;
-  bLight:  [ 30 ]  - declination of the lighting( around the horiz.axis) - <r>^Up / ^Down </r>;
+  <n>aLight:  [-60 ]</n>  - "hour"angle of the lighting( around   a vert. axis) - <r>^Left/^Right</r>;
+  <n>bLight:  [ 30 ]</n>  - declination of the lighting( around the horiz.axis) - <r>^Up / ^Down </r>;
 
-  blur:    [  0 ]  - blur/ smoothing   - <r>^B</r> ;
-  Ksec:    [ 10 ]  - Frames per second - <r>^K</r> ;
+  <n>blur:    [  0 ]</n>  - blur/ smoothing   - <r>^B</r> ;
+  <n>Ksec:    [ 10 ]</n>  - Frames per second - <r>^K</r> ;
 
-  Dn:      [  0 ]  - mode: "Map Down"  - <r>^D</r> ;
-  Axis:    [  1 ]  - mode: "show Axes" - <r>^A</r> ;
-  Map:     [  0 ]  - mode: "Map Only"  - <r>^M</r> ;
+  <n>Dn:      [  0 ]</n>  - mode: "Map Down"  - <r>^D</r> ;
+  <n>Axis:    [  1 ]</n>  - mode: "show Axes" - <r>^A</r> ;
+  <n>Map:     [  0 ]</n>  - mode: "Map Only"  - <r>^M</r> ;
 
-  Fon:     R G B   - window background color: def.[ 242 242 242 ] - <r>^9</r> ;
-  Text: h  R G B a - Details Font:  size,  Color(R G B),  Opacity(from 0 up to 1) - <r>^8</r> ;
-                          default:   14     99  99  99     1 .
+  <n>Back:    RRGGBB</n>  - window <r>Back</r>ground Color: default: f2f2f2     - <r>^9</r> ;
+  <n>Text: h  RRGGBB[_op]</n> - <r>Text</r> of Details:  font  Color [_Opacity] - <r>^8</r> ;
+                         default:           14   636363  Opacity =100% ;
+                         In <r>^8 -Dialog</r>  Opacity  can be selected in "Custom Color..."
 
-  Pal:  [null]     - file "Palette"    - <r>^P</r> - prompt  to select file ;
-  Data: [null]     - file "Details"    - <r>^7</r> - prompt  to select file ;
-  Line: [null] [0] - file "Lines", 0   - <r>^1</r> - prompt  to select file ;
-                                       - <r>^2</r> - ON/ OFF display( default=0 );
+  <n>Opac: [100%]</n>     - "Opacity"         - <r>^O</r> - dialog  to select <r>Opacity of Surface</r> ;
+  <n>Pal:  [null]</n>     - file "Palette"    - <r>^P</r> - prompt  to select file ;
+  <n>Data: [null]</n>     - file "Details"    - <r>^7</r> - prompt  to select file ;
+  <n>Line: [null]</n> <r>[0]</r> - file "Lines"      - <r>^1</r> - prompt  to select file ;
+                                       - <r>^2</r> - ON/ OFF <r>Lines Display</r>( default=0 );
 
-  Next: [Stk=current(,)] [Cfg=current] - Next Stack and config. - <r>^N</r> (demo\lines\*.s3d).
+  <n>Next: [Stk=current(,)] [Cfg=current]</n> - Next Stack and config. - <r>^N</r> (demo\lines\*.s3d).
 <a name='pp'></a>
 	<o>menu>   Stack,  Details,  Lines</o>
 
@@ -345,33 +353,34 @@ List of config. parameters [default values] - <r>how to set/ call</r> :
      Points 3D-lines contains 3 coordinates( X,Y,Z-Vertical). Only fragments of 3D-lines
      which are inside the axes box will be displayed.
 
-     Line coordinates are specified in <a href='#dat'>text ###-format</a>.
+     Line coordinates are specified in files with <a href='#dat'>###-format</a> ( see demo\lines\*.lin ).
      The number of columns = 2 or 3 corresponds to 2D or 3D-Line.
      The number of rows = the number of the Line points(may be =1 -sphere is displayed).
      Point coordinates are NOT required to be integer( may contain decimal point ).
 
      The header contains <r>2 additional parameters</r>:
-         <r>c=RRGGBB</r> - color  in  hexadecimal  format, default: c=0 - BLACK;
-         <r>w=N_pix </r> - Line width/ diameter in pixels, default: w=1 .
+         <r>c=RRGGBB</r>[<r>_op</r>] - Color in hexadecimal format and may be Opacity[%],
+                         default: c=0 -BLACK, Opacity=100% ;
+         <r>w=N_pix </r>      - Line Width/ diameter in pixels, default: w=1 .
 
-Examples:<f>
-  ### 3D-Rect.Arc[ 4, 3 ] w=<r>17.5</r> c=99ffcc
+Examples:<n>
+  ### 3D-Rect.Arc[ 4, 3 ] <r>w=17.5 c=99ffcc</r>  !Width=17.5p, Color=99ffcc, opacity=100%
     40 100 180
     40 20  500
     20 20  500
     20 100 180
 
-  ### 3D-Sphere[ <r>1,</r> 3 ] C=ff9999 w=60
+  ### 3D-Sphere[ <r>1,</r> 3 ] <r>C=ff9999_30 w=60</r>   !<r>Sphere:</r> diameter=60p, opacity=30%
     27 57 430
 
-  ### 2D-Rectangle[ 5, <r>2</r> ]  ! <r>by default: c=0 w=1</r>
+  ### <r>2D</r>-Rectangle[ 5, <r>2</r> ]                 !default: c=0, w=1, opacity=100%
     50   90
     50  107
     12  107
     12   90
     50   90
-</f>
-<r>^2</r> - ON/ OFF all( 2D,3D ) Lines Display in all frames.
+</n>
+<r>^2</r> - ON/ OFF all( 2D,3D ) <r>Lines Display</r> in all frames.
 
 With 2D-lines, you can make additional markup of the "Map", for example:
 trajectories, coordinate grids, defining boundaries, zoning ...
@@ -393,7 +402,10 @@ Moving Sections by arrow keys :
 <a name='pal'></a>
 	<o>menu>  Colors</o>
 
-<r>^P -Load Palette"</r>, prompt to select a Palette file( default extantion <r>.pal</r> ).
+<r>^O -"Opacity of Surface"</r>, opens the dialog to select Opacity[%] -"lack of transparency".
+     If Opacity=0, it means full transparency, i.e. surface is not visible.
+
+<r>^P -"Load Palette"</r>, prompt to select a Palette file( default extantion <r>.pal</r> ).
 
 "Palette"- a Set of Colors which define the color of the element,depending on the value.
 Specified by a file in the <a href='#dat'> ###-format </a> and  consists of strings that
@@ -409,7 +421,7 @@ The color in the palette can be set in 2 ways::
   - <r>RR</r><g>GG</g><n>BB</n>            ! hexadecimal color representation.
 
 Example:  Standard Palette   (definitions are equivalent):
-<f>
+<n>
   ### Stand.Palet [ 6, <r>4</r> ]  !   ### Stand.Pal16 [ 6, <r>2</r> ]
   !Value   R     G     B    !   !Value  RRGGBB
     0     255   255   255   !     0     ffffff
@@ -418,31 +430,131 @@ Example:  Standard Palette   (definitions are equivalent):
     .57    79   134   236   !     .57   4f86ec
     .8    255     0     0   !     .8    ff0000
     1     255   217   102   !     1     ffd966
-</f>
+</n>
 The user can create any number of palettes for different cases.
 To get RGB colors, you can use the dialogs: <r>^8 or ^9</r> ( Custom Color.../ RGB| WEB ).
 
 <r>^0 = &lt;Ctrl + Zero ></r> - Load "Standard Palette"
 
 <r>^9 -"Background Color"</r>- opens the dialog to select the color of the 3D-scene.
-   The Opacity of the Background is always = 1 ( 100 % ).
-   The Background Color can be associated with a specific stack type.
-   Default: [ <r>242</r> <g>242</g> <n>242</n> ] = f2f2f2 .
+     Default: f2f2f2, the Opacity of the Background is always 100%.
+     The Background Color can be associated with a specific stack type.
 
-<r>^8 -"Details Color"></r> - calls the dialog to select: Font size, Color, Opacity.
-   Default: [ 14  <r>99</r> <g>99</g> <n>99</n>  1 ].
+<r>^8 -"Details Color"></r> - calls the dialog to select: Font_size, Color, Opacity.
+     Default:  14  636363  Opacity=100%.
 
-The Palette file  and  selected colors  can be seen/ edited in CONFIGURATION: <r>^C</r> .
-They can be saved/ restored:  <r>^S/ ^R</r> .
+The Palette File, selected Colors, Opacity can be seen/edited/saved in CONFIGURATION: <r>^C</r>
+and  <r>^S / ^R</r> - Save / Restore  config. in memory.
 
 Examples can be viewed in  demo\lines\*.pal .
-Good reviews of the Colors & Palettes :
+Good róviews of using Palettes and Colors:
 <a href="https://eos.org/features/visualizing-science-how-color-determines-what-we-see">
    By S. Zeller and D. Rogers, 21 May 2020
    https://eos.org/features/visualizing-science-how-color-determines-what-we-see</a>
 <a href="https://www.kennethmoreland.com/color-maps/ColorMapsExpanded.pdf">
    https://www.kennethmoreland.com/color-maps/ColorMapsExpanded.pdf </a>
 ________________________________________________________________________________________
+<a name='b3d'></a>
+	<o>command: b3d -"Body-3D" display of the Body or Figure
+</o>
+Implementation is based on the<a href="#sss"> s3d command</a>.
+Description of the body consists of 2 frames.  1-st:  <r>Vertices( 3D-points )</r>  and
+2-nd:  <r>Faces/Facets</r>  in one stack.  Frame names don't matter.
+
+Each vertex is described by row of <r>four values</r>:  id-number and 3d-coordinates: x, y, z .
+id-number is any unique integer value,  may be < 0 !
+Example of the Vertices header:  ### Verts[ 9, <r>4</r> ]   ! 9 vertices
+
+A Face/Facet (one row in the frame) is a list of four vertex id's of a quadrilateral.
+Usually the quadrilateral is irregular i.e. the sides and angles are different and
+do not lie in the same plane.  If the face is a triangle, one vertex is repeated twice.
+
+	<r>The vertices must be listed counterclockwise
+	when looking at a face from outside the body !!!</r>
+
+Face may contain additional value <r>"color"</r>, which is used to put color to the facet
+in accordance with "Palette", <a href="#pal">see s3d.Colors</a>.
+For example,  it could be  temperature, tension, distance to some point/axis ...
+Header examples:  ### Faces[ 11, <r>4</r> ];  ### F_color[ 17, <r>5</r> ]  !with colors
+
+If colors are not used, the color of the whole body may be defined in the header:
+### Faces[ 11, <r>4</r> ] <r>C=ff00_30</r>  !Green( RGB=00ff00 ) with opacity=30%
+
+By default( no colors ) body is colored with <n>"DODGERBLUE"</n>=1e90ff_70, opacity=70% .
+To change body color and opacity call dialog: <r>&lt;Ctrl+3></r>,  edge color - <r>&lt;Ctrl+4></r>.
+
+<r>b3d functionality</r>  is  restricted functionality of the<a href="#sss"> s3d command</a>.
+Press  <r>Right Mouse</r>  to get context menu  and see  available functions.
+
+Configuration: <r>^C</r>  has additional parameters:
+
+  <n>Body:   [ 1e90ff_70]</n>  - Color of Faces  - <r>^3</r>,  acts only for Faces without color;
+  <n>Edge:   [      0_0 ]</n>  - Color of Edges  - <r>^4</r>   default: Edges are not visible !!!
+
+If extended Faces( +color: ### [?,<r>5</r>]) are used, menu has <r>Palette and Opacity</r> functions.
+
+Example( pik3d\demo\body\simple ):<n>
+  ### Points[ 9, 4 ]     !Vertices
+  ! id    x    y    z
+    10  -200 -200  100
+    11   200 -200  100
+    12   200  300  100
+    13  -200  300  100
+
+   -24  -100 -100 -200   !example with <r>id&lt;0</r>
+   -25   100 -100 -200   !on the bottom face
+   -26   100  100 -200
+   -27  -100  100 -200
+
+    99    50   50  200   !top vertex
+
+  ### Faces[ 8, <r>5</r> ]      !<r>extended</r> Faces
+    11  10 -24 -25  100
+    12  11 -25 -26  200
+    13  12 -26 -27  300
+   -27 -24  10  13  400
+
+    10  11  <r>99  99</r>  700  !<r>triangles</r>
+    12  13  <r>99  99</r>  800
+
+    10  11  12  13  500
+   -27 -26 -25 -24  600  !</n><r>counterclockwise</r>
+
+> b3d simple        !in the folder:  pik3d\demo\body , try to change Palette and Opacity
+
+The following example uses <a href="#jj">jj-technology</a> to generate vertices and faces of torus
+Example( pik3d\usr\torus.jj ):<m>
+{
+  d = getPars( arg, 36,0 ); n=(int)min( 100, d[0]);
+  vv[] b = new vv[ n ];
+  int i,j; var df=2*pi/n;
+  for(i=0;i&lt;n;i++) b[i] = new vv( 2+cos(i*df), 0, sin(i*df));          //torus: 0-sect.
+
+  hh( n*n, 4 );
+  for(j=0;j&lt;n;j++) for(i=0;i&lt;n;i++)                                    //rotate section
+    tvv( fa(i,j), new vv( b[i].x*cos(j*df)+rn(), b[i].x*sin(j*df)+rn(), b[i].z+rn()));
+
+  hh( n*n, 5 );
+  for(j=0;j&lt;n;j++) for(i=0;i&lt;n;i++)
+    tt( fa(i,j), fa(i,j+1), fa(i+1,j+1), fa(i+1,j), b[i].x );          //face +"color"
+}
+double[] d;  int n=20;  //the number of points to represent circle
+
+double rn(){ return d[1]*(rnd()-.5);}                                  // random noise
+int fa( int i, int j ){ if(i==n)i=0; if(j==n)j=0; return i*100 + j;}   // face_id
+void  tvv( int n, vv p ){ tt( n, p.x, p.y, p.z );}                     // print vertex
+record vv( double x, double y, double z ){}                            // vertex
+</m>
+Program  <m>torus.jj</m>  has 2 optional parameters:
+  1. The number of circle points &lt;= 100, default: 36
+  2. "Random Noise" of face coordinates, default: 0 - smooth surface
+
+> jj torus        | b3d -         !display torus with defaults: points=36, noise=0
+> jj torus  55    | b3d -         !display torus: points=55, noise=0
+> jj torus  ,   .6| b3d -         !display torus: points=36, noise=.6
+> jj torus  100 .7| b3d -         !display torus: points=100( #faces=10000 ), noise=.7
+________________________________________________________________________________________
+
 <a name='fwk'></a>
 <o>   PROCESSING AND 3D DISPLAY OF MATRIXES/FRAMES AND THEIR SEQUENCES
 </o>
@@ -472,12 +584,12 @@ or by means of <r>"pipe"</r>( it can reduce disk usage and increase performance 
 Most of the commands  output the result  to the standard output stream. If commands
 chained in to the pipe-line the next command can get data from the standard stream.
 To denote standard stream symbol <r>'-'</r> id used. In case of several Stacks in the output:
-<r>-(2), -(3)</r> ... Stacks are delimited by: <r>### &lt;eos></r> -"End Of Stack". It looks like:
+<r>-:2, -:3</r> ... Stacks are delimited by: <r>### &lt;eos></r> -"End Of Stack". It looks like:
 
-  cmd1 a b <r>|</r> cmd2 c <r>-</r> <r>|</r> cmd3 d <r>-</r> d(3) <r>-(2)</r> ... <r>|</r> cmdN <r>-</r> p <r>></r> File
+  cmd1 a b <r>|</r> cmd2 c <r>-</r> <r>|</r> cmd3 d <r>-</r> d:3 <r>-:2</r> ... <r>|</r> cmdN <r>-</r> p <r>></r> File
 
 The framework can be installed on Windows 7, 10, Linux (tested in Mint 21.1).
-Version 19.5.7 is compiled with JAVA-21 using javaFX.
+Version 21.0 is compiled with JAVA-21 using javaFX.
 ________________________________________________________________________________________
 <a name='ins'></a>
 				<o>INSTALL pik3d
@@ -640,7 +752,7 @@ This technology allows you to have several JVM and libraries in the system.
 When called without parameters or with the key: <r>/?</r> most commands show their short
 description. If the command does not show anything, it must be run with the key: <r>/dbg</r>
 - debug mode. Also, some diagnostic messages are visible only in debug mode.
-
+<div style='background:#333333; color:#00FF00;'>If you need error info. from  <r>s3d</r> or <r>b3d</r> on Linux, you should run <r>s3dx</r> or <r>b3dx</r> Launcher.</div>
 Most commands (with the exception of visual commands) send the result to the standard
 input/ output stream. If you do not specify  <r>> File</r>  at the end of the command,
 the output will be performed to the console/ screen.
@@ -653,7 +765,7 @@ It may improve disk usage and performance.
 If you need to save intermediate data for further processing, any command can save its
 output to file. To do this, it is necessary that the command ends with:  <r>@file</r>
 
-   <r>Experience shows that a pipe should not be used when processing large Stacks > 1GB.</r>
+   <r>Experience shows that a pipe should not be used when processing large Stacks > 1 GB.</r>
 
 To use the pipe-line, the commands are written on one line and separated by <r>'|'</r>.
 
@@ -705,7 +817,7 @@ Windows: <r>setvar</r> is used in .cmd-scripts to set <r>VAR</r>iable :
 > <r>call varstk VVV</r>  Stk  5 4              !read value from Stack: <r>VVV</r> = Stk[5,4]
 > echo %VVV%
 
-Example( pik3d\exe\stkelm.cmd - get element: Stk[i,j,k] ):<f>
+Example( pik3d\exe\stkelm.cmd - get element: Stk[i,j,k] ):<n>
 @echo OFF
 ::          get Stk Element, %1 = Stack Name
 IF [%1]==[] goto end
@@ -722,7 +834,7 @@ echo %1[ %<r>i</r>%, %<r>j</r>%, %<r>k</r>%] = %<r>elm</r>%
 echo.
 goto cycle
 
-:end</f>
+:end</n>
 > stk 5 9 3| noise - 100 > dat  & fmt dat 9*6.0f   !prepare  Stack: dat  for the test
 > stkelm dat                                       !run script
 This script can be used for any Stack in text or binary format.
@@ -806,6 +918,11 @@ Formats  are described  in the <a href="#fmt"> fmt </a> command.
 > ...| tt -:2  10*11.5g           # print only second stack from "pipe"
 
 > stk 8 8| noise -| eig -| tt 8*11.4g  # Eigen Values & Vectors of random matrix 8x8
+
+tt-command  can be used instead of  fmt-command:
+> tt         &lt; dat                # print stack: dat              ==  tt&lt;dat
+> tt 10*5.0f &lt; dat                # print stack: dat with format  ==  fmt dat 10*5.0f
+> tt  i2     &lt; dat > dat_i2       # convert format of dat to binary I2
 ________________________________________________________________________________________
 <a name='ren'></a><o>
 	renam  Stk  name  [ N=1 ]  > File   ! Rename Frames
@@ -828,14 +945,14 @@ All text, even without leading symbols: #|! , are comments( since no header yet 
 	<r>  It is useful to describe the data before the 1st. header</r>
 Examples:
   1. > gauss | hhh -    !print description of Gauss Blur Filter & header
-  2. In folder:  pik3d\demo\bell2  run command:> <f>gen3d bell2.gen > bell2</f>
+  2. In folder:  pik3d\demo\bell2  run command:> <n>gen3d bell2.gen > bell2</n>
   3. gen3d  creates 3d-Stack  with comments before data( inserts generation config ).
   4. Look at the header and comments:> hhh bell2
 
-Result looks like:<f>
-  gen3d: 2023.08.04 03:06:33         </f>// generation time<f>
+Result looks like:<n>
+  gen3d: 2023.08.04 03:06:33         </n>// generation time<n>
 
-  base: 80 120 40                    </f>// gen.config: bell2.gen<f>
+  base: 80 120 40                    </n>// gen.config: bell2.gen<n>
   noise: 120
   blur:  8
 
@@ -852,7 +969,7 @@ Result looks like:<f>
           x: (1 71 )(20 25)(40 9)
           y: (1 111)(20 60)(40 9)
 
-  ### bell2.gen_1 [ 80, 120 ] F4 BE  </f>// 1st. Frame header
+  ### bell2.gen_1 [ 80, 120 ] F4 BE  </n>// 1st. Frame header
 ________________________________________________________________________________________
 <a name='eeh'></a><o>
      command:  ee  [text]   # print to std.ERR current time & text
@@ -862,13 +979,13 @@ Since this command stop pipe-line, it is recommended to use it as 1st. or the la
 joining commands to a pipe-line. And use symbol <r>'&'</r> after and before it !
   e.g.
 > ee _______start <r>&</r> get Stk[#3,#5] <r>|</r> tt <r>&</r> ee _______ End.    !looks like:
-<f>  02:44:12.715  _______start
+<n>  02:44:12.715  _______start
 
   ### p1 [ 3, 5 ]
    337           326           310           294           283
    339           334           318           295           273
    336           321           328           312           292
-  02:44:13.330  _______ End.</f>
+  02:44:13.330  _______ End.</n>
 ________________________________________________________________________________________
 <a name='60'></a>
 	<o>gauss  [ R=8 [ width=3 ]]  > File
@@ -1077,7 +1194,7 @@ The stack is generated in the format: <a href="#dat">F4 BE</a> .
 Date and config.file  are placed  at the beginning of the stack as a comment.
 
 Config.file example:  <r>spiral2.cfg</r>  "Two rotating spirals":
-<f>
+<n>
 base: 160 160,20       # it is enough 10 frames
 movi:
 blur: 5
@@ -1099,10 +1216,10 @@ blur: 5
     r: 5
     h: 2
     form: cos
-</f>
+</n>
 File:  <r>spiral</r>  is received by the program:  pik3d\usr\Spiral.java
 it can be run(<a href='#jj'> jj File.java</a>)> jj Spiral.java > <r>spiral</r>
-<f>
+<n>
 package usr;
 public class Spiral {
   static public void main( String[] a ) {
@@ -1115,7 +1232,7 @@ public class Spiral {
       r+=dr; f+=df; h+=dh;
     }
   }
-}</f>
+}</n>
 To see result >  <r>gen3d spiral2.cfg | s3d -</r>   !do not forget to press &lt;space>
 ________________________________________________________________________________________
 <a name='140'></a>
@@ -1336,9 +1453,9 @@ There are three options for comparison:
 
 > stk 99 99| noise - > A           ! create A[99,99] and fill by random values
 > inv A| mul A - | dif - 1         ! A * invA = I, difference from Identity
-<f>! Max          Average       Root_Mean_Square
+<n>! Max          Average       Root_Mean_Square
 ### dif[ 3 ]
- 1.998401e-14  1.944781e-15  2.900034e-15</f>
+ 1.998401e-14  1.944781e-15  2.900034e-15</n>
 ________________________________________________________________________________________
 <a name='inv'></a>
     <o>inv  A  >  File        ! <r>Inv</r>ert Matrix
@@ -1348,8 +1465,8 @@ The result, when multiplied by A, gives the Identity Matrix.
 
 > stk 400 400 | noise - > A      ! create and fill by random values
 > inv A | mul - A | dif - 1      ! invert, multiply by original, difference from I
-  <f>### dif[ 3 ] !Max   Average   Root_Mean_Square
-  3.752553e-14   2.902646e-15   4.163867e-15</f>
+  <n>### dif[ 3 ] !Max   Average   Root_Mean_Square
+  3.752553e-14   2.902646e-15   4.163867e-15</n>
 ________________________________________________________________________________________
 <a name='sys'></a>
     <o>sys  A  b  > File    ! Solve a System of Linear Equations: [A]*x = b
@@ -1360,8 +1477,8 @@ The result( x ), when multiplied from the left by A, gives the b vector.
 > stk 400 400 | noise - > A         ! create A and fill by random values
 > stk 400     | noise - 5     > b   ! create and fill vector b[400]
 > sys A b     | mul A - | dif - b   ! solve, [A]*x, difference from b
-  <f>### dif[ 3 ] !Max   Average   Root_Mean_Square
-  4.423128e-13   1.251711e-13   1.549051e-13</f>
+  <n>### dif[ 3 ] !Max   Average   Root_Mean_Square
+  4.423128e-13   1.251711e-13   1.549051e-13</n>
 ________________________________________________________________________________________
 <a name='eig'></a>
     <o>eig  A  > V   !"<r>Eig</r>en Values and Vectors  of  Square Matrix"
@@ -1372,7 +1489,7 @@ ________________________________________________________________________________
 If you plan to use <o>eig</o> or <o>svd</o> commands, you need to download the library  and  place
 jar-files in the  <r>pik3d/lib</r>  folder.  Without sources and java-doc it takes ~2.3 MB.
 
-Result: 2 stacks separated by "<f>### &lt;eos></f>":
+Result: 2 stacks separated by "<r>### &lt;eos></r>":
  - Diagonal Matrix of Eigen Values - V:1 or V ;
  - Matrix of normalized( length=1 ) Eigen Vectors - V:2 .
 
@@ -1385,13 +1502,13 @@ V * V# = I,  where: V# - transp.V --> V# - inverse of V .
 > fmt V    10*11.5g                 ! view Eigen Values
 > fmt V:2  10*11.5g                 ! view Eigen Vectors(columns)
 
-> mul V:2  V:2# | dif - 1           ! V:2 * V:2# = I<f>
+> mul V:2  V:2# | dif - 1           ! V:2 * V:2# = I<n>
   ### dif[ 3 ] !Max   Average   Root_Mean_Square
-  5.828671e-16   2.111598e-16   2.491707e-16</f>
+  5.828671e-16   2.111598e-16   2.491707e-16</n>
 
-> mul V:2  V  V:2# | dif - A        ! V:2 * V * V:2#  =  A<f>
+> mul V:2  V  V:2# | dif - A        ! V:2 * V * V:2#  =  A<n>
   ### dif[ 3 ] !Max   Average   Root_Mean_Square
-  1.94289e-16    6.120254e-17   7.585892e-17</f>
+  1.94289e-16    6.120254e-17   7.585892e-17</n>
 
 > diag V | vic -   ! plot Eigen Values as function of number.
 ________________________________________________________________________________________
@@ -1438,20 +1555,20 @@ We can neglect small and zeros Singular Values/Vectors and use r < n :
 > stk 99 7 | noise -  >  A     ! A-random matrix 99x7
 > svd A <r>@D</r> | tt 10*11.4g       ! <r>Save</r> and print Singular Values and Vectors
 > mul D:2 D D:3# | dif A -     ! Difference A from L*S*Rt
-  <f>### dif[ 3 ] !Max   Average   Root_Mean_Square
-  1.665334e-16   4.135816e-17   5.1797643e-17</f>
+  <n>### dif[ 3 ] !Max   Average   Root_Mean_Square
+  1.665334e-16   4.135816e-17   5.1797643e-17</n>
 
 > mul D:2# D:2 | dif - 1       ! L# * L = I
-  <f>### dif[ 3 ] !Max   Average   Root_Mean_Square
-  1.776356e-15   2.970216e-16   4.27931803e-16</f>
+  <n>### dif[ 3 ] !Max   Average   Root_Mean_Square
+  1.776356e-15   2.970216e-16   4.27931803e-16</n>
 
 > mul D:3# D:3 | dif - 1       ! R# * R = I
-  <f>### dif[ 3 ] !Max   Average   Root_Mean_Square
-  5.551115e-16   1.525140e-16   1.937281e-16</f>
+  <n>### dif[ 3 ] !Max   Average   Root_Mean_Square
+  5.551115e-16   1.525140e-16   1.937281e-16</n>
 
 > mul A# A > AtA  &  <r>mul D:3  D D  D:3#</r> | dif - AtA    ! <r>R * S*S * Rt</r> = AtA
-  <f>### dif[ 3 ] !Max   Average   Root_Mean_Square
-  5.551115e-16   1.159963e-16   1.481203e-16</f>
+  <n>### dif[ 3 ] !Max   Average   Root_Mean_Square
+  5.551115e-16   1.159963e-16   1.481203e-16</n>
 
 > diag D | vic -   ! plot Singular Values as function of number.
 ________________________________________________________________________________________
@@ -1606,8 +1723,8 @@ Result:  ### dif[ 3 ]     ! Max, mean, root_mean_square of deviations:
 > jj prereg  D[:,3] D[:,q2] u80 <r>1</r>| linreg - > K  !obtain {k} -Regression coefficients
 > jj prereg  D[:,3] D[:,q2] u80 <r>0</r>| tstreg -   K  !print difference: <r>V-F*K</r>
 
-  <f>### dif[ 3 ] !Max    Average    Root_Mean_Square
-        106.1928      46.84697      55.43736</f>
+  <n>### dif[ 3 ] !Max    Average    Root_Mean_Square
+        106.1928      46.84697      55.43736</n>
 ________________________________________________________________________________________
 <a name='uve'></a>
   <o>usevec  m  c1 p1 [c2 p2 [c3 p3]]  > Use  !Create "<r>Use</r>-<r>Vec</r>tor"
@@ -1636,13 +1753,13 @@ Analyzes the vector and displays Statistics:  case, number, outliers
 > usevec  100  1 11  2 22  3 33  4 19 @U |tt 20*3.0f & usestat U  !create and init.Stat.
 > jj "var u=inVect2(arg[0]); for(int i=0;i<100;i+=2)u[i]*=-1; ttVect2(u)" U >U_
 > fmt U_ 20*3.0f  &  usestat U_      !after even elements "drop" display and Statistics
-<f>! case   number  dropped
+<n>! case   number  dropped
 ### Use_Statistics [ 5, 3 ]
      0       15        0
      1        5        6
      2        8       14
      3       20       13
-     4        8       11</f>
+     4        8       11</n>
 ________________________________________________________________________________________
 <a name='uca'></a>
   <o>usecase  M  U  c  > Mc   ! get <r>"Use Case"</r> from  Matrix
@@ -1698,8 +1815,8 @@ It may be viewed in simple way: > vics  SPL:2 1  2,-1  3,0
 
 The 3rd stack:  SPL:3 -"difference" ### dif[3] : Max, mean, Root_Mean_Square( r.m.s.)
 R.m.s. is indicated on the title of the chart  if key /vis is used.  Examples:
-jj-program to generate data: pik3d\usr\TestLSS.jj :
-<f>{
+<a href="#jj">jj-program</a> to generate data: pik3d\usr\TestLSS.jj :
+<m>{
   int i, n=30, nn=n*3;
   double dx=2*pi/n, x=.6, Fun;
   tt("### XYF [ "+nn+", 3 ]");  // XY + Function
@@ -1708,7 +1825,7 @@ jj-program to generate data: pik3d\usr\TestLSS.jj :
     tt( x, (Fun+(rnd()-.5)), Fun);
     x+=dx;
   }
-}</f>
+}</m>
 - see: pik3d/demo/2d-graph/_run.cmd (line:13)
 
 > jj TestLSS @XYF | lss - 7 /vis @SPL | spl - XYF > XYFS       !XYFS[90,4]=XYF[90,3]+Spl
@@ -1912,15 +2029,16 @@ where: <r>config</r> is a text file, may contain empty lines and comments(start 
 
 Column display parameters :  <r>vic Stk ...  and  vics Stk ...</r>
 exactly match the commands:  <a href="#vis">vic Stk ...  and  vics Stk ...</a>   Example config file:
-<f>
-# this is a comment
-  <r>vic </r> p5
-  <r>vic </r> q,,2 3
-  <r>vics</r> q25, -3 "4 4b0082, Delay" "9 7, Limit [ms]"
-! config END.</f>
+<n>
+  # this is a comment
+    <r>vic </r> p5
+    <r>vic </r> q,,2 3
+    <r>vics</r> q25, -3 "4 4b0082, Delay" "9 7, Limit [ms]"
+  ! config END.</n>
 
 We can create the config dynamically on the fly while executing the batch file, e.g.
-<m>rem  cretae config  &  execute it  with Spline data:</m><n>
+
+  <n>rem  cretae config  &  execute it  with Spline data:</n><n>
   jj   TestLSS  @XYF  | lss  XYF  7  > SPL
   spl  SPL       XYF  >      XYFS
   echo vics XYFS 1 "2,-1 Data" "3,0 Function" "4 8 0 Spline" > <r>config</r>
@@ -2074,7 +2192,7 @@ Example 1, <n>minMAJ.java</n>: "<n>minor</n> <r>MAJOR</r>":
   Chords  =  additions of three harmonics with frequencies:
     <n>minor</n> chord:  1, <n>6/5</n>, 3/2  - tonic, <n>minor</n> third, quint
     <r>MAJOR</r> chord:  1, <r>5/4</r>, 3/2  - tonic, <r>MAJOR</r> third, quint
-<f>
+<n>
 package usr;
 public class minMAJ {
   static public void main( String[] a )
@@ -2087,52 +2205,54 @@ public class minMAJ {
                                 +"\t"+( k + Math.sin( t*5/4 ))); // MAJOR
     }
   <r>}</r>
-}</f>
+}</n>
 > <o>jj</o> minMAJ<n>.java</n>                                               !output to the console
 > <o>jj</o> minMAJ<n>.java</n> /c                                            !only compile
 > <o>jj</o> minMAJ<n>.java</n> | vics - 1 2 3,8                              !simple display
 > <o>jj</o> minMAJ<n>.java</n> | vics - 1 "2 1 0 minor_: 1, 6/5, 3/2" "3 8 0 MAJOR: 1, 5/4, 3/2"
-<f>By the way, pay attention to the failure of the frequency for the minor on 5th
-and 15th periods - this is the reason why the minor sounds sad.</f>
+
+<n>By the way, pay attention to the failure of the frequency for the minor on 5th
+and 15th periods - this is the reason why the minor sounds sad.</n>
 
 
 If you need to input and process <a href="#dat">###-files</a>, program must inherit the I/O library <r>pik.io</r>.
 Example 2, <n>Reverse.java: "Stack with Frames in Reverse order"</n>:
-<f>package usr;
+
+<n>package usr;
 import java.util.*;
-import pik.*;
+import <r>pik.*</r>;
 
 public class Reverse extends io {
   public static void main( String[] arg ){
     try{ new Reverse(arg); clott();}
     catch( Exception e ){ e.printStackTrace();}
   }
-  Reverse(String[] arg) throws Exception
+  Reverse( String[] arg ) throws Exception
   <r>{</r>
     er1("Reverse", arg, "Stk > ktS");                // check input arg[]
     var stk = inStk( arg[0] );                       // stk[ kk ][ii][jj]
     int k = stk.length;
     while(k-->0) ttFrame( stk[k], arg[0]+"_"+(k+1)); // output in reverse
   <r>}</r>
-}</f>
-> <o>jj</o> Reverse<n>.java</n> Stk > ktS                           // save result
+}</n>
+> <o>jj</o> Reverse<n>.java</n> Stk > ktS                           // save result to Stack: ktS
 > <o>jj</o> Reverse<n>.java</n> Stk | s3d -                         // display
 
 To create a stack for experiments( pik3d must be installed ):
-  1. go to folder:  pik3d\demo\bell2
-  2. in console  >  gen3d bell2.gen > Stk
-  3. to see it   >  s3d Stk
+  1. go to the folder:  pik3d\demo\bell2
+  2. in console      >  gen3d bell2.gen > Stk
+  3. to see it       >  s3d Stk
 
 
 A more advanced way to use "single source-file" in the <o>pik3d</o> is to use <o>jj-technology</o>
 File<o>.jj</o> contains only <r>subject part</r> of the program( marked with red curly braces ).
-Example 3, pik3d\usr\Reverse<o>.jj</o> (functionality is the same as previous example):<f>
+Example 3, pik3d\usr\Reverse<o>.jj</o> (functionality is the same as previous example):<m>
 <r>{</r>
     er1("Reverse", arg, "Stk > ktS");                // check input arg[]
     var stk = inStk( arg[0] );                       // stk[ kk ][ii][jj]
     int k = stk.length;
     while(k-->0) ttFrame( stk[k], arg[0]+"_"+(k+1)); // output in reverse
-<r>}</r></f>
+<r>}</r></m>
 > <o>jj</o> Reverse Stk > ktS                                // save result
 > <o>jj</o> Reverse Stk | s3d -                              // display
 
@@ -2144,65 +2264,65 @@ Example 3, pik3d\usr\Reverse<o>.jj</o> (functionality is the same as previous ex
   - if you need .class files (result of compilation), use key: <r>/c</r> - only compilation.
 
 <o>jj supports short names</o>. Function arguments can be of 3 types:  double, float, int.
-   Fun(...) denotes use of <r>'varargs'</r>, i.e. possible: Fun(a), Fun(a,b), Fun(a,b,c)...
+   Fun(<r>...</r>) denotes use of <r>'varargs'</r>, i.e. possible: Fun(a), Fun(a,b), Fun(a,b,c)...
 
-   tt(String), tt(...) - output arguments  to std.OUT
-   ee(String), ee(...) - output arguments  to std.ERR
-   hh(i), hh(i,j)      - output ###-header to std.OUT, i-number of rows, j-columns
+   <m>tt(String), tt(...)</m> - output arguments  to std.OUT
+   <m>ee(String), ee(...)</m> - output arguments  to std.ERR
+   <m>hh(i), hh(i,j)</m>      - output ###-header to std.OUT, i-number of rows, j-columns
 
-   min(...) , max(...) - minimum, maximum value
-   pow( a, p ) - a^p,  e.g. pow(5,2)=25; pow(8,1/3.)=2
-   sqr( a )    - square root of a = pow( a,.5 )
-   abs( a )    - absolute value
-   erf( a )    - "Error Function", sigmoid: -1 < erf() < 1
-   rnd()       - random value: 0 <= rnd() <= 1
+   <m>min(...) , max(...)</m> - minimum, maximum value
+   <m>pow( a, p )</m> - a^p,  e.g. pow(5,2)=25; pow(8,1/3.)=2
+   <m>sqr( a )</m>    - square root of a = pow( a,.5 )
+   <m>abs( a )</m>    - absolute value
+   <m>erf( a )</m>    - "Error Function", sigmoid: -1 < erf() < 1
+   <m>rnd()</m>       - random value: 0 <= rnd() <= 1
 
-   sin(a), cos(a), tg(a),   asin(a), acos(a) ,atg(a),   exp(a), ln(a), lg(a)
-   constants:  pi=3.1415..., rad=180/pi
+   <m>sin(a), cos(a), tg(a),   asin(a), acos(a) ,atg(a),   exp(a), ln(a), lg(a)</m>
+   constants:  <m>pi=3.1415..., rad=180/pi</m>
 
 Folder: <o>pik3d/usr</o> is default repository for <o>.jj</o> and <n>.java</n> files.
 If path to the file is omitted, the search sequence: current folder, <o>pik3d/usr</o>.
 By default, the file extension is assumed to be <o>.jj</o> ( can be omitted ).
 
-The general form of <o>code.jj</o> is :   (more examples: pik3d\usr\*.jj)
-<f>
+The general form of <o>code.jj</o> is :   ( more examples: pik3d\usr\*.jj )
+<m>
   [ import pkg;  // NON-STANDARD  JAVA, pik  packages ]
   [ comments:  /* text ... */  or  // text ... ]
   <r>{</r>
-      JAVA :  body of <r>code</r>( String arg[] )
+      <n>JAVA code uses arguments:  String arg[]</n>
   <r>}</r>
-  [ methods,  classes(not public),  static ... ]</f>
+  [ methods,  classes(not public),  static ... ]</m>
 <a name='jc'></a>
 Example 1(above) in <o>jj-form</o>, file: minMAJ<o>.jj</o>
-<r>{</r><f>
+<r>{</r><m>
    hh( 201, 3 );                                   // ### Header
    for(int i=0; i&lt;=200; i++) {
       var t = i*( 2*pi/10 );                       // 10 points/period
       var k = sin( t ) + sin( t*3/2 );             // tonic + quint
       tt( i/10., k+sin( t*6/5 ), k+sin( t*5/4 ));  // t  minor  MAJOR
    }
-<r>}</r></f>
+<r>}</r></m>
 
 There is often a need to describe processing features as a commentary to the data.
-For example, a type of regression( see  <n>pik3d\usr\prereg.jj:  lines: 17, 20 </n>).
+For example, a type of regression( see  <m>pik3d\usr\prereg.jj:  lines: 17, 20 </m>).
 If a jj-program line contains a comment like:  <r>//!</r>,  then this <r>line of JAVA code</r>
-will be printed <r>as a comment</r> before the <n>Stack</n> output.  Example:<r>
+will be printed <r>as a comment</r> before the Stack output.  Example:<r>
 !
 ! double x=X[0], y=X[1];
 ! 1, x,y, x*x, y*y, x*y
 !</r><n>
 ### prereg_VF [ 7, 7 ] D8
     . . .</n>
-This is some kind of <r>self-documenting</r> of the jj-program.
+This is some kind of <m>self-documenting</m> of the jj-program.
 
 An additional very handy feature of <o>jj-Technology</o> is to execute the sequence of JAVA
 commands directly from the command line. In this case  file: <n>Noname.java</n>  is produced
 and executed( you can save it: <o>/s</o> ).  It takes less than 1 second.
 	 ________________________________________________________________
 	|                                                                |
-	|                  !!! ATTENTION in WINDOWS !!!                  |
+	|                  !!! ATTENTION in <r>WINDOWS</r> !!!                  |
 	|                                                                |
-	|  Since JAVA <r>double quote character "</r> cannot be used correctly  |
+	|  Since <r>JAVA double quote character "</r> cannot be used correctly  |
 	|  on the command line, it must be replaced  by  <r>\" </r>or<r> ^</r>,  e.g.  |
 	|    > jj "tt(<r>^</r>Hello World<r>^</r>)"                                    |
 	|  Before compilation <r>^</r> will be replaced back with <r>"</r> .           |
@@ -2210,11 +2330,11 @@ and executed( you can save it: <o>/s</o> ).  It takes less than 1 second.
 
 JAVA commands are delimited by <r>';'</r> (last before closed <r>"</r> may be omitted ).
 Examples( ^C/^V  to test jj, pik3d ):
-<f>
+<m>
 > <o>jj</o> "tt( max(.9, pi/2, pi-1), 4*pi, sin(-pi/4))"   !use of <r>'varargs'</r>
 > <o>jj</o> "for(int i=0;i&lt;9;i++) tt(<r>^</r> i=<r>^</r>+i)"             !print: i=0\n i=1\n i=2...\n i=8
 > <o>jj</o> "hh(101,2); for(var x=0.;x<=20;x+=.2) tt(x,exp(-x/7)*sin(x))"| vic - 1 2,11
-</f>
+</m>
 <div style='background:#333333; color:#00FF00;'>  Linux:
 $ jj <r>'</r>tt( max(.9, pi/2, pi-1), 4*pi, sin(-pi/4))<r>'</r>   !use of <r>'varargs'</r>
 $ jj <r>'</r>for(int i=0;i&lt;9;i++) tt(<r>"</r> i=<r>"</r>+i)<r>'</r>             !print: i=0 i=1 ... i=8
@@ -2222,41 +2342,46 @@ $ jj <r>'</r>hh(101,2); for(var x=0.;x&lt;=20;x+=.2) tt(x,exp(-x/7)*sin(x))<r>'<
 <r>JAVA options</r> can be used with <o>jj-command</o>. It is useful to test new features of Java.
 Example( Vector API: pik3d/usr/jep438.jj ):
 
-<f>> <o>jj</o>  <r>--enable-preview  --source=21  --add-modules=jdk.incubator.vector</r>  jep438 </f>
+<m>> <o>jj</o>  <r>--enable-preview  --source=21  --add-modules=jdk.incubator.vector</r>  jep438 </m>
 ________________________________________________________________________________________
 <a name='pik'></a><o>
 		Most used pik.io methods
 
-Read/Write to standard streams: <r>System.in/ System.out</r>, <u>static methods:</u></o>
-<f>
-  void cmd( String cmd, String[] arg, String help ) </f>//checking arg[] parameters
+<u>static methods:</u>
+</o><n>
+  void cmd( String cmd, String[] arg, String help ) </n>//checking arg[] parameters
 	// If arg is empty or arg[0]=<r>"/?"</r>, then help is displayed and program stop
 	// supports <r>@file</r> service - duplicating pipe-output to file
-<f>
-  double getdbl( String s ) </f>//get double value from String,if need int: <f>(int)getdbl(s)</f>
-	// e.g.> <f>jj "tt( (int)getdbl(^-3^) )"</f>
+<n>
+  double[] getPars( String[] arg, d0,d1,d2 ...)    </n>//get values from command line args.
+	// if i-value is absent or replaced by <r>','</r> default: <n>di</n> is used
+<n>
+  double getdbl( String s ) </n>//get double value from String,if need int: <n>(int)getdbl(s)</n>
+	// e.g.> <n>jj "tt( (int)getdbl(^-3^) )"
+</n>
+<o>Read/Write to standard streams: <r>System.in / System.out</r></o>
 
-  <f>void tt( String s )  </f> //output string to stream: System.out
-  <f>void <r>ee</r>( String s )  </f> //output string to stream: <r>System.err</r>
-  <f>void tt( double... x)</f> //output to System.out double[](may be float): tt(1,.2f,9e9,-1)
-  <f>void <r>ee</r>( double... x)</f> //output to <r>System.err</r> ---:---:---:---:---:---
+  <n>void tt( String s )  </n> //output string to stream: System.out
+  <n>void <r>ee</r>( String s )  </n> //output string to stream: <r>System.err</r>
+  <n>void tt( double... x)</n> //output to System.out double[](may be float): tt(1,.2f,9e9,-1)
+  <n>void <r>ee</r>( double... x)</n> //output to <r>System.err</r> ---:---:---:---:---:---
 
-  <f>float [][][] inStack ( String file ) </f>//read stack into <r>float [][][]</r>
-  <f>double[][][] inStack8( String file ) </f>//read stack into <r>double[][][]</r>
+  <n>float [][][] inStack ( String file ) </n>//read stack into <r>float [][][]</r>
+  <n>double[][][] inStack8( String file ) </n>//read stack into <r>double[][][]</r>
 
-  <f>float [][] inFrame ( String file ) </f>//read the <r>1st frame</r> of the stack into <r>float [][]</r>
-  <f>double[][] inFrame8( String file ) </f>//read the <r>1st frame</r> of the stack into <r>double[][]</r>
+  <n>float [][] inFrame ( String file ) </n>//read the <r>1st frame</r> of the stack into <r>float [][]</r>
+  <n>double[][] inFrame8( String file ) </n>//read the <r>1st frame</r> of the stack into <r>double[][]</r>
 
-  <f>void ttFrame( Object <r>F</r> ) </f>//<r>F</r>rame out: <r>float[][]   or double[][]</r>,   <a href="#bin">bin.format F4|D8</a>
-  <f>void ttFrame( Object <r>F</r>, String name ) </f>//the same as previous with <f>Frame_Name</f>
-  <f>void ttStack( Object <r>S</r> )</f> //<r>S</r>tack out: <r>float[][][] or double[][][]</r>, <a href="#bin">bin.format F4|D8</a>
+  <n>void ttFrame( Object <r>F</r> ) </n>//<r>F</r>rame out: <r>float[][]   or double[][]</r>,   <a href="#bin">bin.format F4|D8</a>
+  <n>void ttFrame( Object <r>F</r>, String name ) </n>//the same as previous with <n>Frame_Name</n>
+  <n>void ttStack( Object <r>S</r> )</n> //<r>S</r>tack out: <r>float[][][] or double[][][]</r>, <a href="#bin">bin.format F4|D8</a>
 	// output format( F4 or D8 ) depends on Object: float[]... or double[]...
 
-  <f>void clott()</f> // close/clean up pik.io resources, should <r>ALWAYS</r> be called at the end !
+  <n>void clott()</n> // close/clean up pik.io resources, should <r>ALWAYS</r> be called at the end !
   If you use <a href="#jj">jj-Technology</a>, this call is already present !
 
-Frame is 2-dimensional array <r>frame    [ ii ][ jj ]</r>, e.g. 3-row  : <f>var s3 = frame[ 2 ];</f>
-Stack is 3-dimensional array <r>stk[ <u>kk</u> ][ ii ][ jj ]</r>, e.g. 5-frame: <f>var k5 = stk  [ 4 ];</f>
+Frame is 2-dimensional array <r>frame    [ ii ][ jj ]</r>, e.g. 3-row  : <n>var s3 = frame[ 2 ];</n>
+Stack is 3-dimensional array <r>stk[ <u>kk</u> ][ ii ][ jj ]</r>, e.g. 5-frame: <n>var k5 = stk  [ 4 ];</n>
 You can use file names with stack number (see below): "A.dat:3", "-:4"
 
 If the stacks are small and there is enough memory to accommodate them entirely,
@@ -2264,61 +2389,61 @@ it is recommended to use these  <o><u>static methods</u></o>.
 
 <o>Read Frame, <u>instance methods:</u></o>
 
-  <f>io reader = new io( String file )</f> // constructor: create a reader of the File,
+  <n>io reader = new io( String file )</n> // constructor: create a reader of the File,
                                      // if <r>file ="-","-:N"</r>, then reading from <r>System.in</r>
 If the file/stream contains multiple stacks separated by lines <r>### &lt;eos></r> (<r>E</r>nd <r>O</r>f <r>S</r>tack),
 then the filename might look like this: <r>Stk:3, -:4</r>. Last means: 4th stack in  <r>System.in</r>
 
-  <f>float [][]   reader.inFrame () </f>   // read frame into <r>float [][]</r>    - 2d-array ;
-  <f>double[][]   reader.inFrame8() </f>   // read frame into <r>double[][]</r>    - 2d-array ;
+  <n>float [][]   reader.inFrame () </n>   // read frame into <r>float [][]</r>    - 2d-array ;
+  <n>double[][]   reader.inFrame8() </n>   // read frame into <r>double[][]</r>    - 2d-array ;
                                      // Frame can be in any format:<a href="#dat"> Text,I2,F4,D8<a>
-  <f>float [][][] reader.inStack () </f>   // read stack into <r>float [][][]</r> - 3d-array ;
-  <f>double[][][] reader.inStack8() </f>   // read stack into <r>double[][][]</r> - 3d-array ;
+  <n>float [][][] reader.inStack () </n>   // read stack into <r>float [][][]</r> - 3d-array ;
+  <n>double[][][] reader.inStack8() </n>   // read stack into <r>double[][][]</r> - 3d-array ;
 
 The reader reads frame by frame sequentially. If it encounters end of file or
-<r>### &lt;eos></r> (End Of Stack), then the methods <f>inFrame(), inFrame8()</f> return null
-and <f>inStack(), inStack8()</f> ends reading and returns a 3d array. In the case of several
+<r>### &lt;eos></r> (End Of Stack), then the methods <n>inFrame(), inFrame8()</n> return null
+and <n>inStack(), inStack8()</n> ends reading and returns a 3d array. In the case of several
 stacks in the file/stream, the reader is ready to read the next stack.
 
-  <f>void reader.skipStk( int n ) </f>     // Skip n stacks.
-  <f>void reader.reset()          </f>     //"rewind" file/ input stream to the beginning.
+  <n>void reader.skipStk( int n ) </n>     // Skip n stacks.
+  <n>void reader.reset()          </n>     //"rewind" file/ input stream to the beginning.
 
-reader does not need to be closed, readers are closed at the end by the method: <f>clott()</f>.
+reader does not need to be closed, readers are closed at the end by the method: <n>clott()</n>.
 A package to read/write  ###-files  in  <r>PYTHON</r>:  <r>kadr.py</r>  - pik3d\ext\###_PYTHON.zip .
 <o>
 Simple 2D-graphics ( can be used with <a href="#jj">jj-technology</a> ):</o>
 
 Universal pik3d window <r>gra</r> is used. It supports all services <a href="#gra">"Use of 2D-graphics"</a>.
-static methods:<f>
-  <r>gra</r> simple( String title, double[] xx, double[] yy, int mark )  </f>// one plot: y(x)<f>
-  <r>gra</r> simple( String title, double[] yy )                         </f>// xx[]={1,2,3...}<f>
-  <r>gra</r> simple( String title, double[] xx, double[]... yy )         </f>// several plots
+static methods:<n>
+  <r>gra</r> simple( String title, double[] xx, double[] yy, int mark )  </n>// one plot: y(x)<n>
+  <r>gra</r> simple( String title, double[] yy )                         </n>// xx[]={1,2,3...}<n>
+  <r>gra</r> simple( String title, double[] xx, double[]... yy )         </n>// several plots
 
-if you have <r>gra w</r> created by <f>simple()</f>, you can :<f>
-  <r>w</r>.setLocation( xpix, ypix )         </f>// set window location on the screen<f>
-  <r>w</r>.pen( n );  <r>w</r>.pen( rgb )           </f>// set color(<a href="#vis"> 0&lt= n &lt;=10 </a>or rgb ~ 0x04b4ff )<f>
-  <r>w</r>.bold( npix )                      </f>// set line-width in pixels<f>
-  <r>w</r>.fun    ( xx, yy, mark )           </f>// add plot:   y(x)  to <r>w</r><f>
-  <r>w</r>.aspline( xx, yy, mark )           </f>// add spline: y(x), if <a href="#vis">mark</a>=0  - only line<f>
-  <r>w</r>.font(size); <r>w</r>.txt( text, x, y )   </f>// in <r>w</r>-subject coord.: x,y add String text<f>
-  <r>w</r>.repaint();                        </f>// is required! after manipulation with <r>gra</r>
+if you have <r>gra w</r> created by <n>simple()</n>, you can :<n>
+  <r>w</r>.setLocation( xpix, ypix )         </n>// set window location on the screen<n>
+  <r>w</r>.pen( n );  <r>w</r>.pen( rgb )           </n>// set color(<a href="#vis"> 0&lt= n &lt;=10 </a>or rgb ~ 0x04b4ff )<n>
+  <r>w</r>.bold( npix )                      </n>// set line-width in pixels<n>
+  <r>w</r>.fun    ( xx, yy, mark )           </n>// add plot:   y(x)  to <r>w</r><n>
+  <r>w</r>.aspline( xx, yy, mark )           </n>// add spline: y(x), if <a href="#vis">mark</a>=0  - only line<n>
+  <r>w</r>.font(size); <r>w</r>.txt( text, x, y )   </n>// in <r>w</r>-subject coord.: x,y add String text<n>
+  <r>w</r>.repaint();                        </n>// is required! after manipulation with <r>gra</r>
 ________________________________________________________________________________________
 <a name='jc'></a>
 		<o>Create New pik3d Command, prepare Launcher
 </o>
 It is recommended to use <a href="#jj">jj-Technology</a> for complex commands: get  <n>JAVA file</n>  as a first
-variant from  <n>jj ... /s</n>  and place it in to the  <n>JAVA IDE</n>  for comfortable development.
+variant from  <n>jj ... /s</n>  and  put it in  <n>JAVA IDE</n>  for comfortable development.
 
 The description uses  <r>fun.jj</r>  and  <r>fun</r>  as the name of the  file  and  command.
 
-1. Debug <r>fun.jj</r> and functionality with  ><a href="#jj"> jj fun</a>
+1. Debug <r>fun.jj</r> and functionality with  ><a href="#jj"> jj fun [arg0 arg1 ...]</a>
 
-2. COMPILE:  > <f>jj fun /c</f> .  If successful,  <r>fun.class</r>  should appear.
+2. COMPILE:  > <n>jj fun /c</n> .  If successful,  <r>fun.class</r>  should appear.
 
 3. Copy  <r>fun.jj</r> and <r>fun.class</r>  to the library:  <r>pik3d\lib\usr.jar\usr\</r>
    The .jar files are ZIP archives, so any ZIP utility is suitable, e.g. Total Commander
 
-4. Add new line  to the  pik3d\exe\<r>_Launch.cfg</r>:<f>  fun:  java  usr.fun </f>
+4. Add new line  to the  pik3d\exe\<r>_Launch.cfg</r>:<n>  fun:  java  usr.fun </n>
 
 5. Create all Launchers:  go to  pik3d\exe,  run > <r>_Launch.exe</r>
 
@@ -2327,14 +2452,14 @@ In fact, <r>pik3d Launcher technology</r> can be used  to create  Lancher for an
 class, which has function: main(),  for any JAVA version 8 or later.
 
 Only  <r>_Launch.exe</r>  and  <r>pik3d\lib\run.jar</r>  are needed  (they are compiled with JAVA-8).
-Let us assume <f><b>[cp]</b></f> is a list of archives for new Launcher( class-path ).
-<f># test.cfg - Launcher config for class: <r>c:\workspace\project\pkg\test.java</r>:
+Let us assume <n><b>[cp]</b></n> is a list of archives for new Launcher( class-path ).
+<n># test.cfg - Launcher config for class: <r>c:\workspace\project\pkg\test.java</r>:
 
   jdk/bin:   c:\java_11\bin                                    !use this JAVA
   lib/jar:   <b><r>c:\workspace\project</r>;[cp]</b>;<u>E:\pik3d\lib\run.jar</u>    !class-path
   test01:    java  <r>pkg.test</r>                                    !main-class
-</f>
-> _Launch test.cfg        !test01.exe is created, run.jar is needed to create exe-file
+</n>
+> _Launch test.cfg        !<n>test01.exe</n> is created, run.jar is needed to create exe-file
                           !it is not included to the class-path of the launcher.
 ________________________________________________________________________________________
 <f>
