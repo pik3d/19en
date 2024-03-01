@@ -1,5 +1,5 @@
 ![head](/assets/images/830x290.jpg)
-Framework pik3d v.20.0
+Framework pik3d v.21.0
 
     PROCESSING AND 3D-DISPLAY OF MATRICES/FRAMES AND THEIR SEQUENCES
 
@@ -37,6 +37,9 @@ During clip you can stop it and change the angles of view, colors, lighting.
 The functionality of version 20 is extended by Eigen/Singular Values Decomposition of Matrix
 and Regression analyses based on <a href='https://commons.apache.org/proper/commons-math/'>"The Apache Commons Mathematics Library"</a>.
 
+Version 21 includes tool: b3d -"Body-3D" for 3D-display of bodies defined by
+quadrilateral faces (up to 10,000 faces). You can control Opacity of body/surface.
+
 The framework has simple but effective 2D-graphics tools for displaying
 columns and rows of matrices. Simple graph-editor can add text, lines, figures to chart.
 2D-graphics can be saved in vector format: WMF - "Windows Meta File".
@@ -69,7 +72,7 @@ or by means of "pipe" (it can reduce disk usage and increase performance).
 Any command can save the pipe-output to the file for further processing( add to command @file).
 
 The framework can be installed on Windows 7, 10, Linux (tested in Mint 21.1).
-Current version 20.0 is compiled with JAVA-21 using javaFX .
+Current version 21.0 is compiled with JAVA-21 using javaFX .
 
 Description of the framework, formats and install procedure in the file:
 pik3d_DOC.html (contained in the install archive: pik3d.zip).
