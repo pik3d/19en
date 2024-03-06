@@ -2446,22 +2446,27 @@ The description uses  <r>fun.jj</r>  and  <r>fun</r>  as the name of the  file  
 4. Add new line  to the  pik3d\exe\<r>_Launch.cfg</r>:<n>  fun:  java  usr.fun </n>
 
 5. Create all Launchers:  go to  pik3d\exe,  run > <r>_Launch.exe</r>
-
 This is an easy way to create a new Launcher.
-In fact, <r>pik3d Launcher technology</r> can be used  to create  Lancher for any runnable
-class, which has function: main(),  for any JAVA version 8 or later.
 
-Only  <r>_Launch.exe</r>  and  <r>pik3d\lib\run.jar</r>  are needed  (they are compiled with JAVA-8).
-Let us assume <n><b>[cp]</b></n> is a list of archives for new Launcher( class-path ).
-<n># test.cfg - Launcher config for class: <r>c:\workspace\project\pkg\test.java</r>:
+In fact, <r>pik3d Launcher</r> technology can be used  to create  Lancher for any  <r>main class</r>
+(class has function: main()). <r>_Launch.exe</r> and <r>pik3d\lib\run.jar</r> are compiled with <r>JAVA-8</r>
 
-  jdk/bin:   c:\java_11\bin                                    !use this JAVA
-  lib/jar:   <b><r>c:\workspace\project</r>;[cp]</b>;<u>E:\pik3d\lib\run.jar</u>    !class-path
-  test01:    java  <r>pkg.test</r>                                    !main-class
+Let us assume <r>CP</r> is a project CLASS-PASS for <r>tsk.java</r>:
+//header of class looks like:<n>
+    package <r>pkg.utl.qq</r>;
+    import ...
+    public class <r>tsk</r> {
+      public static void <r>main</r>( String[] arg ) {
+	  ...
+
+# tsk.cfg - Launcher config for class: c:\work\project</n><u>\src\</u><r>pkg.utl.qq\tsk.java </r>:
+<n>
+  jdk/bin:  c:\java_11\bin                                !use this JAVA
+  lib/jar:  c:\work\project</n>\<u>bin;</u><r>CP</r>;</n><u>E:\pik3d\lib\run.jar</u>   <n>!class-path, NO spaces!
+  tsk:      java  <r>pkg.utl.qq.<r>tsk</r>                          !main-class
 </n>
-> _Launch test.cfg        !<n>test01.exe</n> is created, run.jar is needed to create exe-file
-                          !it is not included to the class-path of the launcher.
-________________________________________________________________________________________
+> _Launch <n>tsk.cfg                                         !Launcher: tsk.exe is created
+</n>________________________________________________________________________________________
 <f>
                               author: K.A. Ilyashenko, e-mail: kilyashenko@gmail.com
                               Error messages, comments, suggestions  are  welcome .
