@@ -1,5 +1,5 @@
 ![head](/assets/images/830x290.jpg)
-Framework pik3d v.21.0
+Framework pik3d v.21.1
 
     PROCESSING AND 3D-DISPLAY OF MATRICES/FRAMES AND THEIR SEQUENCES
 
@@ -28,6 +28,10 @@ The set of such 3D-points forms a 3D-surface.
         |                       /            /
         X                      /____________/
                              X/
+
+Starting from version 21.1, for text data you can use a shortened header: ### [ ] .
+The number of columns is the number of values in the first row of data.
+The number of rowes is defined by the file length or the next header.
 
 Surface rendering with simple angle controls, lighting, color, etc.
 constitutes the functionality of the command: s3d -"Surface-3D".
@@ -72,7 +76,7 @@ or by means of "pipe" (it can reduce disk usage and increase performance).
 Any command can save the pipe-output to the file for further processing( add to command @file).
 
 The framework can be installed on Windows 7, 10, Linux (tested in Mint 21.1).
-Current version 21.0 is compiled with JAVA-21 using javaFX .
+Current version 21.1 is compiled with JAVA-21 using javaFX. It can be run under JAVA-21,22.
 
 Description of the framework, formats and install procedure in the file:
 pik3d_DOC.html (contained in the install archive: pik3d.zip).
