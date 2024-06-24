@@ -16,7 +16,7 @@ x{background:#333333; color:#00FF00; font-size:13px; line-height:13px; font-fami
 <h5><pre><a name='s3d'><f>pik3d - framework for processing and 3d-display of matrices and their sequences
         Help has standard HTML navigation:  &lt;Home>,  &lt;End>,  <a href="#ins">links</a>
 </f><a name='ogl'></a>
-<a href='#fwk'>DESCRIPTION of&nbsp; pik3d &nbsp;v.21.0</a>
+<a href='#fwk'>DESCRIPTION of&nbsp; pik3d &nbsp;v.21.1</a>
 <a href="#ins">INSTALL pik3d </a>
 <a href="#dat">###-format of the data: FRAME, STACK</a>
 <a href="#cmd">COMMANDS</a>
@@ -221,7 +221,7 @@ Example( start 4 synchronized s3d-windows ):
          Paste (^V) it in any convenient Text Editor.
          This functionality may be used to draw <a href="#lin">lines<a> on the "Map".
 
-<r>^A -"Axis"</r>- ON/ OFF Axis display.
+<r>^A -"Axes"</r>- ON/ OFF Axes display.
 <a name='cob'></a>
 <r>^X -"MAX/min of Z-axis"</r> - call dialog to define parameters of the vertical Z-axis.
      If the checkbox: "Automatic" is checked - MAX/min are found from the Stack data.
@@ -316,7 +316,7 @@ List of <n>config. parameters [default values]</n> - <r>how to set/ call</r> :
   <n>Ksec:    [ 10 ]</n>  - Frames per second - <r>^K</r> ;
 
   <n>Dn:      [  0 ]</n>  - mode: "Map Down"  - <r>^D</r> ;
-  <n>Axis:    [  1 ]</n>  - mode: "show Axes" - <r>^A</r> ;
+  <n>Axes:    [  1 ]</n>  - mode: "show Axes" - <r>^A</r> ;
   <n>Map:     [  0 ]</n>  - mode: "Map Only"  - <r>^M</r> ;
 
   <n>Back:    RRGGBB</n>  - window <r>Back</r>ground Color: default: f2f2f2     - <r>^9</r> ;
@@ -674,7 +674,7 @@ real numbers, even if they do not contain a decimal point.
 
 A string can be divided into any number of substrings  with comments between them.
 The only limitation is that you cannot break a numeric value.  Example( correct frame ):
-
+<n>
  ### test [ 3, 5 ]    ! 3-rows, 5-columns
 
    11.123, 12.34, 13  # comment
@@ -682,7 +682,7 @@ The only limitation is that you cannot break a numeric value.  Example( correct 
 
    21.32 22.54 -23.33 24.765 -.25E+8   # real: with  decimal point
    31 32 3.3e1 340e-7    9e9           !             and/or exponent
-
+</n>
 <r>Text format</r> may contain <r>repeaters and cycles</r>:
   - repeater: <r>n*v</r> ="n times repeat v", e.g. 99*-.01 -means 99 times repeat value=-.01;
   - cycle:  <r>( b, e [, s])</r> -values: b, b+s, b+2*s ... until b+k*s <=e or e <= b+ks if s<0
@@ -691,6 +691,17 @@ The only limitation is that you cannot break a numeric value.  Example( correct 
 
 > <n>echo</n> ### V[200]: <r>101*99 (98,0)</r> <n>></n> Vect  <n>&</n>  fmt Vect    !create V[200] and print it
                                  ! Used the opportunity <r>to create a stack in one line</r>.
+								 
+Starting from version 21.1, for text data you can use a <n>shortened header:  ### []</n> .
+The number of columns is the number of values in the first row of data.
+The number of rowes is defined by the file length or the next header. Example:
+<n>
+### [] T8        ! shortened HEADER for frame[3,5] of text double precision data  
+  1.41673775804     2.16775769909     2.42139177571     1.85775663706     2.47759811625
+  2.07666607657     1.7660799297      1.96489360786     2.27607551608     2.1607433131
+  3.12731327412    -.273277055213     .0544477327523   -.396327103658    -.333276174596
+
+### ...          ! next HEADER</n>
 <a name='bin'></a>
 <r>Binary Format</r> has an extended header. The matrix size is followed by the binary
 data type: <r>I2 | F4 | D8</r> and possibly  a "Byte Order Indicator": <r> LE </r> .
@@ -1220,7 +1231,6 @@ blur: 5
 File:  <r>spiral</r>  is received by the program:  pik3d\usr\Spiral.java
 it can be run(<a href='#jj'> jj File.java</a>)> jj Spiral.java > <r>spiral</r>
 <n>
-package usr;
 public class Spiral {
   static public void main( String[] a ) {
     int i, n=20, nn=n*3;
@@ -1974,7 +1984,7 @@ examples:
   vic q                          !stack q: "by numbers" 1-column == q,, == q,1 == q 1 1
   vic q,4                        !---:---:---:---:---   4-column
   vic q (2 .5) 6 7 /w=999 /h=555 !---:---: X=2,2.5,3... 6,7-columns, window[0,0,999,555]
-  vic q 1 2 /lgy                 !chart with Log.scale y-axis
+  vic q 1 2 /lgy                 !chart with Log.scale Y-axis
   vic /blank /add=AddGraph.add   !blank with add.graphics( it can be loaded later ^A ).
 
 default <r>"Legend"</r> contains:  colored line with marker,  stack name  and  column number.
@@ -2128,8 +2138,8 @@ You can add <r>TEXT, LINE or FIGURE( box, oval, romb )</r> anywhere in the windo
 <o>
        Graphics Features:
 </o>
-- THE SIZE OF THE AXIS SIGNATURES IS FIXED ( does not increase with an increase of the
-  window).If the document needs large axis labels, select a small window size before ^S.
+- THE SIZE OF THE AXES SIGNATURES IS FIXED ( does not increase with an increase of the
+  window).If the document needs large axes labels, select a small window size before ^S.
 
 - When resizing the window, the position( in subject coordinates ) of the lower left
   corner of the texts remains unchanged. "Legend" base point - its upper right corner.
@@ -2193,7 +2203,6 @@ Example 1, <n>minMAJ.java</n>: "<n>minor</n> <r>MAJOR</r>":
     <n>minor</n> chord:  1, <n>6/5</n>, 3/2  - tonic, <n>minor</n> third, quint
     <r>MAJOR</r> chord:  1, <r>5/4</r>, 3/2  - tonic, <r>MAJOR</r> third, quint
 <n>
-package usr;
 public class minMAJ {
   static public void main( String[] a )
   <r>{</r>
@@ -2218,8 +2227,7 @@ and 15th periods - this is the reason why the minor sounds sad.</n>
 If you need to input and process <a href="#dat">###-files</a>, program must inherit the I/O library <r>pik.io</r>.
 Example 2, <n>Reverse.java: "Stack with Frames in Reverse order"</n>:
 
-<n>package usr;
-import java.util.*;
+<n>import java.util.*;
 import <r>pik.*</r>;
 
 public class Reverse extends io {
@@ -2229,7 +2237,7 @@ public class Reverse extends io {
   }
   Reverse( String[] arg ) throws Exception
   <r>{</r>
-    er1("Reverse", arg, "Stk > ktS");                // check input arg[]
+    cmd("Reverse", arg, "Stk > ktS");                // check input arg[]
     var stk = inStk( arg[0] );                       // stk[ kk ][ii][jj]
     int k = stk.length;
     while(k-->0) ttFrame( stk[k], arg[0]+"_"+(k+1)); // output in reverse
@@ -2248,7 +2256,7 @@ A more advanced way to use "single source-file" in the <o>pik3d</o> is to use <o
 File<o>.jj</o> contains only <r>subject part</r> of the program( marked with red curly braces ).
 Example 3, pik3d\usr\Reverse<o>.jj</o> (functionality is the same as previous example):<m>
 <r>{</r>
-    er1("Reverse", arg, "Stk > ktS");                // check input arg[]
+    cmd("Reverse", arg, "Stk > ktS");                // check input arg[]
     var stk = inStk( arg[0] );                       // stk[ kk ][ii][jj]
     int k = stk.length;
     while(k-->0) ttFrame( stk[k], arg[0]+"_"+(k+1)); // output in reverse
@@ -2268,7 +2276,7 @@ Example 3, pik3d\usr\Reverse<o>.jj</o> (functionality is the same as previous ex
 
    <m>tt(String), tt(...)</m> - output arguments  to std.OUT
    <m>ee(String), ee(...)</m> - output arguments  to std.ERR
-   <m>hh(i), hh(i,j)</m>      - output ###-header to std.OUT, i-number of rows, j-columns
+   <m>hh(), hh(i),hh(i,j)</m> - output ###-header to std.OUT, i-number of rows, j-columns
 
    <m>min(...) , max(...)</m> - minimum, maximum value
    <m>pow( a, p )</m> - a^p,  e.g. pow(5,2)=25; pow(8,1/3.)=2
@@ -2295,8 +2303,7 @@ The general form of <o>code.jj</o> is :   ( more examples: pik3d\usr\*.jj )
 <a name='jc'></a>
 Example 1(above) in <o>jj-form</o>, file: minMAJ<o>.jj</o>
 <r>{</r><m>
-   hh( 201, 3 );                                   // ### Header
-   for(int i=0; i&lt;=200; i++) {
+   hh(); for(int i=0; i&lt;=200; i++) {               // ### Header & cycle
       var t = i*( 2*pi/10 );                       // 10 points/period
       var k = sin( t ) + sin( t*3/2 );             // tonic + quint
       tt( i/10., k+sin( t*6/5 ), k+sin( t*5/4 ));  // t  minor  MAJOR
@@ -2333,12 +2340,12 @@ Examples( ^C/^V  to test jj, pik3d ):
 <m>
 > <o>jj</o> "tt( max(.9, pi/2, pi-1), 4*pi, sin(-pi/4))"   !use of <r>'varargs'</r>
 > <o>jj</o> "for(int i=0;i&lt;9;i++) tt(<r>^</r> i=<r>^</r>+i)"             !print: i=0\n i=1\n i=2...\n i=8
-> <o>jj</o> "hh(101,2); for(var x=0.;x<=20;x+=.2) tt(x,exp(-x/7)*sin(x))"| vic - 1 2,11
+> <o>jj</o> "hh(); for(var x=0.;x<=20;x+=.2) tt(x,exp(-x/7)*sin(x))"| vic - 1 2,11
 </m>
 <div style='background:#333333; color:#00FF00;'>  Linux:
 $ jj <r>'</r>tt( max(.9, pi/2, pi-1), 4*pi, sin(-pi/4))<r>'</r>   !use of <r>'varargs'</r>
 $ jj <r>'</r>for(int i=0;i&lt;9;i++) tt(<r>"</r> i=<r>"</r>+i)<r>'</r>             !print: i=0 i=1 ... i=8
-$ jj <r>'</r>hh(101,2); for(var x=0.;x&lt;=20;x+=.2) tt(x,exp(-x/7)*sin(x))<r>'</r>| vic - 1 2,11</div>
+$ jj <r>'</r>hh(); for(var x=0.;x&lt;=20;x+=.2) tt(x,exp(-x/7)*sin(x))<r>'</r>| vic - 1 2,11</div>
 <r>JAVA options</r> can be used with <o>jj-command</o>. It is useful to test new features of Java.
 Example( Vector API: pik3d/usr/jep438.jj ):
 
@@ -2440,10 +2447,10 @@ The description uses  <r>fun.jj</r>  and  <r>fun</r>  as the name of the  file  
 
 2. COMPILE:  > <n>jj fun /c</n> .  If successful,  <r>fun.class</r>  should appear.
 
-3. Copy  <r>fun.jj</r> and <r>fun.class</r>  to the library:  <r>pik3d\lib\usr.jar\usr\</r>
+3. Copy  <r>fun.jj</r> and <r>fun.class</r>  to the library:  <r>pik3d\lib\usr.jar</r>
    The .jar files are ZIP archives, so any ZIP utility is suitable, e.g. Total Commander
 
-4. Add new line  to the  pik3d\exe\<r>_Launch.cfg</r>:<n>  fun:  java  usr.fun </n>
+4. Add new line  to the  pik3d\exe\<r>_Launch.cfg</r>:<n>  fun:  java  fun </n>
 
 5. Create all Launchers:  go to  pik3d\exe,  run > <r>_Launch.exe</r>
 This is an easy way to create a new Launcher.
