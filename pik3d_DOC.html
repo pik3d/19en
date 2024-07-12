@@ -16,13 +16,13 @@ x{background:#333333; color:#00FF00; font-size:13px; line-height:13px; font-fami
 <h5><pre><a name='s3d'><f>pik3d - framework for processing and 3d-display of matrices and their sequences
         Help has standard HTML navigation:  &lt;Home>,  &lt;End>,  <a href="#ins">links</a>
 </f><a name='ogl'></a>
-<a href='#fwk'>DESCRIPTION of&nbsp; pik3d &nbsp;v.21.1</a>
+<a href='#fwk'>DESCRIPTION of&nbsp; pik3d &nbsp;v. 21.2</a>
 <a href="#ins">INSTALL pik3d </a>
 <a href="#dat">###-format of the data: FRAME, STACK</a>
 <a href="#cmd">COMMANDS</a>
 
-  <a href='#sss'>s3d -"Surface-3D" </a>                           ! <r>3D</r>-display of the Stack
-  <a href='#b3d'>b3d -"Body-3D" </a>                              ! <r>3D</r>-display of the Body or Figure
+  <a href='#sss'>s3d -"Surface-3D" </a>                           ! <r>3d</r>-display of the Stack
+  <a href='#b3d'>b3d -"Body-3D" </a>                              ! <r>3d</r>-display of the Body or Figure
 
 Stack: create, view, info:
   <a href='#40' >stk  ii  [ jj=1 [kk=1]]  [v=&lt;value>]  [D8]</a>   ! Create new <r>St</r>ac<r>k</r>
@@ -80,10 +80,10 @@ Element-wise Calculations:
   <a href="#120">sv  S  [+-x/^|exp|ln|db]  value </a>             ! <r>S</r>tack-<r>V</r>alue operations
   <a href="#130">ss  A  [+-x/^]            B </a>                 ! <r>S</r>tack-<r>S</r>tack operations
 
-2D-Graphics:
+2d-Graphics:
   <a href="#vis">vic(s) Stk  jX j1 j2 j3 ... [keys]</a>           ! <r>Vi</r>sualize <r>C</r>olumns (<r>S</r>pline)
   <a href="#vip">vimp   config  [keys]</a>                        ! --"---"---"---"-- <r>M</r>ultiple Stack <r>P</r>lots
-  <a href="#gra">Use of 2D-graphics </a>
+  <a href="#gra">Use of 2d-graphics </a>
   <a href="#tif">tif  File.tif | Config  [Npro=99999] </a>        ! Show <r>.TIF</r>-files/clip
 
 <a href="#jj" >jj  File[.jj] or FIle.java     [/s] [/c] </a>      ! <r>"java-JAVA"</r> or <m>simple JAVA</m> Technology
@@ -93,7 +93,7 @@ Element-wise Calculations:
 <a href="#jc" >Create New pik3d Command, prepare Launcher </a>
 ________________________________________________________________________________________
 <a name='sss'></a>
-  <o>command: s3d -"Surface-3D" display Matrix/ Frame and their sequences
+  <o>command: s3d -"Surface-3d" display Matrix/ Frame and their sequences
 </o>
 	 <a href='#bb'>Startup, initial parameters</a>
 	 <a href='#st'>Stack viewing</a>
@@ -114,7 +114,7 @@ Consider a matrix element that is in the <r>i</r>-row, <r>j</r>-column and has t
 
 	O_____<r>j</r>_______Y        |<r>Z</r>
 	|     |     |          |
-	|     |     | ---3D--> |  <r>z=m[i,j]</r>
+	|     |     | ---3d--> |  <r>z=m[i,j]</r>
 	|     |     |          |   |
 	<r>i</r>_____<r>m[i,j]</r>|         O|___|__<r>y=j</r>______
 	|           |          /   |  /     / Y
@@ -123,8 +123,8 @@ Consider a matrix element that is in the <r>i</r>-row, <r>j</r>-column and has t
 	|                   /            /
 	X                  /____________/
 	                 X/
-The matrix element can be displayed as a point in 3D-space: X - matrix row,
-Y - matrix column, Z - element value. The set of such points forms a 3D-surface.
+The matrix element can be displayed as a point in 3d-space: X - matrix row,
+Y - matrix column, Z - element value. The set of such points forms a 3d-surface.
 
 A strict mapping would consist of a set of vertical rectangular bars.
 To simplify perception, the surface is smoothed.
@@ -152,7 +152,7 @@ where:
 
 All angles are saved in configuration parameters and can be set at startup.
 
-Lighting angles greatly affect the view of a 3D-scene when they are close to viewing
+Lighting angles greatly affect the view of a 3d-scene when they are close to viewing
 angles. It is convenient to first select the viewing angles and then set lighting close
 to view for fine tuning. This can be done by calling the config: <o>^C</o> and explicitly set.
 <a name='bb'></a>
@@ -162,7 +162,7 @@ to view for fine tuning. This can be done by calling the config: <o>^C</o> and e
 
 > s3d                                # a prompt to select a stack will be displayed
 > s3d   Stk                          # display Stack: Stk
-> s3d   Stk   config                 # display Stack: Stk with config. of the 3D-scene
+> s3d   Stk   config                 # display Stack: Stk with config. of the 3d-scene
                                      # By default config. file has extention: .s3d,
                                      # if config. is absent, default config. is used
 > s3d   Stk   config       <r>main</r>      # it is possible to run several <r>s3d</r>, all follow up
@@ -198,13 +198,13 @@ Example( start 4 synchronized s3d-windows ):
          Show clip - <a href='#tif'>command: tif </a>.
          To copy window image to clipboard: <r>&lt;Alt + PrtSc></r>.
 
-<r>&lt;Drag></r> - Mouse movement while any button is pressed - rotate 3D-scene :
+<r>&lt;Drag></r> - Mouse movement while any button is pressed - rotate 3d-scene :
          angles are showing in the window title: a-"alpha" and b-"beta".
          Right/Left - rotation around a Vertical   Axis - config.param. <r>a</r>[deg.]
          Up / Down  - rotation around a Horizontal Axis - config.param. <r>b</r>[deg.]
-<r>^+ / ^-</r>   - increase / decrease by ~10%  3D-scene image - config.param. <r>K</r>
-<r>&lt;Shift + H/L></r> - increase / decrease  Vertical size of 3D-scene - config.param. <r>Kh</r>
-<r>&lt;Shift + Left| Right| Up| Dn ></r> - shift 3D-scene in the window  - config.param. <r>sx, sy</r>
+<r>^+ / ^-</r>   - increase / decrease by ~10%  3d-scene image - config.param. <r>K</r>
+<r>&lt;Shift + H/L></r> - increase / decrease  Vertical size of 3d-scene - config.param. <r>Kh</r>
+<r>&lt;Shift + Left| Right| Up| Dn ></r> - shift 3d-scene in the window  - config.param. <r>sx, sy</r>
 <a name='os'></a>
 	<o>menu>  Map,  Axes,  smooth/ Blur</o>
 
@@ -344,17 +344,17 @@ List of <n>config. parameters [default values]</n> - <r>how to set/ call</r> :
 
 <a name='lin'></a>
 <r>^1</r> - Load <r>"Lines"</r>, prompt to select file( extention: <r>.lin</r> ).
-     The text file contains descriptions of 2D and 3D-lines( can be mixed in one file ).
+     The text file contains descriptions of 2d and 3d-lines( can be mixed in one file ).
 
-     The 2D-Line is given by the coordinates of the points that lie on the "Map".
+     The 2d-Line is given by the coordinates of the points that lie on the "Map".
      Points allowed outside the "Map", but only fragments of lines that are on the "Map"
      will be displayed.
 
-     Points 3D-lines contains 3 coordinates( X,Y,Z-Vertical). Only fragments of 3D-lines
+     Points 3d-lines contains 3 coordinates( X,Y,Z-Vertical). Only fragments of 3d-lines
      which are inside the axes box will be displayed.
 
      Line coordinates are specified in files with <a href='#dat'>###-format</a> ( see demo\lines\*.lin ).
-     The number of columns = 2 or 3 corresponds to 2D or 3D-Line.
+     The number of columns = 2 or 3 corresponds to 2d or 3d-Line.
      The number of rows = the number of the Line points(may be =1 -sphere is displayed).
      Point coordinates are NOT required to be integer( may contain decimal point ).
 
@@ -364,34 +364,34 @@ List of <n>config. parameters [default values]</n> - <r>how to set/ call</r> :
          <r>w=N_pix </r>      - Line Width/ diameter in pixels, default: w=1 .
 
 Examples:<n>
-  ### 3D-Rect.Arc[ 4, 3 ] <r>w=17.5 c=99ffcc</r>  !Width=17.5p, Color=99ffcc, opacity=100%
+  ### 3d-Rect.Arc[ 4, 3 ] <r>w=17.5 c=99ffcc</r>  !Width=17.5p, Color=99ffcc, opacity=100%
     40 100 180
     40 20  500
     20 20  500
     20 100 180
 
-  ### 3D-Sphere[ <r>1,</r> 3 ] <r>C=ff9999_30 w=60</r>   !<r>Sphere:</r> diameter=60p, opacity=30%
+  ### 3d-Sphere[ <r>1,</r> 3 ] <r>C=ff9999_30 w=60</r>   !<r>Sphere:</r> diameter=60p, opacity=30%
     27 57 430
 
-  ### <r>2D</r>-Rectangle[ 5, <r>2</r> ]                 !default: c=0, w=1, opacity=100%
+  ### <r>2d</r>-Rectangle[ 5, <r>2</r> ]                 !default: c=0, w=1, opacity=100%
     50   90
     50  107
     12  107
     12   90
     50   90
 </n>
-<r>^2</r> - ON/ OFF all( 2D,3D ) <r>Lines Display</r> in all frames.
+<r>^2</r> - ON/ OFF all( 2d,3d ) <r>Lines Display</r> in all frames.
 
-With 2D-lines, you can make additional markup of the "Map", for example:
+With 2d-lines, you can make additional markup of the "Map", for example:
 trajectories, coordinate grids, defining boundaries, zoning ...
-3D-lines allow you to display: 3D-markers(e.g. balls), 3D-paths, 3D-trajectories ...
+3d-lines allow you to display: 3d-markers(e.g. balls), 3d-paths, 3d-trajectories ...
 Examples can be viewed in demo\lines\*.lin .
 <a name='ss'></a>
 	<o>menu>  Cross Sections </o>
 
-View as 2D-graphs all values of i-row, j-column and value[i,j] through all Stack.
+View as 2d-graphs all values of i-row, j-column and value[i,j] through all Stack.
 <r>^V</r> -ON/ OFF sections, cursor must point ij-element on the "Map".
-    Two lines: <r>i-row</r>, <n>j-column</n> will show on the "Map"  and  three new 2D-windows.
+    Two lines: <r>i-row</r>, <n>j-column</n> will show on the "Map"  and  three new 2d-windows.
     Pressing <r>^V</r> again turns OFF Sections.
 
 Moving Sections by arrow keys :
@@ -436,7 +436,7 @@ To get RGB colors, you can use the dialogs: <r>^8 or ^9</r> ( Custom Color.../ R
 
 <r>^0 = &lt;Ctrl + Zero ></r> - Load "Standard Palette"
 
-<r>^9 -"Background Color"</r>- opens the dialog to select the color of the 3D-scene.
+<r>^9 -"Background Color"</r>- opens the dialog to select the color of the 3d-scene.
      Default: f2f2f2, the Opacity of the Background is always 100%.
      The Background Color can be associated with a specific stack type.
 
@@ -455,10 +455,10 @@ Good róviews of using Palettes and Colors:
    https://www.kennethmoreland.com/color-maps/ColorMapsExpanded.pdf </a>
 ________________________________________________________________________________________
 <a name='b3d'></a>
-	<o>command: b3d -"Body-3D" display of the Body or Figure
+	<o>command: b3d -"Body-3d" display of the Body or Figure
 </o>
 Implementation is based on the<a href="#sss"> s3d command</a>.
-Description of the body consists of 2 frames.  1-st:  <r>Vertices( 3D-points )</r>  and
+Description of the body consists of 2 frames.  1-st:  <r>Vertices( 3d-points )</r>  and
 2-nd:  <r>Faces/Facets</r>  in one stack.  Frame names don't matter.
 
 Each vertex is described by row of <r>four values</r>:  id-number and 3d-coordinates: x, y, z .
@@ -691,12 +691,12 @@ The only limitation is that you cannot break a numeric value.  Example( correct 
 
 > <n>echo</n> ### V[200]: <r>101*99 (98,0)</r> <n>></n> Vect  <n>&</n>  fmt Vect    !create V[200] and print it
                                  ! Used the opportunity <r>to create a stack in one line</r>.
-								 
+
 Starting from version 21.1, for text data you can use a <n>shortened header:  ### []</n> .
 The number of columns is the number of values in the first row of data.
 The number of rowes is defined by the file length or the next header. Example:
 <n>
-### [] T8        ! shortened HEADER for frame[3,5] of text double precision data  
+### [] T8        ! shortened HEADER for frame[3,5] of text double precision data
   1.41673775804     2.16775769909     2.42139177571     1.85775663706     2.47759811625
   2.07666607657     1.7660799297      1.96489360786     2.27607551608     2.1607433131
   3.12731327412    -.273277055213     .0544477327523   -.396327103658    -.333276174596
@@ -1268,7 +1268,7 @@ where:  <r>Nint</r> - the Number of Intervals in the range [min,max], default: 1
 	Valid range for Nint is from 4 to 2000 .
 
 if key <r>/add=File</r> is present, Additional Graphics from File[.add] is added
-to the chart( see <a href='#gra'>Use of 2D-graphics</a> ).
+to the chart( see <a href='#gra'>Use of 2d-graphics</a> ).
 
 In the opened Histogram window, you can change the Number of Intervals:
 in the upper right corner <r>enter a new value and press &lt;Enter></r>.
@@ -1390,7 +1390,7 @@ ________________________________________________________________________________
 <a name='dim'></a>
 	<o>dim32  Stk  > File   !"<r>DIM</r>ension: <r>3d -> 2d</r>"
 </o>
-If one of the 3D-Stack sizes = <r>1</r>, the stack is converted to a 2d-matrix.
+If one of the 3d-Stack sizes = <r>1</r>, the stack is converted to a 2d-matrix.
 This situation occurs when getting a section of the stack with the command <a href="#get">get </a>:
 
   section along <r>i-row   </r>:   > get Stk [ <r>i</r>, dj, dk ]
@@ -1547,9 +1547,9 @@ Result: 3 stacks separated by "<f>### &lt;eos></f>":
 
 Useful info: Rj-column is Eigen Vector with Eig.Value Ej of At*A, Sj=sqrt(Ej)
              Lj = A*Rj/Sj ,  where:  Lj-Left,  Rj-Right,  Sj-Singular Value
-             SVD works even if m < n !
+             SVD works even if m &lt; n !
 
-We can neglect small and zeros Singular Values/Vectors and use r < n :
+We can neglect small and zeros Singular Values/Vectors and use r &lt; n :
 	 ___n___                     __r__
 	|       |                   |     |      __r__      ___n___
 	|       |                   |     |     |     |    |       |
@@ -1989,7 +1989,7 @@ examples:
 
 default <r>"Legend"</r> contains:  colored line with marker,  stack name  and  column number.
 "Legend" can be dragged. Before saving, you can add Texts(^T), Lines(^L), Figures(^F).
-&lt;F1> -"Help": Add.graphics, options: ^T, ^L, ^F, ZOOM ...  <a href="#gra">more abour 2D-graphics</a>.
+&lt;F1> -"Help": Add.graphics, options: ^T, ^L, ^F, ZOOM ...  <a href="#gra">more abour 2d-graphics</a>.
 
          c = Colors[ 11 ]:     m = Markers[ 10 ]:
          <b>0 - black             </b>0 - LINE WITHOUT MARKER
@@ -2056,7 +2056,7 @@ We can create the config dynamically on the fly while executing the batch file, 
   <r>vimp config</r></n>
 ________________________________________________________________________________________
 <a name='gra'></a>
-	<o> Use of 2D-graphics</o>
+	<o> Use of 2d-graphics</o>
 
   &lt;F1>      - quick help.
   &lt;^S>      - save image in .WMF format
@@ -2069,12 +2069,12 @@ This allows you to build a table of measurements: after clicking go to the text 
 and <r>"Paste"</r> the values from the clipboard( <r>&lt;Ctrl+V> or &lt;Shift+Ins></r> ).
 
 You can select and enlarge a fragment of the chart - <r>ZOOM</r>:
-1. Press Left Mouse button and <r>"Drag"</r>.
+1. Press Left Mouse button and <r>"Drag" Down-Right</r> .
 2. Without releasing the mouse button, select the size of the rectangle.
 3. Release the mouse and <r>click inside the rectangle</r> - a new ZOOM window will open.
 4. Select the size and aspect ratio of the new ZOOM window.
 5. Select the position of ZOOM in the main window - <r>"Drag" rectangle</r>.
-6. The size of the rectangle can be changed: <r>"Drag" any corner of the rectangle</r>.
+6. The size of the rectangle can be changed: <r>"Drag" ANY corner of the rectangle</r>.
 7. The rectangle in the main window exists as long as ZOOM window is not closed.
 
 You can add <r>TEXT, LINE or FIGURE( box, oval, romb )</r> anywhere in the window:
@@ -2086,12 +2086,12 @@ You can add <r>TEXT, LINE or FIGURE( box, oval, romb )</r> anywhere in the windo
 
   - <r>&lt;Ctrl+L></r> - add  <r>LINE</r>
         A line can consist of several fragments: Bezier curves and/or straight lines.
-        Form is controled by Hotspots( HS ). <r>YELLOW HS</r> are used in Bezier curves,
-        which provide a continuous second derivative. YELLOW HS can only be dragged.
-        If they are turned off(X-function), you can get fragment of straight line.
+        Form is controled by Hotspots( HS ). <r>YELLOW HS</r> are used in Bezier curves
+        to control the shape. They are arranged symmetrically for continuity of the
+        first derivative. You can OFF them (X-function) to get fragment of straight line
 
         The <r>RED HS</r> define the start and end of the fragment.
-        When the cursor is hovered over a HS, RED HS is activated - the cursor changes
+        When the cursor is hovered over a HS, it is activated - the cursor changes
         shape to a "hand". When RED HS is activated, you can execute the functions by
         pressing the keyboard: <r>A/D, X, &#8592;/&#8594;</r>.
         If no one HS is active - the function is applied to the Last Line Fragment.
@@ -2110,15 +2110,21 @@ You can add <r>TEXT, LINE or FIGURE( box, oval, romb )</r> anywhere in the windo
       - <r>+/-</r>  - increase/ decrease Line Width/ thickness of the Figure Border;
       - <r>Right Mouse Drag  any  Red Hotspot  moves  the whole  FIGURE !</r>
 
+  - <r>&lt;Ctrl+Z></r> - Delete Last Added: Text, Line, Add.Graphics. May be done several times.
+
+<n>!!! After Drag Text/ Hotspot, Fine Tuning of the Position can be done by ARROW Keys !!!
+    Hotspot must be Active("hand"). ARROW Keys reproduce LAST Move/Drag Mouse Function.
+    Standard use:  Drag Text/ Hotspot  by Mouse,  Fine Tuning  by ARROW Keys .</n>
+
   - <r>&lt;Alt +A></r> - Save to File <r>Additonal Graphics</r>: Texts,Lines,Figures, previous Add.Graph.
                Add.Graphics is not tied to the subject coordinates. It exists in the
                window coordinates !  One Graph  can be used  in  different charts.
   - <r>&lt;Ctrl+A></r> - Add to chart Add.Graphics from File[.add]( saved by &lt;Alt+A>).
                May be done several times  with  different addons.
 
-  - <r>&lt;Ctrl+Z></r> - Delete Last Added: Text, Line, Add.Graphics. May be done several times.
-
   - <r>&lt;Ctrl+B></r> - ON/ OFF  <r>Background</r> Color  of the chart.
+
+  - <r>&lt;Ctrl+C></r> - ON/ OFF  Cursor Lines."+
 
   - <r>&lt;Ctrl+S></r> - Save chart in <r>"Windows Meta File"</r> - vector graphics, that scales well
                and is supported by MS Word, ACDSee, Total Commander &lt;F3> ...
@@ -2380,7 +2386,7 @@ ________________________________________________________________________________
   <n>double[][] inFrame8( String file ) </n>//read the <r>1st frame</r> of the stack into <r>double[][]</r>
 
   <n>void ttFrame( Object <r>F</r> ) </n>//<r>F</r>rame out: <r>float[][]   or double[][]</r>,   <a href="#bin">bin.format F4|D8</a>
-  <n>void ttFrame( Object <r>F</r>, String name ) </n>//the same as previous with <n>Frame_Name</n>
+  <n>void ttFrame( Object <r>F</r>, String name )  </n>//the same as previous with <n>Frame_Name</n>
   <n>void ttStack( Object <r>S</r> )</n> //<r>S</r>tack out: <r>float[][][] or double[][][]</r>, <a href="#bin">bin.format F4|D8</a>
 	// output format( F4 or D8 ) depends on Object: float[]... or double[]...
 
@@ -2403,9 +2409,9 @@ then the filename might look like this: <r>Stk:3, -:4</r>. Last means: 4th stack
 
   <n>float [][]   reader.inFrame () </n>   // read frame into <r>float [][]</r>    - 2d-array ;
   <n>double[][]   reader.inFrame8() </n>   // read frame into <r>double[][]</r>    - 2d-array ;
-                                     // Frame can be in any format:<a href="#dat"> Text,I2,F4,D8<a>
-  <n>float [][][] reader.inStack () </n>   // read stack into <r>float [][][]</r> - 3d-array ;
-  <n>double[][][] reader.inStack8() </n>   // read stack into <r>double[][][]</r> - 3d-array ;
+                                    // Frame can be in any format:<a href="#dat"> Text,I2,F4,D8<a>
+  <n>float [][][] reader.inStack () </n>   // read stack into <r>float [][][]</r>  - 3d-array ;
+  <n>double[][][] reader.inStack8() </n>   // read stack into <r>double[][][]</r>  - 3d-array ;
 
 The reader reads frame by frame sequentially. If it encounters end of file or
 <r>### &lt;eos></r> (End Of Stack), then the methods <n>inFrame(), inFrame8()</n> return null
@@ -2418,9 +2424,9 @@ stacks in the file/stream, the reader is ready to read the next stack.
 reader does not need to be closed, readers are closed at the end by the method: <n>clott()</n>.
 A package to read/write  ###-files  in  <r>PYTHON</r>:  <r>kadr.py</r>  - pik3d\ext\###_PYTHON.zip .
 <o>
-Simple 2D-graphics ( can be used with <a href="#jj">jj-technology</a> ):</o>
+Simple 2d-graphics ( can be used with <a href="#jj">jj-technology</a> ):</o>
 
-Universal pik3d window <r>gra</r> is used. It supports all services <a href="#gra">"Use of 2D-graphics"</a>.
+Universal pik3d window <r>gra</r> is used. It supports all services <a href="#gra">"Use of 2d-graphics"</a>.
 static methods:<n>
   <r>gra</r> simple( String title, double[] xx, double[] yy, int mark )  </n>// one plot: y(x)<n>
   <r>gra</r> simple( String title, double[] yy )                         </n>// xx[]={1,2,3...}<n>
