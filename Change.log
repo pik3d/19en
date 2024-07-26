@@ -1,7 +1,9 @@
 version 21.2
-
   - The functionality of the mouse/keyboard in 2d-graphics has been expanded:
-    - cursor lines (can be turned on/off)
+    - Cursor Lines (can be turned on/off)
     - Fine-tune the cursor position using the arrow keys
-	
-  - several bugs are fixed. 
+  - several bugs are fixed.
+
+version 21.2.1
+  - 2d-graphics: improved interaction between Hot Points and Cursor Lines.
+
