@@ -1,5 +1,5 @@
 ![head](/assets/images/830x290.jpg)
-Framework pik3d v.21.2
+Framework pik3d v.22
 
     PROCESSING AND 3D-DISPLAY OF MATRICES/FRAMES AND THEIR SEQUENCES
 
@@ -38,15 +38,19 @@ constitutes the functionality of the command: s3d -"Surface-3D".
 You can view the stack in the "frame by frame" mode, like a video clip.
 During clip you can stop it and change the angles of view, colors, lighting.
 
-The functionality of version 20 is extended by Eigen/Singular Values Decomposition of Matrix
-and Regression analyses based on <a href='https://commons.apache.org/proper/commons-math/'>"The Apache Commons Mathematics Library"</a>.
+The surface can be displayed in two ways: "Smooth" and "bar-View" - a set of vertical
+bars. You can switch the view by pressing <F4> at any time.
 
-Version 21 includes tool: b3d -"Body-3D" for 3D-display of bodies defined by
+Version 21 and later includes tool: b3d -"Body-3D" for 3D-display of bodies defined by
 quadrilateral faces (up to 10,000 faces). You can control Opacity of body/surface.
+2D/3D - Points|Lines|Body can be added to the 3d-scene in s3d. 
+
+Starting from version 20 data processing is extended by Eigen/Singular Values Decomposition of Matrix
+and Regression analyses based on <a href='https://commons.apache.org/proper/commons-math/'>"The Apache Commons Mathematics Library"</a>.
 
 The framework has simple but effective 2D-graphics tools for displaying
 columns and rows of matrices. Simple graph-editor can add text, lines, figures to chart.
-2D-graphics can be saved in vector format: WMF - "Windows Meta File".
+2D-graphics can be saved in vector format: WMF - "Microsoft Windows Meta File".
 They scale well and can be used in MS Word documents, conveniently viewed using ACDSee
 , Total Commander<F3> ...
 
@@ -76,7 +80,7 @@ or by means of "pipe" (it can reduce disk usage and increase performance).
 Any command can save the pipe-output to the file for further processing( add to command @file).
 
 The framework can be installed on Windows 7, 10, Linux (tested in Mint 21.1).
-Current version 21.1 is compiled with JAVA-21 using javaFX. It can be run under JAVA-21,22.
+Current version 22 is compiled with JAVA-21 using javaFX. It can be run under JAVA-21,22.
 
 Description of the framework, formats and install procedure in the file:
 pik3d_DOC.html (contained in the install archive: pik3d.zip).
@@ -84,6 +88,8 @@ pik3d_DOC.html (contained in the install archive: pik3d.zip).
 To exchange large data ###-format includes binary data presentation.
 In addition CSV-file can be convertrd to binary ###-format file.
 
+![opacF4](/assets/images/OpacF4.jpg)
+![polibo](/assets/images/plb2.jpg)
 ![4_view](/assets/images/4view.jpg)
 ![minMAJ](/assets/images/2dgra.png)
 To download and install:

@@ -16,12 +16,12 @@ x{background:#333333; color:#00FF00; font-size:13px; line-height:13px; font-fami
 <h5><pre><a name='s3d'><f>pik3d - framework for processing and 3d-display of matrices and their sequences
         Help has standard HTML navigation:  &lt;Home>,  &lt;End>,  <a href="#ins">links</a>
 </f><a name='ogl'></a>
-<a href='#fwk'>DESCRIPTION of&nbsp; pik3d &nbsp;v. 21.2</a>
+<a href='#fwk'>DESCRIPTION of&nbsp; pik3d &nbsp;v.22.0</a>
 <a href="#ins">INSTALL pik3d </a>
 <a href="#dat">###-format of the data: FRAME, STACK</a>
 <a href="#cmd">COMMANDS</a>
 
-  <a href='#sss'>s3d -"Surface-3D" </a>                           ! <r>3d</r>-display of the Stack
+  <a href='#sss'>s3d -"Surface-3D" </a>                           ! <r>3d</r>-display of the Stack [+Additions]
   <a href='#b3d'>b3d -"Body-3D" </a>                              ! <r>3d</r>-display of the Body or Figure
 
 Stack: create, view, info:
@@ -95,13 +95,15 @@ ________________________________________________________________________________
 <a name='sss'></a>
   <o>command: s3d -"Surface-3d" display Matrix/ Frame and their sequences
 </o>
-	 <a href='#bb'>Startup, initial parameters</a>
-	 <a href='#st'>Stack viewing</a>
-	 <a href='#os'>Map,  Axes,  smooth/ blur</a>
-	 <a href='#cf'>Configuration</a>
-	 <a href='#pp'>Load Stack, Details, Lines</a>
-	 <a href='#ss'>Cross Sections</a>
-	 <a href='#pal'>Colors</a>
+	 <a href='#bb' >Startup, initial parameters</a>
+	 <a href='#st' >Stack, Details, +Lines, +Body</a>
+	 <a href='#cli'>View  Stack/ Frame, Clip</a>
+	 <a href='#lig'>Size,  Position,  Light</a>
+	 <a href='#os' >Map,  Axes,  Blur</a>
+	 <a href='#ss' >Cross Sections</a>
+	 <a href='#pal'>Colors, Opacity</a>
+	 <a href='#cf' >Configuration</a>
+	 <a href='#defcfg'>Standard/ initial Config.</a>
 
     <o>Coordinate system  and  viewing / lighting  angles</o>
 
@@ -126,29 +128,27 @@ Consider a matrix element that is in the <r>i</r>-row, <r>j</r>-column and has t
 The matrix element can be displayed as a point in 3d-space: X - matrix row,
 Y - matrix column, Z - element value. The set of such points forms a 3d-surface.
 
-A strict mapping would consist of a set of vertical rectangular bars.
-To simplify perception, the surface is smoothed.
-
 On the XOY plane, the element m[i,j ] corresponds to the square:  i-1&lt; x &lt;i,  j-1&lt; y &lt;j
-The corresponding surface element can be inclined, convex, concave ...
-The display is not entirely accurate, in other words - <r>illustrative</r>.
+The system provides two modes of surface display( <r>&lt;F4></r> - switching of view type ):
+ - <r>Bars</r>   - a set of vertical rectangular bars
+ - <r>Smooth</r> - a surface element can be inclined, convex, concave ...
 
-The <o>observation point</o> is specified by two angles ("Astronomical equatorial system"):
- -"hour angle" - in the plane of the matrix from the OX-axis to the right to the OY-axis
+The <o>observation point</o> is specified by two angles (<r>"Astronomical equatorial system"</r>):
+ -<r>"hour angle"</r> - in the plane of the matrix from the OX-axis to the right to the OY-axis
                  in the interval [-180, +180] degrees;
- -"declination"- angle above the plane of the matrix: [-90,90] degrees.
+ -<r>"declination"</r>- angle above the plane of the matrix: [-90,90] degrees.
 
-Viewing angles can be changed with the mouse while pressing the button and
-in the &lt;Ctrl+C> configuration( will be referenced as <o>^Ñ</o> below ).
+Viewing angles can be changed with the mouse while pressing the button( drag ) and
+in the Configuration Editor( call: <r>&lt;Ctrl+C></r> will be referenced below as <r>^Ñ</r> ).
 
 The <o>position of the light source</o> is set by lighting angles.
-These angles can be changed with the keyboard: &lt;Ctrl> + &lt;arrows> and in the
-configuration: ^C.
+These angles can be changed with the keyboard: <r>&lt;Ctrl> + &lt;arrows></r> and in the
+configuration: <r>^C</r>.
 
-Angles are measured in degrees and displayed in the window title:  v(a,b),  *(c,d)
+Angles are measured in degrees and displayed in the window title:  <r>v(a,b),  *(c,d)</r>
 where:
-       v - "view"  - <o>viewing  angles</o>: a - "hour", b - "declination"
-       * - "Light" - <o>lighting angles</o>: c - "hour", d - "declination"
+       <r>v - "view"</r>  - <o>viewing  angles</o>:  "hour", "declination"
+       <r>* - "Light"</r> - <o>lighting angles</o>:  "hour", "declination"
 
 All angles are saved in configuration parameters and can be set at startup.
 
@@ -181,231 +181,181 @@ Example( start 4 synchronized s3d-windows ):
 </n>
 	<o>Shortening and denotation used in Help:
 </o>
-<r>^Êey  = &lt;Ctrl + Key></r> - simultaneously pressed &lt;Ctrl> and  &lt;Key>
 <r>menu> - Context Menu</r> is calling in any place of the s3d-window by pressing <r>Right Mouse</r>
         Almost all commands of the Context Menu can be executed with a key combination
+<r>^Êey  = &lt;Ctrl + Key></r> - simultaneously pressed  &lt;Ctrl> and &lt;Key>
+
+<r>&lt;F1></r>  - Help - show file: <n>pik3d/pik3d_DOC.html</n> in a separate window
+<r>&lt;F4></r>  - switching of the surface view mode: <r>"Smooth"/ "Bar View"</r>  at any time
 <r>^C    -"Config"</r> - call the Configuration Editor
 <a name='st'></a>
-	<o>menu>  Stack View</o>
-
-<r>&lt;Left> / &lt;Right></r> - (arrow keys) previous / next  frame;
-<r>&lt;Home> / &lt;End></r>   - "initial( 1-st )"/ "End( Last )" stack frame;
-<r>&lt;Mouse Wheel></r>    - frame "paging":  "Down"- forward, "Up"- backward;
-
-<r>&lt;Space></r>- Start/ Stop of the Clip( sequential show frame by frame );
-<r>^K</r>     - call dialog to define a frame number per second for clip;
-<a name='s3F2'></a><r>&lt;F2></r>   - save clip in the multipage .tif-file( prompt to select file );
-         Show clip - <a href='#tif'>command: tif </a>.
-         To copy window image to clipboard: <r>&lt;Alt + PrtSc></r>.
-
-<r>&lt;Drag></r> - Mouse movement while any button is pressed - rotate 3d-scene :
-         angles are showing in the window title: a-"alpha" and b-"beta".
-         Right/Left - rotation around a Vertical   Axis - config.param. <r>a</r>[deg.]
-         Up / Down  - rotation around a Horizontal Axis - config.param. <r>b</r>[deg.]
-<r>^+ / ^-</r>   - increase / decrease by ~10%  3d-scene image - config.param. <r>K</r>
-<r>&lt;Shift + H/L></r> - increase / decrease  Vertical size of 3d-scene - config.param. <r>Kh</r>
-<r>&lt;Shift + Left| Right| Up| Dn ></r> - shift 3d-scene in the window  - config.param. <r>sx, sy</r>
-<a name='os'></a>
-	<o>menu>  Map,  Axes,  smooth/ Blur</o>
-
-<r>^D -"Map Down"</r>- Lower/Raise "Map" half the height of the OZ axis.
-         Standard Map position is on the minimum value of the OZ axis.
-
-<r>^M -"Map Only"</r>- ON/ OFF TOP view of the matrix/ frame, i.e. standard matrix view:
-         rows to the Down, columns to the Right, value has color from "palette".
-
-<r>^+Mouse CLick</r>-"Read Value" pointed by cursor and Write it to the editable window.
-         Cursor must point to the "Map"(must be "Map Down" or "Map Only").
-         Record contains:  <r>Frame number:  [ row, column ] = value</r>.
-         To save text in the editable window: select text and click ^C (copy).
-         Paste (^V) it in any convenient Text Editor.
-         This functionality may be used to draw <a href="#lin">lines<a> on the "Map".
-
-<r>^A -"Axes"</r>- ON/ OFF Axes display.
-<a name='cob'></a>
-<r>^X -"MAX/min of Z-axis"</r> - call dialog to define parameters of the vertical Z-axis.
-     If the checkbox: "Automatic" is checked - MAX/min are found from the Stack data.
-     Clear it by pressing checkbox or <r>&lt;Tab></r> - transfer focus to the next component.
-     Sliders can be moved by Mouse or Keyboard: <r>&lt;Left>,&lt;Right>, &lt;Home>,&lt;End></r>.
-     While changing value by slider image changes immediately. It gives opportunity
-     to do fine adjustment of MAX/min and surface colors.
-     value can be entered from the keyboard. To activate new value press &lt;Enter>.
-     Image will be updated. If <r>&lt;Esc></r> is pressed, the dialog closes and the frame
-     is returned to its original state.
-
-<r>^B - Smoothing("Gaussian Blur")</r> - call Smoothing dialog.
-     The parameter is <r>"RADIUS of Gaussian bell"= 2*sigma</r> - is the visual size and
-     characteristic smoothing size( fragments > RADIUS remain after filtering ).
-     Fine tuning can be done by holding down the key: <r>&lt;Left></r> or <r>&lt;Right></r>.
-     At the end of the dialog, you need to click the button: <r>Save</r>. In case of <r>&lt;Esc></r>
-     the dialog closes and the frame is returned to its original state.
-
-     <r>DURING DIALOGUES: ^X, ^B, ^O  angles can be changed  and  ^A, ^D, ^M  can be used</r>
-
-<r>&lt;Ctrl+F2></r> -Save Stack after ^B,^X (data can be changed by MAX/min cutting and smoothing)
-     Prompt to select Stack name. New Stack is saved in <a href='#bin'>binary ###-format F4 BE</a>.
-
-  Example (contains useful tricks for working with <r>^X, ^B, ^O</r> ):
-  Go to folder: pik3d\demo\bell2, start: _run.cmd, stop at frame 10-14 &lt;space>.
-  Press the buttons in sequence:
-
-  <n>^B</n> &lt;Tab> <n>2</n> &lt;Enter> &lt;Enter>
-  <n>^X</n> &lt;Tab> &lt;Tab> <n>12</n> &lt;Tab> &lt;Tab> <n>-6</n> &lt;Enter> &lt;Enter>
-
-  From the slider to slider in <n>^X</n> dialog  you can navigate  using the arrows: UP/DOWN.
-
-  <n>^B</n>                 ! <r>Blur</r> changing:
-     <n>&lt;arrow RIGHT></n>   ! press and hold until the picture stops.
-     <n>&lt;arrow LEFT> </n>   ! press and hold until you reach a convenient Blur.
-  <n>&lt;Esc></n>
-
-  <n>^O</n>                 ! <r>Opacity</r> changing:
-     <n>&lt;arrow LEFT> </n>   ! press and hold until Surface disappears.
-     <n>&lt;arrow RIGHT></n>   ! press and hold until you reach a convenient Opacity.
-  <n>&lt;Enter></n>
-<a name='cf'></a>
-	<o>menu>  Configuration</o>
-
-All parameters: window position, dimensions, angles, colors, enabled functions ...
-are stored in structure "CONFIGURATION". In the process of working with s3d, the user
-sets these parameters, to get the desired display. A successful configuration can be
-temporarily saved to memory ^S and later restore - ^R. Restoring a saved configuration
-or the configurationwhat was at the moment of last stack loading.
-
-Viewing, editing and saving configuration in a file is possible after <r>^C</r> -"Config".
-An editable text box is displayed with parameters  that differ  from  default values.
-The window can be closed without saving changes: <r>&lt;Esc></r>.
-When editing, you can change, remove or add  any  valid parameters.  After editing,
-the configuration can be installed immediately or saved in a File. If some parameter is
-removed from the config window, then  during  installation / loading  it will  receive
-default value. It is usful  to set in config.editor  angles  of  view/ lighting.
-
-The new configuration can be :
-   button:  <r>Set</r>          - set immediately;
-   button:  <r>Save in File</r> - save for later loading.
-
-Config.file can be uploaded in 3 ways:
-- <r>at the start of s3d</r> specify the name of the config.file after the stack name;
-- <r>^L</r> - loading config file during operation (file selection dialog);
-- <r>^N</r> - loading the next stack and config.file ( config.parameter: <r>Next: Stk Cfg</r> );
-       It is useful when viewing multiple stacks sequentially  or  one stack in several
-       configurations( palettes, angles, blur ... ).
-
-List of <n>config. parameters [default values]</n> - <r>how to set/ call</r> :
-
-  <n>max: [from Stack]</n>  - maximum value of the vertical axis - <r>^X</r> ;
-  <n>min: [from Stack]</n>  - minimum value of the vertical axis - <r>^X</r> ;
-
-  <n>x:       [ 612]</n>  - screen x-coordinate of the upper left corner of s3d-window in pix.;
-  <n>y:       [ 222]</n>  - screen y-coordinate of the upper left corner of s3d-window in pix.;
-  <n>w:       [ 640]</n>  - window width  in pixels ;
-  <n>h:       [ 520]</n>  - window height in pixels ;
-  <n>sx:      [  0 ]</n>  - horizontal shift of the scene in the window - <r>&lt;Shift + Left/Right></r>;
-  <n>sy:      [  0 ]</n>  - vertical   shift of the scene in the window - <r>&lt;Shift + Up/Dn></r> ;
-
-  <n>K:       [  1 ]</n>  - scene  size   increase - <r>^+ / ^-</r> ( +/- ~10% );
-  <n>Kh:      [  1 ]</n>  - vertical axis increase - <r>&lt;Shift + H / L></r> (Higher/Lower) ;
-
-  <n>a[deg]:  [ 20 ]</n>  - rotate the scene around   a vertical   axis ("hour" angle );
-  <n>b[deg]:  [ 25 ]</n>  - rotate the scene around the horizontal axis ("declination");
-
-  <n>aLight:  [-60 ]</n>  - "hour"angle of the lighting( around   a vert. axis) - <r>^Left/^Right</r>;
-  <n>bLight:  [ 30 ]</n>  - declination of the lighting( around the horiz.axis) - <r>^Up / ^Down </r>;
-
-  <n>blur:    [  0 ]</n>  - blur/ smoothing   - <r>^B</r> ;
-  <n>Ksec:    [ 10 ]</n>  - Frames per second - <r>^K</r> ;
-
-  <n>Dn:      [  0 ]</n>  - mode: "Map Down"  - <r>^D</r> ;
-  <n>Axes:    [  1 ]</n>  - mode: "show Axes" - <r>^A</r> ;
-  <n>Map:     [  0 ]</n>  - mode: "Map Only"  - <r>^M</r> ;
-
-  <n>Back:    RRGGBB</n>  - window <r>Back</r>ground Color: default: f2f2f2     - <r>^9</r> ;
-  <n>Text: h  RRGGBB[_op]</n> - <r>Text</r> of Details:  font  Color [_Opacity] - <r>^8</r> ;
-                         default:           14   636363  Opacity =100% ;
-                         In <r>^8 -Dialog</r>  Opacity  can be selected in "Custom Color..."
-
-  <n>Opac: [100%]</n>     - "Opacity"         - <r>^O</r> - dialog  to select <r>Opacity of Surface</r> ;
-  <n>Pal:  [null]</n>     - file "Palette"    - <r>^P</r> - prompt  to select file ;
-  <n>Data: [null]</n>     - file "Details"    - <r>^7</r> - prompt  to select file ;
-  <n>Line: [null]</n> <r>[0]</r> - file "Lines"      - <r>^1</r> - prompt  to select file ;
-                                       - <r>^2</r> - ON/ OFF <r>Lines Display</r>( default=0 );
-
-  <n>Next: [Stk=current(,)] [Cfg=current]</n> - Next Stack and config. - <r>^N</r> (demo\lines\*.s3d).
-<a name='pp'></a>
-	<o>menu>   Stack,  Details,  Lines</o>
-
-<r>^F</r> - Load Stack, prompt to select file. Current config. is saved as if <r>^S</r> was pressed.
-
-<r>^N</r> - Load Next Stack/Config. in case current config. contains parameter: Next .
-
-<r>^7</r> - Load <r>"Details"</r>, prompt to select file. Lines of this text file will be displayed
-     in top right corner after frame number. The line number in the file corresponds
-     to the frame number( see demo\warp\*.s3d, Text.txt ).
-
-<a name='lin'></a>
-<r>^1</r> - Load <r>"Lines"</r>, prompt to select file( extention: <r>.lin</r> ).
+	<o>menu>  Stack, Details, +Lines, +Body
+</o>
+<r>^F</r> - Load Stack - open select file dialog
+<r>^7</r> - Load Details( text file with Frame descriptions ) - open select file dialog
+<r>^N</r> - loading the next stack and config.file( must be config.param.: <r>Next: Stk Cfg</r> )
+     It is useful when viewing multiple stacks sequentially  or  one stack in several
+     configurations( palettes, angles, blur, additions ... ).
+<a name='lin'></a> <a name='pp'></a>
+<r>^2</r> - ON/ OFF <r>display Additions</r>, show menu to select: 1-Points, 2-Lines, 2-Body
+<r>^1</r> - Load and display Additions: <r>"Points"/ "Lines"/ "Body"</r> - show menu to select: 1|2|3
+     Default file extensions: <n>.pnt | .lin | .bdy</n>
      The text file contains descriptions of 2d and 3d-lines( can be mixed in one file ).
 
-     The 2d-Line is given by the coordinates of the points that lie on the "Map".
+     The <r>2d-Line</r> is given by the coordinates of the points that lie on the "Map".
      Points allowed outside the "Map", but only fragments of lines that are on the "Map"
      will be displayed.
 
-     Points 3d-lines contains 3 coordinates( X,Y,Z-Vertical). Only fragments of 3d-lines
+     The <r>3d-lines</r> contains 3 coordinates( X,Y,Z-Vertical). Only fragments of 3d-lines
      which are inside the axes box will be displayed.
 
-     Line coordinates are specified in files with <a href='#dat'>###-format</a> ( see demo\lines\*.lin ).
+     Line coordinates are specified in files with <a href='#dat'>###-format</a> ( see demo/lines/*.lin ).
      The number of columns = 2 or 3 corresponds to 2d or 3d-Line.
      The number of rows = the number of the Line points(may be =1 -sphere is displayed).
-     Point coordinates are NOT required to be integer( may contain decimal point ).
 
      The header contains <r>2 additional parameters</r>:
-         <r>c=RRGGBB</r>[<r>_op</r>] - Color in hexadecimal format and may be Opacity[%],
-                         default: c=0 -BLACK, Opacity=100% ;
-         <r>w=N_pix </r>      - Line Width/ diameter in pixels, default: w=1 .
-
+         <r>c=RRGGBB</r>[<r>_op</r>] - Color in hexadecimal format and may be <r>Opacity[%] in decimal!</r>
+                         default for Points and Lines: c=0 -BLACK, Opacity=100% ;
+         <r>w=N_pix </r>      - Line Width/ diameter/ size  in pixels, default: w=1 .
 Examples:<n>
-  ### 3d-Rect.Arc[ 4, 3 ] <r>w=17.5 c=99ffcc</r>  !Width=17.5p, Color=99ffcc, opacity=100%
+  ### 3d-Rect.Arc[ 4, 3 ] <r>w=17.5 c=99ffcc</r>  # Width=17.5p, Color=99ffcc, opacity=100%
     40 100 180
     40 20  500
     20 20  500
     20 100 180
 
-  ### 3d-Sphere[ <r>1,</r> 3 ] <r>C=ff9999_30 w=60</r>   !<r>Sphere:</r> diameter=60p, opacity=30%
+  ### 3d-Sphere[ <r>1,</r> 3 ] <r>C=ff9999_30 w=60</r>   # <r>Sphere:</r> diameter=60p, opacity=30%
     27 57 430
 
-  ### <r>2d</r>-Rectangle[ 5, <r>2</r> ]                 !default: c=0, w=1, opacity=100%
+  ### <r>2d</r>-Rectangle[ 5, <r>2</r> ]                 # default: c=0, w=1, opacity=100%
     50   90
     50  107
     12  107
     12   90
-    50   90
-</n>
-<r>^2</r> - ON/ OFF all( 2d,3d ) <r>Lines Display</r> in all frames.
+    50   90</n>
 
-With 2d-lines, you can make additional markup of the "Map", for example:
-trajectories, coordinate grids, defining boundaries, zoning ...
-3d-lines allow you to display: 3d-markers(e.g. balls), 3d-paths, 3d-trajectories ...
-Examples can be viewed in demo\lines\*.lin .
+<r>3d-Points</r> are described in the same way as <r>3d-Line</r>  and  may be loaded and displayed
+in two ways: as 3d-Line or 3s-Points. Header parameter: <r>w=N_pix</r> defines the size
+of the cube marker( default: w=3 ).
+
+<r>Body</r> description is presented in <a href='#b3d'>b3d -"Body-3D"</a>.
+<r>
+  Important:  Additions  are displayed  in the  current  coordinate  scheme,  i.e.
+              if <a href='#os'>Subject-XY</a> is active, then the coordinates must be appropriate !
+</r>
+With Additions you can make enhanced markup of the "Map" and 3d-space, for example:
+trajectories, coordinate grids, define boundaries, zoning...
+<a name='cli'></a>
+	<o>menu>  View  Stack/ Frame, Clip
+</o>
+<r>&lt;Drag></r> - Mouse movement while any button is pressed - <r>rotate 3d-scene</r>
+         Angles in degrees are displayed in the window title: <n>v("hour","declination")</n>
+         <r>Horizontal</r> Mouse movement - rotation around a Vertical Axis - <n>changes "hour"</n>
+         <r>Vertical</r> movement - rotation around a Horizontal Axis -<n>changes "declination"</n>
+
+<r>&lt;Left> / &lt;Right></r> - &lt;arrow keys> Previous/ Next  Frame
+<r>&lt;Home> / &lt;End></r>   - "initial(1-st)"/ "End" Stack Frame
+<r>&lt;Mouse Wheel></r>    - Frame "paging":  "Down"- forward, "Up"- backward
+
+<r>&lt;Space></r>- Start/ Stop of the Clip( sequential show frame by frame )
+<r>^K</r>     - dialog to define a frame number per second for clip - config.param. <r>Ksec</r>
+<a name='s3F2'></a><r>&lt;F2></r>   - save clip in the multipage .tif-file( select file dialog )
+         Show clip - <a href='#tif'>command: tif </a>
+To <n>"Ñopy"</n> Window image  to clipboard  for subsequent <n>"Paste"</n>:  <r>&lt;Alt + PrtSc></r>
+<a name='lig'>
+	<o>menu>  Size,  Position,  Light
+</o>
+<r>^+ / ^-</r>        - increase / decrease  by ~10%  <n>Window  size</n>   - config.param. <r>K</r>
+<r>&lt;Shift+ H/ L></r> - increase / decrease <n>Vertical size</n> of 3d-scene - config.param. <r>Kh</r>
+<r>&lt;Shift+ Left| Right| Up| Dn ></r> - <n>Shift 3d-scene</n> in the Window  - config.param. <r>Shift</r>
+<r>&lt;Ctrl + Left| Right| Up| Dn ></r> - <n>Adjust Light Source</n>           - config.param. <r>Light,gr</r>
+<a name='os'></a>
+	<o>menu>  Map,  Axes,  Blur</o>
+
+<r>&lt;Alt+M></r>   - ON/ OFF Map display.
+
+<r>^M -"Map Only"</r>- ON/ OFF TOP view of the matrix/ frame, i.e. standard matrix view:
+     rows to the Down, columns to the Right, value has color from "palette".
+
+<r>^D -"Map Down"</r>- Lower/Raise "Map" half the height of the OZ axis.
+     Standard Map position is on the minimum value of the OZ axis.
+
+<r>^A -"Axes"</r>- ON/ OFF Axes display.
+<a name='cob'></a>
+<r>^X -"Z: MAX/min,  Subject X,Y"</r> - dialog to define parameters of the vertical Z-axis
+     and  optionally  set  <n>"Subject" coordinates for X,Y</n>.
+     If the checkbox: <r>"Automatic"</r> is checked - MAX/min are found from the Stack data.
+     Clear it by pressing checkbox or <r>&lt;Tab></r> - transfer focus to the next component.
+     Sliders can be moved by Mouse or Keyboard: <r>&lt;Left>,&lt;Right>, &lt;Home>,&lt;End></r>.
+     While changing value by slider image changes immediately. It gives opportunity
+     to do fine adjustment of MAX/min and surface colors.
+     The value can be entered from the keyboard. To activate new value press &lt;Enter>.
+     Image will be updated. If <r>&lt;Esc></r> is pressed, the dialog closes and the image
+     is returned to its original state.
+
+     To set <n>"Subject" coordinates for X,Y</n> select check box and enter <r>min/MAX</r> values.
+     Values can be both positive and negative. The only requirement is <r>min < MAX</r>.
+     These parameters affect only the marking of the axis in the plane XOY.
+     All additions will be removed after changing them. After re-adding their
+     X,Y coordinates will correspond to the new markup.
+
+     <r>The measurements on the "Map"</r> also correspond to the selected <r>Subject Coordinates</r>.
+
+     If check box <r>"Subject Axes"</r> is not selected - the XOY marking correspods
+     to the Frame size:  Xmax=Row_Number, Ymax=Column_Number .
+
+<r>^B - "Gaussian Blur"</r> - call Smoothing dialog.
+     The parameter is <r>"RADIUS of Gaussian bell"= 2*sigma</r> - is the visual size and
+     characteristic smoothing size( fragments > RADIUS remain after filtering ).
+     Fine tuning can be done by pressing the &lt;arrow-keys>: <r>&lt;Left></r> or <r>&lt;Right></r>.
+     At the end of the dialog, you need to click the button: <r>Save</r>. In case of <r>&lt;Esc></r>
+     the dialog closes and the image is returned to its original state.
+
+DURING DIALOGUES: <n>^X,^B,^O</n>  angles can be changed  and  <n>^A,^D,^M,&lt;F4></n>  can be used.
+
+<r>&lt;Ctrl>+Mouse CLick</r>-"Read Value" pointed by cursor and Write it to the editable window.
+         The cursor must point the "Map" while "Map Down" or "Map Only" view.
+         Record contains:  <n>Frame number:  [ row, column ] = value</n>.
+         To save text in the editable window: select text and click ^C (copy).
+         Paste (^V) it in any convenient Text Editor.
+         This functionality may be used to draw <a href="#lin">lines<a> on the "Map".
+
+  Example (contains useful tricks for working with <r>^X, ^B, ^O</r> ):
+  Go to folder: <n>pik3d\demo\bell2</n>, start: <n>_run.cmd</n>, stop at frame 10-14 &lt;space>.
+  Press the buttons in sequence:
+       <n>^B</n> &lt;Tab> <n>2</n> &lt;Enter> &lt;Enter>
+       <n>^X</n> &lt;Tab> &lt;Tab> <n>12</n> &lt;Tab> &lt;Tab> <n>-6</n> &lt;Enter> &lt;Enter>
+
+  From the slider to slider in <n>^X</n> dialog  you can navigate  using the arrows: <n>UP/DOWN</n>.
+       <n>^B</n>                 ! <r>Blur</r> changing:
+          <n>&lt;arrow RIGHT></n>   ! press and hold until the picture stops.
+          <n>&lt;arrow LEFT ></n>   ! press and hold until you reach a convenient Blur.
+                &lt;Enter>
+       <n>^O</n>                 ! <r>Opacity</r> changing:
+          <n>&lt;arrow LEFT ></n>   ! press and hold until Surface disappears.
+          <n>&lt;arrow RIGHT></n>   ! press and hold until you reach a convenient Opacity.
+                &lt;Enter>
 <a name='ss'></a>
-	<o>menu>  Cross Sections </o>
-
-View as 2d-graphs all values of i-row, j-column and value[i,j] through all Stack.
+	<o>menu>  Cross Sections
+</o>
+View as 2d-graphs all values of <n>i-row</n>, <r>j-column</r> and <m>value[i,j]</m> through all Stack.
 <r>^V</r> -ON/ OFF sections, cursor must point ij-element on the "Map".
-    Two lines: <r>i-row</r>, <n>j-column</n> will show on the "Map"  and  three new 2d-windows.
+    Two lines: <n>i-row</n>, <r>j-column</r> will show on the "Map"  and  three new 2d-windows.
     Pressing <r>^V</r> again turns OFF Sections.
 
-Moving Sections by arrow keys :
-<r>&lt;Alt + Dn></r>    - go to  <r>Next      row</r>
-<r>&lt;Alt + Up></r>    - go to  <r>Previous  row</r>
-<n>&lt;Alt + Right></n> - go to  <n>Next     column</n>
-<n>&lt;Alt + Left> </n> - go to  <n>Previous column</n>
+Moving Sections by &lt;arrow keys>:
+<n>&lt;Alt + Dn>    = "Next      row"</n>
+<n>&lt;Alt + Up>    = "Previous  row"</n>
+<r>&lt;Alt + Right> = "Next     column"</r>
+<r>&lt;Alt + Left>  = "Previous column"</r>
 <a name='pal'></a>
-	<o>menu>  Colors</o>
+	<o>menu>  Colors, Opacity
+</o>
+<r>^O -"Opacity of Surface"</r>, open the dialog to select Opacity[%] -"lack of transparency".
+     If Opacity=  0, it means full transparency, i.e. surface and "map" is not visible.
+     If Opacity=100, it means surface and "map" is not transparent.
 
-<r>^O -"Opacity of Surface"</r>, opens the dialog to select Opacity[%] -"lack of transparency".
-     If Opacity=0, it means full transparency, i.e. surface is not visible.
-
-<r>^P -"Load Palette"</r>, prompt to select a Palette file( default extantion <r>.pal</r> ).
+<r>^P -"Load Palette"</r>, prompt to select a Palette file( default extention <r>.pal</r> ).
 
 "Palette"- a Set of Colors which define the color of the element,depending on the value.
 Specified by a file in the <a href='#dat'> ###-format </a> and  consists of strings that
@@ -422,7 +372,7 @@ The color in the palette can be set in 2 ways::
 
 Example:  Standard Palette   (definitions are equivalent):
 <n>
-  ### Stand.Palet [ 6, <r>4</r> ]  !   ### Stand.Pal16 [ 6, <r>2</r> ]
+  ### Stand.Palet [ 6, <r>4</r> ]  !   ### Stand.Palhex [ 6, <r>2</r> ]
   !Value   R     G     B    !   !Value  RRGGBB
     0     255   255   255   !     0     ffffff
     .2    166   255    77   !     .2    a6ff4d
@@ -436,23 +386,111 @@ To get RGB colors, you can use the dialogs: <r>^8 or ^9</r> ( Custom Color.../ R
 
 <r>^0 = &lt;Ctrl + Zero ></r> - Load "Standard Palette"
 
-<r>^9 -"Background Color"</r>- opens the dialog to select the color of the 3d-scene.
-     Default: f2f2f2, the Opacity of the Background is always 100%.
-     The Background Color can be associated with a specific stack type.
+<r>^8 -"Details(text) Color"></r> - call the dialog to select: FontSize, Color[_Opacity].
+     cfg_default:   Text:  12, 4d4d4d   # font=12, color=4d4d4d, opacity=100 %
 
-<r>^8 -"Details Color"></r> - calls the dialog to select: Font_size, Color, Opacity.
-     Default:  14  636363  Opacity=100%.
+     <r>!!! Attention:</r> Color definition has mix of formats <r>!!!</r>
+     The Color: in  <r>Hexa</r></m>decimal <r>RR</r><g>GG</g><n>BB</n>, the Opacity: in <r>Decimal(%)</r>,  e.g.
+                    <font color=008b8b>8b8b_70             # darkcyan, Opacity= 70 %</font>  (<r>RR</r> is absent!)
+                    <font color=800080>800080              # purple  , Opacity=100 %</font>
+
+<r>^9 -"Background Color"</r>- opens the dialog to select the color of the 3d-scene.
+     cfg_default:   f2f2f2              # Opacity of the Background is always 100 %
+     The Background Color can be associated with a specific stack type.
 
 The Palette File, selected Colors, Opacity can be seen/edited/saved in CONFIGURATION: <r>^C</r>
 and  <r>^S / ^R</r> - Save / Restore  config. in memory.
 
-Examples can be viewed in  demo\lines\*.pal .
+Examples can be viewed in  <n>demo/lines/*.pal</n> .
 Good róviews of using Palettes and Colors:
 <a href="https://eos.org/features/visualizing-science-how-color-determines-what-we-see">
    By S. Zeller and D. Rogers, 21 May 2020
    https://eos.org/features/visualizing-science-how-color-determines-what-we-see</a>
 <a href="https://www.kennethmoreland.com/color-maps/ColorMapsExpanded.pdf">
    https://www.kennethmoreland.com/color-maps/ColorMapsExpanded.pdf </a>
+<a name='cf'></a>
+	<o>menu>  Configuration
+</o>
+All parameters: window position, dimensions, angles, colors, enabled functions ...
+are stored in structure "CONFIGURATION". In the process of working with <o>s3d</o>, the user
+sets these parameters, to get the desired display. A successful configuration can be
+temporarily saved to memory <r>^S</r> and later restore - <r>^R</r>. Restore a saved configuration
+or the configuration, that was at the moment of last stack load.
+
+Viewing, editing and saving configuration in a file is possible after <r>^C</r> -"Config".
+An editable text box displays ALL possible parameters. Parameters which have default
+values are commented by <r>'#'</r>.  You can  edit, comment, uncomment  any parameter.
+
+To simplify view before Saving, commented lines can be removed. While Loading Config.
+the missing parameters  will receive default values  and  will be present  in Config.
+
+The window can be closed without saving changes: <r>Cancel  or  &lt;Esc></r>.
+When editing, you can change, remove or add  any  valid parameters.  After editing,
+the configuration can be installed immediately or saved in a File. If some parameter is
+removed from the config window, then  during  installation / loading  it will  receive
+default value.  It is usful  to set in config. editor  angles of view/ lighting.
+
+The new/edited configuration can be :
+   button:  <r>Set</r>          - set immediately;
+   button:  <r>Save in File</r> - save for later loading( <r>^L</r> ).
+
+Config. file can be uploaded in 3 ways:
+- <r>at the start of s3d</r> specify the name of the config. file after the stack name;
+- <r>^L</r> - loading config file during operation (file selection dialog);
+- <r>^N</r> - loading the next stack and config.file ( config.parameter: <r>Next: Stk Cfg</r> )
+e.g. Next:  S2  cfg.s3d         # stk=S2, cfg=cfg.s3d
+     Next:  QQ                  # stk=QQ, cfg=current
+     Next:   ,  BW              # stk=current, cfg=BW.
+It is useful  when viewing multiple stacks  sequentially  or  one stack  in several
+configurations( palettes, angles, blur ... ), see: demo/lines/*.s3d .
+<a name='defcfg'></a>
+<n>Standard/ initial Config.</n>       <r>Hot Keys to change</r> the parameter:
+----------------------------------------------------------------------------------------
+# Head:     null                <n>Text in the top-left corner can be set <r>only in Config</r></n>
+# Details:  null                <r>^7</r> - dialog to select "Details" file<r>.txt</r>
+
+# Text:     12, 4d4d4d          <r>^8</r> - dialog to set Font and Color of the Head & Details
+# Back:     f2f2f2              <r>^9</r> - dialog to set Background Color
+# Palette:  null                <r>^7</r> - dialog to select "Palette" file<r>.pal</r>
+
+# Points:   null, <n>0</n>             <r>^1/1</r> - dialog to select file<r>.pnt</r>
+# Lines:    null, <n>0</n>             <r>^1/2</r> - --:---:---:--:-- file<r>.lin</r>
+# Body:     null, <n>0</n>             <r>^1/3</r> - --:---:---:--:-- file<r>.bdy</r>
+                                <n>2nd param.= 1-display/ 0-no</n>  can be set:  <r>^2/ 1|2|3</r>
+
+# Zmin,MAX: -.8362, 2.035       <r>^X</r> - dialog to set Z: min/MAX, <n>default: from the Stack</n>
+# SubjXY:   0,80,  0,120        <r>^X</r> - dialog to set Subject X,Y
+
+View,gr:    20, 25              <r>mouse Drag</r> of the Surface - adjust View Angles
+Light,gr:   -60, 30             <r>&lt;Ctrl+arrow></r> adjust Lighting Angles
+x,y,W,H:    612,222, 640,520    <r>Mouse Drag Window, ^+/^- ></r> adjust Window location & size
+Shift:      0, 0                <r>&lt;Shift+arrow></r> shift the Scene in the Window
+
+# K:        1                   <r>&lt; ^+ / ^- ></r>  - adjust Scale of the Scene
+# Kh:       1                   <r>&lt;Shift+ H/L></r> - adjust Z-axis: <r>H</r>igher/<r>L</r>ower
+# Bars:     1                   <r>&lt;F4></r> - switch View of the Surface: Bar/Smooth
+
+# Axes:     0                   <r>^A</r> - ON/ OFF  display of the <r>A</r>xes
+# MAP_Dn:   1                   <r>^D</r> - ON/ OFF  "Map <r>D</r>own"
+# Only_MAP: 1                   <r>^M</r> - ON/ OFF  "Only <r>M</r>ap mode"
+# NO_MAP:   1                   <r>&lt;Alt + M></r> - ON/ OFF "<r>M</r>ap display"
+
+# Blur:     .5                  <r>^B</r> - Gaussian <r>Blur</r> of Surface
+# Opac,%:   100                 <r>^O</r> - dialog to set Surface <r>O</r>pacity
+# Ksec:     10                  <r>^K</r> - dialog to set frames per second in clip
+
+# Next:     null                <r>^N</r> - Load <r>N</r>ext Stack Config
+----------------------------------------------------------------------------------------
+
+The <r>Head</r> can contain multiple lines, this can be specified in two ways:<n>
+    Head: Title ...<r>\n</r>    Line_1: ...<r>\n</r>  ...  <r>\n</r>    Line_k: ...</n>    # use of <r>"\n"</r>
+or<n>
+    Head: Title ... <r>^</r></n>    # symbol <r>'^' -"to be continued"</r><n>
+    <r>.</r>   Line_1: ... <r>^</r>    </n># symbol <r>'.'</r> at the beginning of a line<r> -"if need indentation"</r>
+     ...           <r>^</r>
+    <r>.</r>   <n>Line_k: ...</n>      # Last line without <r>'^'</r>
+
+e.g. pik3d/demo/*/*.s3d
 ________________________________________________________________________________________
 <a name='b3d'></a>
 	<o>command: b3d -"Body-3d" display of the Body or Figure

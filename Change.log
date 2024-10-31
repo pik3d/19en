@@ -7,3 +7,15 @@ version 21.2
 version 21.2.1
   - 2d-graphics: improved interaction between Hot Points and Cursor Lines.
 
+version 22.0
+  - s3d:
+    - 2 modes to render Surface: "Smooth", "bar-View", switch: <F4> ;
+    - added grid to lower axes ;
+    - the ability to set subject coordinates: <Ctrl+X> ;
+    - the ability to remove "Map": <Alt+M> ;
+    - the ability to add 3d-Points and 3d-Body to the 3d-scene ;
+	- extended config.( almost all parameters have been changed );
+    - mesuremts on the "Map" only after "Map Down";
+	- Help: all new features are described .
+	
+  - known bugs of the input/output are fixed .
