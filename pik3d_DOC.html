@@ -16,7 +16,7 @@ x{background:#333333; color:#00FF00; font-size:13px; line-height:13px; font-fami
 <h5><pre><a name='s3d'><f>pik3d - framework for processing and 3d-display of matrices and their sequences
         Help has standard HTML navigation:  &lt;Home>,  &lt;End>,  <a href="#ins">links</a>
 </f><a name='ogl'></a>
-<a href='#fwk'>DESCRIPTION of&nbsp; pik3d &nbsp;v.22.0</a>
+<a href='#fwk'>DESCRIPTION of&nbsp; pik3d &nbsp;v.22.1</a>
 <a href="#ins">INSTALL pik3d </a>
 <a href="#dat">###-format of the data: FRAME, STACK</a>
 <a href="#cmd">COMMANDS</a>
@@ -2314,6 +2314,9 @@ Example 3, pik3d\usr\Reverse<o>.jj</o> (functionality is the same as previous ex
   - it creates correct java file( in our case: Reverse.java ), which can be saved( <r>/s</r> );
   - run JAVA to execute "single source-file";
   - if you need .class files (result of compilation), use key: <r>/c</r> - only compilation.
+  - it has macro substitution capabilities that allow you to modify java-code directly
+    during jj-call, for example: a code snippet can be inserted into the jj-file just
+    before compilation( see: pik3d/usr/Fx.jj -function formula into a computation loop).
 
 <o>jj supports short names</o>. Function arguments can be of 3 types:  double, float, int.
    Fun(<r>...</r>) denotes use of <r>'varargs'</r>, i.e. possible: Fun(a), Fun(a,b), Fun(a,b,c)...
@@ -2382,18 +2385,39 @@ and executed( you can save it: <o>/s</o> ).  It takes less than 1 second.
 JAVA commands are delimited by <r>';'</r> (last before closed <r>"</r> may be omitted ).
 Examples( ^C/^V  to test jj, pik3d ):
 <m>
-> <o>jj</o> "tt( max(.9, pi/2, pi-1), 4*pi, sin(-pi/4))"   !use of <r>'varargs'</r>
-> <o>jj</o> "for(int i=0;i&lt;9;i++) tt(<r>^</r> i=<r>^</r>+i)"             !print: i=0\n i=1\n i=2...\n i=8
-> <o>jj</o> "hh(); for(var x=0.;x<=20;x+=.2) tt(x,exp(-x/7)*sin(x))"| vic - 1 2,11
+> jj "tt( max(.9, pi/2, pi-1), 4*pi, sin(-pi/4))"    !use of <r>'varargs'</r> in tt()
+> jj "for(int i=0;i&lt;9;i++) tt(<r>^</r> i=<r>^</r>+i)"              !print: i=0/ i=1/ i=2 .../ i=8
+> jj "hh(); for(var x=0.;x<=20;x+=.2) tt(x,exp(-x/7)*sin(x))"| vic - 1 2,11
+> jj Fx "exp(-x/7)*sin(x)" "0,20,.2"| vic - 1 2,11   !result as of previous line
 </m>
 <div style='background:#333333; color:#00FF00;'>  Linux:
-$ jj <r>'</r>tt( max(.9, pi/2, pi-1), 4*pi, sin(-pi/4))<r>'</r>   !use of <r>'varargs'</r>
-$ jj <r>'</r>for(int i=0;i&lt;9;i++) tt(<r>"</r> i=<r>"</r>+i)<r>'</r>             !print: i=0 i=1 ... i=8
-$ jj <r>'</r>hh(); for(var x=0.;x&lt;=20;x+=.2) tt(x,exp(-x/7)*sin(x))<r>'</r>| vic - 1 2,11</div>
+$ jj <r>'</r>tt( max( .9, pi/2, pi-1), 4*pi, sin(-pi/4))<r>'</r>   !use of <r>'varargs'</r> in tt()
+$ jj <r>'</r>for(int i=0;i&lt;9;i++) tt(<r>"</r> i=<r>"</r>+i)<r>'</r>              !print: i=0/ i=1/ i=2 .../ i=8
+$ jj <r>'</r>hh(); for(var x=0.;x&lt;=20;x+=.2) tt(x,exp(-x/7)*sin(x))<r>'</r>| vic - 1 2,11
+$ jj Fx <r>'</r>exp(-x/7)*sin(x)<r>' '</r>0,20,.2<r>'</r>| vic - 1 2,11   !result as of previous line</div>
 <r>JAVA options</r> can be used with <o>jj-command</o>. It is useful to test new features of Java.
-Example( Vector API: pik3d/usr/jep438.jj ):
+Example( Vector API: <n>pik3d/usr/jep438.jj</n> ):
+<m>> jj  <r>--enable-preview  --source=21  --add-modules=jdk.incubator.vector</r>  jep438 </m>
 
-<m>> <o>jj</o>  <r>--enable-preview  --source=21  --add-modules=jdk.incubator.vector</r>  jep438 </m>
+	<o>jj - Macro</o>
+Macro parameters looks like: <m>#p#</m>, where: p=<m>'0..9','A..Z'</m>( maximum 37 parameters ).
+Consider jj-call: <m>> jj File.jj  a0 a1 a2 ... a15 ...</m>
+If any parameter <m>ak</m> contains a symbol space, it must be enclosed in quotation marks.
+<m>#0#</m> will be replaced in jj-file by the <n>text of a0</n>, <m>#1#<n> -a1 ... </n>#A#<n> -a10 ... </n>#F#<n> -a15 ...</n></m>
+If there is no correspondent text in the call, macro parameter will be removed.
+
+Parameter can contain several lines of java-code delimited by <n>\n</n>.
+Example: <n>pik3d/usr/Fx.jj</n> inserts code of Function( <m>#0#</m> ) to calculate it in the loop. 
+
+	<o>jj - Programmable Text Editor</o>
+If you need some complex text processing, you can use this jj-template txt2htm.jj:
+<m>{ var s=""; if( opnStr( arg[0] )) while((s=getStr())!=null) {    //open and read File
+
+      s=s.trim();                                                // remove spaces
+      if( !s.isEmpty()) tt("&lt;DT>&lt;A HREF=\""+s+"\">"+s+"&lt;/A>");   // text processing 
+}}</m>
+This example converts text list of Links to the html-list.
+<m>> jj txt2htm Links.txt > Links.html</m>
 ________________________________________________________________________________________
 <a name='pik'></a><o>
 		Most used pik.io methods

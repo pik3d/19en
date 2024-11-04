@@ -17,5 +17,10 @@ version 22.0
 	- extended config.( almost all parameters have been changed );
     - mesuremts on the "Map" only after "Map Down";
 	- Help: all new features are described .
-	
+
   - known bugs of the input/output are fixed .
+
+version 22.1
+  - jj-technology has been extended with macro substitution,
+    see: pik3d_DOC.html, pik3d/usr/Fx.jj ;
+  - small fixes in s3d.jar, pik.jar .
