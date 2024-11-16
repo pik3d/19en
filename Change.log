@@ -20,7 +20,13 @@ version 22.0
 
   - known bugs of the input/output are fixed .
 
-version 22.1
+version 22.1,  05.11.2024
   - jj-technology has been extended with macro substitution,
     see: pik3d_DOC.html, pik3d/usr/Fx.jj ;
   - small fixes in s3d.jar, pik.jar .
+
+version 22.1.1,  17.11.2024
+  - fix memory error in jj.exe;
+  - jj-methods to calculate Frame and Stack: pik3d/usr/Fx.jj | Fxyt;
+  - <Ctrl+k> replaced by <Alt+F> - Frames per Second dialog;
+  - correct some demo in Linux version.
