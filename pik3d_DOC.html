@@ -257,8 +257,8 @@ trajectories, coordinate grids, define boundaries, zoning...
 <r>&lt;Home> / &lt;End></r>   - "initial(1-st)"/ "End" Stack Frame
 <r>&lt;Mouse Wheel></r>    - Frame "paging":  "Down"- forward, "Up"- backward
 
-<r>&lt;Space></r>- Start/ Stop of the Clip( sequential show frame by frame )
-<r>^K</r>     - dialog to define a frame number per second for clip - config.param. <r>Ksec</r>
+<r>&lt;Space></r>- Start/ Stop of the clip( sequential show frame by frame )
+<r>&lt;Alt+F></r>- dialog "<r>F</r>rames <r>P</r>er <r>S</r>econd" in clip - config.param. <r>FPS</r>
 <a name='s3F2'></a><r>&lt;F2></r>   - save clip in the multipage .tif-file( select file dialog )
          Show clip - <a href='#tif'>command: tif </a>
 To <n>"Ñopy"</n> Window image  to clipboard  for subsequent <n>"Paste"</n>:  <r>&lt;Alt + PrtSc></r>
@@ -268,7 +268,7 @@ To <n>"Ñopy"</n> Window image  to clipboard  for subsequent <n>"Paste"</n>:  <r>
 <r>^+ / ^-</r>        - increase / decrease  by ~10%  <n>Window  size</n>   - config.param. <r>K</r>
 <r>&lt;Shift+ H/ L></r> - increase / decrease <n>Vertical size</n> of 3d-scene - config.param. <r>Kh</r>
 <r>&lt;Shift+ Left| Right| Up| Dn ></r> - <n>Shift 3d-scene</n> in the Window  - config.param. <r>Shift</r>
-<r>&lt;Ctrl + Left| Right| Up| Dn ></r> - <n>Adjust Light Source</n>           - config.param. <r>Light,gr</r>
+<r>&lt;Ctrl + Left| Right| Up| Dn ></r> - <n>Adjust Light Source</n>           - config.param. <r>Light</r>
 <a name='os'></a>
 	<o>menu>  Map,  Axes,  Blur</o>
 
@@ -459,12 +459,12 @@ configurations( palettes, angles, blur ... ), see: demo/lines/*.s3d .
                                 <n>2nd param.= 1-display/ 0-no</n>  can be set:  <r>^2/ 1|2|3</r>
 
 # Zmin,MAX: -.8362, 2.035       <r>^X</r> - dialog to set Z: min/MAX, <n>default: from the Stack</n>
-# SubjXY:   0,80,  0,120        <r>^X</r> - dialog to set Subject X,Y
+# Subj.XY:  0,80,  0,120        <r>^X</r> - dialog to set Subject X,Y
 
-View,gr:    20, 25              <r>mouse Drag</r> of the Surface - adjust View Angles
-Light,gr:   -60, 30             <r>&lt;Ctrl+arrow></r> adjust Lighting Angles
+View:       20, 25              <r>mouse Drag</r> of the Surface - adjust View Angles
+Light:      -60, 30             <r>&lt;Ctrl+arrow></r> adjust Lighting Angles
 x,y,W,H:    612,222, 640,520    <r>Mouse Drag Window, ^+/^- ></r> adjust Window location & size
-Shift:      0, 0                <r>&lt;Shift+arrow></r> shift the Scene in the Window
+Shift:      0, 0                <r>&lt;Shift+arrow></r> shift(px,py) the Scene in the Window
 
 # K:        1                   <r>&lt; ^+ / ^- ></r>  - adjust Scale of the Scene
 # Kh:       1                   <r>&lt;Shift+ H/L></r> - adjust Z-axis: <r>H</r>igher/<r>L</r>ower
@@ -476,8 +476,8 @@ Shift:      0, 0                <r>&lt;Shift+arrow></r> shift the Scene in the W
 # NO_MAP:   1                   <r>&lt;Alt + M></r> - ON/ OFF "<r>M</r>ap display"
 
 # Blur:     .5                  <r>^B</r> - Gaussian <r>Blur</r> of Surface
-# Opac,%:   100                 <r>^O</r> - dialog to set Surface <r>O</r>pacity
-# Ksec:     10                  <r>^K</r> - dialog to set frames per second in clip
+# Opac.%:   100                 <r>^O</r> - dialog to set Surface <r>O</r>pacity
+# FPS:      10                  <r>&lt;Alt+F></r> - "<r>F</r>rames <r>P</r>er <r>S</r>econd" dialog
 
 # Next:     null                <r>^N</r> - Load <r>N</r>ext Stack Config
 ----------------------------------------------------------------------------------------
@@ -2347,7 +2347,7 @@ The general form of <o>code.jj</o> is :   ( more examples: pik3d\usr\*.jj )
       <n>JAVA code uses arguments:  String arg[]</n>
   <r>}</r>
   [ methods,  classes(not public),  static ... ]</m>
-<a name='jc'></a>
+
 Example 1(above) in <o>jj-form</o>, file: minMAJ<o>.jj</o>
 <r>{</r><m>
    hh(); for(int i=0; i&lt;=200; i++) {               // ### Header & cycle
@@ -2407,7 +2407,10 @@ If any parameter <m>ak</m> contains a symbol space, it must be enclosed in quota
 If there is no correspondent text in the call, macro parameter will be removed.
 
 Parameter can contain several java-comands delimited by <r>';'</r>.
-Example: <n>pik3d/usr/Fx.jj</n> inserts code of Function( <m>#0#</m> ) to calculate it in the loop. 
+Example: <n>pik3d/usr/Fx.jj| Fxy.jj| Fxyt.jj</n> code of Function & parameters(<m>#0#,#1#,#2#,#3#</m>)
+are inserted to calculate values in the loop, try example without quotes:
+<m>>jj Fxyt</m>    ! command help
+<m>>jj Fxyt exp(-(x*x+y*y)/9)*cos(x*x+y*y-t*.2*pi) -4,4,.1 -4,4,.1 0,9,1</m>|s3d - Fxyt.s3d , 0
 
 	<o>jj - Programmable Text Editor</o>
 If you need some complex text processing, you can use this jj-template txt2htm.jj:
