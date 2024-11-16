@@ -2417,7 +2417,7 @@ If you need some complex text processing, you can use this jj-template txt2htm.j
 <m>{ var s=""; if( opnStr( arg[0] )) while((s=getStr())!=null) {    //open and read File
 
       s=s.trim();                                                // remove spaces
-      if( !s.isEmpty()) tt("&lt;DT>&lt;A HREF=\""+s+"\">"+s+"&lt;/A>");   // text processing 
+      if( !s.isEmpty()) tt("&lt;DT>&lt;A HREF=\""+s+"\">"+s+"&lt;/A>");   // text processing
 }}</m>
 This example converts text list of Links to the html-list.
 <m>> jj txt2htm Links.txt > Links.html</m>
