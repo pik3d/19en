@@ -1,5 +1,5 @@
 ![head](/assets/images/830x290.jpg)
-Framework pik3d v.22.1
+Framework pik3d v.22.2
 
     PROCESSING AND 3D-DISPLAY OF MATRICES/FRAMES AND THEIR SEQUENCES
 
@@ -94,6 +94,7 @@ In addition CSV-files can be converted to the binary ###-format.
 ![opacF4](/assets/images/OpacF4.jpg)
 ![polibo](/assets/images/plb2.jpg)
 ![4_view](/assets/images/4view.jpg)
+![minMAJ](/assets/images/Regression.png)
 ![minMAJ](/assets/images/2dgra.png)
 To download and install:
   - at the top of this page click file: pik3d.zip or pik3d_Linux.zip;
