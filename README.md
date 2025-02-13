@@ -102,7 +102,7 @@ To download and install:
   - at the top of this page click file: pik3d.zip or pik3d_Linux.zip;
   - on the opened page on the right select download( ~ 1MB );
   - unpack archive in some folder;
-  - click the file: pik3d_DOC.html - it should open by default browser;
+  - click the file: pik3d_DOC.html - it should open in default browser;
   - read the section "INSTALL pik3d";
   - after install, scripts(_run.cmd) in demo folders are available to execute.
   - if you plan to use Eigen/Singular Values Decomposition, you need to dowload
