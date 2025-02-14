@@ -39,7 +39,7 @@ You can view the stack in the "frame by frame" mode, like a video clip.
 During clip you can stop it and change the angles of view, colors, lighting.
 
 The surface can be displayed in two ways: "Smooth" and "bar-View" - a set of vertical
-bars. You can switch the view by pressing <F4> at any time.
+bars. You can switch the view by pressing &lt;F4> at any time.
 
 Version 21 and later includes tool: b3d -"Body-3D" for 3D-display of bodies defined by
 quadrilateral faces (up to 10,000 faces). You can control Opacity of body/surface.
@@ -52,7 +52,7 @@ The framework has simple but effective 2D-graphics tools for displaying
 columns and rows of matrices. Simple graph-editor can add text, lines, figures to chart.
 2D-graphics can be saved in vector format: WMF - "Microsoft Windows Meta File".
 They scale well and can be used in MS Word documents, conveniently viewed using ACDSee
-, Total Commander<F3> ...
+, Total Commander &lt;F3> ...
 
 Framework commands are executable(.exe) modules and their set is not fixed.
 The launcher technology is used ("launch" - to launch, start, run). Launcher
