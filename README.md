@@ -31,7 +31,7 @@ The set of such 3D-points forms a 3D-surface.
 
 Starting from version 21.1, for text data you can use a shortened header: ### [ ] .
 The number of columns is the number of values in the first row of data.
-The number of rowes is defined by the file length or the next header.
+The number of rows is defined by the file length or the next header.
 
 Surface rendering with simple angle controls, lighting, color, etc.
 constitutes the functionality of the command: s3d -"Surface-3D".
