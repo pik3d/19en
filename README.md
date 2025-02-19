@@ -1,7 +1,7 @@
 ![head](/assets/images/830x290.jpg)
 Framework pik3d v.22.2
 
-    PROCESSING AND 3D-DISPLAY OF MATRICES/FRAMES AND THEIR SEQUENCES
+    __PROCESSING AND 3D-DISPLAY OF MATRICES/FRAMES AND THEIR SEQUENCES__
 
 When exploring the properties of a time-varying surface, it is convenient
 to store, process and display a set of images (frames/matrices) as a whole.
@@ -29,12 +29,12 @@ The set of such 3D-points forms a 3D-surface.
         X                      /____________/
                              X/
 
-Starting from version 21.1, for text data you can use a shortened header: ### [ ] .
+Starting from version 21.1, for text data you can use a shortened header: __### [ ]__ .
 The number of columns is the number of values in the first row of data.
 The number of rows is defined by the file length or the next header.
 
 Surface rendering with simple angle controls, lighting, color, etc.
-constitutes the functionality of the command: s3d -"Surface-3D".
+constitutes the functionality of the command: __s3d -"Surface-3D"__.
 You can view the stack in the "frame by frame" mode, like a video clip.
 During clip you can stop it and change the angles of view, colors, lighting.
 
@@ -45,67 +45,67 @@ Version 21 and later includes tool: b3d -"Body-3D" for 3D-display of bodies defi
 quadrilateral faces (up to 10,000 faces). You can control Opacity of body/surface.
 2D/3D - Points| Lines| Body can be added to the 3D-scene.
 
-Starting from version 20 data processing is extended by Eigen/Singular Values Decomposition of Matrix
+Starting from version 20 data processing is extended by __Eigen/Singular Values Decomposition__ of Matrix
 and Regression analyses based on <a href='https://commons.apache.org/proper/commons-math/'>"The Apache Commons Mathematics Library"</a>.
 
 The framework has simple but effective 2D-graphics tools for displaying
 columns and rows of matrices. Simple graph-editor can add text, lines, figures to chart.
-2D-graphics can be saved in vector format: WMF - "Microsoft Windows Meta File".
+2D-graphics can be saved in vector format: __WMF - "Microsoft Windows Meta File"__.
 They scale well and can be used in MS Word documents, conveniently viewed using ACDSee
 , Total Commander &lt;F3> ...
 
 Framework commands are executable(.exe) modules and their set is not fixed.
-The launcher technology is used ("launch" - to launch, start, run). Launcher
+The __launcher technology__ is used ("launch" - to launch, start, run). Launcher
 encapsulates the starting configuration of the Java Virtual Machine.
 
 The user does not encounter JAVA-programming anywhere( except expanding functionality ).
 JAVA doesn't even need to be installed. Only unpack the JAVA installation archive in some folder.
 
-The framework has simple tools to create a new command in JAVA, for example: jj-Technology -"java-JAVA".
+The framework has simple tools to create a new command in JAVA, for example: __jj-Technology -"java-JAVA"__.
 jj-command allows to compile/execute .jj and .java files. jj-file contains
 only "subject part". File.java is generated from File.jj by adding header with import and main().
 Generated file with framework class-path is submitted for execution to JAVA as "single source-file".
 Intermediate files can be saved.
 
-jj-Technology supports macro substitution that allow you to modify java-code directly during jj-call.
+jj-Technology supports __macro substitution__ that allow you to modify java-code directly during jj-call.
 For example: a code snippet can be inserted into the jj-file just before compilation.
-This feature is used to find regression, i.e. set of functions for regression can be specified
-analytically in symbolic form, see: pik3d/demo/regression.
+FOr example this feature is used to find regression, i.e. set of functions for regression can be specified
+__analytically in symbolic form directly in the command line__, see: pik3d/demo/regression.
 
 In addition, jj-command can execute the sequence of Java commands directly from the command line.
 jj-command can use JVM options (see: pik3d/usr/jep438.jj -test of Vector API).
 
 Additional commands can be implemented in any other convenient algorithmic language.
-To read/write ###-files in PYTHON: pik3d/ext/kadr.py package is included.
-To read ###-format in the ImageJ editor, pik3d/ext/###_Reader_ImageJ.jar plugin is implemented.
+To read/write ###-files in __PYTHON__: pik3d/ext/kadr.py package is included.
+To read ###-files in the __ImageJ__ editor, pik3d/ext/###_Reader_ImageJ.jar plugin is implemented.
 
 In a simple case, the processing program is a script (.bat, .cmd ...).
-From command to command, data is transferred in the form of ###-format files
-or by means of "pipe" (it can reduce disk usage and increase performance).
+From command to command, data is transferred in the form of ###-files
+or by means of __"pipe"__ (it can reduce disk usage and increase performance).
 Any command can save the pipe-output to the file for further processing( add to command @file).
 
-The framework can be installed on Windows 7, 10, Linux (tested in Mint 21.1).
-Current version 22 is compiled with JAVA-21 using javaFX. It can be run under JAVA-21,22.
+The framework can be installed on __Windows 7, 10, Linux__ (tested in Mint 21.1).
+Current version 22 is __compiled with __JAVA-21 LTS__using javaFX__. It can be run under JAVA v.21-23.
 
 Description of the framework, formats and install procedure are presented in the file:
-pik3d_DOC.html (contained in the install archive: pik3d.zip or pik3d_Linux.zip).
+__pik3d_DOC.html__, contained in the install archive: __pik3d.zip__ or __pik3d_Linux.zip__.
 
-To exchange large data ###-format includes binary representation of data.
-In addition CSV-files can be converted to the binary ###-format.
+To exchange large data __###-format includes binary representation__ of data.
+In addition __CSV-files__ can be converted to the binary ###-format.
 
 ![opacF4](/assets/images/OpacF4.jpg)
 ![polibo](/assets/images/plb2.jpg)
 ![4_view](/assets/images/4view.jpg)
 ![minMAJ](/assets/images/Regression.png)
 ![minMAJ](/assets/images/2dgra.png)
-To download and install:
-  - at the top of this page click file: pik3d.zip or pik3d_Linux.zip;
+__To download and install:__
+  - at the top of this page click file: __pik3d.zip__ or __pik3d_Linux.zip__;
   - on the opened page on the right select download( ~ 1MB );
   - unpack archive in some folder;
-  - click the file: pik3d_DOC.html - it should open in default browser;
+  - click the file: __pik3d_DOC.html__ - it should open in default browser;
   - read the section "INSTALL pik3d";
   - after install, scripts(_run.cmd) in demo folders are available to execute.
-  - if you plan to use Eigen/Singular Values Decomposition, you need to dowload
+  - if you plan to use __Eigen/Singular Values Decomposition__, you need to dowload
     <a href='https://commons.apache.org/math/download_math.cgi'>The Apache Commons Mathematics Library 4.0</a>
 	and place jar-files in the  pik3d/lib  folder (without sources and java-doc ~2.3MB).
 
