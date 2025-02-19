@@ -72,7 +72,7 @@ For example: a code snippet can be inserted into the jj-file just before compila
 For example this feature is used to find regression, i.e. set of functions for regression can be specified
 __analytically in symbolic form directly in the command__, see: pik3d/demo/regression.
 
-In addition, jj-command can execute the sequence of Java commands directly from the command line.
+In addition, __jj__ can execute the __sequence of Java commands__ directly from the command line.
 jj-command can use JVM options (see: pik3d/usr/jep438.jj -test of Vector API).
 
 Additional commands can be implemented in any other convenient algorithmic language.
