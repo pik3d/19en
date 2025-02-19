@@ -90,8 +90,8 @@ Current  version 22  is  compiled with __JAVA-21 LTS__ using __javaFX__. It can 
 Description of the framework, formats and install procedure are presented in the file:
 __pik3d_DOC.html__, contained in the install archives: __pik3d.zip__ or __pik3d_Linux.zip__.
 
-To exchange large data __###-format includes binary representation__.
-In addition __CSV-files__ can be converted to __###-format__.
+To exchange large data ###-format includes __binary representation__.
+__CSV-files__ can be converted to __###-format__.
 
 ![opacF4](/assets/images/OpacF4.jpg)
 ![polibo](/assets/images/plb2.jpg)
