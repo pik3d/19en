@@ -62,12 +62,12 @@ The user does not encounter JAVA-programming anywhere( except expanding function
 JAVA doesn't even need to be installed. Only unpack the JAVA installation archive in some folder.
 
 The framework has simple tools to create a new command in JAVA, for example: __jj-Technology -"java-JAVA"__.
-jj-command allows to compile/execute .jj and .java files. jj-file contains
+jj-command allows to compile/execute __.jj and .java files__. jj-file contains
 only "subject part". File.java is generated from File.jj by adding header with import and main().
 Generated file with framework class-path is submitted for execution to JAVA as "single source-file".
 Intermediate files can be saved.
 
-jj-Technology supports __macro substitution__ that allow you to modify java-code directly during jj-call.
+__jj-Technology supports macro substitution__ that allow you to modify java-code directly during jj-call.
 For example: a code snippet can be inserted into the jj-file just before compilation.
 FOr example this feature is used to find regression, i.e. set of functions for regression can be specified
 __analytically in symbolic form directly in the command line__, see: pik3d/demo/regression.
@@ -76,8 +76,8 @@ In addition, jj-command can execute the sequence of Java commands directly from 
 jj-command can use JVM options (see: pik3d/usr/jep438.jj -test of Vector API).
 
 Additional commands can be implemented in any other convenient algorithmic language.
-To read/write ###-files in __PYTHON__: pik3d/ext/kadr.py package is included.
-To read ###-files in the __ImageJ__ editor, pik3d/ext/###_Reader_ImageJ.jar plugin is implemented.
+To read/write ###-files in __PYTHON__: pik3d/ext/kadr.py __package__ is included.
+To read ###-files in the __ImageJ__ editor, pik3d/ext/###_Reader_ImageJ.jar __plugin__ is implemented.
 
 In a simple case, the processing program is a script (.bat, .cmd ...).
 From command to command, data is transferred in the form of ###-files
@@ -85,7 +85,7 @@ or by means of __"pipe"__ (it can reduce disk usage and increase performance).
 Any command can save the pipe-output to the file for further processing( add to command @file).
 
 The framework can be installed on __Windows 7, 10, Linux__ (tested in Mint 21.1).
-Current version 22 is __compiled with __JAVA-21 LTS__using javaFX__. It can be run under JAVA v.21-23.
+Current version 22 is __compiled with __JAVA-21 LTS using javaFX__. It can be run under JAVA v.21-23.
 
 Description of the framework, formats and install procedure are presented in the file:
 __pik3d_DOC.html__, contained in the install archive: __pik3d.zip__ or __pik3d_Linux.zip__.
@@ -110,4 +110,4 @@ __To download and install:__
 	and place jar-files in the  pik3d/lib  folder (without sources and java-doc ~2.3MB).
 
 <p>author: K.A.Ilyashenko, e-mail: kilyashenko@gmail.com</p>
-Error messages, comments, suggestions  are  welcome.
+Error messages, comments, suggestions  __are  welcome.__
