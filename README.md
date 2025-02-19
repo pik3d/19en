@@ -77,7 +77,7 @@ jj-command can use JVM options (see: pik3d/usr/jep438.jj -test of Vector API).
 
 Additional commands can be implemented in any other convenient algorithmic language.
 To read/write ###-files in __PYTHON__: pik3d/ext/ __kadr.py package__ is included.
-To read ###-files in the __ImageJ__ editor, __###_Reader_ImageJ.jar plugin__ is implemented.
+To read ###-files in the __ImageJ__ editor, ###_Reader_ImageJ.jar __plugin__ is implemented.
 
 In a simple case, the processing program is a script (.bat, .cmd ...).
 From command to command, data is transferred in the form of ###-files
