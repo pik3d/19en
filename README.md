@@ -100,7 +100,7 @@ __CSV-files__ can be converted to __###-format__.
 ![minMAJ](/assets/images/2dgra.png)
 __To download and install:__
   - at the top of this page click file: __pik3d.zip__ or __pik3d_Linux.zip__;
-  - on the opened page on the right select download( ~ 1MB );
+  - on the opened page on the right select download( ~ 1.2 MB );
   - unpack archive in some folder;
   - click the file: __pik3d_DOC.html__ - it should open in default browser;
   - read the section "INSTALL pik3d";
