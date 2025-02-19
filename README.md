@@ -7,9 +7,9 @@ When exploring the properties of a time-varying surface, it is convenient
 to store, process and display a set of images (frames/matrices) as a whole.
 Such a sequence is called a STACK of images ( perhaps from one frame ).
 
-The framework offers a data storage/exchange standard: ###-format and
+The framework offers a data storage/exchange standard: __###-format__ and
 base set of commands/utilities for processing and displaying stacks.
-To convert matrix text to ###-format all you need to do is add a header:
+To convert matrix text to __###-format__ all you need to do is add a header:
 
     ### matrix_name [ m, n ] , where: m-number of rows, n-columns
 
