@@ -37,6 +37,7 @@ version 22.2,  13.02.2025
   - added new commands: matrix join and farg( to create Argument Files );
   - s3d,b3d: added ability to load and ON/off: Points, Lines, Body;
   - s3d,b3d: added config. setting: head - text in the top left corner;
-  - jj: added new short function: rnd1() - uniform random [-1,1];
+  - jj: added new short function: rn1() - uniform  random [-1,1];
+  -                               gau() - Gaussian random: m=0, sigma=.5; 
   - fixed and extended some sections in the Help ;
   - several bugs are fixed in library: s3d.jar, pik.jar.
