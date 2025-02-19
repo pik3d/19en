@@ -85,7 +85,7 @@ or by means of __"pipe"__ (it can reduce disk usage and increase performance).
 Any command can save the pipe-output to the file for further processing( add to command @file).
 
 The framework can be installed on __Windows 7, 10, Linux__ (tested in Mint 21.1).
-Current version 22 is __compiled with __JAVA-21 LTS using javaFX__. It can be run under JAVA v.21-23.
+Current  version 22  is  compiled with __JAVA-21 LTS__ using __javaFX__. It can be run under JAVA v.21-23.
 
 Description of the framework, formats and install procedure are presented in the file:
 __pik3d_DOC.html__, contained in the install archive: __pik3d.zip__ or __pik3d_Linux.zip__.
@@ -110,4 +110,4 @@ __To download and install:__
 	and place jar-files in the  pik3d/lib  folder (without sources and java-doc ~2.3MB).
 
 <p>author: K.A.Ilyashenko, e-mail: kilyashenko@gmail.com</p>
-Error messages, comments, suggestions  __are  welcome.__
+Error messages, comments, suggestions  __are welcome__.
