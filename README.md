@@ -76,8 +76,8 @@ In addition, __jj__ can execute the __sequence of Java commands__ directly from 
 jj-command can use JVM options (see: pik3d/usr/jep438.jj -test of Vector API).
 
 Additional commands can be implemented in any other convenient algorithmic language.
-To read/write ###-files in __PYTHON__: pik3d/ext/kadr.py __package__ is included.
-To read ###-files in the __ImageJ__ editor, pik3d/ext/###_Reader_ImageJ.jar __plugin__ is implemented.
+To read/write ###-files in __PYTHON__: pik3d/ext/ __kadr.py package__ is included.
+To read ###-files in the __ImageJ__ editor, __###_Reader_ImageJ.jar plugin__ is implemented.
 
 In a simple case, the processing program is a script (.bat, .cmd ...).
 From command to command, data is transferred in the form of ###-files
