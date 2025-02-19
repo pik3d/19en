@@ -1,7 +1,7 @@
 ![head](/assets/images/830x290.jpg)
 Framework pik3d v.22.2
 
-    ####PROCESSING AND 3D-DISPLAY OF MATRICES/FRAMES AND THEIR SEQUENCES
+#### PROCESSING AND 3D-DISPLAY OF MATRICES/FRAMES AND THEIR SEQUENCES
 
 When exploring the properties of a time-varying surface, it is convenient
 to store, process and display a set of images (frames/matrices) as a whole.
@@ -11,7 +11,7 @@ The framework offers a data storage/exchange standard: ###-format and
 base set of commands/utilities for processing and displaying stacks.
 To convert matrix text to ###-format all you need to do is add a header:
 
-    __### matrix_name [ m, n ] , where: m-number of rows, n-columns__
+    ### matrix_name [ m, n ] , where: m-number of rows, n-columns
 
 A matrix element can be displayed as a point in 3D-space:
 X - matrix row number, Y - column number, Z - element value.
@@ -29,7 +29,7 @@ The set of such 3D-points forms a 3D-surface.
         X                      /____________/
                              X/
 
-Starting from version 21.1, for text data you can use a shortened header: __### [ ]__ .
+Starting from version 21.1, for text data you can use a shortened header: __###  []__ .
 The number of columns is the number of values in the first row of data.
 The number of rows is defined by the file length or the next header.
 
