@@ -70,7 +70,7 @@ Intermediate files can be saved.
 __jj-Technology supports macro substitution__ that allow you to modify java-code directly during jj-call.
 For example: a code snippet can be inserted into the jj-file just before compilation.
 For example this feature is used to find regression, i.e. set of functions for regression can be specified
-__analytically in symbolic form directly in the command line__, see: pik3d/demo/regression.
+__analytically in symbolic form directly in the command__, see: pik3d/demo/regression.
 
 In addition, jj-command can execute the sequence of Java commands directly from the command line.
 jj-command can use JVM options (see: pik3d/usr/jep438.jj -test of Vector API).
