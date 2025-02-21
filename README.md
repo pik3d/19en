@@ -98,7 +98,8 @@ __CSV-files__ can be converted to __###-format__.
 ![4_view](/assets/images/4view.jpg)
 ![minMAJ](/assets/images/Regression.png)
 ![minMAJ](/assets/images/2dgra.png)
-__To download and install:__
+
+__download and install:__
   - at the top of this page click file: __pik3d.zip__ or __pik3d_Linux.zip__;
   - on the opened page on the right select download( ~ 1.2 MB );
   - unpack archive in some folder;
