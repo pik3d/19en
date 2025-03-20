@@ -1,37 +1,5 @@
-version 21.2
-  - The functionality of the mouse/keyboard in 2d-graphics has been expanded:
-    - Cursor Lines (can be turned on/off)
-    - Fine-tune the cursor position using the arrow keys
-  - several bugs are fixed.
 
-version 21.2.1
-  - 2d-graphics: improved interaction between Hot Points and Cursor Lines.
-
-version 22.0
-  - s3d:
-    - 2 modes to render Surface: "Smooth", "bar-View", switch: <F4> ;
-    - added grid to lower axes ;
-    - the ability to set subject coordinates: <Ctrl+X> ;
-    - the ability to remove "Map": <Alt+M> ;
-    - the ability to add 3d-Points and 3d-Body to the 3d-scene ;
-	- extended config.( almost all parameters have been changed );
-    - mesuremts on the "Map" only after "Map Down";
-	- Help: all new features are described .
-
-  - known bugs of the input/output are fixed .
-
-version 22.1,  05.11.2024
-  - jj-technology has been extended with macro substitution,
-    see: pik3d_DOC.html, pik3d/usr/Fx.jj ;
-  - small fixes in s3d.jar, pik.jar .
-
-version 22.1.1,  17.11.2024
-  - fix memory error in jj.exe;
-  - jj-methods to calculate Frame and Stack: pik3d/usr/Fx.jj | Fxyt;
-  - <Ctrl+k> replaced by <Alt+F> - Frames per Second dialog;
-  - correct some demo in Linux version.
-
-version 22.2,  13.02.2025
+2025-02-13  version 22.2,  
   - completely redesigned regression building technology ;
   - redesigned section of the Help  and  new  demo-folder: regression ;
   - added new commands: matrix join and farg( to create Argument Files );
@@ -41,3 +9,37 @@ version 22.2,  13.02.2025
   -                               gau() - Gaussian random: m=0, sigma=.5; 
   - fixed and extended some sections in the Help ;
   - several bugs are fixed in library: s3d.jar, pik.jar.
+
+2024-11-17  version 22.1.1
+  - fix memory error in jj.exe;
+  - jj-methods to calculate Frame and Stack: pik3d/usr/Fx.jj | Fxyt;
+  - <Ctrl+k> replaced by <Alt+F> - Frames per Second dialog;
+  - correct some demo in Linux version.
+
+2024-11-05  version 22.1
+  - jj-technology has been extended with macro substitution,
+    see: pik3d_DOC.html, pik3d/usr/Fx.jj ;
+  - small fixes in s3d.jar, pik.jar .
+
+2024-10-31  version 22.0
+  - s3d:
+    - 2 modes to render Surface: "Smooth", "bar-View", switch: <F4> ;
+    - added grid to lower axes ;
+    - the ability to set subject coordinates: <Ctrl+X> ;
+    - the ability to remove "Map": <Alt+M> ;
+    - the ability to add 3d-Points and 3d-Body to the 3d-scene ;
+	- extended config.( almost all parameters have been changed );
+    - mesuremts on the "Map" only after "Map Down";
+	- Help: all new features are described .
+  - known bugs of the input/output are fixed .
+
+2024-07-26  version 21.2.1
+  - 2d-graphics: improved interaction between Hot Points and Cursor Lines.
+
+2024-07-12  version 21.2
+  - The functionality of the mouse/keyboard in 2d-graphics has been expanded:
+    - Cursor Lines (can be turned on/off)
+    - Fine-tune the cursor position using the arrow keys
+  - several bugs are fixed .
+
+...
