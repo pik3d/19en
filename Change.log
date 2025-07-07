@@ -1,5 +1,12 @@
 
-2025-02-13  version 22.2,  
+2025-07-05  version 22.3,
+  - 2d-graphics( pik.jar ): several fixes in  Cursor Lines  and  Zoom ;
+  - jj is added new key: /n=name - define output file name (default: Noname)
+    for case: jj "cmd1; cmd2..." /s /n=file ;
+  - description: how to make a simple Launcher is added to pik3d_DOC.html;
+  - correct some demo .
+
+2025-02-13  version 22.2,
   - completely redesigned regression building technology ;
   - redesigned section of the Help  and  new  demo-folder: regression ;
   - added new commands: matrix join and farg( to create Argument Files );
