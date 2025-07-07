@@ -17,7 +17,7 @@ x{background:#333333; color:#00FF00; font-size:13px; line-height:13px; font-fami
 <h5><pre><a name='s3d'><f>pik3d - framework for processing and 3d-display of matrices and their sequences
         Help has standard HTML navigation:  &lt;Home>,  &lt;End>,  <a href="#ins">links</a>
 </f><a name='ogl'></a>
-<a href='#fwk'>DESCRIPTION of&nbsp; pik3d &nbsp;v.22.2</a>
+<a href='#fwk'>DESCRIPTION of&nbsp; pik3d &nbsp;v.22.3</a>
 <a href="#ins">INSTALL pik3d </a>
 <a href="#dat">###-format of the data: FRAME, STACK</a>
 <a href="#cmd">COMMANDS</a>
@@ -2444,7 +2444,7 @@ Example 3, pik3d\usr\Reverse<o>.jj</o> (functionality is the same as previous <n
    <m>erf( a )</m>    -"Error Function", sigmoid: -1 < erf() < 1
    <m>gau()</m>       - Gaussian random: mean=0, R=2*sigma = 1
    <m>rnd()/rn1()</m> - uniform  random: [0,1] / [-1,1]
-   
+
    <m>sin(a), cos(a), tg(a),   asin(a), acos(a) ,atg(a),   exp(a), ln(a), lg(a)</m>
    constants:  <m>pi=3.1415..., rad=180/pi</m>
 
@@ -2718,24 +2718,41 @@ The description uses  <r>fun.jj</r>  and  <r>fun</r>  as the name of the  file  
 5. Create all Launchers:  go to  pik3d\exe,  run > <r>_Launch.exe</r>
 This is an easy way to create a new Launcher.
 
-In fact, <r>pik3d Launcher</r> technology can be used  to create  Lancher for any  <r>main class</r>
-(class has function: main()).<r>_Launch.exe</r> and <r>pik3d\lib\run.jar</r> are compiled with <r>JAVA-11</r>
 
-Let us assume <r>CP</r> is a project CLASS-PASS for <r>tsk.java</r>:
-//header of class looks like:<n>
-    package <r>pkg.utl.qq</r>;
-    import ...
-    public class <r>tsk</r> {
-      public static void <r>main</r>( String[] arg ) {
-	  ...
+Example: simple <m>Launcher</m> ( <r>JDK</r> and <m>pik3d</m>  must be present ):
 
-# tsk.cfg - Launcher config for class: c:\work\project</n><u>\src\</u><r>pkg.utl.qq\tsk.java </r>:
+1. Create test folder:  <n>d:\test\pi2</n>  and  go there
+
+2. Create <r>java</r> files:
+<m>
+   > jj "tt(pi,2*pi,3*pi);"              <y># check print of 3 values</y>
+   > jj "tt(pi,2*pi,3*pi);" /c /n=p23    <y># create  p23.java  &  p23.class</y>
+                   or
+   > jj  p23.jj /c</m>                       <y># pre-created file: p23.jj</y>
+
+3. Put file: <r>p23.class</r> (maybe <r>p23.java</r> too) to the archive: p23.jar or p23.zip
+   ( if .zip, change extension to .jar ).
+
+4. Copy <m>pik3d files</m> to this folder:
+        pik3d/lib:
+                    <m>pik.jar</m>              <y># standard pik3d input/output library</y>
+                    <m>run.jar</m>              <y># parts of Launcher</y>
+        pik3d/exe:
+                   <m>_Launch.exe</m>           <y># not needed if pik3d is installed</y>
+
+5. Create config file( e.g. <n>cfg.</n> ):
 <n>
-  jdk/bin:  c:\java_11\bin                               <y># use this JAVA</y>
-  lib/jar:  c:\work\project</n>\<u>bin;</u><r>CP</r>;</n><u>E:\pik3d\lib\run.jar</u>  <n><y># class-path, NO spaces!</y>
-  tsk:      java  <r>pkg.utl.qq.tsk</r>                         <y># main-class</y>
+   # config  for  _Launch.exe
+     jdk/bin:  d:\jdk\bin                <y># location of the java.exe</y>
+     lib/jar:  d:\test\pi2\*             <y># class-path of p23.jar,pik.jar</y>
+
+   # Launchers:
+     ppp:    java   p23
 </n>
-> _Launch <n>tsk.cfg                                        <y># Launcher: tsk.exe is created
+6. Create <m>Launcher</m>( <n>ppp.exe</n> ):  <m>> _Launch  <n>cfg</n></m>
+7. Test  <n>ppp.exe</n>:  copy to any other folder  and  run it there.
+8. After <m>Launcher</m> is created, files: <m>run.jar,_Launch.exe</m>  can be deleted in this folder.
+   They are only needed to create <m>Launchers</m>.
 </n>________________________________________________________________________________________
 <f>
                               author: K.A. Ilyashenko, e-mail: kilyashenko@gmail.com
