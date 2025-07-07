@@ -1,5 +1,5 @@
 ![head](/assets/images/830x290.jpg)
-Framework pik3d v.22.2
+Framework pik3d v.22
 
 #### PROCESSING AND 3D-DISPLAY OF MATRICES/FRAMES AND THEIR SEQUENCES
 
@@ -85,7 +85,7 @@ or by means of __"pipe"__ (it can reduce disk usage and increase performance).
 Any command can save the pipe-output to the file for further processing( add to command @file).
 
 The framework can be installed on __Windows 7, 10, Linux__ (tested in Mint 21.1).
-Current  version 22  is  compiled with __JAVA-21 LTS__ using __javaFX__. It can be run under __JAVA v. 21-23__.
+Current  version 22  is  compiled with __JAVA-21 LTS__ using __javaFX__. It can be run under __JAVA v. 21,22__.
 
 Description of the framework, formats and install procedure are presented in the file:
 __pik3d_DOC.html__, contained in the install archives: __pik3d.zip__ and __pik3d_Linux.zip__.
