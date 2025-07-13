@@ -33,10 +33,10 @@ Starting from version 21.1, for text data you can use a shortened header: __### 
 The number of columns is the number of values in the first row of data.
 The number of rows is defined by the file length or the next header.
 
-Surface rendering with simple angle controls, lighting, color, etc.
-constitutes the functionality of the command: __s3d -"Surface-3D"__.
-You can view the stack in the "frame by frame" mode, like a video clip.
-During clip you can stop it and change the angles of view, colors, lighting.
+Rendering a surface with easy control of viewing angles, lighting, color, etc.
+is the functionality of the command: __s3d -"Surface-3D"__. You can view
+the stack in the "frame by frame" mode, like a video clip. During playback of the
+video clip, you can stop it and change the viewing angles, colors, lighting and etc.
 
 The surface can be displayed in two ways: "Smooth" and "bar-View" - a set of vertical
 bars. You can switch the view by pressing &lt;F4> at any time.
@@ -73,7 +73,7 @@ For example this feature is used to find regression, i.e. set of functions for r
 __analytically in symbolic form directly in the command__, see: pik3d/demo/regression.
 
 In addition, __jj__ can execute the __sequence of Java commands__ directly from the command line.
-jj-command can use JVM options (see: pik3d/usr/jep438.jj -test of Vector API).
+jj-command can use JVM options (see: pik3d/usr/jep438.jj - test of Vector API).
 
 Additional commands can be implemented in any other convenient algorithmic language.
 To read/write ###-files in __PYTHON__: pik3d/ext/ __kadr.py package__ is included.
