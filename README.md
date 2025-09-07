@@ -108,7 +108,7 @@ __download and install:__
   - after install, scripts(_run.cmd) in demo folders are available to execute.
   - if you plan to use __Eigen/Singular Values Decomposition__, you need to dowload
     <a href='https://archive.apache.org/dist/commons/math/binaries/commons-math3-3.6.1-bin.zip'>The Apache Commons Mathematics Library 3.61</a>
-	and place jar-files in the  pik3d/lib  folder (without sources and java-doc ~2.3MB).
+	and place jar-files in the  pik3d/lib  folder (without sources and java-doc ~2.2MB).
 
 <p>author: K.A.Ilyashenko, e-mail: kilyashenko@gmail.com</p>
 Error messages, comments, suggestions  are welcome.
