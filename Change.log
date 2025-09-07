@@ -1,4 +1,8 @@
 
+2025-09-07  version 22.3.2,
+  - revert to Apache Math.Library v.3.61 (from 4.0 beta);
+  - commands:  fmt, tt  are fixed for proper operation in pipe-line.
+
 2025-07-09  version 22.3.1,
   - 2d-graphics( pik.jar ): fix Zoom operation, Zoom always on top ;
 

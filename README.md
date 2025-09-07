@@ -46,7 +46,7 @@ quadrilateral faces (up to 10,000 faces). You can control Opacity of body/surfac
 2D/3D - Points| Lines| Body can be added to the 3D-scene.
 
 Starting from version 20 data processing is extended by __Eigen/Singular Values Decomposition__ of Matrix
-and Regression analyses based on <a href='https://commons.apache.org/proper/commons-math/'>"The Apache Commons Mathematics Library"</a>.
+and Regression analyses based on <a href='https://archive.apache.org/dist/commons/math/binaries/commons-math3-3.6.1-bin.zip'>"The Apache Commons Mathematics Library 3.61"</a>.
 
 The framework has simple but effective 2D-graphics tools for displaying
 columns and rows of matrices. Simple graph-editor can add text, lines, figures to chart.
@@ -107,7 +107,7 @@ __download and install:__
   - read the section "INSTALL pik3d";
   - after install, scripts(_run.cmd) in demo folders are available to execute.
   - if you plan to use __Eigen/Singular Values Decomposition__, you need to dowload
-    <a href='https://commons.apache.org/math/download_math.cgi'>The Apache Commons Mathematics Library 4.0</a>
+    <a href='https://archive.apache.org/dist/commons/math/binaries/commons-math3-3.6.1-bin.zip'>The Apache Commons Mathematics Library 3.61</a>
 	and place jar-files in the  pik3d/lib  folder (without sources and java-doc ~2.3MB).
 
 <p>author: K.A.Ilyashenko, e-mail: kilyashenko@gmail.com</p>
