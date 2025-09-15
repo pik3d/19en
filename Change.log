@@ -1,19 +1,25 @@
 
+2025-09-15  version 23
+  - jj-technology is extended with execution of OS-commands and pipe-lines,
+    this feature alows use it as batch file with control on JAVA !
+  - fix files permitions in demo folder ;
+  - small fixes in pik.jar( input/output ).
+
 2025-09-07  version 22.3.2,
   - revert to Apache Math.Library v.3.61 (from 4.0 beta);
   - commands:  fmt, tt  are fixed for proper operation in pipe-line.
 
-2025-07-09  version 22.3.1,
+2025-07-09  version 22.3.1
   - 2d-graphics( pik.jar ): fix Zoom operation, Zoom always on top ;
 
-2025-07-07  version 22.3,
+2025-07-07  version 22.3
   - 2d-graphics( pik.jar ): several fixes in  Cursor Lines  and  Zoom ;
   - jj is added new key: /n=name - define output file name (default: Noname)
     for case: jj "cmd1; cmd2..." /s /n=file ;
   - description: how to make a simple Launcher is added to pik3d_DOC.html;
   - correct some demo .
 
-2025-02-13  version 22.2,
+2025-02-13  version 22.2
   - completely redesigned regression building technology ;
   - redesigned section of the Help  and  new  demo-folder: regression ;
   - added new commands: matrix join and farg( to create Argument Files );

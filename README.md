@@ -75,17 +75,20 @@ __analytically in symbolic form directly in the command__, see: pik3d/demo/regre
 In addition, __jj__ can execute the __sequence of Java commands__ directly from the command line.
 jj-command can use JVM options (see: pik3d/usr/jep438.jj - test of Vector API).
 
-Additional commands can be implemented in any other convenient algorithmic language.
-To read/write ###-files in __PYTHON__: pik3d/ext/ __kadr.py package__ is included.
-To read ###-files in the __ImageJ__ editor, ###_Reader_ImageJ.jar __plugin__ is implemented.
-
 In a simple case, the processing program is a script (.bat, .cmd ...).
 From command to command, data is transferred in the form of ###-files
 or by means of __"pipe"__ (it can reduce disk usage and increase performance).
 Any command can save the pipe-output to the file for further processing( add to command @file).
 
+__jj-technology__ supports execution of OS-commands and pipe-lines.
+This feature allows to use __jj-file__ as batch file with flexible control on JAVA !
+
+Additional commands can be implemented in any other convenient algorithmic language.
+To read/write ###-files in __PYTHON__: pik3d/ext/ __kadr.py package__ is included.
+To read ###-files in the __ImageJ__ editor, ###_Reader_ImageJ.jar __plugin__ is implemented.
+
 The framework can be installed on __Windows 7, 10, Linux__ (tested in Mint 21.1).
-Current  version 22  is  compiled with __JAVA-21 LTS__ using __javaFX__. It can be run under __JAVA v. 21, 22__.
+Current  version 23  is  compiled with __JAVA-21 LTS__ using __javaFX__. It can be run under __JAVA v. 21, 22__.
 
 Description of the framework, formats and install procedure are presented in the file:
 __pik3d_DOC.html__, contained in the install archives: __pik3d.zip__ and __pik3d_Linux.zip__.
