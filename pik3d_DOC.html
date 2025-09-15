@@ -17,13 +17,12 @@ x{background:#333333; color:#00FF00; font-size:13px; line-height:13px; font-fami
 <h5><pre><a name='s3d'><f>pik3d - framework for processing and 3d-display of matrices and their sequences
         Help has standard HTML navigation:  &lt;Home>,  &lt;End>,  <a href="#ins">links</a>
 </f><a name='ogl'></a>
-<a href='#fwk'>DESCRIPTION of&nbsp; pik3d &nbsp;v.22.3</a>
+<a href='#fwk'>OVERVIEW of pik3d v.23</a>
 <a href="#ins">INSTALL pik3d </a>
 <a href="#dat">###-format of the data: FRAME, STACK</a>
 <a href="#cmd">COMMANDS</a>
-
-  <a href='#sss'>s3d -"Surface-3D" </a>                           ! <r>3d</r>-display of the Stack [+Additions]
-  <a href='#b3d'>b3d -"Body-3D" </a>                              ! <r>3d</r>-display of the Body or Figure
+               <a href='#sss'>s3d -"Surface-3D" </a>              ! <r>3d</r>-display of the Stack [+Additions]
+               <a href='#b3d'>b3d -"Body-3D" </a>                 ! <r>3d</r>-display of the Body or Figure
 
 Stack: create, view, info:
   <a href='#40' >stk  ii  [ jj=1 [kk=1]]  [v=&lt;value>]  [D8]</a>   ! Create new <r>St</r>ac<r>k</r>
@@ -97,6 +96,323 @@ Element-wise Calculations:
 
 <a href="#pik">Most used pik.io methods </a>
 <a href="#jc" >Create New pik3d Command, prepare Launcher </a>
+<a name='fwk'></a>________________________________________________________________________________________
+
+<o>   PROCESSING AND 3D DISPLAY OF MATRIXES/FRAMES AND THEIR SEQUENCES
+</o>
+When examining the properties of a time-varying surface, it is convenient to store,
+process and display a set of images/ frames/ matrices as a whole.
+Such an image sequence is often referred to as a STACK of images.
+Displaying of the stack in the "frame by frame" mode is perceived as a video clip.
+
+Framework <o>pik3d</o> offers a data storage/sharing standard and a basic set of commands for
+processing and displaying stacks.The methods for reading and writing files in <a href="#dat">###-format</a>
+implemented in JAVA are stored in the library: lib\pik.jar and described: <a href="#pik">pik.io methods</a>
+Package: kadr.py is implemented for PYTHON language ( stored: ext\###_PYTHON.zip ).
+To use the ###-format in the <r>ImageJ</r> graphical editor, a plugin is implemented
+( ext\###_Reader_ImageJ.jar, copy to ImageJ\plugins\3D ).
+
+Framework commands are executable(.exe) modules and their set is not fixed.
+The launcher technology is used ("launch" - to launch, start). Launcher encapsulates
+the starting configuration of the Virtual JAVA Machine (JVM).
+
+The framework contains simple tools for creating <a href="#jc">new command on JAVA</a>.
+Additional commands can be implemented in any convenient algorithmic language.
+
+From command to command, Stacks are transferred in the form of the <a href="#dat">###-format</a> files
+or by means of <r>pipe-line</r>( it can reduce disk usage and increase performance ).
+
+Most of the commands  output the result  to the standard output stream. If commands
+chained in to the <r>pipe-line</r> the next command can get data from the <r>standard stream</r>.
+To denote standard stream symbol <r>'-'</r> is used. In case of several Stacks in the output:
+<r>-:2, -:3</r> ... Stacks are delimited by: <r>### &lt;eos></r> -"End Of Stack". It looks like:
+
+  cmd1 a b <r>|</r> cmd2 c <r>-</r> <r>|</r> cmd3 d <r>-</r> d:3 <r>-:2</r> ... <r>|</r> cmdN <r>-</r> p <r>></r> File
+
+In a simple case, the processing program is a command/ batch script.
+More complex program with loops and branching points( even dialogs ) can be implemented
+using <a href="#jj">jj-technology</a>. In jj-file OS-command/ pipe ( the same as in the batch file )
+follows the symbol <m>'$'</m>, example of <n>batch-file</n> and <m>jj-file</m> with the same functioality:
+
+  <y>rem file: eigenVV.bat</y>                 | <r>{</r> <y>//file: eigenVV.jj</y>
+  <n>stk 77 9| noise -| mul -# -| eig ->V</n>  |   <m>$ stk 77 9| noise -| mul -# -| eig ->V</m>
+  <n>fmt V    10*11.5g                   </n>  |   <m>$ fmt V    10*11.5g</m>
+  <n>fmt V:2  10*11.5g                   </n>  |   <m>$ fmt V:2  10*11.5g</m>
+                                        | <r>}</r>
+  > eigenVV            !run <n>batch-file</n>  | > jj eigenVV             !run <m>jj-file</m>
+
+Use of <m>jj-file</m> is more flexible as it can contain JAVA-code to control the processing.
+
+The framework can be installed on Windows 7, 10, Linux (tested in Mint 21.1).
+Version 23 is compiled with <r>JAVA-21 using javaFX</r>.
+<a name='ins'></a>________________________________________________________________________________________
+
+				<o>INSTALL pik3d
+</o>
+    <x> Linux specific steps will appear like this.</x>
+
+ 1. Download <r>Open JDK+FX( Full ) v.21</r> installation zip-archive for Windows( x86 64bit ).
+    Recommended builds (follow one of the links):
+
+       <a href="https://www.azul.com/downloads/?version=java-21-sts&os=windows&architecture=x86-64-bit&package=jdk-fx#zulu"
+>Azul:          JDK  FX  </a>   ! Java <r>21</r>, x86 64-bit, <r>JDK FX !</r>
+       <a href="https://axiomjdk.ru/pages/downloads/#/java-21-current"
+>BellSoft(RU):  Full JDK </a>
+
+    Since the framework does not require a full JAVA installation ( <r>only unzip</r> ),
+    builds can be easily changed. If another version of JAVA is installed on the system,
+    the framework with JAVA-21 will not affect it in any way.
+
+ 2. Expand JAVA archive, for example to: D:\jdk <x> ~/jdk </x>. There should be a folder:
+    D:\jdk\bin  <x> ~/jdk/bin </x>  with  <r>java.exe</r>.  It will be pointed in Launchers config.
+
+ 3. Expand the archive: <r>pik3d.zip</r> <x> pik3d_Linux.zip </x> in a folder, for example:
+    E:\pik3d &nbsp;&nbsp; <x> ~/pik3d &nbsp; </x>
+
+ 4. Create Launchers:
+    a. Go to the <r>pik3d\exe</r> <x> ~/pik3d/exe </x> folder ;
+    b. Edit config <r>_Launch.cfg</r> :
+       - set parameter: <r>jdk/bin:</r>,  in our example:  D:\jdk\bin     <x> ~/jdk/bin  </x>
+       - set parameter: <r>lib/jar:</r>,  --:--:--:--:--:  E:\pik3d\lib\* <x> ~/pik3d/lib/* </x>
+
+    c. run <r>_Launch.exe</r> <x> <b>./_Launch</b>  # ALL Launchers are copied to ~/bin !!!</x>
+
+	               <x> in Linux  skip steps  5., 6.  and  go to 7. </x>
+
+ 5. If need to "introduce" all Launchers to the antivirus, use  pik3d\exe\<r>_antivir.bat</r>.
+
+ 6. Add  path to Launchers  to the <r>Path environment variable</r>
+    in our example:  ...;E:\pik3d\exe
+
+ 7. Check if the installation is correct:  console> <r>gauss| s3d -</r>
+    The "Gauss Bell" should be displayed.
+    In case of error:  check  <r>pik3d\exe\_Launch.cfg</r>,  check <r>Path</r>: > path
+    Possibly, you may need to restart Windows.
+    Also, the cause may be a conflict with the antivirus (it will pass after a while).
+
+ 8. Several demos are collected in the folder: <r>pik3d\demo</r>,  run:  > _run.cmd <x> ./run  </x>
+    If stop viewing by &lt;space>, you can change view angles by moving the pressed Mouse.
+    The lighting angles can be changed by: <r>&lt;Ctrl + arrows</r>: Left, Right, Up, Down >.
+    It is recommended to press in different sequences:
+    <r>&lt;F1></r>, <r>^D</r> -Map Down, <r>^A</r> -Axes, <r>^M</r> -Map</r>, <r>^2</r>-on/off obj.( <r>^</r> -means pressed &lt;Ctrl> key )
+<a name='dat'></a>________________________________________________________________________________________
+
+		<o>###-format of the data: FRAME, STACK
+</o>
+The file may contain one or more frames and stacks in text and/or in binary format.
+Frame = Matrix in the mathematical sense: rows are counted down, columns - to the right.
+Stack - a sequence of frames. Stack ends with the end of file or a line: <r>### &lt;eos></r> -
+"End Of Stack". If file A.dat contains several stacks, then A.dat(2) - access to the 2nd
+stack, A.dat(3) - to the 3rd, access to the 1st: A.dat or A.dat(1) .
+
+The frame data is preceded by a header: <r>### frame_name [ Row_number, Column_number ]</r>.
+The frame name can be any text( may be with spaces or even empty ).
+<r>Space</r> after <r>"###"</r> is important !  Matrix size is specified in parentheses: [ ] or ( ).
+If the number of columns = 1, it can be omitted.
+
+If need to consider data as <r>Double Presion (8-byte)</r>, parameter <r>T8</r> must be used after <r>[]</r>.
+If <r>T8</r> is absent, data are considered as "FLoating Point single precision".
+
+Text or binary data files may contain <y>comments</y>.
+Comments start with <y>!</y>  or  a single <y>#</y>  and  continues to the end of the line.
+An empty line is also considered a comment.
+
+<r>Any text</r> (even without leading symbols: !|# ) <r>before 1st. ###-header is comment</r> too.
+It is good practice to include data description in to the important files.
+This can be done by means of text editor.
+
+To see header with commemts  use commad: <a href="#tt">tt< Stk /h</a> .
+
+In  <r>Text Format</r>, the header line is followed by data lines. The data is considered as
+real numbers, even if they do not contain a decimal point.
+<r>+-.0123456789eE</r>  are considered as Data Symbols. The rest can serve as delimiters.
+
+A string can be divided into any number of substrings  with comments between them.
+The only limitation is that you cannot break a numeric value.  Example( correct frame ):
+<n>
+ ### test [ 3, 5 ]    <y>! 3-rows, 5-columns</y>
+
+   11.123, 12.34, 13  <y># comment</y>
+                        -14, 15.56     <y>! integers can be used:</y>
+
+   21.32 22.54 -23.33 24.765 -.25E+8   <y># real: with  decimal point</y>
+   31 32 3.3e1 340e-7    9e9           <y>!             and/or exponent</y>
+</n>
+<r>Text format</r> may contain <r>repeaters and cycles</r>:
+  - repeater: <r>n*v</r> ="n times repeat v", e.g. 99*-.01 -means 99 times repeat value=-.01;
+  - cycle:  <r>( b, e [, s])</r> -values: b, b+s, b+2*s ... until b+k*s <=e or e <= b+ks if s<0
+    if s is omitted  s=+1 if b&lt;e  or  s=-1 if b>e .
+  Examples: (-4,4,2) = {-4,-2,0,2,4};  (4,1) = {4,3,2,1};  (4,-4,-2) = {4,2,0,-2,-4}
+
+> <m>echo <n>### V[200]/ <r>101*99 (98,0)</r> </n>> Vect  &  fmt Vect</m>    !create V[200] and print it
+                                 ! <n>"One Line Stack"</n> technology is used
+
+Starting from version 21.1, for text data you can use a <n>shortened header:  ### []</n> .
+The number of columns is the number of values in the first row of data.
+The number of rows is defined by the file length or the next header. Example:
+<n>
+### [] T8        ! shortened HEADER for frame[3,5] of text double precision data
+  1.41673775804     2.16775769909     2.42139177571     1.85775663706     2.47759811625
+  2.07666607657     1.7660799297      1.96489360786     2.27607551608     2.1607433131
+  3.12731327412    -.273277055213     .0544477327523   -.396327103658    -.333276174596
+
+### ...          ! next HEADER</n>
+
+Special types of square matrices: <r>diagonal, symmetric, </r>triangular:<r> upper, lower</r>
+In examples <n>"One Line Stack"</n> is used to create stack and then <m>"pipe" it to the console</m>:
+
+> <m>echo</m> <n>### Dia [ 20, <r>diagonal</r> ] / (1, 20)</n> <m>| tt 20*4.0f</m>    <y>! diagonal: 1,2..., others=0</y>
+> <m>echo</m> <n>### Sym [ 20, <r>symmetric</r>] / (1,210)</n> <m>| tt 20*4.0f</m>    <y>! set only upper triangl</y>
+> <m>echo</m> <n>### Upp [ 20, <r>upper</r>    ] / (1,210)</n> <m>| tt 20*4.0f</m>    <y>!          upper triangl</y>
+> <m>echo</m> <n>### Low [ 20, <r>lower</r>    ] / (1,210)</n> <m>| tt 20*4.0f</m>    <y>! lower triangl</y>
+                 <n>!!! <r>Keywords</r> can be shortened to two characters: <r>di</r> | <r>sy</r> | <r>up</r> | <r>lo</r> !!!</n>
+<a name='bin'></a>
+<r>Binary Format</r> has an extended header. The matrix size is followed by the binary
+data type: <r>I2 | F4 | D8</r> and possibly  a "Byte Order Indicator": <r> LE </r> .
+
+    <r>I2</r> - 2-byte integers, value range from <r>-32768</r> to <r>+32767</r>
+
+    <r>F4</r> - 4-byte real("Floating Point") single precision, <r>~ 7</r> significant digits:
+                            <r>1.4e-45</r> < absolute value < <r>3.4e+38</r>
+
+    <r>D8</r> - 8-byte real double precision, <r>~ 15</r> significant digits:
+                            <r>4.9e-324</r> < absolute value < <r>1.8e+308</r>
+
+    <r>LE</r> - "Little-Endian" - "LOW bytes first" like in memory.
+          Default byte order is <r> "Big-Endian"</r> - this is JAVA Standard !
+
+The binary block starts after byte=0x10=#0A("Line Feed") and does not contain comments!
+Comments can be placed only before the header or after the binary block !
+
+The data is output to the binary block sequentially by lines without separators !
+
+Stack may contain both text and binary frames( even with different "Byte Order").
+
+	<r>The amount of Stack Data should not exceed 2 GB !</r>
+
+In files with binary frames, you can add/ change comments and headers using editors
+that support binary format ( Notepad++, SlickEdit ... )
+
+The command:<a href="#fmt"> fmt </a>- "format" converts a file to the specified format.
+To quickly view stacks in the "pipe", it is convenient to use the command: <a href="#tt">...| tt</a>
+
+JAVA methods to work with data in  ###-format  are given in  <a href="#pik">pik.io methods</a> .
+<a name='cmd'></a>________________________________________________________________________________________
+
+					<o>COMMANDS:</o>
+The command consists of two parts:
+ - functional part, implemented and compiled with JAVA, are stored: pik3d\lib\*.jar;
+ - launcher - exe module stored in pik3d\exe, that starts JVM and passes parameters.
+
+Launcher actions:
+ - starts the JVM in the required configuration:  paths, keys, options ...
+ - passes to JVM a link to compiled code;
+ - passes arguments to the command;
+ - exits after starting the JVM and passing parameters.
+
+All launchers have the same code. The difference is in the start parameters and the link
+to the command class. How create new command and prepare launcher:  <a href="#jc">jj, jc, new command</a>.
+<r>
+   At the first call of the command, a conflict with the antivirus may occur.
+   After checking the launcher with the antivirus, this passes.
+   You can "introduce" all launchers to antivirus by executing: pik3d\exe\antivir.bat
+</r>
+Command name = launcher name and is not fixed. You can rename any launcher as you like.
+
+The launcher receives information about the JAVA machine and the path to the libraries
+at the time of creation, parameters: <r>jdk/bin, lib/jar</r> of the <r>_Launch.cfg</r> file.
+This technology allows you to have several JVM and libraries in the system.
+
+When called without parameters or with the key: <r>/?</r> most commands show their short
+description. If the command does not show anything, it must be run with the key: <r>/dbg</r>
+- debug mode. Also, some diagnostic messages are visible only in debug mode.
+<x>If you need error info. from  <r>s3d</r>  or  <r>b3d</r>  in Linux,  you should run
+<r>s3dx</r>  or  <r>b3dx</r>  Launcher.</x>
+
+Most commands (with the exception of visual commands) send the result to the standard
+input/ output stream. If you do not specify  <r>> File</r>  at the end of the command,
+the output will be performed to the console/ screen.
+
+The standard stream allows the use of the <r>"pipe-line"</r> technology.
+If the intermediate data is not important, it can be passed from one command to the next
+command directly, bypassing the disk file. The "pipe-line" provides this capability.
+It may improve disk usage and performance.
+
+If you need to save intermediate data for further processing, any command can save its
+output to file. To do this, it is necessary that the command ends with:  <r>@file</r>
+
+   <r>Experience shows that a pipe should not be used when processing large Stacks > 1 GB.</r>
+
+To use the pipe-line, the commands are written on one line and separated by <r>'|'</r>.
+
+If the command receives a stack from the pipeline, then this parameter is replaced by <r>-</r>.
+A pipe as a file may contain several stacks. N-th stack will be called: <r>-:N</r> .
+
+   stk 70 90 <r>|</r> noise <r>- @F.dat |</r> bell <r>-</r> "20 30 .3 10" <r>|</r> wave <r>-</r> "50 60 .2 15 45" <r>></r> Land
+
+<r>   None of the input files must have a result name (in the example: Land )
+   Commands: <o>s3d, hist, lss /vis, vi.., ee, tif</o>  STOP pipe-line
+</r>
+It makes sense to save the worked out command sequences as batch scripts.
+Stack names and parameters can be considered as call arguments ( %1, %2 ...).
+
+If you need to provide  loops  and  branch points  during processing, it is recommended
+to use  <a href="#jj">jj-technology</a>  with  <m>$ sys1[ | sys2 ]...</m>  and control code on JAVA.
+
+An alternative is to use the command: <r>setvar</r> - "Set Variable".  It allows to read value
+from the Stack elent or keyboard  and  set it to the system environment variable.
+
+   <r>setvar kbd</r>  prompt [ default value ]   <y>!print prompt and read value from Kayboard</y>
+   <r>setvar stk</r>  Stack  [i=1 [j=1 [k=1]]]   <y>!get Stack[ i,j,k ] element</y>
+
+<div style='background:#333333; color:#00FF00;'># Linux example(~/bin/stkelm): $ stkelm Stk&nbsp;
+  s=$1
+  if [ -z "$1" ];then
+    s=`<r>setvar kbd</r> "input Stk.name" q`
+  fi
+
+  while [ true ];do
+    i=`<r>setvar kbd</r> "input i" 3`
+    j=`<r>setvar kbd</r> "input j" 7`
+    k=`<r>setvar kbd</r> "input k(999=exit)" 999`
+
+    if [ $k = 999 ];then
+      exit; fi
+
+    v=`<r>setvar stk</r> $s $i $j $k`
+    echo $s[ $i, $j, $k ] = $v; echo
+  done
+</div>
+In Windows, <r>setvar</r> is launched using sripts:
+
+  <r>call varkbd VAR</r> prompt [default]       <y>!get value from the keyboard</y>
+  <r>call varstk VAR</r> Stk [i=1 [j=1[ k=1]]]  <y>!get value of the Stk[ i,j,k ] element</y>
+
+> <r>call varkbd VVV</r> "input value" -999     <y>!input var: <r>VVV</r> from the keyboard</y>
+> echo %VVV%                             <y>!print var: <r>VVV</r></y>
+> <r>call varstk VVV</r>  Stk  5 4              <y>!read value from Stack: <r>VVV</r> = Stk[5,4]</y>
+
+Example( pik3d\exe\stkelm.cmd - get element: Stk[i,j,k] ):<n>
+@echo OFF
+::          get Stk Element, %1 = Stack Name
+IF [%1]==[] goto end
+
+:cycle
+call varkbd <r>i</r> "input i" 3
+call varkbd <r>j</r> "input j" 7
+call varkbd <r>k</r> "input k(999=exit)" 999
+
+<r>IF</r> %<r>k</r>% equ 999 goto end
+
+call varstk <r>elm</r> %1 %<r>i</r>% %<r>j</r>% %<r>k</r>%
+echo %1[ %<r>i</r>%, %<r>j</r>%, %<r>k</r>%] = %<r>elm</r>%
+echo.
+goto cycle
+
+:end</n>
+> stk 5 9 3| noise - 100 > dat  & fmt dat 9*6.0f   <y>!prepare  Stack: dat  for the test</y>
+> stkelm dat                                       <y>!run script</y>
+This script can be used for any Stack in text or binary format.
 <a name='sss'></a>________________________________________________________________________________________
 
   <o>command: s3d -"Surface-3d" display Matrix/ Frame and their sequences
@@ -600,310 +916,6 @@ Program  <n>torus.jj</n>  has 2 optional parameters:
 > jj torus  55    | b3d -         <y>!display torus: points=55, noise=0</y>
 > jj torus  ,   .6| b3d -         <y>!display torus: points=36, noise=.6</y>
 > jj torus  100 .7| b3d -         <y>!display torus: points=100( #faces=10000 ), noise=.7</y>
-<a name='fwk'></a>________________________________________________________________________________________
-
-<o>   PROCESSING AND 3D DISPLAY OF MATRIXES/FRAMES AND THEIR SEQUENCES
-</o>
-When examining the properties of a time-varying surface, it is convenient to store,
-process and display a set of images/ frames/ matrices as a whole.
-Such an image sequence is often referred to as a STACK of images.
-Displaying of the stack in the "frame by frame" mode is perceived as a video clip.
-
-Framework <o>pik3d</o> offers a data storage/sharing standard and a basic set of commands for
-processing and displaying stacks.The methods for reading and writing files in <a href="#dat">###-format</a>
-implemented in JAVA are stored in the library: lib\pik.jar and described: <a href="#pik">pik.io methods</a>
-Package: kadr.py is implemented for PYTHON language ( stored: ext\###_PYTHON.zip ).
-To use the ###-format in the <r>ImageJ</r> graphical editor, a plugin is implemented
-( ext\###_Reader_ImageJ.jar, copy to ImageJ\plugins\3D ).
-
-Framework commands are executable(.exe) modules and their set is not fixed.
-The launcher technology is used ("launch" - to launch, start). Launcher encapsulates
-the starting configuration of the Virtual JAVA Machine (JVM).
-
-The framework contains simple tools for creating <a href="#jc">new command on JAVA</a>.
-Additional commands can be implemented in any convenient algorithmic language.
-
-In a simple case, the processing program is a batch script.
-From command to command, Stacks are transferred in the form of the <a href="#dat">###-format</a> files
-or by means of <r>"pipe"</r>( it can reduce disk usage and increase performance ).
-
-Most of the commands  output the result  to the standard output stream. If commands
-chained in to the pipe-line the next command can get data from the standard stream.
-To denote standard stream symbol <r>'-'</r> id used. In case of several Stacks in the output:
-<r>-:2, -:3</r> ... Stacks are delimited by: <r>### &lt;eos></r> -"End Of Stack". It looks like:
-
-  cmd1 a b <r>|</r> cmd2 c <r>-</r> <r>|</r> cmd3 d <r>-</r> d:3 <r>-:2</r> ... <r>|</r> cmdN <r>-</r> p <r>></r> File
-
-The framework can be installed on Windows 7, 10, Linux (tested in Mint 21.1).
-Version 22.2 is compiled with <r>JAVA-21 using javaFX</r>.
-<a name='ins'></a>________________________________________________________________________________________
-
-				<o>INSTALL pik3d
-</o>
-    <x> Linux specific steps will appear like this.</x>
-
- 1. Download <r>Open JDK+FX( Full ) v.21</r> installation zip-archive for Windows( x86 64bit ).
-    Recommended builds (follow one of the links):
-
-       <a href="https://www.azul.com/downloads/?version=java-21-sts&os=windows&architecture=x86-64-bit&package=jdk-fx#zulu"
->Azul:          JDK  FX  </a>   ! Java <r>21</r>, x86 64-bit, <r>JDK FX !</r>
-       <a href="https://axiomjdk.ru/pages/downloads/#/java-21-current"
->BellSoft(RU):  Full JDK </a>
-
-    Since the framework does not require a full JAVA installation ( <r>only unzip</r> ),
-    builds can be easily changed. If another version of JAVA is installed on the system,
-    the framework with JAVA-21 will not affect it in any way.
-
- 2. Expand JAVA archive, for example to: D:\jdk <x> ~/jdk </x>. There should be a folder:
-    D:\jdk\bin  <x> ~/jdk/bin </x>  with  <r>java.exe</r>.  It will be pointed in Launchers config.
-
- 3. Expand the archive: <r>pik3d.zip</r> <x> pik3d_Linux.zip </x> in a folder, for example:
-    E:\pik3d &nbsp;&nbsp; <x> ~/pik3d &nbsp; </x>
-
- 4. Create Launchers:
-    a. Go to the <r>pik3d\exe</r> <x> ~/pik3d/exe </x> folder ;
-    b. Edit config <r>_Launch.cfg</r> :
-       - set parameter: <r>jdk/bin:</r>,  in our example:  D:\jdk\bin     <x> ~/jdk/bin  </x>
-       - set parameter: <r>lib/jar:</r>,  --:--:--:--:--:  E:\pik3d\lib\* <x> ~/pik3d/lib/* </x>
-
-    c. run <r>_Launch.exe</r> <x> <b>./_Launch</b>  # ALL Launchers are copied to ~/bin !!!</x>
-
-	               <x> in Linux  skip steps  5., 6.  and  go to 7. </x>
-
- 5. If need to "introduce" all Launchers to the antivirus, use  pik3d\exe\<r>_antivir.bat</r>.
-
- 6. Add  path to Launchers  to the <r>Path environment variable</r>
-    in our example:  ...;E:\pik3d\exe
-
- 7. Check if the installation is correct:  console> <r>gauss| s3d -</r>
-    The "Gauss Bell" should be displayed.
-    In case of error:  check  <r>pik3d\exe\_Launch.cfg</r>,  check <r>Path</r>: > path
-    Possibly, you may need to restart Windows.
-    Also, the cause may be a conflict with the antivirus (it will pass after a while).
-
- 8. Several demos are collected in the folder: <r>pik3d\demo</r>,  run:  > _run.cmd <x> ./run  </x>
-    If stop viewing by &lt;space>, you can change view angles by moving the pressed Mouse.
-    The lighting angles can be changed by: <r>&lt;Ctrl + arrows</r>: Left, Right, Up, Down >.
-    It is recommended to press in different sequences:
-    <r>&lt;F1></r>, <r>^D</r> -Map Down, <r>^A</r> -Axes, <r>^M</r> -Map</r>, <r>^2</r> -Lines ( <r>^</r> - means pressed &lt;Ctrl> key )
-<a name='dat'></a>________________________________________________________________________________________
-
-		<o>###-format of the data: FRAME, STACK
-</o>
-The file may contain one or more frames and stacks in text and/or in binary format.
-Frame = Matrix in the mathematical sense: rows are counted down, columns - to the right.
-Stack - a sequence of frames. Stack ends with the end of file or a line: <r>### &lt;eos></r> -
-"End Of Stack". If file A.dat contains several stacks, then A.dat(2) - access to the 2nd
-stack, A.dat(3) - to the 3rd, access to the 1st: A.dat or A.dat(1) .
-
-The frame data is preceded by a header: <r>### frame_name [ Row_number, Column_number ]</r>.
-The frame name can be any text( may be with spaces or even empty ).
-<r>Space</r> after <r>"###"</r> is important !  Matrix size is specified in parentheses: [ ] or ( ).
-If the number of columns = 1, it can be omitted.
-
-If need to consider data as <r>Double Presion (8-byte)</r>, parameter <r>T8</r> must be used after <r>[]</r>.
-If <r>T8</r> is absent, data are considered as "FLoating Point single precision".
-
-Text or binary data files may contain <y>comments</y>.
-Comments start with <y>!</y>  or  a single <y>#</y>  and  continues to the end of the line.
-An empty line is also considered a comment.
-
-<r>Any text</r> (even without leading symbols: !|# ) <r>before 1st. ###-header is comment</r> too.
-It is good practice to include data description in to the important files.
-This can be done by means of text editor.
-
-To see header with commemts  use commad: <a href="#tt">tt< Stk /h</a> .
-
-In  <r>Text Format</r>, the header line is followed by data lines. The data is considered as
-real numbers, even if they do not contain a decimal point.
-<r>+-.0123456789eE</r>  are considered as Data Symbols. The rest can serve as delimiters.
-
-A string can be divided into any number of substrings  with comments between them.
-The only limitation is that you cannot break a numeric value.  Example( correct frame ):
-<n>
- ### test [ 3, 5 ]    <y>! 3-rows, 5-columns</y>
-
-   11.123, 12.34, 13  <y># comment</y>
-                        -14, 15.56     <y>! integers can be used:</y>
-
-   21.32 22.54 -23.33 24.765 -.25E+8   <y># real: with  decimal point</y>
-   31 32 3.3e1 340e-7    9e9           <y>!             and/or exponent</y>
-</n>
-<r>Text format</r> may contain <r>repeaters and cycles</r>:
-  - repeater: <r>n*v</r> ="n times repeat v", e.g. 99*-.01 -means 99 times repeat value=-.01;
-  - cycle:  <r>( b, e [, s])</r> -values: b, b+s, b+2*s ... until b+k*s <=e or e <= b+ks if s<0
-    if s is omitted  s=+1 if b&lt;e  or  s=-1 if b>e .
-  Examples: (-4,4,2) = {-4,-2,0,2,4};  (4,1) = {4,3,2,1};  (4,-4,-2) = {4,2,0,-2,-4}
-
-> <m>echo <n>### V[200]/ <r>101*99 (98,0)</r> </n>> Vect  &  fmt Vect</m>    !create V[200] and print it
-                                 ! <n>"One Line Stack"</n> technology is used
-
-Starting from version 21.1, for text data you can use a <n>shortened header:  ### []</n> .
-The number of columns is the number of values in the first row of data.
-The number of rows is defined by the file length or the next header. Example:
-<n>
-### [] T8        ! shortened HEADER for frame[3,5] of text double precision data
-  1.41673775804     2.16775769909     2.42139177571     1.85775663706     2.47759811625
-  2.07666607657     1.7660799297      1.96489360786     2.27607551608     2.1607433131
-  3.12731327412    -.273277055213     .0544477327523   -.396327103658    -.333276174596
-
-### ...          ! next HEADER</n>
-
-Special types of square matrices: <r>diagonal, symmetric, </r>triangular:<r> upper, lower</r>
-In examples <n>"One Line Stack"</n> is used to create stack and then <m>"pipe" it to the console</m>:
-
-> <m>echo</m> <n>### Dia [ 20, <r>diagonal</r> ] / (1, 20)</n> <m>| tt 20*4.0f</m>    <y>! diagonal: 1,2..., others=0</y>
-> <m>echo</m> <n>### Sym [ 20, <r>symmetric</r>] / (1,210)</n> <m>| tt 20*4.0f</m>    <y>! set only upper triangl</y>
-> <m>echo</m> <n>### Upp [ 20, <r>upper</r>    ] / (1,210)</n> <m>| tt 20*4.0f</m>    <y>!          upper triangl</y>
-> <m>echo</m> <n>### Low [ 20, <r>lower</r>    ] / (1,210)</n> <m>| tt 20*4.0f</m>    <y>! lower triangl</y>
-                 <n>!!! <r>Keywords</r> can be shortened to two characters: <r>di</r> | <r>sy</r> | <r>up</r> | <r>lo</r> !!!</n>
-<a name='bin'></a>
-<r>Binary Format</r> has an extended header. The matrix size is followed by the binary
-data type: <r>I2 | F4 | D8</r> and possibly  a "Byte Order Indicator": <r> LE </r> .
-
-    <r>I2</r> - 2-byte integers, value range from <r>-32768</r> to <r>+32767</r>
-
-    <r>F4</r> - 4-byte real("Floating Point") single precision, <r>~ 7</r> significant digits:
-                            <r>1.4e-45</r> < absolute value < <r>3.4e+38</r>
-
-    <r>D8</r> - 8-byte real double precision, <r>~ 15</r> significant digits:
-                            <r>4.9e-324</r> < absolute value < <r>1.8e+308</r>
-
-    <r>LE</r> - "Little-Endian" - "LOW bytes first" like in memory.
-          Default byte order is <r> "Big-Endian"</r> - this is JAVA Standard !
-
-The binary block starts after byte=0x10=#0A("Line Feed") and does not contain comments!
-Comments can be placed only before the header or after the binary block !
-
-The data is output to the binary block sequentially by lines without separators !
-
-Stack may contain both text and binary frames( even with different "Byte Order").
-
-	<r>The amount of Stack Data should not exceed 2 GB !</r>
-
-In files with binary frames, you can add/ change comments and headers using editors
-that support binary format ( Notepad++, SlickEdit ... )
-
-The command:<a href="#fmt"> fmt </a>- "format" converts a file to the specified format.
-To quickly view stacks in the "pipe", it is convenient to use the command: <a href="#tt">...| tt</a>
-
-JAVA methods to work with data in  ###-format  are given in  <a href="#pik">pik.io methods</a> .
-<a name='cmd'></a>________________________________________________________________________________________
-
-				<o>COMMANDS:
-</o>
-The command consists of two parts:
- - functional part, implemented and compiled with JAVA, are stored: pik3d\lib\*.jar;
- - launcher - exe module stored in pik3d\exe, that starts JVM and passes parameters.
-
-Launcher actions:
- - starts the JVM in the required configuration:  paths, keys, options ...
- - passes to JVM a link to compiled code;
- - passes arguments to the command;
- - exits after starting the JVM and passing parameters.
-
-All launchers have the same code. The difference is in the start parameters and the link
-to the command class. How create new command and prepare launcher:  <a href="#jc">jj, jc, new command</a>.
-<r>
-   At the first call of the command, a conflict with the antivirus may occur.
-   After checking the launcher with the antivirus, this passes.
-   You can "introduce" all launchers to antivirus by executing: pik3d\exe\antivir.bat
-</r>
-Command name = launcher name and is not fixed. You can rename any launcher as you like.
-
-The launcher receives information about the JAVA machine and the path to the libraries
-at the time of creation, parameters: <r>jdk/bin, lib/jar</r> of the <r>_Launch.cfg</r> file.
-This technology allows you to have several JVM and libraries in the system.
-
-When called without parameters or with the key: <r>/?</r> most commands show their short
-description. If the command does not show anything, it must be run with the key: <r>/dbg</r>
-- debug mode. Also, some diagnostic messages are visible only in debug mode.
-<div style='background:#333333; color:#00FF00;'>If you need error info. from  <r>s3d</r> or <r>b3d</r> on Linux, you should run <r>s3dx</r> or <r>b3dx</r> Launcher.</div>
-Most commands (with the exception of visual commands) send the result to the standard
-input/ output stream. If you do not specify  <r>> File</r>  at the end of the command,
-the output will be performed to the console/ screen.
-
-The standard stream allows the use of the <r>"pipe-line"</r> technology.
-If the intermediate data is not important, it can be passed from one command to the next
-command directly, bypassing the disk file. The "pipe-line" provides this capability.
-It may improve disk usage and performance.
-
-If you need to save intermediate data for further processing, any command can save its
-output to file. To do this, it is necessary that the command ends with:  <r>@file</r>
-
-   <r>Experience shows that a pipe should not be used when processing large Stacks > 1 GB.</r>
-
-To use the pipe-line, the commands are written on one line and separated by <r>'|'</r>.
-
-If the command receives a stack from the pipeline, then this parameter is replaced by <r>-</r>.
-A pipe as a file may contain several stacks. N-th stack will be called: <r>-:N</r> .
-
-   stk 70 90 <r>|</r> noise <r>- @F.dat |</r> bell <r>-</r> "20 30 .3 10" <r>|</r> wave <r>-</r> "50 60 .2 15 45" <r>></r> Land
-
-<r>   None of the input files must have a result name (in the example: Land )
-   Commands: <o>s3d, hist, lss /vis, vi.., ee, tif</o>  STOP pipe-line
-</r>
-It makes sense to save the worked out command sequences as batch scripts.
-Stack names and parameters can be considered as call arguments ( %1, %2 ...).
-
-If you need to provide  loops  or  branch points  during batch file execution, use
-command: <r>setvar</r>. It allows to read value from Stack elent or keyboard and put this
-value to the system environment variable.
-
-   <r>setvar kbd</r>  prompt [ default value ]   <y>!print prompt and read value from Kayboard</y>
-   <r>setvar stk</r>  Stack  [i=1 [j=1 [k=1]]]   <y>!get Stack[ i,j,k ] element</y>
-
-Usage differs in Linux and Windows. Scripts with the same functionality are given:
-
-<div style='background:#333333; color:#00FF00;'># Linux example(~/bin/stkelm): $ stkelm Stk&nbsp;
-  s=$1
-  if [ -z "$1" ];then
-    s=`<r>setvar kbd</r> "input Stk.name" q`
-  fi
-
-  while [ true ];do
-    i=`<r>setvar kbd</r> "input i" 3`
-    j=`<r>setvar kbd</r> "input j" 7`
-    k=`<r>setvar kbd</r> "input k(999=exit)" 999`
-
-    if [ $k = 999 ];then
-      exit; fi
-
-    v=`<r>setvar stk</r> $s $i $j $k`
-    echo $s[ $i, $j, $k ] = $v; echo
-  done
-</div>
-Windows: <r>setvar</r> is used in .cmd-scripts to set <r>VAR</r>iable :
-
-  <r>call varkbd VAR</r> prompt [default]       <y>!get value from the keyboard</y>
-  <r>call varstk VAR</r> Stk [i=1 [j=1[ k=1]]]  <y>!get value of the Stk[ i,j,k ] element</y>
-
-> <r>call varkbd VVV</r> "input value" -999     <y>!input var: <r>VVV</r> from the keyboard</y>
-> echo %VVV%                             <y>!print var: <r>VVV</r></y>
-> <r>call varstk VVV</r>  Stk  5 4              <y>!read value from Stack: <r>VVV</r> = Stk[5,4]</y>
-> echo %VVV%
-
-Example( pik3d\exe\stkelm.cmd - get element: Stk[i,j,k] ):<n>
-@echo OFF
-::          get Stk Element, %1 = Stack Name
-IF [%1]==[] goto end
-
-:cycle
-call varkbd <r>i</r> "input i" 3
-call varkbd <r>j</r> "input j" 7
-call varkbd <r>k</r> "input k(999=exit)" 999
-
-<r>IF</r> %<r>k</r>% equ 999 goto end
-
-call varstk <r>elm</r> %1 %<r>i</r>% %<r>j</r>% %<r>k</r>%
-echo %1[ %<r>i</r>%, %<r>j</r>%, %<r>k</r>%] = %<r>elm</r>%
-echo.
-goto cycle
-
-:end</n>
-> stk 5 9 3| noise - 100 > dat  & fmt dat 9*6.0f   <y>!prepare  Stack: dat  for the test</y>
-> stkelm dat                                       <y>!run script</y>
-This script can be used for any Stack in text or binary format.
 <a name='40'></a>________________________________________________________________________________________
 
 	<o>stk ii [jj=1 [kk=1]] [v=&lt;value>] [D8]  > File
@@ -1987,7 +1999,7 @@ R.m.s. is indicated on the title of the chart  if key /vis is used.  Examples:
 Arranges X rows if necessary, computes spline values( with SPL from <a href='#mnk'>command: lss </a>),
 <r>appends!</r> to X a new column with them  and  outputs to the File.
 
-> jj  TestLSS @XYF  |  lss - 7 /vis  > SPL               <y># XYF[90,3] & save Spline => SPL</y>
+> jj  TestLSS @XYF  |  lss - 7 /vis  > SPL               <y># XYF[90,3] & save Spline =>SPL</y>
 > spl   SPL    XYF  >  XYFS                              <y># XYF[90,3]+Spl => XYFS[90,4]</y>
 > vics XYFS 1 "2,-1 Data" "3,0 Function" "4 8 0 Spline"  <y># plot: Data, Fun, Spline</y>
 <a name='180'></a>________________________________________________________________________________________
@@ -2365,9 +2377,9 @@ public class minMAJ {
     }
   <r>}</r>
 }</n>
-> <o>jj</o> minMAJ<n>.java</n>                                                 <y># output to the console</y>
-> <o>jj</o> minMAJ<n>.java</n> /c                                              <y># only compile</y>
-> <o>jj</o> minMAJ<n>.java</n> | vics - 1 2 3,8                                <y># simple display</y>
+> <o>jj</o> minMAJ<n>.java</n>                                             <y># output to the console</y>
+> <o>jj</o> minMAJ<n>.java</n> /c                                          <y># only compile</y>
+> <o>jj</o> minMAJ<n>.java</n> | vics - 1 2 3,8                            <y># simple display</y>
 > <o>jj</o> minMAJ<n>.java</n> | vics - 1 "2 1 0 minor_: 1, 6/5, 3/2" "3 8 0 MAJOR: 1, 5/4, 3/2"
 
 By the way, pay attention to the failure of the frequency for the minor on 5th
@@ -2458,7 +2470,14 @@ The general form of <o>code.jj</o> is :   ( more examples: pik3d\usr\*.jj )
   [ import pkg;  // NON-STANDARD  JAVA, pik  packages ]
   [ comments:  /* text ... */  or  // text ... ]
   <r>{</r>
-      <n>JAVA code uses arguments:  String arg[]</n>
+    <n>JAVA code uses <r>arguments</r> from  main( String[] <r>arg</r> )</n>
+
+    MACRO Substitution can be used: #0# <-a0, #1# <-a1... #A# <-a10... #F# <-a15 ...
+    Up to 36 parameters will be replaced or removed( if NO arg.) before Compilation,
+    see examples: pik3d/usr/ Fx.jj| Fxy.jj| Fxyt.jj
+
+  $ sys1 | sys2 ...   <y>! run OS-command or pipe, quotes use:  $ sys1 "..\"...\".."...</y>
+                      <y>!  or </y><n>JAVA:  var s="sys1 \"..\"...\"..\"...";</n> <r>sys( s );</r>
   <r>}</r>
   [ methods,  classes(not public),  static ... ]</m>
 
@@ -2477,14 +2496,14 @@ Example 1(above) in <o>jj-form</o>, file: <n>min</n><r>MAJ</r><o>.jj</o>
 An additional very handy feature of <o>jj-Technology</o> is to execute the sequence of JAVA
 commands directly from the command line. In this case  file: <n>Noname.java</n>  is produced
 and executed( you can save it: <o>/s</o> ).  It takes less than 1 second.
-	 _______________________________________________________________
-	|                                                               |
-	|                  !!! ATTENTION in <r>WINDOWS</r> !!!                 |
-	|                                                               |
-	|  Since <r>JAVA double quote</r> character <r>"</r> cannot be used correctly |
-	|  on the command line, it must be replaced by  <r>\"</r> ,  example:  |
-	|   > jj "tt( <r>\"</r> Hello World <r>\"</r> )"                              |
-	|_____________^______________^__________________________________|
+	 ____________________________________________________________
+	|                                                            |
+	|                      !!! ATTENTION !!!                     |
+	|                                                            |
+	|  Since the <r>double quotes "</r> is a special character for the  |
+	|  command line, internal JAVA quotes must be escaped:  <r>\"</r>   |
+	|  > jj "tt( <r>\"</r> Hello World <r>\"</r> )"                            |
+	|____________^______________^________________________________|
 
 JAVA commands are delimited by <r>';'</r> (last <r>';'</r> before closed <r>"</r> may be omitted ).
 Examples( ^C/^V  to test jj, pik3d ):
@@ -2493,12 +2512,6 @@ Examples( ^C/^V  to test jj, pik3d ):
 > <m>jj "for(int i=0;i<9;i++) tt(\" i=\"+i)"                   </m><y>#print: i=0/ i=1/ i=2... i=8</y>
 > <m>jj "hh();for(var x=0.;x<=20;x+=.2) tt(x,exp(-x/7)*sin(x))"| vic - 1 2,11    </m><y>#plot</y>
 > <m>jj Fx "exp(-x/7)*sin(x)" "0,20,.2"| vic - 1 2,11          </m><y>#result as of previous line!</y>
-
-<div style='background:#333333; color:#00FF00;'>  Linux:
-$ jj <r>'</r>tt( max( .9, pi/2, pi-1), 4*pi, sin(-pi/4))<r>'</r>          #use of <r>'varargs'</r> in tt()
-$ jj <r>'</r>for(int i=0;i&lt;9;i++) tt(<r>"</r> i=<r>"</r>+i)<r>'</r>                     #print: i=0/ i=1/ i=2... i=8
-$ jj <r>'</r>hh();for(var x=0.;x&lt;=20;x+=.2) tt(x,exp(-x/7)*sin(x))<r>'</r>| vic - 1 2,11    #plot
-$ jj Fx <r>'</r>exp(-x/7)*sin(x)<r>' '</r>0,20,.2<r>'</r>| vic - 1 2,11          #result as of previous line</div>________________________________________________________________________________________
 
 <r>JAVA options</r> can be used with <o>jj-command</o>. It is useful to test new features of Java.
 Example( Vector API: <n>pik3d/usr/jep438.jj</n> ):
