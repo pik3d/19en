@@ -108,7 +108,7 @@ __download and install:__
   - unpack the archive into some folder;
   - click the file: __pik3d_DOC.html__ - it should be open by default browser;
   - read the section "INSTALL pik3d";
-  - after install, scripts(__ _run.cmd__/ __./run__ in Linux ) in demo folders are available to execute.
+  - after install, scripts: __\_run.cmd or ./run__ (Linux) in demo folders are available to execute.
   - if you plan to use __Eigen / Singular Values Decomposition__, you need to dowload
     <a href='https://archive.apache.org/dist/commons/math/binaries/commons-math3-3.6.1-bin.zip'>The Apache Commons Mathematics Library 3.61</a>
 	and place jar-file into the pik3d/lib folder (without sources and java-doc ~2.2MB).
