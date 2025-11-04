@@ -78,7 +78,7 @@ In addition, __jj__ can execute the __sequence of Java commands__ directly from 
 jj-command can use JVM options (see: pik3d/usr/jep438.jj - test of Vector API).
 
 In a simple case, the processing program is a script (.bat, .cmd ...).
-From command to command, data is transferred in the form of ###-files
+From command to command, data is transferred in the form of __###-files__
 or by means of __"pipe"__ (it can reduce disk usage and increase performance).
 Most commands can save intermediate pipe data to a file for further processing (add @file to the command).
 
