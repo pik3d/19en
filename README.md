@@ -83,7 +83,7 @@ Most commands can save intermediate pipe data to a file for further processing (
 
 __jj-technology__ supports execution of OS-commands and pipe-lines.
 This feature allows to use __jj-file__ as batch file with flexible control on JAVA !
-Such jj-script can be compiled into the .class file and run with .exe Launcher !  
+Such jj-script even can be compiled into the __.class__ file and run with __.exe Launcher__ !
 
 Additional commands can be implemented in any other convenient algorithmic language.
 To read/write ###-files in __PYTHON__: pik3d/ext/ __kadr.py package__ is included.
