@@ -29,7 +29,7 @@ The set of such 3D-points forms a 3D-surface.
         X                      /____________/
                              X/
 
-Starting from version 21.1, for text data you can use a shortened header: __###  []__ .
+For text data you can use a shortened header: __###  []__ or even  __###[]__.
 The number of columns is the number of values in the first row of data.
 The number of rows is defined by the file length or the next header.
 
@@ -41,11 +41,11 @@ video clip, you can stop it and change the viewing angles, colors, lighting and 
 The surface can be displayed in two ways: "Smooth" and "bar-View" - a set of vertical
 bars. You can switch the view by pressing &lt;F4> at any time.
 
-Version 21 and later includes tool: b3d -"Body-3D" for 3D-display of bodies defined by
+Command: __b3d__ -"Body-3D" support 3D-display of bodies defined by
 quadrilateral faces (up to 10,000 faces). You can control Opacity of body/surface.
 2D/3D - Points| Lines| Body can be added to the 3D-scene.
 
-Starting from version 20 data processing is extended by __Eigen/Singular Values Decomposition__ of Matrix
+Data processing supports __Eigen/Singular Values Decomposition__ of Matrix
 and Regression analyses based on <a href='https://archive.apache.org/dist/commons/math/binaries/commons-math3-3.6.1-bin.zip'>"The Apache Commons Mathematics Library 3.61"</a>.
 
 The framework has simple but effective 2D-graphics tools for displaying
@@ -105,13 +105,13 @@ __CSV-files__ can be converted to __###-format__.
 __download and install:__
   - at the top of this page click file: __pik3d.zip__ or __pik3d_Linux.zip__;
   - on the opened page on the right select download( ~ 1.2 MB );
-  - unpack archive in some folder;
-  - click the file: __pik3d_DOC.html__ - it should open in default browser;
+  - unpack the archive into some folder;
+  - click the file: __pik3d_DOC.html__ - it should be open by default browser;
   - read the section "INSTALL pik3d";
   - after install, scripts(_run.cmd) in demo folders are available to execute.
   - if you plan to use __Eigen/Singular Values Decomposition__, you need to dowload
     <a href='https://archive.apache.org/dist/commons/math/binaries/commons-math3-3.6.1-bin.zip'>The Apache Commons Mathematics Library 3.61</a>
-	and place jar-files in the  pik3d/lib  folder (without sources and java-doc ~2.2MB).
+	and place jar-file into the pik3d/lib folder (without sources and java-doc ~2.2MB).
 
 <p>author: K.A.Ilyashenko, e-mail: kilyashenko@gmail.com</p>
 Error messages, comments, suggestions  are welcome.

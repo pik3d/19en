@@ -1,6 +1,31 @@
 
+2025-10-13  version 23.1
+  - jj-preprocessor & executor:
+    - command: $ OS-commands //execute applications, pipes, shell-cmd;
+        - support of &(&&-Linux), |, >, >> ;
+        - shell-commands: cmd in Windows, Bash in Linux ;		
+    - extention with short functions:  p()=pow()="x^y",  e()=exp() ;
+	- correct processing of the text blocks: """ text block... """ ;
+	- fix Macro Substitution: #p/default# ;
+	- fix of the indentation errors ;
+	- small fixes in jj-library: pik3d/usr/*.jj .
+	
+  - added matrix operations:
+    - corr - auto correlation matrix ;
+    - ata  - transp( A ) * A ;
+	- meanc - mean values of columns ;
+	- submeanc - subtract column mean values ;
+	- sr  = "Stack Row" ;
+	- sks = "Stack + k*Stack" ;
+	- fmt and tt are added new key: /r -"print row number";
+	
+  - new pik.io methods: getKbd(), getSTi(), stdin() - see: pik3d_DOC.html;
+  - command: farg is replaced by pl-"Print Lines";
+  - small fixes in pik.jar( input/output );
+  - pik3d_DOC.html is reorganized .
+
 2025-09-15  version 23
-  - jj-technology is extended with execution of OS-commands and pipe-lines,
+  - jj-preprocessor is extended with execution of OS-commands and pipe-lines,
     this feature alows use it as batch file with control on JAVA !
   - fix files permitions in demo folder ;
   - small fixes in pik.jar( input/output ).
@@ -37,7 +62,7 @@
   - correct some demo in Linux version.
 
 2024-11-05  version 22.1
-  - jj-technology has been extended with macro substitution,
+  - jj-preprocessor has been extended with macro substitution,
     see: pik3d_DOC.html, pik3d/usr/Fx.jj ;
   - small fixes in s3d.jar, pik.jar .
 
@@ -51,7 +76,7 @@
 	- extended config.( almost all parameters have been changed );
     - mesuremts on the "Map" only after "Map Down";
 	- Help: all new features are described .
-  - known bugs of the input/output are fixed .
+    - known bugs of the input/output are fixed .
 
 2024-07-26  version 21.2.1
   - 2d-graphics: improved interaction between Hot Points and Cursor Lines.
