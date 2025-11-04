@@ -63,9 +63,10 @@ The user does not encounter JAVA-programming anywhere( except expanding function
 JAVA doesn't even need to be installed. Only unpack the JAVA installation archive in some folder.
 
 The framework has simple tools to create a new command in JAVA, for example: __jj-Technology -"java-JAVA"__.
-jj-command allows to compile/execute __.jj and .java files__. jj-file contains
+
+__jj is a preprocessor and executor__. It allows to compile/execute __.jj and .java files__. jj-file contains
 only "subject part". File.java is generated from File.jj by adding header with import and main().
-Generated file with framework class-path is submitted for execution to JAVA as "single source-file".
+Generated file with framework class-path is submitted for execution to JAVA (jdk/javac must be present).
 Intermediate files can be saved.
 
 __jj-Technology supports macro substitution__ that allow you to modify java-code directly during jj-call.
