@@ -43,9 +43,9 @@ bars. You can switch the view by pressing &lt;F4> at any time.
 
 Command: __b3d__ -"Body-3D" support 3D-display of bodies defined by
 quadrilateral faces (up to 10,000 faces). You can control Opacity of body/surface.
-2D/3D - Points| Lines| Body can be added to the 3D-scene.
+2D/3D - Points| Lines| Body can be added to the 3D-scene in __s3d__ and __b3d__.
 
-Data processing supports __Eigen/Singular Values Decomposition__ of Matrix
+Data processing supports __Eigen / Singular Values Decomposition__ of Matrix
 and Regression analyses based on <a href='https://archive.apache.org/dist/commons/math/binaries/commons-math3-3.6.1-bin.zip'>"The Apache Commons Mathematics Library 3.61"</a>.
 
 The framework has simple but effective 2D-graphics tools for displaying
@@ -108,8 +108,8 @@ __download and install:__
   - unpack the archive into some folder;
   - click the file: __pik3d_DOC.html__ - it should be open by default browser;
   - read the section "INSTALL pik3d";
-  - after install, scripts(_run.cmd) in demo folders are available to execute.
-  - if you plan to use __Eigen/Singular Values Decomposition__, you need to dowload
+  - after install, scripts(__ _run.cmd__/ __./run__ in Linux ) in demo folders are available to execute.
+  - if you plan to use __Eigen / Singular Values Decomposition__, you need to dowload
     <a href='https://archive.apache.org/dist/commons/math/binaries/commons-math3-3.6.1-bin.zip'>The Apache Commons Mathematics Library 3.61</a>
 	and place jar-file into the pik3d/lib folder (without sources and java-doc ~2.2MB).
 
