@@ -10,13 +10,10 @@ Such a sequence is called a STACK of images ( perhaps from one frame ).
 The framework offers a data storage/exchange standard: __###-format__ and
 base set of commands/utilities for processing and displaying stacks.
 To convert matrix text to __###-format__ all you need to do is add a header:
-
     ### matrix_name [ m, n ] , where: m-number of rows, n-columns
-
 A matrix element can be displayed as a point in 3D-space:
 X - matrix row number, Y - column number, Z - element value.
 The set of such 3D-points forms a 3D-surface.
-
         O_____j_______Y            |Z
         |     |     |              |
         |     |     |   ---3D-->   |  z=m[i,j]
@@ -28,8 +25,7 @@ The set of such 3D-points forms a 3D-surface.
         |                       /            /
         X                      /____________/
                              X/
-
-For text data you can use a shortened header: __###  []__ or even  __###[]__.
+For text data you can use a shortened header: __###  []__ or even  __###[]__ .
 The number of columns is the number of values in the first row of data.
 The number of rows is defined by the file length or the next header.
 
@@ -55,8 +51,9 @@ They scale well and can be used in MS Word documents, conveniently viewed using 
 , Total Commander &lt;F3> ...
 
 Framework commands are executable(.exe) modules and their set is not fixed.
-The __launcher technology__ is used ("launch" - to launch, start, run). Launcher
-encapsulates the starting configuration of the Java Virtual Machine.
+The __launcher technology__ is used ("launch" - to launch, start, run ). Launcher (.exe )
+encapsulates the initial path and configuration of the Java Virtual Machine for the command.
+It allows to have several versions of JAVA on the system if necessary.
 
 The user does not encounter JAVA-programming anywhere( except expanding functionality ).
 JAVA doesn't even need to be installed. Only unpack the JAVA installation archive in some folder.
@@ -69,8 +66,8 @@ Intermediate files can be saved.
 
 __jj-Technology supports macro substitution__ that allow you to modify java-code directly during jj-call.
 For example: a code snippet can be inserted into the jj-file just before compilation.
-For example this feature is used to find regression, i.e. set of functions for regression can be specified
-__analytically in symbolic form directly in the command__, see: pik3d/demo/regression.
+This feature is used to find regression, i.e. set of functions for regression can be specified
+__analytically in symbolic form directly in the command line__, see: pik3d/demo/regression.
 
 In addition, __jj__ can execute the __sequence of Java commands__ directly from the command line.
 jj-command can use JVM options (see: pik3d/usr/jep438.jj - test of Vector API).
@@ -78,10 +75,11 @@ jj-command can use JVM options (see: pik3d/usr/jep438.jj - test of Vector API).
 In a simple case, the processing program is a script (.bat, .cmd ...).
 From command to command, data is transferred in the form of ###-files
 or by means of __"pipe"__ (it can reduce disk usage and increase performance).
-Any command can save the pipe-output to the file for further processing( add to command @file).
+Most commands can save intermediate pipe data to a file for further processing (add @file to the command).
 
 __jj-technology__ supports execution of OS-commands and pipe-lines.
 This feature allows to use __jj-file__ as batch file with flexible control on JAVA !
+Such jj-script can be compiled into the .class file and run with .exe Launcher !  
 
 Additional commands can be implemented in any other convenient algorithmic language.
 To read/write ###-files in __PYTHON__: pik3d/ext/ __kadr.py package__ is included.
@@ -113,5 +111,5 @@ __download and install:__
     <a href='https://archive.apache.org/dist/commons/math/binaries/commons-math3-3.6.1-bin.zip'>The Apache Commons Mathematics Library 3.61</a>
 	and place jar-file into the pik3d/lib folder (without sources and java-doc ~2.2MB).
 
-<p>author: K.A.Ilyashenko, e-mail: kilyashenko@gmail.com</p>
+<p>author: kilyashenko@gmail.com</p>
 Error messages, comments, suggestions  are welcome.
