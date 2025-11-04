@@ -10,10 +10,13 @@ Such a sequence is called a STACK of images ( perhaps from one frame ).
 The framework offers a data storage/exchange standard: __###-format__ and
 base set of commands/utilities for processing and displaying stacks.
 To convert matrix text to __###-format__ all you need to do is add a header:
+
     ### matrix_name [ m, n ] , where: m-number of rows, n-columns
+
 A matrix element can be displayed as a point in 3D-space:
 X - matrix row number, Y - column number, Z - element value.
 The set of such 3D-points forms a 3D-surface.
+
         O_____j_______Y            |Z
         |     |     |              |
         |     |     |   ---3D-->   |  z=m[i,j]
@@ -25,6 +28,7 @@ The set of such 3D-points forms a 3D-surface.
         |                       /            /
         X                      /____________/
                              X/
+
 For text data you can use a shortened header: __###  []__ or even  __###[]__ .
 The number of columns is the number of values in the first row of data.
 The number of rows is defined by the file length or the next header.
