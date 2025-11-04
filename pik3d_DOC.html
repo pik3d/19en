@@ -15,9 +15,9 @@ x{background:#333333; color:#00FF00; font-size:13px; line-height:13px; font-fami
 --></style></head><body>
 
 <h5><pre><a name='s3d'><f>pik3d - framework for processing and 3d-display of matrices and their sequences
-        Help has standard HTML navigation:  &lt;Home>,  &lt;End>,  <a href="#ins">links</a>
+        Help supports HTML navigation: &lt;Home>, &lt;End>, <a href="#ins">links</a>
 </f><a name='ogl'></a>
-<a href='#fwk'>OVERVIEW of pik3d v.23</a>
+<a href='#fwk'>OVERVIEW of pik3d v.23.1</a>
 <a href="#ins">INSTALL pik3d </a>
 <a href="#dat">###-format of the data: FRAME, STACK</a>
 <a href="#cmd">COMMANDS</a>
@@ -47,15 +47,18 @@ Data Generation:
   <a href='#csv'>csv  CSV-file [ di,dj ]   [D8] </a>              ! read <r>"Comma-Separated Values"</r> file
 
 Matrix Operations:
+  <a href="#tra">tra   Stk </a>                                   ! Stack <r>Tra</r>nsposition
+  <a href="#tra">rot90 Stk </a>                                   ! <r>Rot</r>ate Frames on <r>90</r> degrees
+  <a href="#dia">diag  A  [Vector] </a>                           ! <r>Diag</r>onal put/get </a>
   <a href="#mul">mul   A  B  [C D ...]</a>                        ! Matrix <r>mul</r>tiplication
   <a href="#dif">dif   A  0 | A  1 |  A  B </a>                   ! <r>dif</r>ference of the Matrix/ Stack
   <a href="#inv">inv   A </a>                                     ! <r>inv</r>ert Matrix
   <a href="#sys">sys   A  b </a>                                  ! Linear <r>sys</r>tem solver
   <a href="#eig">eig   A </a>                                     ! <r>Eig</r>en Values and Vectors
   <a href="#svd">svd   A </a>                                     ! <r>S</r>ingular <r>V</r>alues <r>D</r>ecomposition
-  <a href="#dia">diag  A  [Vector] </a>                           ! <r>Diag</r>onal put/get </a>
-  <a href="#tra">tra   Stk </a>                                   ! Stack <r>Tra</r>nsposition
-  <a href="#tra">rot90 Stk </a>                                   ! <r>Rot</r>ate Frames on <r>90</r> degrees
+  <a href="#cor">corr  A </a>                                     ! <r>Corr</r>erelation Matrix
+  <a href="#mea">meanc    A </a>                                  ! <r>Mean C</r>olumn Values
+  <a href="#sme">submeanc A </a>                                  ! <r>Sub</r>tract <r>Mean C</r>olumn Values
 
 <a href="#reg">Linear Regression:</a>
   <a href="#rej">jj reglin  XV  x.arg     [USE case] > Regr </a>  ! Regression <r>Lin</r>ear
@@ -79,8 +82,10 @@ Data Processing:
   <a href="#220">sma    Stk  [N=5  [level=0 ]] </a>               ! <r>S</r>ubtract <r>M</r>oving <r>A</r>verage
 
 Element-wise Calculations:
-  <a href="#120">sv  S  [+-x/^|exp|ln|db]  value </a>             ! <r>S</r>tack-<r>V</r>alue operations
-  <a href="#130">ss  A  [+-x/^]            B </a>                 ! <r>S</r>tack-<r>S</r>tack operations
+  <a href="#120">sv  S  [+-x/p|exp|ln|db]  value </a>             ! <r>S</r>tack-<r>V</r>alue operations
+  <a href="#row">sr  S  [+-x/p]            Row </a>               ! <r>S</r>tack-<r>R</r>ow   operations
+  <a href="#130">ss  S  [+-x/p]            A </a>                 ! <r>S</r>tack-<r>S</r>tack operations
+  <a href="#sks">sks S          k          A </a>                 ! "S + k*A"
 
 2d-Graphics:
   <a href="#vis">vic(s) Stk  jX j1 j2 j3 ... [keys]</a>           ! <r>Vi</r>sualize <r>C</r>olumns (<r>S</r>pline)
@@ -88,11 +93,11 @@ Element-wise Calculations:
   <a href="#gra">Use of 2d-graphics </a>
   <a href="#tif">tif  File.tif | Config  [Npro=99999] </a>        ! Show <r>.TIF</r>-files/clip
 
-<a href="#jj"  >jj  File[.jj] or File.java    [/s] [/c] </a>       ! <r>"java-JAVA"</r> or <m>simple JAVA</m> Technology
+<a href="#jj"  >jj  File[.jj] or File.java    [/s] [/c] </a>       !<r>"jj=java-JAVA=simple_JAVA"</r> preprocessor
 <a href="#jcc" >jj "jcmd1; jcmd2; jcmd3 ..."  [/s] [/c] </a>       ! Execute several JAVA commands
 <a href="#jmm" >  jj: Macro Substitution:  #p#[default#]</a>       ! macro-substitution in <m>file.jj</m>
-<a href="#jaf" >  jj: Argument File                     </a>       ! contains <r>List of Arguments</r>
-<a href="#pee" >  jj: Text Processor                    </a>       ! example/template for text processor
+<a href="#jaf" >  jj: Argument File                     </a>       ! file.arg contains <r>List of Arguments</r>
+<a href="#pee" >  jj: Simple Text Processor             </a>       ! example/ template for text processor
 
 <a href="#pik">Most used pik.io methods </a>
 <a href="#jc" >Create New pik3d Command, prepare Launcher </a>
@@ -128,10 +133,10 @@ To denote standard stream symbol <r>'-'</r> is used. In case of several Stacks i
 <r>-:2, -:3</r> ... Stacks are delimited by: <r>### &lt;eos></r> -"End Of Stack". It looks like:
 
   cmd1 a b <r>|</r> cmd2 c <r>-</r> <r>|</r> cmd3 d <r>-</r> d:3 <r>-:2</r> ... <r>|</r> cmdN <r>-</r> p <r>></r> File
-
+<a name='jjscr'></a>
 In a simple case, the processing program is a command/ batch script.
 More complex program with loops and branching points( even dialogs ) can be implemented
-using <a href="#jj">jj-technology</a>. In jj-file OS-command/ pipe ( the same as in the batch file )
+using <a href="#jj">jj-preprocessor</a>. In jj-file OS-command/ pipe ( the same as in the batch file )
 follows the symbol <m>'$'</m>, example of <n>batch-file</n> and <m>jj-file</m> with the same functioality:
 
   <y>rem file: eigenVV.bat</y>                 | <r>{</r> <y>//file: eigenVV.jj</y>
@@ -240,12 +245,12 @@ The only limitation is that you cannot break a numeric value.  Example( correct 
 </n>
 <r>Text format</r> may contain <r>repeaters and cycles</r>:
   - repeater: <r>n*v</r> ="n times repeat v", e.g. 99*-.01 -means 99 times repeat value=-.01;
-  - cycle:  <r>( b, e [, s])</r> -values: b, b+s, b+2*s ... until b+k*s <=e or e <= b+ks if s<0
+  - cycle:  <r>( b, e [, s])</r> -values: b, b+s, b+2*s ... until b+k*s <=e or e<= b+k*s if s<0
     if s is omitted  s=+1 if b&lt;e  or  s=-1 if b>e .
   Examples: (-4,4,2) = {-4,-2,0,2,4};  (4,1) = {4,3,2,1};  (4,-4,-2) = {4,2,0,-2,-4}
 
 > <m>echo <n>### V[200]/ <r>101*99 (98,0)</r> </n>> Vect  &  fmt Vect</m>    !create V[200] and print it
-                                 ! <n>"One Line Stack"</n> technology is used
+                                 ! <n>"One Line Frame"</n> technique is used
 
 Starting from version 21.1, for text data you can use a <n>shortened header:  ### []</n> .
 The number of columns is the number of values in the first row of data.
@@ -258,8 +263,9 @@ The number of rows is defined by the file length or the next header. Example:
 
 ### ...          ! next HEADER</n>
 
-Special types of square matrices: <r>diagonal, symmetric, </r>triangular:<r> upper, lower</r>
-In examples <n>"One Line Stack"</n> is used to create stack and then <m>"pipe" it to the console</m>:
+<r>Special types</r> of square matrices: <r>diagonal, symmetric, </r>triangular:<r> upper, lower</r> .
+Currently, only <r>diagonal</r> is supported in binary format, the others only in text files.
+In examples <n>"One Line Frame"</n> is used to create stack and then <m>"pipe" it to the console</m>:
 
 > <m>echo</m> <n>### Dia [ 20, <r>diagonal</r> ] / (1, 20)</n> <m>| tt 20*4.0f</m>    <y>! diagonal: 1,2..., others=0</y>
 > <m>echo</m> <n>### Sym [ 20, <r>symmetric</r>] / (1,210)</n> <m>| tt 20*4.0f</m>    <y>! set only upper triangl</y>
@@ -279,7 +285,7 @@ data type: <r>I2 | F4 | D8</r> and possibly  a "Byte Order Indicator": <r> LE </
                             <r>4.9e-324</r> < absolute value < <r>1.8e+308</r>
 
     <r>LE</r> - "Little-Endian" - "LOW bytes first" like in memory.
-          Default byte order is <r> "Big-Endian"</r> - this is JAVA Standard !
+          Default byte order is <n> "Big-Endian" - this is JAVA Standard !</n>
 
 The binary block starts after byte=0x10=#0A("Line Feed") and does not contain comments!
 Comments can be placed only before the header or after the binary block !
@@ -357,7 +363,7 @@ It makes sense to save the worked out command sequences as batch scripts.
 Stack names and parameters can be considered as call arguments ( %1, %2 ...).
 
 If you need to provide  loops  and  branch points  during processing, it is recommended
-to use  <a href="#jj">jj-technology</a>  with  <m>$ sys1[ | sys2 ]...</m>  and control code on JAVA.
+to use  <a href="#jj">jj-preprocessor</a>  with  <m>$ sys1[ | sys2 ]...</m>  and control code on JAVA.
 
 An alternative is to use the command: <r>setvar</r> - "Set Variable".  It allows to read value
 from the Stack elent or keyboard  and  set it to the system environment variable.
@@ -885,7 +891,7 @@ Example( pik3d\demo\body\simple ):<n>
 
 > b3d simple        !in the folder:  pik3d\demo\body , try to change Palette and Opacity
 
-The following example uses <a href="#jj">jj-technology</a> to generate vertices and faces of torus
+The following example uses <a href="#jj">jj-preprocessor</a> to generate vertices and faces of torus
 Example( <n>pik3d\usr\torus.jj</n> ):<m>
 {
   d = getPars( arg, 36,0 ); n=(int)min( 100, d[0]);
@@ -1020,7 +1026,7 @@ It is useful to describe the data in comment before ###.  Examples:
   > gauss  @filter | tt /h          <y># header of filter</y>
   > gauss > filter & tt&lt; filter /h  <y># both lines give the same result:</y>
 <n>
-! Gauss Blur Filter: radius=2*sigm=8.0, width=25, Normalized.
+! Gauss Blur Filter: radius=2*sigma=8.0, width=25, Normalized.
 
 ### Gauss_sigma_4 [ 25, 25 ]
  1.284e-6   2.625e-6   5.042e-6   9.103e-6   1.544e-5   2.462e-5   3.687e-5  ...</n>
@@ -1066,7 +1072,7 @@ For the Gaussian distribution, it is convenient to assume <r>Radius = 2*sigma</r
 This is the visually perceived radius of the "Gaussian Bell" and  the characteristic
 size of "SMOOTHING".
 
-	<r>After smoothing, only details that exceed the Radius remain</r>
+    <r>After smoothing, elements of size &lt; Radius  will be lost</r>
 
 Filter aperture or width (2nd parameter) measured in Radii, default = 3*R = 6*sigma .
 On "Center Point Demand" width rounds UP to nearest odd number: 3*8=24 --> 25 .
@@ -1488,6 +1494,37 @@ Input file can be taken <r>from the WEB</r>:
 
 It is also possible to read a <r>compressed(.zip ) CSV-file</r> (locally, not WEB):
   csv cereal.zip [3:,4:] | tt
+<a name='tra'></a>________________________________________________________________________________________
+
+    <o>tra    Stk  > File
+</o>
+<r>TRA</r>nsposing ALL FRAMES OF THE STACK. The frame columns become the rows in the new Stack.
+It can be considered as frame  <r>turn over the diagonal</r>:  upper left - lower right.
+
+    <o>rot90  Stk  > File
+</o>
+Rotation STACK FRAME 90 degrees can be considered as a <r>rotation about the center</r> of the
+frame at 90 degrees COUNTERCLOCK-WISE.
+Example for frame[ m, n ] - m-rows, n-columns:  *-------> n                  _________
+                                                |  _____________            |D       C|
+    frame[ m, n ]   result[ n, m ]              | |A           D|         n |         |
+                                                | |             | rot90   ^ |         |
+      A: ( 1, 1 )   --->  ( n, 1 )              V |      *      | ----->  | |    *    |
+      B: ( m, 1 )   --->  ( n, m )              m |             |         | |         |
+      C: ( m, n )   --->  ( 1, m )                |B___________C|         | |         |
+      D: ( 1, n )   --->  ( 1, 1 )                                        | |A_______B|
+                                                                          *-----> m
+<a name='dia'></a>________________________________________________________________________________________
+
+    <o>diag  A  [Vector]  > D   ! get/set <r>DIAG</r>onal values of Matrix
+</o>
+If Vector is absent , vector D will contain diagonal of the matrix A.
+
+If Vector is present, it will be set as diagonal in to the A matrix and output.
+The number of inserted values = min( A_Diagonal.Length, Vector.Length )
+  e.g.
+> diag  A      > d      <y># get:  d is vector and contains Diagonal of A</y>
+> diag  A  dd  > Anew   <y># set:  Anew == A with new diagonal = dd</y>
 <a name='mul'></a>________________________________________________________________________________________
 
     <o>mul  A B [ C D ...]  > File   ! Matrix <r>Mul</r>tiplication
@@ -1638,37 +1675,50 @@ We can neglect small and zeros Singular Values/Vectors and use r &lt; n :
   5.551115e-16   1.159963e-16   1.481203e-16</n>
 
 > diag D | vic -   <y>! plot Singular Values as function of number.</y>
-<a name='dia'></a>________________________________________________________________________________________
+<a name='cor'></a>________________________________________________________________________________________
 
-    <o>diag  A  [Vector]  > D   ! get/set <r>DIAG</r>onal values of Matrix
-</o>
-If Vector is absent , vector D will contain diagonal of the matrix A.
+    <o>corr  A  > C   ! <r>Corr</r>erelation Matrix (only 1st Frame)</o>
 
-If Vector is present, it will be set as diagonal in to the A matrix and output.
-The number of inserted values = min( A_Diagonal.Length, Vector.Length )
-  e.g.
-> diag  A      > d      <y># get:  d is vector and contains Diagonal of A</y>
-> diag  A  dd  > Anew   <y># set:  Anew == A with new diagonal = dd</y>
-<a name='tra'></a>________________________________________________________________________________________
+Calculation steps ( i-row, j-column, sum() -summation by i=1...N ):
+  1. Mean values for j-column:  <n>Mj = sum( Dij )/ N</n> ;
+  2. Deviation for all elements of j-column:  <n>Dij = Aij - Mj</n> ;
+  3. Standard Deviation for j-column:  <n>SDj = sqrt( sum( Dij^2 )/ N )</n> ;
+  4. Correlation coefficient:  <n>Cmn = sum( Dim * Din )/ ( SDm * SDn * N )</n> .
 
-    <o>tra    Stk  > File
-</o>
-<r>TRA</r>nsposing ALL FRAMES OF THE STACK. The frame columns become the rows in the new Stack.
-It can be considered as frame  <r>turn over the diagonal</r>:  upper left - lower right.
+The correlation matrix is always symmetrical, there are  1,1...  on the diagonal.
+To view it <a href="#sss">command: s3d </a>can be used > <n>corr A| s3d -  </n><y>!do not forget set "Bar-view"=&lt;F4></y>
 
-    <o>rot90  Stk  > File
-</o>
-Rotation STACK FRAME 90 degrees can be considered as a <r>rotation about the center</r> of the
-frame at 90 degrees COUNTERCLOCK-WISE.
-Example for frame[ m, n ] - m-rows, n-columns:  *-------> n                  _________
-                                                |  _____________            |D       C|
-    frame[ m, n ]   result[ n, m ]              | |A           D|         n |         |
-                                                | |             | rot90   ^ |         |
-      A: ( 1, 1 )   --->  ( n, 1 )              V |      *      | ----->  | |    *    |
-      B: ( m, 1 )   --->  ( n, m )              m |             |         | |         |
-      C: ( m, n )   --->  ( 1, m )                |B___________C|         | |         |
-      D: ( 1, n )   --->  ( 1, 1 )                                        | |A_______B|
-                                                                          *-----> m
+The result file contains three stacks:
+    C:1  <y>! Correlation Matrix</y>
+    C:2  <y>! Column Mean Values</y>
+    C:3  <y>! Column Standard Deviations</y>
+e.g.
+> stk 99 8| noise - 2 @A| corr - @C| s3d - & tt 8*10.3g < C
+<a name='mea'></a>________________________________________________________________________________________
+
+    <o>meanc  A  > M   ! <r>Mean C</r>olumn Values (only 1st Frame)</o>
+
+Calculation steps:  1, 2, 3  as for the <r>corr</r> command (above).
+The result file contains two stacks:
+    M:1  <y>! Column Mean Values</y>
+    M:2  <y>! Column Standard Deviations</y>
+e.g.
+> stk 99 5| noise - 3| meanc - @M| tt
+> tt&lt;M
+<a name='sme'></a>________________________________________________________________________________________
+
+    <o>submeanc  A  > A_m   ! <r>Sub</r>tract <r>Mean C</r>olumn Values (only 1st Frame)</o>
+
+For all column:  find Mean Column Value  and  subtract from all elements of column.
+Result = Deviations of Mean Value.
+
+The result file contains two stacks:
+  A_m:1    <y>! Deviations of Mean Column Values</y>
+  A_m:2    <y>! Mean Column Values </y>
+e.g.
+> stk 999 9 d8| noise - 10 @A| submeanc -| sr - + -:2| dif - A   <y>!deviations + means = A</y><n>
+ ### MAX        Average       Root_Mean_Square [3]
+  8.881784e-16  2.422135e-17  1.244592e-16</n>
 <a name='reg'></a>________________________________________________________________________________________
 
     <o>Linear Regression</o>
@@ -1720,8 +1770,8 @@ This task is performed by the command:  <m>jj reglin</m> .
 
     <o>jj  reglin  XV  x.arg  [USE case]  > Regr     ! <r>REG</r>ression <r>LIN</r>near
 </o>
-<m>Framework pik3d</m> proposes to use  <a href="#jj">pik3d jj-technology</a>  to solve this problem.
-jj-preprocessing allows to define a set of regression functions: <r>{f}</r> and <r>"how to read"</r>
+<m>Framework pik3d</m> proposes to use  <a href="#jj">pik3d jj-preprocessor</a>  to solve this problem.
+It allows to define a set of regression functions: <r>{f}</r> and <r>"how to read"</r>
 data from the matrix <r>XV</r>  as  <r>lines of Java code</r>  directly in the command line.
 Three commands are implemented as  <m>jj-programs</m>  and must be launched using <n>jj-launcher</n>:
 <m>
@@ -2007,7 +2057,8 @@ Arranges X rows if necessary, computes spline values( with SPL from <a href='#mn
 	<o>blur  Stk  [R=2]   > File
 </o>
 Apply <r>"Gaussian Blur"</r> smooth filter of given Radius R=2*sigma to all frames.
-Radius - characteristic blur size (smaller elements will disappear after blur ).
+Radius - characteristic size of the blur (smaller elements will be lost after blurring).
+Radius is the characteristic size of the blur ( smaller elements will be lost ).
 By default R=2, but can be for example: 1.2, 1.75, 3.5 ...
 Filter width (aperture) = 3*R = 6*sigma, i.e. at R=2 summation for each point
 will be done on a 7x7 square( 3*R=3*2, +1 - "Center Point Requirement").
@@ -2060,45 +2111,65 @@ One of the operations[] is applied to <r>each stack element</r> and <r>value</r>
   Arithmetic operations:
     +, -, <r>x-multiply(Latin:x)</r>, /-divide, <r>p-raise to a Power</r>
 
-  Functions &lt;Stack element> / value:
-    exp = exp  ( stk / value ) - "e" to the power ratio: &lt;Stack element>/value
-    ln  = ln   ( stk / value ) - natural logarithm( base "e" )
-    db  = 10*lg( stk / value ) - power decibel( decibel log.)
+    sv  Stk  + 200  >  F       <y>! add 200 to all elements</y>
+    sv  Stk  - 100  >  F       <y>! subtract from all elements value 100</y>
+    sv  Stk  x -1   >  F       <y>! x - multiply by -1 == change the sign of all elements</y>
+    sv  Stk  / 4    >  F       <y>! divide all elements by 4</y>
+    sv  Stk  p 2    >  F       <y>! raise to a power 2   = square all elements</y>
+    sv  Stk  p .5   >  F       <y>! raise to a power 1/2 = square root of all elements</y>
 
-    sv  Stk  + 200   >  F    <y># add 200 to all elements</y>
-    sv  Stk  - 100   >  F
-    sv  Stk  x -1    >  F    <y># x - multiply by -1 == change the sign of all elements</y>
-    sv  Stk  / 4     >  F
-    sv  Stk  p 2     >  F    <y># square all elements</y>
-    sv  Stk  p .5    >  F    <y># take the square root of all elements (power of 1/2)</y>
+  Functions &lt;Stack element> / value:
+    exp = exp  ( stk/ value )  <y>! "e" to the power ratio: &lt;Stack element>/value</y>
+    ln  = ln   ( stk/ value )  <y>! natural logarithm( base "e" )</y>
+    db  = 10*lg( stk/ value )  <y>!- decibel, lg - decimal logarithm( base=10 )</y>
 
 *you can omit the space before value:
-    sv Stk +1; sv Stk /2; sv Stk ^.5;
-    sv Stk - -3 == sv Stk --3 == sv Stk +3 !!!
+    sv Stk +1; sv Stk /2; sv Stk -3;
+    sv Stk - -3 == sv Stk --3 == sv Stk 3 == sv Stk +3 !!!
 
 *function name can be abbreviated to ONE letter( e, l, d ):
-    sv Stk e -2 == sv Stk exp -2   <y># exp( -stk/2 )</y>
+    sv Stk e -2 == sv Stk exp -2   <y>! exp( -stk/2 )</y>
+<a name='row'></a>________________________________________________________________________________________
+
+    <o>sr  S [+-x/p]  Row  > File  !"<r>S</r>tack-<r>R</r>ow", Row is one row Stack
+</o>
+The operation is applied to the elements of the Stack and Row in the same column:
+
+  sr  S + R  > F    <y>! ADDITION:          Fij = Sij + Rj</y>
+  sr  S - R  > F    <y>! SUBTRACT:          Fij = Sij - Rj</y>
+  sr  S x R  > F    <y>! MULTIPLY(<r>Latin x</r>): Fij = Sij x Rj</y>
+  sr  S / R  > F    <y>! DIVISION:          Fij = Sij / Rj</y>
+  sr  S p R  > F    <y>! RAISE TO A POWER:  Fij = Sij p Rj</y>
+
+* <n>&lt;NUMBER of COLUMNS <r>S</r>> = &lt;NUMBER of ELEMENTS <r>Row</r>>, e.g. S[99,<r>7</r>] <-- Row[<r>7</r>] or Row[1,<r>7</r>]</n>
 <a name='130'></a>________________________________________________________________________________________
 
-    <o>ss  A  [+-x/^]  B  > File   !"<r>S</r>tack-<r>S</r>tack" operations
+    <o>ss  S  [+-x/p]  T  > File   !"<r>S</r>tack-<r>S</r>tack" operations
 </o>
-One of the operations[] is applied to the correspondent elements of stacks;
+The operation is applied to the correspondent elements of stacks;
 Element-by-element stack operations:
 
-  ss  A + B  > F    <y># element-wise ADDITION:          Fij = Aij + Bij</y>
-  ss  A - B  > F    <y># --:--:--:--  SUBTRACT:          Fij = Aij - Bij</y>
-  ss  A x B  > F    <y># --:--:--:--  MULTIPLY(<r>Latin x</r>): Fij = Aij x Bij</y>
-  ss  A / B  > F    <y># --:--:--:--  DIVISION:          Fij = Aij / Bij</y>
-  ss  A p B  > F    <y># --:--:--:--  RAISE TO A POWER:  Fij = Aij p Bij</y>
+  ss  S + T  > F    <y>! element-wise ADDITION:          Fij = Sij + Tij</y>
+  ss  S - T  > F    <y>! --:--:--:--  SUBTRACT:          Fij = Sij - Tij</y>
+  ss  S x T  > F    <y>! --:--:--:--  MULTIPLY(<r>Latin x</r>): Fij = Sij x Tij</y>
+  ss  S / T  > F    <y>! --:--:--:--  DIVISION:          Fij = Sij / Tij</y>
+  ss  S p T  > F    <y>! --:--:--:--  RAISE TO A POWER:  Fij = Sij p Tij</y>
 
 * STACKS MUST HAVE FRAMES OF THE SAME SIZE !
-* Number of result frames = number of <r>shorter</r> stack.
-* Raise to a power - single quote.
+* Number of frames of the result = number of frames of the <r>shorter</r> stack.
+<a name='sks'></a>________________________________________________________________________________________
+
+    <o>sks  A  k  B  > File    !<r>S</r>tack-<r>S</r>tack" operation: "A + k*B"
+</o>
+Element-wise addition with multiplication by k:  Fij = Aij + k*Bij .
+
+* STACKS MUST HAVE FRAMES OF THE SAME SIZE !
+* Number of frames of the result = number of frames of the shorter stack
 <a name='vis'></a>________________________________________________________________________________________
 
   <o>vic[s] - <r><u>VI</u></r>sualize <r><u>C</u></r>olumn [with <r> <u>S</u></r>pline]
 </o>
-  <r>!!! IT IS NOT RECOMMENDED TO DISPLAY COLUMNS LONGER > 100,000 elements !!!</r>
+  <n>!!! IT IS NOT RECOMMENDED TO DISPLAY COLUMNS LONGER<r> > 100,000</r> elements !!!</n>
 
 The parameters for the <o>vic</o> and <o>vics</o> commands are the same.
 Sign <r>,</r> in the command means default value.
@@ -2318,10 +2389,10 @@ You can add <r>TEXT, LINE or FIGURE( box, oval, romb )</r> anywhere in the windo
 You can save a clip as a multi-pages tif-file by the command <a href="#s3F2"> s3d: &lt;F2> </a>.
 You can use multi-pages tif-files created in other programs ( ImageJ ...)
 
-All pages are displayed sequentially. The cycle is repeated Npro times.
+All pages are displayed sequentially. The cycle is repeated <n>Npro</n> times.
 This parameter should not be specified unless required fixed number of views.
 
-To display multiple tif files synchronously, <r>Config file is required:
+To display multiple tif files synchronously, <n>Config file is required:
        ___________Config__________
       |                           |
       | dt[ms] = &lt;frame interval> |
@@ -2331,10 +2402,10 @@ To display multiple tif files synchronously, <r>Config file is required:
       |       ...                 |
       | FileN.tif, xN, yN, wN, hN |
       |___________________________|
-</r>
-where:  dt[ms] - time interval in milliseconds between frames, default=200 ;
-        xk, yk - coordinates of the upper left corner of the k-image ;
-        wk, hk - width, height of the k-image,  k=1,2,3...N .
+</n>
+where:  <n>dt[ms]</n> - time interval in milliseconds between frames, default=200 ;
+        <n>xk, yk</n> - coordinates of the upper left corner of the k-image ;
+        <n>wk, hk</n> - width, height of the k-image,  k=1,2,3...N .
 
 Show can be:
   - stop/continue: <r>&lt;Mouse Right click>  or  &lt;space></r>;
@@ -2343,32 +2414,32 @@ Show can be:
 Frames can be scrolled by rotating the <r>Mouse Wheel</r> or keys: <r>&lt;Left>/&lt;Right>, &lt;Home>/&lt;End></r>
 <a name='jj'></a>________________________________________________________________________________________
 
-<f>jj = "java-JAVA" or simple JAVA Technology</f><o>
+<f>jj = "java-JAVA" preprocessor & executor of simple_JAVA
+      simple_JAVA = JAVA  without Header and main()  -  ONLY SUBJECT CODE</f><o>
 
-     command: jj  ...   # execute "single source-file":  .java or .jj
-
- jj  File<n>.java</n>  [arg0 arg1 ...]      [/c]  #Execute "single source-file"
- jj  File[.jj]  [arg0 arg1 ...] [/s] [/c]  #---:--- .jj = "simple" JAVA
-
- jj "jcmd1; jcmd2; jcmd3;  ..." [/s] [/c]  #---:---  several JAVA cmds.
-<div style='background:#333333; color:#00FF00;'> jj <r>'</r>jcmd1; jcmd2; jcmd3;  ...<r>'</r> [/s] [/c]  #---:---  Linux </div></o>
+ jj  <n>File.java</n>  [arg0 arg1...]      [/c] [> File]  #execute <n>JAVA-file</n>
+ jj "<n>jcmd1; jcmd2; jcmd3; ...</n>" [/s] [/c] [> File]  #execute <n>JAVA commands</n>
+ jj  File[.jj]  [arg0 arg1...] [/s] [/c] [> File]  #execute simple_JAVA
+</o>
 <r>       ATTENTION: if file contains NON-ENGLISH characters, <n>ENCODING must be UTF-8</n> !!!
 </r>
-Modern JAVA supports direct execution of "single source-file". In general case, you need
-to specify JVM parameters and class-path. Since  these parameters are already set in the
-framework, no need to point them in the command <o>jj</o>.  Small programs may be used
-to generate data in the <a href="#dat">###-format</a>  or  for simple data processing.
+To execute JAVA file, you need to specify JVM parameters and class-path.
+Since these parameters have been already set in the framework, no need to point them
+when calling the command <o>jj</o>.
 
-Example 1, <n>min<r>MAJ</r>.java(</n>"<n>minor</n> <r>MAJOR</r>"):
+Small programs(<n>.java</n> or <m>.jj</m> ) may be used to generate data in the <a href="#dat">###-format</a>
+or for the simple data processing.
+
+Example 1, <n>pik3d/usr/minMAJ.java</n> ("minor vs MAJOR"):
   Chord  =  combination of three harmonics with frequencies:
     <n>minor</n> chord:  1, <n>6/5</n>, 3/2  - tonic, <n>minor</n> third, quint
     <r>MAJOR</r> chord:  1, <r>5/4</r>, 3/2  - tonic, <r>MAJOR</r> third, quint
 
-<n>//-----file: minMAJ.java:
-public class minMAJ {
-  static public void main( String[] a )
+<n>public class minMAJ
+{
+  static public void main( String[] arg )
   <r>{</r>
-    System.out.println("### minMAJ [ 201, 3 ]");                 <y>// ### Header</y>
+    System.out.println("### minMAJ [ 201, 3 ]");                 <y>// ### Stack Header</y>
     for(int i=0; i&lt;=200; i++) {
        var t = i*( 2*Math.PI/10 );                               <y>// 10 points/period</y>
        var k = Math.sin( t ) + Math.sin( t*3/2 );                <y>// tonic + quint</y>
@@ -2377,10 +2448,10 @@ public class minMAJ {
     }
   <r>}</r>
 }</n>
-> <o>jj</o> minMAJ<n>.java</n>                                             <y># output to the console</y>
-> <o>jj</o> minMAJ<n>.java</n> /c                                          <y># only compile</y>
-> <o>jj</o> minMAJ<n>.java</n> | vics - 1 2 3,8                            <y># simple display</y>
-> <o>jj</o> minMAJ<n>.java</n> | vics - 1 "2 1 0 minor_: 1, 6/5, 3/2" "3 8 0 MAJOR: 1, 5/4, 3/2"
+> <o>jj</o> <n>minMAJ.java</n>                                             <y># output to the console</y>
+> <o>jj</o> <n>minMAJ.java</n> <m>/c</m>                                          <y># only compile</y>
+> <o>jj</o> <n>minMAJ.java</n> | vics - 1 2 3,8                            <y># simple display</y>
+> <o>jj</o> <n>minMAJ.java</n> | vics - 1 "2 1 0 minor_: 1, 6/5, 3/2" "3 8 0 MAJOR: 1, 5/4, 3/2"
 
 By the way, pay attention to the failure of the frequency for the minor on 5th
 and 15th periods - this is the reason why the minor sounds sad.
@@ -2391,7 +2462,7 @@ Example 2, <n>Reverse.java: "Stack with Frames in Reverse order"</n>:
 <n>import java.util.*;
 import <r>pik.*</r>;
 
-public class Reverse extends io {
+public class Reverse <r>extends io</r> {
   public static void main( String[] arg ){
     try{ new Reverse(arg); clott();}
     catch( Exception e ){ e.printStackTrace();}
@@ -2404,98 +2475,113 @@ public class Reverse extends io {
     while(k-->0) ttFrame( stk[k], arg[0]+"_"+(k+1)); <y>// output in reverse</y>
   <r>}</r>
 }</n>
-> <o>jj</o> Reverse<n>.java</n> Stk > ktS                          <y># save result to Stack: ktS</y>
-> <o>jj</o> Reverse<n>.java</n> Stk | s3d -                        <y># display</y>
 
-To create a stack for experiments( pik3d must be installed ):
-  1. go to the folder:  pik3d\demo\bell2
-  2. in console      >  gen3d bell2.gen > Stk
-  3. to see it       >  s3d Stk
+To create a Stack for experiments( pik3d must be installed ):
+  1. go to the folder:  pik3d/demo/bell2
+  2. > gen3d bell2.gen > Stk                         <y># Stack generation</y>
+  3. > s3d Stk                                       <y># view Stack in normal direction</y>
 
-A more advanced way to use "single source-file" in <o>pik3d</o> is to use <o>jj-technology</o>.
-File<o>.jj</o> contains only <r>subject part</r> of the program( marked with red curly braces ).
-Example 3, pik3d\usr\Reverse<o>.jj</o> (functionality is the same as previous <n>.java</n> example):<m>
+> <o>jj</o> <n>Reverse.java</n> Stk > ktS                          <y># save result to stack: ktS</y>
+> <o>jj</o> <n>Reverse.java</n> Stk | s3d -                        <y># display in reverse</y>
+
+A more advanced way is to use <o>jj-preprocessor & executor</o>.
+File<o>.jj</o> contains only <n>subject part</n> of the program( delimited by <r>red curly braces</r> ).
+Example 3, pik3d/usr/<m>Reverse.jj</m> (functionality is the same as previous <n>.java</n> example):<n>
 <r>{</r>
     cmd("Reverse", arg, "Stk > ktS");                 <y>// check input arg[]</y>
     var stk = inStk( arg[0] );                        <y>// stk[ kk ][ii][jj]</y>
     int k = stk.length;
     while(k-->0) ttFrame( stk[k], arg[0]+"_"+(k+1));  <y>// output in reverse</y>
-<r>}</r></m>
-> <o>jj</o> Reverse Stk > ktS                                <y>// save result</y>
-> <o>jj</o> Reverse Stk | s3d -                              <y>// display</y>
+<r>}</r></n>
+> <m>jj Reverse</m> Stk > ktS                                <y># save result</y>
+> <m>jj Reverse</m> Stk | s3d -                              <y># display</y>
 
-<o>jj - Technology provides</o> :
 
-  - imports most of the required libraries ;
+<o>jj - preprocessor & executor  features :</o>
 
-  - correct program header from the beginning to the open <r>{</r> ;
+  - import most of the required packages( can be added if need )
 
-  - it creates correct java file( in our case: Reverse.java ), which can be saved( <r>/s</r> );
+  - generate correct <n>JAVA file</n>, which can be saved(<r>/s</r>),e.g. <m>Reverse.jj</m> -> <n>Reverse.java</n>
 
-  - run JAVA to execute "single source-file";
+  - run <n>JAVA</n> to execute <n>file.java</n> or generated from <m>file.jj</m>
 
-  - if you need .class files (result of compilation), use key: <r>/c</r> - only compilation.
+  - execute several <n>JAVA commands</n> directly from the command line
 
-  - it supports <m>macro substitution</m> -some kind of preprocessing, it allows to modify code
-    during jj-call, e.g. a code snippet can be inserted into the java file just before
-    compilation( see: pik3d/usr/Fx.jj - function formula in the computation loop ).
+  - if you need <n>.class</n> files (result of compilation), use key: <r>/c</r>
+
+  - support <m>macro substitution</m> - code modification during jj-call, e.g. <n>values</n> or even
+    <n>code snippets</n> can be inserted into the generated java file just before compilation,
+    see: <m>pik3d/usr/Fx|Fxy|Fxyt.jj</m> - symbolic function formula in the computational loop
 
   - argument list may be enclosed into the <m>Argument file</m>, which serves as config. file
-    with the ability to contain a code fragments of several lines.
+    with the ability to contain <n>a code fragments of several lines</n>
 
-<o>jj supports short names</o>. Function arguments can be of 3 types:  double, float, int.
-   Fun(<r>...</r>) denotes use of <r>'varargs'</r>, i.e. possible: Fun(a), Fun(a,b), Fun(a,b,c)...
+  - OS batch scripting( OS-commands, pipes ) with control code on <n>JAVA</n>, see: <a href="#jjscr">example</a>
 
-   <m>tt(String), tt(...)</m> - output arguments  to std.OUT
-   <m>ee(String), ee(...)</m> - output arguments  to std.ERR
-   <m>hh(), hh(i),hh(i,j)</m> - output ###-header to std.OUT, i-number of rows, j-columns
 
-   <m>min(...) , max(...)</m> - minimum, maximum value
-   <m>pow( a, p )</m> - a^p,  e.g. pow(5,2)=25; pow(8,1/3.)=2
-   <m>sqr( a )</m>    - square root of a = pow( a,.5 )
-   <m>abs( a )</m>    - absolute value
-   <m>erf( a )</m>    -"Error Function", sigmoid: -1 < erf() < 1
-   <m>gau()</m>       - Gaussian random: mean=0, R=2*sigma = 1
-   <m>rnd()/rn1()</m> - uniform  random: [0,1] / [-1,1]
+<o>jj supports Short Name Functions</o>,  arguments can be  <n>double, float, int</n>,
+   fun(<r>...</r>) denotes use of <r>'varargs'</r>, i.e. possible: fun(a), fun(a,b), fun(a,b,c) ...
 
-   <m>sin(a), cos(a), tg(a),   asin(a), acos(a) ,atg(a),   exp(a), ln(a), lg(a)</m>
+   <m>tt(String), tt(...)</m>  - output arguments  to std.OUT
+   <m>ee(String), ee(...)</m>  - output arguments  to std.ERR
+   <m>hh(), hh(i),hh(i,j)</m>  - output ###-header to std.OUT, i-number of rows, j-columns
+
+   <m>min(...) , max(...)</m>  - minimum, maximum value
+   <m>sqr( a )</m>             - square root of a = pow( a,.5 )
+   <m>abs( a )</m>             - absolute value
+   <m>erf( a )</m>             -"Error Function", sigmoid: -1 < erf() < 1
+   <m>gau()</m>                - Gaussian random: mean=0, R=2*sigma = 1
+   <m>rnd()/rn1()</m>          - uniform  random: [0,1] / [-1,1]
+   <m>p( x,y )= pow( x,y )</m> - "x to the y power", e.g.  p(5,2)=25;  p(8,1/3.)=2
+
+   <m>sin(a), cos(a), tg(a),   asin(a), acos(a) ,atg(a),   e(a)= exp(a), ln(a), lg(a)</m>
    constants:  <m>pi=3.1415..., rad=180/pi</m>
 
 Folder: <o>pik3d/usr</o> is the default repository for <o>.jj</o> and <n>.java</n> files.
-If path to the file is omitted, the search sequence: current folder, <o>pik3d/usr</o>.
+If path before file name is omitted, the search sequence: current folder, <o>pik3d/usr</o>.
 By default, the file extension is assumed to be <o>.jj</o> ( can be omitted ).
 
-The general form of <o>code.jj</o> is :   ( more examples: pik3d\usr\*.jj )
-<m>
-  [ import pkg;  // NON-STANDARD  JAVA, pik  packages ]
-  [ comments:  /* text ... */  or  // text ... ]
-  <r>{</r>
-    <n>JAVA code uses <r>arguments</r> from  main( String[] <r>arg</r> )</n>
 
-    MACRO Substitution can be used: #0# <-a0, #1# <-a1... #A# <-a10... #F# <-a15 ...
-    Up to 36 parameters will be replaced or removed( if NO arg.) before Compilation,
-    see examples: pik3d/usr/ Fx.jj| Fxy.jj| Fxyt.jj
+The general form of <o>code.jj</o> is :
+-------------------------------------------------------- <m>code.jj (more: pik3d/usr/*.jj):
+[ <n>import pkg;</n> // special packages for this task ]
+[ <y>comments:   /* text ... */   or   // text ...</y> ]
 
-  $ sys1 | sys2 ...   <y>! run OS-command or pipe, quotes use:  $ sys1 "..\"...\".."...</y>
-                      <y>!  or </y><n>JAVA:  var s="sys1 \"..\"...\"..\"...";</n> <r>sys( s );</r>
-  <r>}</r>
-  [ methods,  classes(not public),  static ... ]</m>
+<r>{</r>
+   <n>JAVA code uses <r>arguments</r> of function: main( String <r>arg[]</r> )</n>
 
-Example 1(above) in <o>jj-form</o>, file: <n>min</n><r>MAJ</r><o>.jj</o>
+   <n>MACRO Substitution</n> can be used: <n>#0#</n> &lt;-a0, <n>#1#</n> &lt;-a1... <n>#A#</n> &lt;-a10... <n>#F#</n> &lt;-a15 ...
+   Up to 36 parameters will be replaced or removed( if NO arg.) before Compilation.
+   see examples: pik3d/usr/Fx.jj| Fxy.jj| Fxyt.jj
+
+ $ </m>app1 | app2 ...<m>  ! run </m>applications or pipe<m>.  Quotes use: $ </m>app1 "..\"...\".."...<m>
+                    !  or <n>java:  var s="app1 \"..\"...\"..\"..."; sys( s );</n>
+ $ <n>#cmd1</n> <r>&</r> </m>app1<m>...  ! shell( <n>#</n> ) <n>commands</n>  and  several( <r>&</r> ) </m>applications<m> without pipe
+<r>}</r>
+
+[ <n>methods,  classes( not public ),  static  ...</n> ]</m>
+----------------------------------------------------------------------------------------
+e.g.
+<n>minMAJ.java</n> example (see above) in <m>jj-form( pik3d/usr/minMAJ.jj )</m> :
 <r>{</r><m>
-   hh(); for(int i=0; i&lt;=200; i++) {               <y>// ### Header & cycle</y>
+   hh();                                           <y>// ### Stack Header</y>
+   for(int i=0; i&lt;=200; i++) {                     <y>// cycle</y>
       var t = i*( 2*pi/10 );                       <y>// 10 points/period</y>
       var k = sin( t ) + sin( t*3/2 );             <y>// tonic + quint</y>
       tt( i/10., k+sin( t*6/5 ), k+sin( t*5/4 ));  <y>// t  minor  MAJOR</y>
    }</m>
 <r>}</r></m>
+
+<n>JAVA options</n> can be used with <o>jj-command</o>. It is useful to test new features of <n>Java</n>.
+Example( Vector API: <n>pik3d/usr/jep438.jj</n> ):
+><m> jj  <n>--enable-preview  --source=21  --add-modules=jdk.incubator.vector</n>  jep438 </m>
 <a name='jcc'></a>________________________________________________________________________________________
 
-	<o>Execute several JAVA commands from command line
+	<o>Execute several JAVA commands from the command line
 </o>
-An additional very handy feature of <o>jj-Technology</o> is to execute the sequence of JAVA
+Additional very handy feature of <o>jj-preprocessor</o> is to execute the sequence of <n>JAVA</n>
 commands directly from the command line. In this case  file: <n>Noname.java</n>  is produced
-and executed( you can save it: <o>/s</o> ).  It takes less than 1 second.
+and executed. To save it use <m>/s</m> or <m>/s /n=&lt;name></m>, e.g. <m>/s /n=p23</m> -> <n>p23.java</n> .
 	 ____________________________________________________________
 	|                                                            |
 	|                      !!! ATTENTION !!!                     |
@@ -2505,28 +2591,25 @@ and executed( you can save it: <o>/s</o> ).  It takes less than 1 second.
 	|  > jj "tt( <r>\"</r> Hello World <r>\"</r> )"                            |
 	|____________^______________^________________________________|
 
-JAVA commands are delimited by <r>';'</r> (last <r>';'</r> before closed <r>"</r> may be omitted ).
-Examples( ^C/^V  to test jj, pik3d ):
+<n>JAVA commands</n> are delimited by <r>';'</r> (last <r>';'</r> before closed <r>"</r> may be omitted ).
+Examples( ^C/^V  to test jj and pik3d ):
 
-> <m>jj "tt( max( .9, pi/2, pi-1), 4*pi, sin(-pi/4))"          </m><y>#use of <r>'varargs'</r> in tt()</y>
-> <m>jj "for(int i=0;i<9;i++) tt(\" i=\"+i)"                   </m><y>#print: i=0/ i=1/ i=2... i=8</y>
-> <m>jj "hh();for(var x=0.;x<=20;x+=.2) tt(x,exp(-x/7)*sin(x))"| vic - 1 2,11    </m><y>#plot</y>
-> <m>jj Fx "exp(-x/7)*sin(x)" "0,20,.2"| vic - 1 2,11          </m><y>#result as of previous line!</y>
-
-<r>JAVA options</r> can be used with <o>jj-command</o>. It is useful to test new features of Java.
-Example( Vector API: <n>pik3d/usr/jep438.jj</n> ):
-><m> jj  <r>--enable-preview  --source=21  --add-modules=jdk.incubator.vector</r>  jep438 </m>
+> <m>jj "tt( max( .9, pi/2, pi-1), 4*pi, sin(-pi/4))"              </m><y>#use of<r>'varargs'</r> in tt()</y>
+> <m>jj "for(int i=0;i<9;i++) tt(\" i=\"+i)"                       </m><y>#print i=0/i=1/i=2...i=8</y>
+> <m>jj "hh(); for(var x=0.;x<=20;x+=.2) tt(x,e(-x/7)*sin(x))"|vic - 1 2,11 </m>       <y>#2d-plot</y>
+> <m>jj Fx  "e(-x/7)*sin(x)" "0,20,.2"| vic - 1 2,11               </m><y>#same as previous line !</y>
+> <m>jj Fxy "e(-(x*x+y*y)/9)*cos(x*x+y*y)" "-4,4,.1" "-4,4,.1"|s3d - Fxy.s3d </m>      <y>#3d-plot</y>
 <a name='jmm'></a>________________________________________________________________________________________
 
 <m>Macro Substitution</m> - some kind of preprocessing, it allows to modify code of <m>file.jj</m>
-during <m>jj-call</m>. Fragments <o>#p#</o> are replaced by call arguments.
+during <m>jj-call</m>. Macro parameters <o>#p#</o> are replaced by call arguments.
 
 	<o>jj: Macro Substitution: #p#[default#]</o>
 
 Where: <o>p=<m>'0..9','A..Z'</o>(maximum 36 parameters), <m>default</m> is used if NO <o>p</o>-argument.
 
 Consider jj-call: <m>> jj File.jj  </m><n>a0 a1 a2 ... a15 ...</n>
-If any parameter <n>ak</n> contains a symbol space, it must be enclosed in quotation marks.
+If any parameter contains a symbol space, it must be enclosed in <r>double quotes "</r>.
 <m>#0#</m> will be replaced in <m>jj-file</m> by the <n>text of a0</n>, <m>#1#<n> -a1 ... </n>#A#<n> -a10 ... </n>#F#<n> -a15 ...</n></m>
 If there is no correspondent argument or it is empty, macro parameter will be removed
 or replaced by <m>default</m> value( if optional:<m>default</m> is present ).  <m>Default</m> rules:
@@ -2616,15 +2699,15 @@ e.g the same file.arg as above:
 	<o>jj: Programmable Text Processor
 </o>
 If you need some complex text processing, you can use this jj-template <m>txt2htm.jj</m>:
-<r>{</r><n>
-  var s=""; if( opnStr(arg[0]) ) while( (s=getStr()) !=null)  <y>//read Line from file</y>
-  {
-    s=s.trim();                                               <y>//remove extra spaces</y>
-    if( !s.isEmpty()) tt("&lt;DT>&lt;A HREF=\""+s+"\">"+s+"&lt;/A>");  <y>//text processing & print</y>
-  }</n>
-<r>}</r>
+
+<r>{</r><n> var s=""; if( opnStr( arg[0])) while(( s=getStr() )!=null){  <y>//read Line from file</y>
+
+  if( !s.isEmpty()) tt("&lt;DT>&lt;A HREF=\""+s+"\">"+s+"&lt;/A>");     <y>//text processing & print</y>
+  
+}</n><r>}</r>
+
 This example converts text list of Links to the html-list.
-><m> jj txt2htm Links.txt > Links.html</m>
+><m> jj  txt2htm  Links.txt  > Links.html</m>
 <a name='pik'></a>________________________________________________________________________________________
 <o>
 		Most used pik.io methods
@@ -2661,7 +2744,7 @@ This example converts text list of Links to the html-list.
     // output format( F4 or D8 ) depends on Object: float[]... or double[]...
 
   <n>void clott()</n> // close/clean up pik.io resources, should <r>ALWAYS</r> be called at the end !
-  If you use <a href="#jj">jj-Technology</a>, this call is already present !
+  If you use <a href="#jj">jj-preprocessor</a>, this call is already present !
 
 Frame is 2-dimensional array <r>frame    [ ii ][ jj ]</r>, e.g. 3-row  : <n>var s3 = frame[ 2 ];</n>
 Stack is 3-dimensional array <r>stk[ <u>kk</u> ][ ii ][ jj ]</r>, e.g. 5-frame: <n>var k5 = stk  [ 4 ];</n>
@@ -2694,7 +2777,7 @@ stacks in the file/stream, the reader is ready to read the next stack.
 reader does not need to be closed, readers are closed at the end by the method: <n>clott()</n>.
 A package to read/write  ###-files  in  <r>PYTHON</r>:  <r>kadr.py</r>  - pik3d\ext\###_PYTHON.zip .
 <o>
-Simple 2d-graphics ( can be used with <a href="#jj">jj-technology</a> ):</o>
+Simple 2d-graphics ( can be used with <a href="#jj">jj-preprocessor</a> ):</o>
 
 Universal pik3d window <r>gra</r> is used. It supports all services <a href="#gra">"Use of 2d-graphics"</a>.
 static methods:<n>
@@ -2714,7 +2797,7 @@ if you have <r>gra w</r> created by <n>simple()</n>, you can :<n>
 
 		<o>Create New pik3d Command, prepare Launcher
 </o>
-It is recommended to use <a href="#jj">jj-Technology</a> for complex commands: get  <n>JAVA file</n>  as a first
+It is recommended to use <a href="#jj">jj-preprocessor</a> for complex commands: get <n>JAVA file</n> as a first
 variant from  <n>jj ... /s</n>  and  put it in  <n>JAVA IDE</n>  for comfortable development.
 
 The description uses  <r>fun.jj</r>  and  <r>fun</r>  as the name of the  file  and  command.
@@ -2765,7 +2848,7 @@ Example: simple <m>Launcher</m> ( <r>JDK</r> and <m>pik3d</m>  must be present )
 6. Create <m>Launcher</m>( <n>ppp.exe</n> ):  <m>> _Launch  <n>cfg</n></m>
 7. Test  <n>ppp.exe</n>:  copy to any other folder  and  run it there.
 8. After <m>Launcher</m> is created, files: <m>run.jar,_Launch.exe</m>  can be deleted in this folder.
-   They are only needed to create <m>Launchers</m>.
+   They are only needed to create <m>Launcher</m>.
 </n>________________________________________________________________________________________
 <f>
                               author: K.A. Ilyashenko, e-mail: kilyashenko@gmail.com
