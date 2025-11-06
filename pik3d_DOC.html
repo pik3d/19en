@@ -760,7 +760,7 @@ In <n>Java</n> it looks like:  <n>sys("""</n>
 
 A lot of OS-commands are implemented as <n>shell-commands</n>:
 Windows cmd-shell:  <n>dir, cd, echo, md, rd, copy, del, ren, type ...</n>
-<x>Linux Bash-shell:  <r>ls, cd, echo, cat, cp, mv, rm, mkdir, touch ...</r> </x>
+<x>Linux Bash-shell: ls, cd, echo, cat, cp, mv, rm, mkdir, touch ...</x>
 
 To use <n>shell-command</n> <r>'#'</r> must be used at the beginning of the command,e.g. <r>$ #</r><n>copy F1 F2</n>
 
@@ -768,7 +768,8 @@ Since <r>$ ...</r>  is considered as a <n>Text Block</n>, you can freely use <r>
 in <m>jj-files</m> without escaping, but <r>be careful</r>  when using it on the <r>command line</r>.
 
 Command <r>$ ...</r> may be used in one line with other <n>JAVA commands</n>, e.g.
-> jj "<n>ee(\"______ *.jj ______\n\")<r>; $ #dir *.jj; </r>ee(\"__________________\")"</n>
+> jj "<n>ee(\"_______ *.jj _______\n\")<r>; $ #dir *.jj; </r>ee(\"__________________\")"</n>
+<x>$ jj 'ee("------- *.jj -------")<r>; $ #ls *.jj;</r>ee("--------------------")'</x>
 <a name='sss'></a>________________________________________________________________________________________
 
   <o>command: s3d -"Surface-3d" display Matrix/ Frame and their sequences
