@@ -17,7 +17,7 @@ x{background:#333333; color:#00FF00; font-size:13px; line-height:13px; font-fami
 <h5><pre><a name='s3d'><f>pik3d - framework for processing and 3d-display of matrices and their sequences
         in s3d Help supports HTML navigation:  <a href="#ins">links</a><f>, &lt;Home>, &lt;End>
 </f><a name='ogl'></a>
-<a href='#fwk'>OVERVIEW of pik3d v.23.1</a>
+<a href='#fwk'>OVERVIEW of pik3d v.23.2</a>
 <a href="#ins">INSTALL pik3d </a>
 <a href="#dat">###-format of the data: FRAME, STACK</a>
 <a href="#cmd">COMMANDS</a>
@@ -27,7 +27,7 @@ jj preprocessor & executor:
 <a href="#jjf" >Preprocessor & executor                  </a>      ! general description
 <a href="#jcc" >jj "jcmd1; jcmd2; jcmd3 ..."  [/s] [/c]  </a>      ! Execute several JAVA commands
 <a href="#jaf" >Argument File                            </a>      ! File.arg contains <r>List of Arguments</r>
-<a href="#jmm" >jj macro:  #p[/default]#                 </a>      ! Macro Substitution
+<a href="#jmm" >jj macro: #p[/default]#, #<r>?prompt</r>[/default]# </a>  ! Macro Substitution
 <a href="#jos" >jj script with Operating System commands </a>      ! <r>OS batch</r> script
 
 3d-graphics:
@@ -709,11 +709,15 @@ e.g the same file.arg as above:
 > <r>pl</r>  <n>"fset: 1, x, x*x ..."  "read: x=X[0], V=X[1] ..."</n>  > file.arg
 <a name='jmm'></a>________________________________________________________________________________________
 <o>
-	jj: Macro Substitution: #p[/default]#
+	jj: Macro Substitution:  #p[/default]#
+	          <n>Request:</n> #<n>?prompt</n>[/default]#
 </o>
 Where: <o>p=<m>'0..9','A..Z'</o>(maximum 36 parameters), <m>default</m> is used if NO <o>p</o>-argument.
-Replace macro-parameters <m>#p#</m> before converting: <m>.jj --></m><n>.java</n>  and  compilation.
-If <m>/default</m> and <n>call argument</n> are absent, <m>#p#</m> will be removed.
+Replace macro-parameters <m>#p#</m> before converting:  <m>.jj --></m><n> .java</n>  and  compilation.
+If <m>/default</m> is absent  and  <n>call argument</n> is empty,  <m>#p#</m>  will be removed.
+
+<n>Request</n> prints to the console <n>prompt</n> and (<m>default</m> if exists) and  after  keyboard input
+replaces <m>#<n>?prompt</n>/default#</m>  with entered text  in the same way as <m>macro</m>.
 
 Consider jj-call: <m>> jj File.jj  </m><n>a0 a1 a2 ... a15 ...</n>
 If any <n>argument</n> contains a symbol <space>, it must be enclosed in <r>double quotes "</r>.
@@ -731,17 +735,28 @@ parameters, <m>#0#,#1#,#2#</m> are inserted to the <n>.java</n> file in text for
 ><m>jj Fxy</m>    ! print Help of <n>Fxy.jj</n>, try to execute 3-d call and view result.
 
 It is important to understand that arguments which are refered as:
-  - <n>arg[i]</n> - only input <n>i-argument</n> at <r>"run time"</r>;
-  - <m>#p#</m>    - make "hard-code" replace of <m>#p#</m> parameter at <r>"compile time"</r>.
+  - <n>arg[i]</n> - only input <n>i-argument</n> at <n>"run time"</n>;
+  - <m>#p#</m>    - make <r>"hard-code"</r> replace of the <m>#p#</m> parameter at <r>"compile time"</r>.
+
+<n>Request:</n> <m>#<n>?prompt</n>/default#</m> works in the same way: entered text is set to the <r>java-code !</r>
 
 Compare use of <n>arg[0]</n> in txt2htm.jj  and  <m>#0#,#1#,#2#</m> in Fxy.jj  (folder: <m>pik3d/usr</m>).
-  - pik3d/usr/txt2htm.jj - <n>arg[0]</n> symply input file name of the file at <r>"run time"</r>;
-  - pik3d/usr/Fxy.jj - java code is changed by text insert of the function expression
+  - pik3d/usr/txt2htm.jj - <n>arg[0]</n> symply input file name of the file at <n>"run time"</n>;
+  - pik3d/usr/Fxy.jj - <r>java code is changed</r> by text insert of the function expression
                        and calc.limits, you can see this to save(/s) .java file.
 
 These capabilities can be used together. You can specify the processing code with
 <m>Argument File</m>  and  current parameters with  <n>arg[i]</n>,  for example:
 <m>F.arg( #0#, #1#, #2# )</m>  and  <n>arg[3], arg[4], arg[5] ...</n>   > <m>jj app F.arg</m>  <n>a3 a4 a5 ...</n>
+
+Examples of using <m>macro</m> and <n>request</n>, look at <n>Noname.java</n> (<n>/s</n> is used) :
+
+> jj dbg123 7 9 3 <r>@S</r>               <y># create test <R>S</r>tack: S[i,j,k] = i*100 + j*10 + k</y>
+
+> jj "tt( getSTi( <n>arg[0]</n>, <m>#1/1#, #2/2#, #3/3#</m>))" <r>S</r> 5 7 2          <n>/s</n>   <y># S[5,7,2]</y>
+> jj "tt( getSTi( <n>arg[0]</n>, <m>#1/1#, #2/2#, #3/3#</m>))" <r>S</r> 4              <n>/s</n>   <y># S[4,2,3]</y>
+
+> jj "tt( getSTi(\"<m>#0#</m>\", <m>#<n>?inp.i</n>/5#, #<n>?inp.j</n>/4#, #<n>?inp.k</n>/1#</m>))" <r>S</r> <n>/s   # inp. i ... ???</n>
 <a name='jos'></a>________________________________________________________________________________________
 <o>
 	jj  script  with  Operating System  commands
