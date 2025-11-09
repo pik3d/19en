@@ -1,4 +1,8 @@
 
+2025-11-09  version 23.2
+  - jj-preprocessor & executor: 
+	- added Macro Substitution with Request, see: pik3d_DOC.html.
+
 2025-11-06  version 23.1.1
   - jj-preprocessor & executor:
 	- fix utf-8 BOM problem in Linux version ;
