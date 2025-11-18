@@ -86,6 +86,9 @@ __jj-technology__ supports execution of OS-commands and pipe-lines.
 This feature allows to use __jj-file__ as batch file with flexible control on JAVA !
 Such jj-script even can be compiled into the __.class__ file and run with __.exe Launcher__ !
 
+Framework has simple tool to create new comands: __crex__ -"CReate EXecutable" Launcher.
+Launcher can be created for any jj-script of java-file, which can be executed by __JJ-preprocessor__.
+
 Additional commands can be implemented in any other convenient algorithmic language.
 To read/write ###-files in __PYTHON__: pik3d/ext/ __kadr.py package__ is included.
 To read ###-files in the __ImageJ__ editor, ###_Reader_ImageJ.jar __plugin__ is implemented.

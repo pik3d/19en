@@ -1,4 +1,10 @@
 
+2025-11-18  version 23.3
+  - new pik3d commands:
+    - crex  -"CReate EXecutable" Launcher - simple way: java --> .exe ;
+    - adzip - add Files to ZIP ;
+  - pik3d_DOC.html is reorganized .
+
 2025-11-09  version 23.2
   - jj-preprocessor & executor: 
 	- added Macro Substitution with Request, see: pik3d_DOC.html.
