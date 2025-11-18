@@ -17,30 +17,34 @@ x{background:#333333; color:#00FF00; font-size:13px; line-height:13px; font-fami
 <h5><pre><a name='s3d'><f>pik3d - framework for processing and 3d-display of matrices and their sequences
         in s3d Help supports HTML navigation:  <a href="#ins">links</a><f>, &lt;Home>, &lt;End>
 </f><a name='ogl'></a>
-<a href='#fwk'>OVERVIEW of pik3d v.23.2</a>
+<a href='#fwk'>OVERVIEW of pik3d v.23.3</a>
 <a href="#ins">INSTALL pik3d </a>
 <a href="#dat">###-format of the data: FRAME, STACK</a>
 <a href="#cmd">COMMANDS</a>
 
 jj preprocessor & executor:
-<a href="#jj"  >jj File[.jj] or File.java     [/s] [/c]  </a>      ! <r>"jj = java-JAVA = simple_JAVA"</r>
-<a href="#jjf" >Preprocessor & executor                  </a>      ! general description
-<a href="#jcc" >jj "jcmd1; jcmd2; jcmd3 ..."  [/s] [/c]  </a>      ! Execute several JAVA commands
-<a href="#jaf" >Argument File                            </a>      ! File.arg contains <r>List of Arguments</r>
-<a href="#jmm" >jj macro: #p[/default]#, #<r>?prompt</r>[/default]# </a>  ! Macro Substitution
-<a href="#jos" >jj script with Operating System commands </a>      ! <r>OS batch</r> script
+  <a href="#jj"  >jj File[.jj] or File.java     [/s] [/c]  </a>    ! <r>"jj = java-JAVA = simple_JAVA"</r>
+  <a href="#jjf" >Preprocessor & executor                  </a>    ! general description
+  <a href="#jcc" >jj "jcmd1; jcmd2; jcmd3 ..."  [/s] [/c]  </a>    ! Execute several JAVA commands
+  <a href="#jaf" >Argument File                            </a>    ! File.arg contains <r>List of Arguments</r>
+  <a href="#jmm" >jj macro: #p[/default]#, #<r>?prompt</r>[/default]# </a>! Macro Substitution
+  <a href="#jos" >jj script with Operating System commands </a>    ! <r>OS batch</r> script
+
+System:
+  <a href="#cex">crex   F.jj | F.java </a>                        ! <r>CR</r>eate <r>EX</r>ecutable Launcher
+  <a href="#zip">adzip  ZIP  F1  [ F2 F2 ... ] </a>               ! <r>AD</r>d Files to <r>ZIP</r>
+  <a href="#eeh">ee  [text] </a>                                  ! print to std.<r>ERR</r> current time & text
+  <a href="#pls">pl  L1  [ L2 ... ] </a>                          ! <r>P</r>rint <r>L</r>ines to std.OUT/ console
 
 3d-graphics:
-<a href='#sss'>s3d -"Surface-3D" </a>                             ! <r>3d</r>-display of the Stack [+Additions]
-<a href='#b3d'>b3d -"Body-3D"    </a>                             ! <r>3d</r>-display of the Body or Figure
+  <a href='#sss'>s3d -"Surface-3D" </a>                           ! <r>3d</r>-display of the Stack [+Additions]
+  <a href='#b3d'>b3d -"Body-3D"    </a>                           ! <r>3d</r>-display of the Body or Figure
 
 Stack: create, view, info:
   <a href='#40' >stk  ii  [ jj=1 [kk=1]]  [v=&lt;value>]  [D8]</a>   ! Create new <r>St</r>ac<r>k</r>
   <a href='#fmt'>fmt  Stk [ I2|F4|D8| n*w.dF ] [LE] [/h]</a>      ! Convert or Print Stack | Header
   <a href='#tt' >...| tt ...   or   tt&lt;  File ...</a>             ! Process <r>ALL Stacks</r> from pipe | File
   <a href='#ren'>renam  Stk  name   [N=1] </a>                    ! <r>Renam</r>e Frames: name_N, name_&lt;N+1> ...
-  <a href="#eeh">ee  [text] </a>                                  ! print to std.<r>ERR</r> current time & text
-  <a href="#pls">pl  L1  [ L2 ... ] </a>                          ! <r>P</r>rint <r>L</r>ines to std.OUT/ console
 
 Data Generation:
   <a href="#60" >gauss   [r=2 [ width=3 ]] </a>                   ! create normalized Gaussian filter
@@ -107,7 +111,6 @@ Data Processing:
   <a href="#tif">tif  File.tif | Config  [Npro=99999] </a>        ! Show <r>.TIF</r>-files/clip
 
 <a href="#pik">Most used pik.io methods </a>
-<a href="#jc" >Create New pik3d Command, prepare Launcher </a>
 <a name='fwk'></a>________________________________________________________________________________________
 
 <o>   PROCESSING AND 3D DISPLAY OF MATRIXES/FRAMES AND THEIR SEQUENCES
@@ -128,7 +131,7 @@ Framework commands are executable(.exe) modules and their set is not fixed.
 The launcher technology is used ("launch" - to launch, start). Launcher encapsulates
 the starting configuration of the Virtual JAVA Machine (JVM).
 
-The framework contains simple tools for creating <a href="#jc">new command on JAVA</a>.
+The framework contains simple tool to extend <m>pik3d</m> on JAVA - <a href="#cex">command: crex</a>.
 Additional commands can be implemented in any convenient algorithmic language.
 
 From command to command, Stacks are transferred in the form of the <a href="#dat">###-format</a> files
@@ -154,6 +157,7 @@ follows the symbol <m>'$'</m>, example of <n>batch-file</n> and <m>jj-file</m> w
   > eigenVV            !run <n>batch-file</n>  | > jj eigenVV             !run <m>jj-file</m>
 
 Use of <m>jj-file</m> is more flexible as it can contain JAVA-code to control the processing.
+Executable <a href="#cex">Launchers (.exe)</a> can be created for the established <m>jj-scripts</m>.
 
 The framework can be installed on Windows 7, 10, Linux (tested in Mint 21.1).
 Version 23 is compiled with <r>JAVA-21 using javaFX</r>.
@@ -167,9 +171,9 @@ Version 23 is compiled with <r>JAVA-21 using javaFX</r>.
     Recommended builds (follow one of the links):
 
        <a href="https://www.azul.com/downloads/?version=java-21-sts&os=windows&architecture=x86-64-bit&package=jdk-fx#zulu"
->Azul:          JDK  FX  </a>   ! Java <r>21</r>, x86 64-bit, <r>JDK FX !</r>
+>Azul:        JDK  FX  </a>  ! Java <r>21</r>, x86 64-bit, <r>JDK FX !</r>
        <a href="https://axiomjdk.ru/pages/downloads/#/java-21-current"
->BellSoft(RU):  Full JDK </a>
+>Axiom (RU):  Full JDK </a>
 
     Since the framework does not require a full JAVA installation ( <r>only unzip</r> ),
     builds can be easily changed. If another version of JAVA is installed on the system,
@@ -325,7 +329,7 @@ Launcher actions:
  - exits after starting the JVM and passing parameters.
 
 All launchers have the same code. The difference is in the start parameters and the link
-to the command class. How create new command and prepare launcher:  <a href="#jc">jj, jc, new command</a>.
+to the command class. How to create new command:  <a href="#cex">command: crex</a>.
 <r>
    At the first call of the command, a conflict with the antivirus may occur.
    After checking the launcher with the antivirus, this passes.
@@ -766,7 +770,7 @@ It is convenient to save the worked out sequence of commands in a batch script.
 
 Since <m>jj</m> contains <n>JAVA</n> code, it can support complex control logic of the processing.
 In addition, you can save <n>.java (/s)  or .class (/c)</n> files of the script  and  create
-<a href="#jc">.exe Launcher</a>.
+<a href="#cex">.exe Launcher</a>.
 
  <r><u>$</u></r><m> app1 <r>&</r> app2<r>|</r> app3... <r>></r> F1 <r>&</r> app4<r>|</r> app5... <r>></r> F2</m>   <y># run applications, pipes and output</y>
 
@@ -785,6 +789,69 @@ in <m>jj-files</m> without escaping, but <r>be careful</r>  when using it on the
 Command <r>$ ...</r> may be used in one line with other <n>JAVA commands</n>, e.g.
 > jj "<n>ee(\"_______ *.jj _______\n\")<r>; $ #dir *.jj; </r>ee(\"__________________\")"</n>
 <x>$ jj 'ee("------- *.jj -------")<r>; $ #ls *.jj;</r>ee("--------------------")'</x>
+<a name='cex'></a>________________________________________________________________________________________
+<o>
+     command:  crex   F.jj | F.java     # <r>CR</r>eate <r>EX</r>ecutable Launcher
+</o>
+For any file that can be executed by the <a href="#jj">jj-processor</a>, you can create an executable
+Launcher. Actions will be done by <m>crex</m> :
+ - compile F
+ - put  F, F.class  to the  pik3d/lib/usr.jar
+ - create  F.exe    in the  current directory
+
+	  <r>This is a way to extend the pik3d command set</r>
+Steps:
+ - Check that the file: <m>F.jj</m> or <n>F.java</n>  can be executed by the <a href="#jj">jj-processor</a>
+ - Run <r>crex</r>:  > <r>crex</r>  <m>F (.jj is implied)</m> | <m>F.jj</m> | <n>F.java</n>
+ - Check <r>F.exe</r>. If you don't like the name, you can rename it as you wish.
+   <x>in Linux extension: .exe can be removed and Launcher moved to ~/bin/</x>
+
+Example( <m>pik3d/usr/kbdstr.jj</m> ):
+<y>// input String from the Keyboard and print it to the Console</y><m>
+<r>{</r>     var s="";
+  while( (s=getKbd("inp.String, exit=<space><Enter>","def_String")) !=null && !s.isBlank())
+    ee(tab("length="+s.length(),52,1)+" | "+s);
+<r>}</r></m>
+> jj kbdstr          <y># check kbdstr.jj</y>
+> <r>crex</r> kbdstr        <y># create Launcher: kbdstr.exe</y>
+> kbdstr             <y># check Launcher</y>
+<a name='zip'></a>________________________________________________________________________________________
+<o>
+     command:  adzip  ZIP  F1 [ F2 F2 ... ]    # <r>AD</r>d Files to <r>ZIP</r>
+</o>
+The added file may contain  a <n>full path</n>,  e.g.
+> adzip  q.zip   <n>d:/pik3d/lib/run.jar</n><y>
+#      Structure:   <n>pik3d/lib/run.jar</n>  will be created  in q.zip !</y>
+<a name='eeh'></a>________________________________________________________________________________________
+<o>
+     command:  ee  [text]    # print to std.ERR current time & text
+</o>
+Ñan be used to mark execution steps and timing of a script or pipe-line.
+Since this command stop pipe-line, it is recommended to use it as 1st. or the last when
+joining commands to a pipe-line. And use symbol <r>'&'</r> after and before it !
+  e.g.
+> ee _______start <r>&</r> get Stk[:3,:#5] <r>|</r> tt <r>&</r> ee _______ End.    <y>!looks like:</y>
+<n>  02:44:12.715  _______start
+
+  ### p1 [ 3, 5 ]
+   337           326           310           294           283
+   339           334           318           295           273
+   336           321           328           312           292
+  02:44:13.330  _______ End.</n>
+<a name='pls'></a>________________________________________________________________________________________
+<o>
+     command:  pl  L1 [ L2 ... ]    # <r>P</r>rint <r>L</r>ines to std.OUT/ console
+</o>
+May be considered as multi-line extention of the system command "echo".
+Lines are separated by the symbol <r>'space'</r>. If a string contains a space, it must be
+enclosed in quotation marks. Single quotes can be used in Linux OS.
+<r>! Attention, pl command  DOES NOT support  @File  in pipe-line !</r>
+
+This command can be used to create  <a href='#jaf'>Argument File</a>  or  data File in <a href='#dat'>###-format</a>,
+e.g.
+> <r>pl</r> "fset: 1,x,x*x..." "read: x=X[0],V=X[1]..." >file.arg  <y>#Arg.File to find Regression</y>
+> <r>pl</r> "###[]/ 1 2 3 4 5 6 7" > L7  &  tt< L7                 <y>#<n>"One Line Frame"</n> L7[ 7 ]</y>
+> <r>pl</r>  ###[] "1 2 3 4 5" "11 22 33 44 55" "-9 -8 -7 -6 -5" > Frame_3x5  <y>#Data File[ 3,5 ]</y>
 <a name='sss'></a>________________________________________________________________________________________
 
   <o>command: s3d -"Surface-3d" display Matrix/ Frame and their sequences
@@ -1413,36 +1480,6 @@ name_&lt;N>, name_&lt;N+1>, name_&lt;N+2> ...
 
 > renam  q  data    > qDAT    <y>!in qDAT frames: data_1 , data_2   ...</y>
 > renam  q  neg -2  > q_50    <y>!in q_50 frames: neg_-2 , neg_-1 , neg_0 , neg_1 ...</y>
-<a name='eeh'></a>________________________________________________________________________________________
-<o>
-     command:  ee  [text]   # print to std.ERR current time & text
-</o>
-Ñan be used to mark execution steps and timing of a script or pipe-line.
-Since this command stop pipe-line, it is recommended to use it as 1st. or the last when
-joining commands to a pipe-line. And use symbol <r>'&'</r> after and before it !
-  e.g.
-> ee _______start <r>&</r> get Stk[:3,:#5] <r>|</r> tt <r>&</r> ee _______ End.    <y>!looks like:</y>
-<n>  02:44:12.715  _______start
-
-  ### p1 [ 3, 5 ]
-   337           326           310           294           283
-   339           334           318           295           273
-   336           321           328           312           292
-  02:44:13.330  _______ End.</n>
-<a name='pls'></a>________________________________________________________________________________________
-<o>
-     command:  pl  L1  [ L2 ... ]       # <r>P</r>rint <r>L</r>ines to std.OUT/ console
-</o>
-May be considered as multi-line extention of the system command "echo".
-Lines are separated by the symbol <r>'space'</r>. If a string contains a space, it must be
-enclosed in quotation marks. Single quotes can be used in Linux OS.
-<r>! Attention, pl command  DOES NOT support  @File  in pipe-line !</r>
-
-This command can be used to create  <a href='#jaf'>Argument File</a>  or  data File in <a href='#dat'>###-format</a>,
-e.g.
-> <r>pl</r> "fset: 1,x,x*x..." "read: x=X[0],V=X[1]..." >file.arg  <y>#Arg.File to find Regression</y>
-> <r>pl</r> "###[]/ 1 2 3 4 5 6 7" > L7  &  tt< L7                 <y>#<n>"One Line Frame"</n> L7[ 7 ]</y>
-> <r>pl</r>  ###[] "1 2 3 4 5" "11 22 33 44 55" "-9 -8 -7 -6 -5" > Frame_3x5  <y>#Data File[ 3,5 ]</y>
 <a name='60'></a>________________________________________________________________________________________
 <o>
 	gauss  [ R=8 [ width=3 ]]  > File
@@ -2906,63 +2943,7 @@ if you have <r>gra w</r> created by <n>simple()</n>, you can :<n>
   <r>w</r>.aspline( xx, yy, mark )           </n>// add spline: y(x), if <a href="#vis">mark</a>=0  - only line<n>
   <r>w</r>.font(size); <r>w</r>.txt( text, x, y )   </n>// in <r>w</r>-subject coord.: x,y add String text<n>
   <r>w</r>.repaint();                        </n>// is required! after manipulation with <r>gra</r>
-<a name='jc'></a>________________________________________________________________________________________
-
-		<o>Create New pik3d Command, prepare Launcher
-</o>
-It is recommended to use <a href="#jj">jj-preprocessor</a> for complex commands: get <n>JAVA file</n> as a first
-variant from  <n>jj ... /s</n>  and  put it in  <n>JAVA IDE</n>  for comfortable development.
-
-The description uses  <r>fun.jj</r>  and  <r>fun</r>  as the name of the  file  and  command.
-
-1. Debug <r>fun.jj</r> and functionality with  ><a href="#jj"> jj fun [arg0 arg1 ...]</a>
-
-2. COMPILE:  > <n>jj fun /c</n> .  If successful,  <r>fun.class</r>  should appear.
-
-3. Copy  <r>fun.jj</r> and <r>fun.class</r>  to the library:  <r>pik3d\lib\usr.jar</r>
-   The .jar files are ZIP archives, so any ZIP utility is suitable, e.g. Total Commander
-
-4. Add new line  to the  pik3d\exe\<r>_Launch.cfg</r>:<n>  fun:  java  fun </n>
-
-5. Create all Launchers:  go to  pik3d\exe,  run > <r>_Launch.exe</r>
-This is an easy way to create a new Launcher.
-
-
-Example: simple <m>Launcher</m> ( <r>JDK</r> and <m>pik3d</m>  must be present ):
-
-1. Create test folder:  <n>d:\test\pi2</n>  and  go there
-
-2. Create <r>java</r> files:
-<m>
-   > jj "tt(pi,2*pi,3*pi);"              <y># check print of 3 values</y>
-   > jj "tt(pi,2*pi,3*pi);" /c /n=p23    <y># create  p23.java  &  p23.class</y>
-                   or
-   > jj  p23.jj /c</m>                       <y># pre-created file: p23.jj</y>
-
-3. Put file: <r>p23.class</r> (maybe <r>p23.java</r> too) to the archive: p23.jar or p23.zip
-   ( if .zip, change extension to .jar ).
-
-4. Copy <m>pik3d files</m> to this folder:
-        pik3d/lib:
-                    <m>pik.jar</m>              <y># standard pik3d input/output library</y>
-                    <m>run.jar</m>              <y># parts of Launcher</y>
-        pik3d/exe:
-                   <m>_Launch.exe</m>           <y># not needed if pik3d is installed</y>
-
-5. Create config file( e.g. <n>cfg.</n> ):
-<n>
-   # config  for  _Launch.exe
-     jdk/bin:  d:\jdk\bin                <y># location of the java.exe</y>
-     lib/jar:  d:\test\pi2\*             <y># class-path of p23.jar,pik.jar</y>
-
-   # Launchers:
-     ppp:    java   p23
-</n>
-6. Create <m>Launcher</m>( <n>ppp.exe</n> ):  <m>> _Launch  <n>cfg</n></m>
-7. Test  <n>ppp.exe</n>:  copy to any other folder  and  run it there.
-8. After <m>Launcher</m> is created, files: <m>run.jar,_Launch.exe</m>  can be deleted in this folder.
-   They are only needed to create <m>Launcher</m>.
-</n>________________________________________________________________________________________
+________________________________________________________________________________________
 <f>
                               author: K.A. Ilyashenko, e-mail: kilyashenko@gmail.com
                               Error messages, comments, suggestions  are  welcome .
