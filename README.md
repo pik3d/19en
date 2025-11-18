@@ -86,7 +86,7 @@ __jj-technology__ supports execution of OS-commands and pipe-lines.
 This feature allows to use __jj-file__ as batch file with flexible control on JAVA !
 Such jj-script even can be compiled into the __.class__ file and run with __.exe Launcher__ !
 
-Framework has simple tool to create new comands: __crex__ -"CReate EXecutable".
+Framework has simple tool to create new comands: __crex -"CReate EXecutable"__.
 Launcher can be created for __any jj-script or java-file__, which can be executed by __jj-preprocessor__.
 
 Additional commands can be implemented in any other convenient algorithmic language.
