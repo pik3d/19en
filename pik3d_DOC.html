@@ -32,7 +32,7 @@ jj preprocessor & executor:
 
 System:
   <a href="#cex">crex   F.jj | F.java </a>                        ! <r>CR</r>eate <r>EX</r>ecutable Launcher
-  <a href="#clg">Creating a Launcher: general case</a>            ! <r>CR</r>eate <r>EX</r>ecutable Launcher
+  <a href="#clg">Creating Launcher: general case</a>              ! Launcher for any java-code, <r>not pik3d</r>
   <a href="#zip">adzip  ZIP  F1  [ F2 F2 ... ] </a>               ! <r>AD</r>d Files to <r>ZIP</r>
   <a href="#eeh">ee  [text] </a>                                  ! print to std.<r>ERR</r> current time & text
   <a href="#pls">pl  L1  [ L2 ... ] </a>                          ! <r>P</r>rint <r>L</r>ines to std.OUT/ console
@@ -48,10 +48,10 @@ Stack: create, view, info:
   <a href='#ren'>renam  Stk  name   [N=1] </a>                    ! <r>Renam</r>e Frames: name_N, name_&lt;N+1> ...
 
 Data Generation:
-  <a href="#60" >gauss   [r=2 [ width=3 ]] </a>                   ! create normalized Gaussian filter
-  <a href="#bel">bell  K "x y h r"   ["x1 y1 h1 r1"] </a>         ! add Gaussian "Bell"
-  <a href="#wav">wave  K "x y h r a" ["x1 y1 h1 r1 a1"] </a>      ! add Gaussian "Wave"
-  <a href="#gel">gen3d   config </a>                              ! "3d-Stack Generator"
+  <a href="#60" >gauss   [r=2 [ width=3 ]] </a>                   ! create normalized <r>Gauss</r>ian filter
+  <a href="#bel">bell  K "x y h r"   ["x1 y1 h1 r1"] </a>         ! add Gaussian "<r>Bell</r>"
+  <a href="#wav">wave  K "x y h r a" ["x1 y1 h1 r1 a1"] </a>      ! add Gaussian "<r>Wave</r>"
+  <a href="#gel">gen3d   config </a>                              ! "<r>3d</r>-Stack <r>Gen</r>erator"
   <a href="#140">noise   Stk  [amp =.1] </a>                      ! add "Uniform <r>Noise</r>"
   <a href="#145">gnoise  Stk  [R=.1] </a>                         ! add "<r>G</r>aussian <r>Noise</r>", sigma=R/2
 
@@ -871,7 +871,7 @@ public class scal
 }</n>
 The difference between  Windows  and  Linux  is the use of path separators:
  - Windows: '\'  and  ';' in class-path ;
- - <x>Linux: '/' and ':' !!! </x>
+ - <x> Linux: '/' and ':' !!! </x>
 The example below is for Windows.
 
 Preliminary actions:
@@ -885,10 +885,12 @@ Preliminary actions:
 
 1. Compile  <r>scal.java</r>  without IDE :
    - go to the folder: <n>com\org\scal\aa\bb\cc</n>
-   - run compiler( JDK must be installed ): > <r>javac scal.java</r>
+   - run compiler( JDK must be installed ): > <r>javac scal.java</r> 
+     <x> $ ~/jdk/bin/javac scal.java </x>
    - check existance of the file:  <r>scal.class</r>  in the  <n>...\cc</n> .
 
 2. In the root folder try to run <n>scal.class:</n> > <r>java com.org.scal.aa.bb.cc.scal</r>
+   <x> $ ~/jdk/bin/java com.org.scal.aa.bb.cc.scal </x>
    In general case, a class-path option( -cp jar1;jar2;... ) may be required.
    Make sure the class-file works properly.
 
