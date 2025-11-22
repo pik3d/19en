@@ -32,6 +32,7 @@ jj preprocessor & executor:
 
 System:
   <a href="#cex">crex   F.jj | F.java </a>                        ! <r>CR</r>eate <r>EX</r>ecutable Launcher
+  <a href="#clg">Creating a Launcher: general case</a>            ! <r>CR</r>eate <r>EX</r>ecutable Launcher
   <a href="#zip">adzip  ZIP  F1  [ F2 F2 ... ] </a>               ! <r>AD</r>d Files to <r>ZIP</r>
   <a href="#eeh">ee  [text] </a>                                  ! print to std.<r>ERR</r> current time & text
   <a href="#pls">pl  L1  [ L2 ... ] </a>                          ! <r>P</r>rint <r>L</r>ines to std.OUT/ console
@@ -815,6 +816,102 @@ Example( <m>pik3d/usr/kbdstr.jj</m> ):
 > jj kbdstr          <y># check kbdstr.jj</y>
 > <r>crex</r> kbdstr        <y># create Launcher: kbdstr.exe</y>
 > kbdstr             <y># check Launcher</y>
+<a name='clg'></a>________________________________________________________________________________________
+<o>
+     Creating a Launcher: general case.
+</o>
+Framework supports the creation of a Launcher for any java-program, not only for <m>pik3d</m>.
+Below is an example of creating the Launcher: <r>scal.exe</r> for a <n>s</n>imple <n>cal</n>culator.
+The source file can be taken from:  <n>pik3d\usr\scal.java</n>
+
+<r>For simplicity, the class name starts with a lowercase letter</r>, which is a violation of
+JAVA convention, but it is done to avoid confusion between the class name, package and
+folder. All starts with lowercase letter !
+<n>
+package com.org.scal.aa.bb.cc;      // Strange package name only for demo. purposes
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
+public class scal
+{
+  public static void main( String[] arg ){ new scal( arg );}
+  String gets(){
+    try {
+      return new BufferedReader( new InputStreamReader( System.in )).readLine().trim();
+    } catch( Exception e){ q(); return "";}
+  }
+  scal( String[] arg ){
+     while( true ){
+        q("Calc: A (+-*/^) B, (blank=exit): ");
+        try {
+           var s=gets();  int i=0;
+           if( s.isBlank()) break;
+           while( ++i < s.length()){
+              var op=s.substring( i,i+1 );
+              if("+-*/^".contains( op )){
+                 double a = Double.parseDouble( s.substring( 0,i )),
+                        b = Double.parseDouble( s.substring( i+1 )), c=0;
+                 switch ( op ) {
+                   case "+" -> c=a+b;
+                   case "-" -> c=a-b;
+                   case "*" -> c=a*b;
+                   case "/" -> c=a/b;
+                   case "^" -> c=Math.pow( a,b );
+                 }
+                 q("\t\t\t\t "+c); break;
+              }
+           } q();
+        } catch( Exception e){ q();}
+     }
+     q("__________________ end.\n");
+  }
+  void q( String s ){ System.err.print( s );}
+  void q(){ q("\n");}
+}</n>
+The difference between  Windows  and  Linux  is the use of path separators:
+ - Windows: '\'  and  ';' in class-path ;
+ - <x>Linux: '/' and ':' !!! </x>
+The example below is for Windows.
+
+Preliminary actions:
+ - Choose folder for the project (will be refered to as root)  and  place
+   <m>pik3d\exe\_Launcher.exe</m>  there
+ - Choose JAR-storage (e.g. <n>d:\usr\jars</n> ) for the Launcher  and  place
+   <m>pik3d\lib\run.jar</m>  there
+ - Create directory structure, which corresponds to the package: <n>com\org\scal\aa\bb\cc\</n>
+ - Copy source: <n>scal.java</n> to the last folder: <n>...\cc</n>, in the root must be the structure:
+   <n>com\org\scal\aa\bb\cc\scal.java</n> .
+
+1. Compile  <r>scal.java</r>  without IDE :
+   - go to the folder: <n>com\org\scal\aa\bb\cc</n>
+   - run compiler( JDK must be installed ): > <r>javac scal.java</r>
+   - check existance of the file:  <r>scal.class</r>  in the  <n>...\cc</n> .
+
+2. In the root folder try to run <n>scal.class:</n> > <r>java com.org.scal.aa.bb.cc.scal</r>
+   In general case, a class-path option( -cp jar1;jar2;... ) may be required.
+   Make sure the class-file works properly.
+
+3. Create JAR-file:  <r>scal.jar</r> , which contains the structure:
+   <n>com\org\scal\aa\bb\cc\scal.class</n> .
+   It can be created with  IDE  or  any zip-utility, for example: <n>"Total Commander"</n>:
+   in project root / select folder: <n>com</n> / press &lt;Alt+F5> / input name:  <r>scal.jar</r> .
+
+4. Copy  <r>scal.jar</r>  to the chosen JAR-storage (e.g. <n>d:\usr\jars\*</n>, <m>run.jar</m> is there ).
+   This storage and jar-file will be hard-coded into the Launcher !
+
+5. Create Launcher config.file:  <r>scal.cfg</r> :
+
+  jdk/bin:  <n>d:\jdk\bin</n>                       <y># location of the java.exe</y>
+  lib/jar:  <n>d:\usr\jars\*</n>                    <y># class-path of <m>run.jar</m> and <r>scal.jar</r></y>
+<y># lib/jar:  JAR-storage\*;jar1;jar2;...      # general case</y>
+  <r>scal</r>:  <n>java  com.org.Calc.aa.bb.cc.</n><r>scal</r>    <y># exe-name, executor, reference to .class</y>
+                                             <y># exe-name can be anything !</y>
+6. Create Launcher: > <r>_Launcher scal.cfg</r>
+
+7. Place <r>scal.exe</r> in any folder specified in the PATH environment variable or  <x> ~\bin </x>
+
+Files: <m>pik3d\exe\_Launcher.exe</m>, <m>pik3d\lib\run.jar</m> can be removed.
 <a name='zip'></a>________________________________________________________________________________________
 <o>
      command:  adzip  ZIP  F1 [ F2 F2 ... ]    # <r>AD</r>d Files to <r>ZIP</r>
