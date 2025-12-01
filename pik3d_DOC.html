@@ -821,37 +821,32 @@ Example( <m>pik3d/usr/kbdstr.jj</m> ):
      Creating a Launcher: general case.
 </o>
 Framework supports the creation of a Launcher for any java-program, not only for <m>pik3d</m>.
-Below is an example of creating the Launcher: <r>scal.exe</r> for a <n>s</n>imple <n>cal</n>culator.
-The source file can be taken from:  <n>pik3d\usr\scal.java</n>
-
-<r>For simplicity, the class name starts with a lowercase letter</r>, which is a violation of
-JAVA convention, but it is done to avoid confusion between the class name, package and
-folder. All starts with lowercase letter !
+Below is an example of creating the Launcher: <r>scal.exe</r> for a <r>s</r>imple <r>cal</r>culator.
+The source file can be taken from:  <n>pik3d\usr\</n><r>Scal.java</r>
 <n>
-package com.org.scal.aa.bb.cc;      // Strange package name only for demo. purposes
+package com.org.calc.aa.bb.cc;      // Strange package name only for demo. purposes
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-public class scal
+public class Scal
 {
-  public static void main( String[] arg ){ new scal( arg );}
+  public static void main( String[] arg ){ new Scal( arg );}
   String gets(){
     try {
       return new BufferedReader( new InputStreamReader( System.in )).readLine().trim();
-    } catch( Exception e){ q(); return "";}
+    } catch( Exception e){ q("\n"); return "";}
   }
-  scal( String[] arg ){
+  Scal( String[] arg ){
      while( true ){
-        q("Calc: A (+-*/^) B, (blank=exit): ");
+        q("scal:  A (+-*/^) B,  if A|B=, -\"use last result\", (blank=exit): ");
         try {
            var s=gets();  int i=0;
            if( s.isBlank()) break;
            while( ++i < s.length()){
               var op=s.substring( i,i+1 );
               if("+-*/^".contains( op )){
-                 double a = Double.parseDouble( s.substring( 0,i )),
-                        b = Double.parseDouble( s.substring( i+1 )), c=0;
+                 double a = pars( s.substring( 0,i )), b = pars( s.substring( i+1 ));
                  switch ( op ) {
                    case "+" -> c=a+b;
                    case "-" -> c=a-b;
@@ -859,15 +854,18 @@ public class scal
                    case "/" -> c=a/b;
                    case "^" -> c=Math.pow( a,b );
                  }
-                 q("\t\t\t\t "+c); break;
+                 q("\t\t\t\t\t\t\t\t"+c); break;
               }
-           } q();
-        } catch( Exception e){ q();}
+           } q("\n");
+        } catch( Exception e){ q("\n");}
      }
      q("__________________ end.\n");
   }
+  double c=0;
+  double pars( String s ){
+     s=s.trim(); return s.startsWith(",")? c: Double.parseDouble( s );
+  }
   void q( String s ){ System.err.print( s );}
-  void q(){ q("\n");}
 }</n>
 The difference between  Windows  and  Linux  is the use of path separators:
  - Windows: '\'  and  ';' in class-path ;
@@ -876,44 +874,46 @@ The example below is for Windows.
 
 Preliminary actions:
  - Choose folder for the project (will be refered to as root)  and  place
-   <m>pik3d\exe\_Launcher.exe</m>  there
+   <m>pik3d\exe\_Launcher.exe</m>  there ;
  - Choose JAR-storage (e.g. <n>d:\usr\jars</n> ) for the Launcher  and  place
-   <m>pik3d\lib\run.jar</m>  there
- - Create directory structure, which corresponds to the package: <n>com\org\scal\aa\bb\cc\</n>
- - Copy source: <n>scal.java</n> to the last folder: <n>...\cc</n>, in the root must be the structure:
-   <n>com\org\scal\aa\bb\cc\scal.java</n> .
+   <m>pik3d\lib\run.jar</m>  there ;
+ - Create or copy source-code: <r>Scal.java</r> to the root .
 
-1. Compile  <r>scal.java</r>  without IDE :
-   - go to the folder: <n>com\org\scal\aa\bb\cc</n>
-   - run compiler( JDK must be installed ): > <r>javac scal.java</r> 
-     <x> $ ~/jdk/bin/javac scal.java </x>
-   - check existance of the file:  <r>scal.class</r>  in the  <n>...\cc</n> .
-
-2. In the root folder try to run <n>scal.class:</n> > <r>java com.org.scal.aa.bb.cc.scal</r>
-   <x> $ ~/jdk/bin/java com.org.scal.aa.bb.cc.scal </x>
-   In general case, a class-path option( -cp jar1;jar2;... ) may be required.
-   Make sure the class-file works properly.
+1. Compile  <r>Scal.java</r>  without IDE :
+   - run compiler( JDK must be installed ): > <r>javac Scal.java</r>
+     <x> $ ~/jdk/bin/javac Scal.java </x>
+   - create folder structure in the root:  <r>com\org\calc\aa\bb\cc</r> ,
+     which  corresponts  to the   <n>package  com.org.calc.aa.bb.cc</n> ;
+   - copy Scal-files there: > <r>copy Scal.*  com\org\calc\aa\bb\cc</r> .
+     It is useful to have the source code along with the compiled one.
+	 
+2. In the root folder try to run <n>Scal.class:</n> > <r>java com.org.calc.aa.bb.cc.Scal</r>
+   <x> $ ~/jdk/bin/java com.org.calc.aa.bb.cc.Scal </x>
+   In general case, a class-path option( -cp jar1;jar2;... ) may be required .
+   Make sure the class-file works properly .
 
 3. Create JAR-file:  <r>scal.jar</r> , which contains the structure:
-   <n>com\org\scal\aa\bb\cc\scal.class</n> .
+   <r>com\org\calc\aa\bb\cc\Scal.class</r> .
    It can be created with  IDE  or  any zip-utility, for example: <n>"Total Commander"</n>:
-   in project root / select folder: <n>com</n> / press &lt;Alt+F5> / input name:  <r>scal.jar</r> .
+   in project root / select folder: <r>com</r> / press <n>&lt;Alt+F5></n> / input name:  <r>scal.jar</r> .
 
 4. Copy  <r>scal.jar</r>  to the chosen JAR-storage (e.g. <n>d:\usr\jars\*</n>, <m>run.jar</m> is there ).
-   This storage and jar-file will be hard-coded into the Launcher !
+   This storage will be hard-coded into the Launcher:  lib/jar:  <n>d:\usr\jars\*</n> !
+
+        <n>It is possible to collect class structures into a single JAR in the storage</n>
 
 5. Create Launcher config.file:  <r>scal.cfg</r> :
 
   jdk/bin:  <n>d:\jdk\bin</n>                       <y># location of the java.exe</y>
-  lib/jar:  <n>d:\usr\jars\*</n>                    <y># class-path of <m>run.jar</m> and <r>scal.jar</r></y>
+  lib/jar:  <n>d:\usr\jars\*</n>                    <y># class-path to  <m>run.jar</m> and <r>scal.jar</r></y>
 <y># lib/jar:  JAR-storage\*;jar1;jar2;...      # general case</y>
-  <r>scal</r>:  <n>java  com.org.Calc.aa.bb.cc.</n><r>scal</r>    <y># exe-name, executor, reference to .class</y>
+  <r>scal</r>:  <n>java  com.org.Calc.aa.bb.cc.</n><r>Scal</r>    <y># exe-name, executor, reference to .class</y>
                                              <y># exe-name can be anything !</y>
-6. Create Launcher: > <r>_Launcher scal.cfg</r>
+6. Create Launcher: > <r>_Launch scal.cfg</r>
 
 7. Place <r>scal.exe</r> in any folder specified in the PATH environment variable or  <x> ~\bin </x>
 
-Files: <m>pik3d\exe\_Launcher.exe</m>, <m>pik3d\lib\run.jar</m> can be removed.
+Files: <m>pik3d\exe\_Launcher.exe</m>, <m>pik3d\lib\run.jar</m> can be removed .
 <a name='zip'></a>________________________________________________________________________________________
 <o>
      command:  adzip  ZIP  F1 [ F2 F2 ... ]    # <r>AD</r>d Files to <r>ZIP</r>
@@ -2374,7 +2374,7 @@ e.g.
 
 In many cases, the problem of finding Linear Regression is formulated as follows:
 
-  - there is V - scalar value dependent on vector X ;
+  - there is V - Scalar value dependent on vector X ;
   - X = ( x, y, z ... ) - vector of independent variables ;
   - the set of measurements: <r>[V]</r> ={ V1,V2...Vm } and correspondent <r>[X]</r> ={ X1,X2...Xm }.
 
@@ -2743,7 +2743,7 @@ examples:
   vic q                          !stack q: "by numbers" 1-column == q,, == q,1 == q 1 1
   vic q,4                        !---:---:---:---:---   4-column
   vic q (2 .5) 6 7 /w=999 /h=555 !---:---: X=2,2.5,3... 6,7-columns, window[0,0,999,555]
-  vic q 1 2 /lgy                 !chart with Log.scale Y-axis
+  vic q 1 2 /lgy                 !chart with Log.Scale Y-axis
   vic /blank /add=AddGraph.add   !blank with add.graphics( it can be loaded later ^A ).
 
 default <r>"Legend"</r> contains:  colored line with marker,  stack name  and  column number.
@@ -2887,7 +2887,7 @@ You can add <r>TEXT, LINE or FIGURE( box, oval, romb )</r> anywhere in the windo
 
   - <r>&lt;Ctrl+C></r> - ON/ OFF  Cursor Lines."+
 
-  - <r>&lt;Ctrl+S></r> - Save chart in <r>"Windows Meta File"</r> - vector graphics, that scales well
+  - <r>&lt;Ctrl+S></r> - Save chart in <r>"Windows Meta File"</r> - vector graphics, that Scales well
                and is supported by MS Word, ACDSee, Total Commander &lt;F3> ...
                If the chart uses characters  of a code page  other  than cp1252,
                this code page  must be specified  after  the file name  with comma,
@@ -2913,7 +2913,7 @@ You can add <r>TEXT, LINE or FIGURE( box, oval, romb )</r> anywhere in the windo
 
 - The aspect ratio of the image can only be changed until is saved: ^S  .
 
-- <r>WMF</r> is a vector format( LINES, NO pixels ), so it scales well.
+- <r>WMF</r> is a vector format( LINES, NO pixels ), so it Scales well.
   In the  MS Word document  you can stretch the image  to the desired size.
 
 - When manipulating a <r>WMF</r> image, the font will resize according to the image size.
