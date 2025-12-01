@@ -1,4 +1,8 @@
 
+2025-12-01  v.23.3
+  - pik3d_DOC.html: extended section: "Creating a Launcher: general case";
+  - fixed problem in run.jar( Linux ).
+
 2025-11-22  version 23.3
   - pik3d_DOC.html new section: "Creating a Launcher: general case";
   - pik3d/usr/scal.java - new example .
