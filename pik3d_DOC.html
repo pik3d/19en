@@ -17,7 +17,7 @@ x{background:#333333; color:#00FF00; font-size:13px; line-height:13px; font-fami
 <h5><pre><a name='s3d'><f>pik3d - framework for processing and 3d-display of matrices and their sequences
         in s3d Help supports HTML navigation:  <a href="#ins">links</a><f>, &lt;Home>, &lt;End>
 </f><a name='ogl'></a>
-<a href='#fwk'>OVERVIEW of pik3d v.23.3</a>
+<a href='#fwk'>OVERVIEW of pik3d v.23.4</a>
 <a href="#ins">INSTALL pik3d </a>
 <a href="#dat">###-format of the data: FRAME, STACK</a>
 <a href="#cmd">COMMANDS</a>
@@ -913,14 +913,14 @@ Preliminary actions:
 
 7. Place <r>scal.exe</r> in any folder specified in the PATH environment variable or  <x> ~\bin </x>
 
-Files: <m>pik3d\exe\_Launcher.exe</m>, <m>pik3d\lib\run.jar</m> can be removed .
+Files: <m>_Launcher.exe</m>, <m>run.jar</m> can be removed from root.
 <a name='zip'></a>________________________________________________________________________________________
 <o>
      command:  adzip  ZIP  F1 [ F2 F2 ... ]    # <r>AD</r>d Files to <r>ZIP</r>
 </o>
-The added file may contain  a <n>full path</n>,  e.g.
-> adzip  q.zip   <n>d:/pik3d/lib/run.jar</n><y>
-#      Structure:   <n>pik3d/lib/run.jar</n>  will be created  in q.zip !</y>
+The added files may contain a  <n>PATH</n>,  e.g.
+> adzip  q.zip  <n>com/org/test/ver_1/calc.jj</n><y>
+#   Structure:  <n>com/org/test/ver_1/calc.jj</n>  will be created in</y>  q.zip !
 <a name='eeh'></a>________________________________________________________________________________________
 <o>
      command:  ee  [text]    # print to std.ERR current time & text
