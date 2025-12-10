@@ -1,4 +1,7 @@
 
+2025-12-10  v.23.4
+  - command crex: unnecessary warning is removed .
+
 2025-12-07  v.23.4
   - command: crex -"CReate EXecutable":
     - create standard launcher (from jj-files) with: package usr;
