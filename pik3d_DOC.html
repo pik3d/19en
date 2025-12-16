@@ -17,7 +17,7 @@ x{background:#333333; color:#00FF00; font-size:13px; line-height:13px; font-fami
 <h5><pre><a name='s3d'><f>pik3d - framework for processing and 3d-display of matrices and their sequences
         in s3d Help supports HTML navigation:  <a href="#ins">links</a><f>, &lt;Home>, &lt;End>
 </f><a name='ogl'></a>
-<a href='#fwk'>OVERVIEW of pik3d v.23.4</a>
+<a href='#fwk'>OVERVIEW of pik3d v.23.5</a>
 <a href="#ins">INSTALL pik3d </a>
 <a href="#dat">###-format of the data: FRAME, STACK</a>
 <a href="#cmd">COMMANDS</a>
@@ -161,24 +161,22 @@ Use of <m>jj-file</m> is more flexible as it can contain JAVA-code to control th
 Executable <a href="#cex">Launchers (.exe)</a> can be created for the established <m>jj-scripts</m>.
 
 The framework can be installed on Windows 7, 10, Linux (tested in Mint 21.1).
-Version 23 is compiled with <r>JAVA-21 using javaFX</r>.
+Version 23.5 is compiled with <r>JAVA-25 using javaFX</r>.
 <a name='ins'></a>________________________________________________________________________________________
 
 				<o>INSTALL pik3d
 </o>
     <x> Linux specific steps will appear like this.</x>
 
- 1. Download <r>Open JDK+FX( Full ) v.21</r> installation zip-archive for Windows( x86 64bit ).
+ 1. Download <r>Open JDK+FX( Full ) v.25</r> installation zip-archive for Windows( x86 64bit ).
     Recommended builds (follow one of the links):
 
-       <a href="https://www.azul.com/downloads/?version=java-21-sts&os=windows&architecture=x86-64-bit&package=jdk-fx#zulu"
->Azul:        JDK  FX  </a>  ! Java <r>21</r>, x86 64-bit, <r>JDK FX !</r>
-       <a href="https://axiomjdk.ru/pages/downloads/#/java-21-current"
->Axiom (RU):  Full JDK </a>
+       <a href="https://www.azul.com/downloads/?os=windows&architecture=x86-64-bit&package=jdk-fx#zulu">Azul  JDK FX </a>        ! Java <r>25 LTS</r>, x86 64-bit, <r>JDK FX !</r>
+       <a href="https://axiomjdk.ru/pages/downloads/#/java-25-lts">Axiom JDK 25 Standard </a>
 
     Since the framework does not require a full JAVA installation ( <r>only unzip</r> ),
     builds can be easily changed. If another version of JAVA is installed on the system,
-    the framework with JAVA-21 will not affect it in any way.
+    the framework with JAVA-25 will not affect it in any way.
 
  2. Expand JAVA archive, for example to: D:\jdk <x> ~/jdk </x>. There should be a folder:
     D:\jdk\bin  <x> ~/jdk/bin </x>  with  <r>java.exe</r>.  It will be pointed in Launchers config.
@@ -619,7 +617,7 @@ This example converts text list of Links to the html-list.
 ----------------------------------------------------------------------------------------
 <n>JAVA options</n> can be used with <o>jj-command</o>. It is useful to test new features of <n>Java</n>.
 Example( Vector API: <m>pik3d/usr/jep438.jj</m> ):
-><m> jj  <n>--enable-preview  --source=21  --add-modules=jdk.incubator.vector</n>  jep438 </m>
+><m> jj  <n>--enable-preview  --source=25  --add-modules=jdk.incubator.vector</n>  jep438 </m>
 
 <a name='jcc'></a>________________________________________________________________________________________
 <o>
@@ -874,7 +872,7 @@ The example below is for Windows.
 
 Preliminary actions:
  - Choose folder for the project (will be refered to as root)  and  place
-   <m>pik3d\exe\_Launcher.exe</m>  there ;
+   <m>pik3d\exe\_Launch.exe</m>  there ;
  - Choose JAR-storage (e.g. <n>d:\usr\jars</n> ) for the Launcher  and  place
    <m>pik3d\lib\run.jar</m>  there ;
  - Create or copy source-code: <r>Scal.java</r> to the root .
@@ -913,7 +911,7 @@ Preliminary actions:
 
 7. Place <r>scal.exe</r> in any folder specified in the PATH environment variable or  <x> ~\bin </x>
 
-Files: <m>_Launcher.exe</m>, <m>run.jar</m> can be removed from root.
+Files: <m>_Launch.exe</m>, <m>run.jar</m> can be removed from root.
 <a name='zip'></a>________________________________________________________________________________________
 <o>
      command:  adzip  ZIP  F1 [ F2 F2 ... ]    # <r>AD</r>d Files to <r>ZIP</r>
