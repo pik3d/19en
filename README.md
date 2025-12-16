@@ -94,7 +94,7 @@ To read/write ###-files in __PYTHON__: pik3d/ext/ __kadr.py package__ is include
 To read ###-files in the __ImageJ__ editor, ###_Reader_ImageJ.jar __plugin__ is implemented.
 
 The framework can be installed on __Windows 7, 10, Linux__ (tested in Mint 21).
-Current  version 23 is  compiled with __JAVA-21 LTS__ using __javaFX__. It can be run under __JAVA v. 21, 22__.
+Current  version 23.5 is  compiled with __JAVA-25 LTS__ using __javaFX__. It can be run under __JAVA v. 25__.
 
 Description of the framework, formats and install procedure are presented in the file:
 __pik3d_DOC.html__, contained in the install archives: __pik3d.zip__ and __pik3d_Linux.zip__.
@@ -110,7 +110,7 @@ __CSV-files__ can be converted to __###-format__.
 
 __download and install:__
   - at the top of this page click file: __pik3d.zip__ or __pik3d_Linux.zip__;
-  - on the opened page on the right select download( ~ 1.2 MB );
+  - on the opened page on the right select download( ~ 1.3 MB );
   - unpack the archive into some folder;
   - click the file: __pik3d_DOC.html__ - it should be open by default browser;
   - read the section "INSTALL pik3d";
