@@ -17,8 +17,9 @@ x{background:#333333; color:#00FF00; font-size:13px; line-height:13px; font-fami
 <h5><pre><a name='s3d'><f>pik3d - framework for processing and 3d-display of matrices and their sequences
         in s3d Help supports HTML navigation:  <a href="#ins">links</a><f>, &lt;Home>, &lt;End>
 </f><a name='ogl'></a>
-<a href='#fwk'>OVERVIEW of pik3d v.23.5</a>
+<a href='#fwk'>OVERVIEW of pik3d v.23.6</a>
 <a href="#ins">INSTALL pik3d </a>
+<a href="#jfx">Assemble your own JDK+FX build</a>
 <a href="#dat">###-format of the data: FRAME, STACK</a>
 <a href="#cmd">COMMANDS</a>
 
@@ -160,15 +161,16 @@ follows the symbol <m>'$'</m>, example of <n>batch-file</n> and <m>jj-file</m> w
 Use of <m>jj-file</m> is more flexible as it can contain JAVA-code to control the processing.
 Executable <a href="#cex">Launchers (.exe)</a> can be created for the established <m>jj-scripts</m>.
 
-The framework can be installed on Windows 7, 10, Linux (tested in Mint 21.1).
-Version 23.5 is compiled with <r>JAVA-25 using javaFX</r>.
+The framework can be installed on Windows 7, 10, Linux (tested in Mint 21).
+Version 23.6 is compiled with <r>JAVA-21 using javaFX</r>. It can run on Java 21-27.
+It was tested under JAVA 21,22,25,"Early-Access Release 27".
 <a name='ins'></a>________________________________________________________________________________________
 
 				<o>INSTALL pik3d
 </o>
     <x> Linux specific steps will appear like this.</x>
 
- 1. Download <r>Open JDK+FX (Full) v.25</r> installation zip-archive for Windows or Linux.
+ 1. Download or <a href="#jfx">create*</a> <r>Open JDK+FX</r> installation zip-archive for Windows or Linux.
     Recommended build:
 
        <a href="https://www.azul.com/downloads/?os=windows&architecture=x86-64-bit&package=jdk-fx#zulu">Azul  JDK FX </a>        ! Java <r>25 LTS</r>, x86 64-bit
@@ -209,6 +211,39 @@ Version 23.5 is compiled with <r>JAVA-25 using javaFX</r>.
     The lighting angles can be changed by: <r>&lt;Ctrl + arrows></r>: Left, Right, Up, Down .
     It is recommended to press in different sequences (again key press =enable/disable):
     <r>&lt;F1></r>,<r>^A</r>-Axes,<r>&lt;Alt+M></r>-Map Off,<r>^D</r>-Map Down,<r>^M</r>-only Map,<r>^2</r>-add.Obj (<r>^</r>=pressed<r>&lt;Ctrl></r>key)
+
+<a name='jfx'></a>
+<n>*Assemble your own <r>JDK+FX</r> build (example: OpenJDK + javaFX v.25 for Windows)</n>
+
+ 1. Download from official site: <a href="https://jdk.java.net/java-se-ri/25"> <r>jdk</r>.java.net </a> GA Releases:
+    - <n>jdk-25_windows-x64_bin.zip</n>               - Windows/x64 JDK 25 (212 MB) ;
+    - <n>openjfx-25.0.1_windows-x64_bin-jmods.zip</n> - Windows/x64 javaFX 25 (45 MB) .
+
+ 2. Copy zip-folder:  <n>jdk-25.0.1</n>  to the disk( for example we will use d:\ ).
+    Make sure the folder:  <n>d:\jdk</n>  is absent( our build will be placed there ).
+
+ 3. Copy zip-folder:  <n>javafx-jmods-25.0.1</n>  to the disk ;
+
+ 4. Go to the folder:  <n>d:\jdk-25.0.1\bin</n> ;
+
+ 5. Run Console (e.g. cmd.exe)  and  execute command ( this is <n>one line</n> ):
+
+<n>jlink --module-path d:\javafx-jmods-25.0.1 --add-modules  javafx.base,javafx.controls,
+javafx.fxml,javafx.graphics,javafx.media,javafx.swing,javafx.web  --bind-services
+--output  d:\jdk </n>
+
+ <r>!!! After that d:\jdk contains build( </r>~288 MB<r> ) which is enough to execute framework,
+     but not enough to compile java-files with javaFX !!!</r>
+
+The following steps are required for the build with the javaFX Compilation option.
+
+ 6. Copy folder: <n>jmods</n>  from <n>d:\jdk-25.0.1</n>  to the  <n>d:\jdk</n> .
+
+ 7. Copy <n>all files</n> from the folder: <n>d:\javafx-jmods-25.0.1\jmods</n> to the <n>d:\jdk\jmods</n>
+    If any file already exists while copying, select the <n>overwrite</n> option !
+
+After all the steps  <n>d:\jdk</n>  contains  <r>Full JDK+FX</r>  ( ~422 MB ).
+Folders:  <n>d:\jdk-25.0.1, d:\javafx-jmods-25.0.1</n>  can be removed.
 <a name='dat'></a>________________________________________________________________________________________
 
 		<o>###-format of the data: FRAME, STACK
@@ -883,16 +918,17 @@ Preliminary actions:
      which  corresponts  to the   <n>package  com.org.calc.aa.bb.cc</n> ;
    - copy Scal-files there: > <r>copy Scal.*  com\org\calc\aa\bb\cc</r> .
      It is useful to have the source code along with the compiled one.
-	 
+
 2. In the root folder try to run <n>Scal.class:</n> > <r>java com.org.calc.aa.bb.cc.Scal</r>
    <x> $ ~/jdk/bin/java com.org.calc.aa.bb.cc.Scal </x>
    In general case, a class-path option( -cp jar1;jar2;... ) may be required .
    Make sure the class-file works properly .
 
-3. Create JAR-file:  <r>scal.jar</r> , which contains the structure:
-   <r>com\org\calc\aa\bb\cc\Scal.class</r> .
-   It can be created with  IDE  or  any zip-utility, for example: <n>"Total Commander"</n>:
-   in project root / select folder: <r>com</r> / press <n>&lt;Alt+F5></n> / input name:  <r>scal.jar</r> .
+3. Create    <r>scal.jar</r> , which contains the structure:
+
+                        <r>com\org\calc\aa\bb\cc\Scal.class</r>
+
+ > <r>jar</r> -c -f <r>scal.jar</r>   com\org\calc\aa\bb\cc\<r>*</r>            <y># use java jar utility</y>
 
 4. Copy  <r>scal.jar</r>  to the chosen JAR-storage (e.g. <n>d:\usr\jars\*</n>, <m>run.jar</m> is there ).
    This storage will be hard-coded into the Launcher:  lib/jar:  <n>d:\usr\jars\*</n> !
@@ -901,16 +937,14 @@ Preliminary actions:
 
 5. Create Launcher config.file:  <r>scal.cfg</r> :
 
-  jdk/bin:  <n>d:\jdk\bin</n>                       <y># location of the java.exe</y>
-  lib/jar:  <n>d:\usr\jars\*</n>                    <y># class-path to  <m>run.jar</m> and <r>scal.jar</r></y>
-<y># lib/jar:  JAR-storage\*;jar1;jar2;...      # general case</y>
-  <r>scal</r>:  <n>java  com.org.Calc.aa.bb.cc.</n><r>Scal</r>    <y># exe-name, executor, reference to .class</y>
+   jdk/bin:  <n>d:\jdk\bin</n>                      <y># location of the java.exe</y>
+   lib/jar:  <n>d:\usr\jars\*</n>                   <y># class-path to  <m>run.jar</m> and <r>scal.jar</r></y>
+ <y># lib/jar:  JAR-storage\*;jar1;jar2;...     # general case</y>
+   <r>scal</r>:  <n>java  com.org.Calc.aa.bb.cc.</n><r>Scal</r>   <y># exe-name, executor, reference to .class</y>
                                              <y># exe-name can be anything !</y>
-6. Create Launcher: > <r>_Launch scal.cfg</r>
+6. Create Launcher: > <r>_Launch  scal.cfg</r>
 
 7. Place <r>scal.exe</r> in any folder specified in the PATH environment variable or  <x> ~\bin </x>
-
-Files: <m>_Launch.exe</m>, <m>run.jar</m> can be removed from root.
 <a name='zip'></a>________________________________________________________________________________________
 <o>
      command:  adzip  ZIP  F1 [ F2 F2 ... ]    # <r>AD</r>d Files to <r>ZIP</r>
