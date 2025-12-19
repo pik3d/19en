@@ -1,4 +1,11 @@
 
+2025-12-19  v.23.6  !!! JAVA 21-27 !!! 
+  - recompiled with option: --reliase 21 ;
+  - tested with JAVA: 21,22, 25, 27 (https://jdk.java.net/27/ -Early-Access Build);
+  - pik3d_DOC.html:
+    - the section "Creating Launcher: general case" is improved;
+	- new section "Assemble your own JDK+FX build".
+
 2025-12-16  v.23.5  !!! move to JAVA-25 !!! 
   - crex -"CReate EXecutable": compiled File.jj --> File.java
     has no package( default package ) ; 

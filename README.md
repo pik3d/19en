@@ -94,7 +94,8 @@ To read/write ###-files in __PYTHON__: pik3d/ext/ __kadr.py package__ is include
 To read ###-files in the __ImageJ__ editor, ###_Reader_ImageJ.jar __plugin__ is implemented.
 
 The framework can be installed on __Windows 7, 10, Linux__ (tested in Mint 21).
-Current  version 23.5 is  compiled with __JAVA-25 LTS__ using __javaFX__. It can be run under __JAVA v. 25__.
+Current  version 23.6 is  compiled with __JAVA-21 LTS__ using __javaFX__. It can be run under __JAVA 21-27__.
+It was tested with JAVA: 21, 22, 25, 27 <a href='https://jdk.java.net/27/'> https://jdk.java.net/27 - Early-Access Build)</a>;
 
 Description of the framework, formats and install procedure are presented in the file:
 __pik3d_DOC.html__, contained in the install archives: __pik3d.zip__ and __pik3d_Linux.zip__.
@@ -113,7 +114,7 @@ __download and install:__
   - on the opened page on the right select download( ~ 1.3 MB );
   - unpack the archive into some folder;
   - click the file: __pik3d_DOC.html__ - it should be open by default browser;
-  - read the section "INSTALL pik3d";
+  - read the section __"INSTALL pik3d"__;
   - after install, scripts: __\_run.cmd or ./run__ (Linux) in demo folders are available to execute.
   - if you plan to use __Eigen / Singular Values Decomposition__, you need to dowload
     <a href='https://archive.apache.org/dist/commons/math/binaries/commons-math3-3.6.1-bin.zip'>The Apache Commons Mathematics Library 3.61</a>
