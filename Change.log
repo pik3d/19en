@@ -2,6 +2,7 @@
 2025-12-19  v.23.6  !!! JAVA 21-27 !!! 
   - recompiled with option: --reliase 21 ;
   - tested with JAVA: 21,22,25,27 (https://jdk.java.net/27 -Early-Access Build);
+  - s3d: bring texts to front ;
   - pik3d_DOC.html:
     - the section "Creating Launcher: general case" is improved;
     - new section "Build your own JDK+FX assembly"  is added .
