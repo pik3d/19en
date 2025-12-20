@@ -29,7 +29,7 @@ The set of such 3D-points forms a 3D-surface.
         X                      /____________/
                              X/
 
-For text data you can use a shortened header: __ ###[] __ .
+For text data you can use a shortened header: __###[]__ .
 The number of columns is the number of values in the first row of data.
 The number of rows is defined by the file length or the next header.
 
