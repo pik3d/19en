@@ -38,10 +38,10 @@ is the functionality of the command: __s3d -"Surface-3D"__. You can view
 the stack in the "frame by frame" mode, like a video clip. During playback of the
 video clip, you can stop it and change the viewing angles, colors, lighting and etc.
 
-The surface can be displayed in two ways: "Smooth" and "bar-View" - a set of vertical
+The surface can be displayed in two ways: "Smooth" and "bar-View"- a set of vertical
 bars. You can switch the view by pressing &lt;F4> at any time.
 
-Command: __b3d__ -"Body-3D" support 3D-display of bodies defined by
+Command: __b3d__ -"Body-3D" supports 3D-display of bodies defined by
 quadrilateral faces (up to 10,000 faces). You can control Opacity of body/surface.
 2D/3D - Points| Lines| Body can be added to the 3D-scene in __s3d__ and __b3d__.
 
@@ -68,8 +68,8 @@ JAVA doesn't even need to be installed. Only unpack the JAVA installation archiv
 The framework has simple tools to create a new command in JAVA, for example: __jj-Technology -"java-JAVA"__.
 
 __jj is a preprocessor and executor__. It allows to compile/execute __.jj and .java files__. jj-file contains
-only "subject part". File.java is generated from File.jj by adding header with import and main().
-Generated file with framework class-path is submitted for execution to JAVA (jdk/javac must be present).
+only "subject part". __File.java is generated from File.jj__ by adding header with import and main().
+Created __File.java__ with framework __class-path__ is submitted for execution to __JAVA__ (jdk/javac must be present).
 Intermediate files can be saved.
 
 __jj-Technology supports macro substitution__ that allow you to modify java-code directly during jj-call.
