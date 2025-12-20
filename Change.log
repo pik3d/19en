@@ -4,7 +4,7 @@
   - tested with JAVA: 21,22,25,27 (https://jdk.java.net/27 -Early-Access Build);
   - pik3d_DOC.html:
     - the section "Creating Launcher: general case" is improved;
-    - new section "Assemble your own JDK+FX build"  is added .
+    - new section "Build your own JDK+FX assembly"  is added .
 
 2025-12-16  v.23.5  !!! move to JAVA-25 !!! 
   - crex -"CReate EXecutable": compiled File.jj --> File.java
