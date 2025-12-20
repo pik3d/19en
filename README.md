@@ -72,8 +72,9 @@ only "subject part". __File.java is generated from File.jj__ by adding header wi
 __File.java__ with framework __class-path__ is submitted for execution to __JAVA__ ( jdk/javac must be present ).
 Intermediate files can be saved.
 
-__jj-Technology supports macro substitution__ that allow you to modify java-code directly during jj-call.
+__jj-Technology supports macro substitution__, which allows to modify code directly during jj-call.
 For example: a code snippet can be inserted into the jj-file just before compilation.
+You can submit an __analytical expression of a function__ as argument during jj-call ( standard jj-scripts: Fx, Fxy, Fxyt ).
 This feature is used to find regression, i.e. set of functions for regression can be specified
 __analytically in symbolic form directly in the command line__, see: pik3d/demo/regression.
 
