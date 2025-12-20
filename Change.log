@@ -1,15 +1,15 @@
 
-2025-12-19  v.23.6  !!! JAVA 21-27 !!! 
+2025-12-19  v.23.6  !!! JAVA 21-27 !!!
   - recompiled with option: --reliase 21 ;
   - tested with JAVA: 21,22,25,27 (https://jdk.java.net/27 -Early-Access Build);
-  - s3d: bring texts to front ;
+  - s3d: bring texts to front .
   - pik3d_DOC.html:
     - the section "Creating Launcher: general case" is improved;
     - new section "Build your own JDK+FX assembly"  is added .
 
-2025-12-16  v.23.5  !!! move to JAVA-25 !!! 
+2025-12-16  v.23.5  !!! move to JAVA-25 !!!
   - crex -"CReate EXecutable": compiled File.jj --> File.java
-    has no package( default package ) ; 
+    has no package( default package ) ;
   - jj-preprocessor:
     - use javac v.25.0.1 ;
 	- small changes related to JAVA-25 ;
@@ -43,7 +43,7 @@
   - pik3d_DOC.html is reorganized .
 
 2025-11-09  version 23.2
-  - jj-preprocessor & executor: 
+  - jj-preprocessor & executor:
 	- added Macro Substitution with Request, see: pik3d_DOC.html.
 
 2025-11-06  version 23.1.1
@@ -55,13 +55,13 @@
   - jj-preprocessor & executor:
     - command: $ OS-commands //execute applications, pipes, shell-cmd;
         - support of &(&&-Linux), |, >, >> ;
-        - shell-commands: cmd in Windows, Bash in Linux ;		
+        - shell-commands: cmd in Windows, Bash in Linux ;
     - extention with short functions:  p()=pow()="x^y",  e()=exp() ;
 	- correct processing of the text blocks: """ text block... """ ;
 	- fix Macro Substitution: #p/default# ;
 	- fix of the indentation errors ;
 	- small fixes in jj-library: pik3d/usr/*.jj .
-	
+
   - added matrix operations:
     - corr - auto correlation matrix ;
     - ata  - transp( A ) * A ;
@@ -70,7 +70,7 @@
 	- sr  = "Stack Row" ;
 	- sks = "Stack + k*Stack" ;
 	- fmt and tt are added new key: /r -"print row number";
-	
+
   - new pik.io methods: getKbd(), getSTi(), stdin() - see: pik3d_DOC.html;
   - command: farg is replaced by pl-"Print Lines";
   - small fixes in pik.jar( input/output );
@@ -103,7 +103,7 @@
   - s3d,b3d: added ability to load and ON/off: Points, Lines, Body;
   - s3d,b3d: added config. setting: head - text in the top left corner;
   - jj: added new short function: rn1() - uniform  random [-1,1];
-  -                               gau() - Gaussian random: m=0, sigma=.5; 
+  -                               gau() - Gaussian random: m=0, sigma=.5;
   - fixed and extended some sections in the Help ;
   - several bugs are fixed in library: s3d.jar, pik.jar.
 
