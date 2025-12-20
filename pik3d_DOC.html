@@ -2196,7 +2196,7 @@ V * V# = I,  where: V# - transp.V --> V# - inverse of V .
   5.828671e-16   2.111598e-16   2.491707e-16</n>
 
 > mul V:2  V  V:2# | dif - A        <y>! V:2 * V * V:2#  =  A</y>
- <n>### MAX         Average        Root_Mean_Square [ 3 ]
+ <n>### MAX         Average        Root_Mean_Square [3]
   1.94289e-16    6.120254e-17   7.585892e-17</n>
 
 > diag V | vic -   <y>! plot Eigen Values as function of number</y>.
@@ -2244,19 +2244,19 @@ We can neglect small and zeros Singular Values/Vectors and use r &lt; n :
 > stk 99 7 | noise -  >  A      <y>! A-random matrix 99x7</y>
 > svd A <r>@D</r> | tt 10*11.4g        <y>! <r>Save</r> and print Singular Values and Vectors</y>
 > mul D:2 D D:3# | dif A -      <y>! Difference A from L*S*Rt</y>
- <n>### MAX         Average        Root_Mean_Square [ 3 ]
+ <n>### MAX         Average        Root_Mean_Square [3]
   1.665334e-16   4.135816e-17   5.1797643e-17</n>
 
 > mul D:2# D:2 | dif - 1        <y>! L# * L = I</y>
- <n>### MAX         Average        Root_Mean_Square [ 3 ]
+ <n>### MAX         Average        Root_Mean_Square [3]
   1.776356e-15   2.970216e-16   4.27931803e-16</n>
 
 > mul D:3# D:3 | dif - 1        <y>! R# * R = I</y>
- <n>### MAX         Average        Root_Mean_Square [ 3 ]
+ <n>### MAX         Average        Root_Mean_Square [3]
   5.551115e-16   1.525140e-16   1.937281e-16</n>
 
 > mul A# A > AtA  &  <r>mul D:3  D D  D:3#</r> | dif - AtA    ! <r>R * S*S * Rt</r> = AtA
- <n>### MAX         Average        Root_Mean_Square [ 3 ]
+ <n>### MAX         Average        Root_Mean_Square [3]
   5.551115e-16   1.159963e-16   1.481203e-16</n>
 
 > diag D | vic -   <y>! plot Singular Values as function of number.</y>
@@ -2587,11 +2587,11 @@ result:<n>
  . . .
 <m>> jj reglin XV</m> %fx%     <r>use 1</r> ...
  . . .
-### MAX        Average       Root_Mean_Square [ 3 ]
+### MAX        Average       Root_Mean_Square [3]
  .5548023      .2444596      .2871637                     <y>#R.Diff <> regtst.Diff</y>
  . . .
 <m>> jj regtst XV</m> %fx%  <r>R  use 0</r></m>
-### MAX        Average       Root_Mean_Square [ 3 ]
+### MAX        Average       Root_Mean_Square [3]
  .4371455      .1949338      .2269329</n>                     <y>#regtst.Diff</y>
 <a name='uve'></a>________________________________________________________________________________________
 
