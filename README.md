@@ -69,7 +69,7 @@ The framework has simple tools to create a new command in JAVA, for example: __j
 
 __jj__ is a __preprocessor and executor__. It allows to compile/execute __.jj and .java files__. jj-file contains
 only "subject part". __File.java is generated from File.jj__ by adding header with import and main().
-__File.java__ with framework __class-path__ is submitted for execution to __JAVA__ (jdk/javac must be present).
+__File.java__ with framework __class-path__ is submitted for execution to __JAVA__ ( jdk/javac must be present ).
 Intermediate files can be saved.
 
 __jj-Technology supports macro substitution__ that allow you to modify java-code directly during jj-call.
