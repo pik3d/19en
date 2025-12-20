@@ -54,6 +54,9 @@ columns and rows of matrices. Simple graph-editor can add text, lines, figures t
 They scale well and can be used in MS Word documents, conveniently viewed using ACDSee
 , Total Commander &lt;F3> ...
 
+An overview of the technology is given in the article:
+<a href='https://habr.com/ru/articles/974088/'>__"Domain-Specific system based on console JAVA applications"__</a>.
+
 Framework commands are executable(.exe) modules and their set is not fixed.
 The __launcher technology__ is used ("launch" - to launch, start, run ). Launcher (.exe )
 encapsulates the initial path and configuration of the Java Virtual Machine for the command.
@@ -92,9 +95,6 @@ Launcher can be created for __any jj-script or java-file__, which can be execute
 Additional commands can be implemented in any other convenient algorithmic language.
 To read/write ###-files in __PYTHON__: pik3d/ext/ __kadr.py package__ is included.
 To read ###-files in the __ImageJ__ editor, ###_Reader_ImageJ.jar __plugin__ is implemented.
-
-An overview of the technology is given in the article:
-<a href='https://habr.com/ru/articles/974088/'>__"Domain-Specific system based on console JAVA applications"__</a>.
 
 The framework can be installed on __Windows 7, 10, Linux__ (tested in Mint 21).
 __Current version 23.6__ is  compiled with __JAVA-21 LTS__ using __javaFX__. It can be run under __JAVA 21-27__,
