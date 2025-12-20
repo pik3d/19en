@@ -19,7 +19,7 @@ x{background:#333333; color:#00FF00; font-size:13px; line-height:13px; font-fami
 </f><a name='ogl'></a>
 <a href='#fwk'>OVERVIEW of pik3d v.23.6</a>
 <a href="#ins">INSTALL pik3d </a>
-<a href="#jfx">Assemble your own JDK+FX build</a>
+<a href="#jfx">Build your own JDK+FX assembly</a>
 <a href="#dat">###-format of the data: FRAME, STACK</a>
 <a href="#cmd">COMMANDS</a>
 
@@ -170,14 +170,14 @@ It was tested under JAVA 21,22,25,"Early-Access Release 27".
 </o>
     <x> Linux specific steps will appear like this.</x>
 
- 1. Download or <a href="#jfx">create*</a> <r>Open JDK+FX</r> installation zip-archive for Windows or Linux.
-    Recommended build:
+ 1. Download or  <a href="#jfx">*build your own</a>  <r>JDK+FX</r> assembly  for Windows or Linux.
+    Recommended assembly:
 
        <a href="https://www.azul.com/downloads/?os=windows&architecture=x86-64-bit&package=jdk-fx#zulu">Azul  JDK FX </a>        ! Java <r>25 LTS</r>, x86 64-bit
 
     Since the framework does not require a full JAVA installation ( <r>only unzip</r> ),
-    builds can be easily changed. If another version of JAVA is installed on the system,
-    the framework with JAVA-25 will not affect it in any way.
+    assemblies can be easily changed. If a different version of Java is installed on the
+    system, the presence of the JDK+FX assembly will not affect the system in any way.
 
  2. Expand JAVA archive, for example to: D:\jdk <x> ~/jdk </x>. There should be a folder:
     D:\jdk\bin  <x> ~/jdk/bin </x>  with  <r>java.exe</r>.  It will be pointed in Launchers config.
@@ -213,37 +213,43 @@ It was tested under JAVA 21,22,25,"Early-Access Release 27".
     <r>&lt;F1></r>,<r>^A</r>-Axes,<r>&lt;Alt+M></r>-Map Off,<r>^D</r>-Map Down,<r>^M</r>-only Map,<r>^2</r>-add.Obj (<r>^</r>=pressed<r>&lt;Ctrl></r>key)
 
 <a name='jfx'></a>
-<n>*Assemble your own <r>JDK+FX</r> build (example: OpenJDK + javaFX v.25 for Windows)</n>
+<n>*Build your own <r>JDK+FX</r> assembly</n>,  example: OpenJDK + javaFX v.25 for Windows.
 
- 1. Download from official site: <a href="https://jdk.java.net/java-se-ri/25"> <r>jdk</r>.java.net </a> GA Releases:
+ 1. Download from official site: <a href="https://jdk.java.net/java-se-ri/25"> <r>jdk</r>.java.net </a>  GA Releases:
     - <n>jdk-25_windows-x64_bin.zip</n>               - Windows/x64 JDK 25 (212 MB) ;
     - <n>openjfx-25.0.1_windows-x64_bin-jmods.zip</n> - Windows/x64 javaFX 25 (45 MB) .
 
- 2. Copy zip-folder:  <n>jdk-25.0.1</n>  to the disk( for example we will use d:\ ).
-    Make sure the folder:  <n>d:\jdk</n>  is absent( our build will be placed there ).
+ 2. Copy zip-folder:  <n>jdk-25.0.1</n>  to the disk( for example we will use <n>d:\</n> ).
 
  3. Copy zip-folder:  <n>javafx-jmods-25.0.1</n>  to the disk ;
 
- 4. Go to the folder:  <n>d:\jdk-25.0.1\bin</n> ;
+ 4. Make sure the folder:  <n>d:\jdk</n>  is absent, our build will create it.
 
- 5. Run Console (e.g. cmd.exe)  and  execute command ( this is <n>one line</n> ):
+ 5. Go to the folder:  <n>d:\jdk-25.0.1\bin</n> ;
 
-<n>jlink --module-path d:\javafx-jmods-25.0.1 --add-modules  javafx.base,javafx.controls,
+ 6. Run Console (e.g. cmd.exe)  and  execute command ( this is <m>one line</m> ):
+
+<m>jlink  --module-path <n>d:\javafx-jmods-25.0.1</n>  --add-modules javafx.base,javafx.controls,
 javafx.fxml,javafx.graphics,javafx.media,javafx.swing,javafx.web  --bind-services
---output  d:\jdk </n>
+--output</m>  <n>d:\jdk</n>
 
- <r>!!! After that d:\jdk contains build( </r>~288 MB<r> ) which is enough to execute framework,
-     but not enough to compile java-files with javaFX !!!</r>
+ 7. Copy files:  <r>LICENSE, README, release</r>  from  <n>d:\jdk-25.0.1</n>  to  <n>d:\jdk</n> .
 
-The following steps are required for the build with the javaFX Compilation option.
+ <r>!!! After this, the d:\jdk folder contains an assembly (</r>~288 MB<r>), which is sufficient
+     to run the framework, but not sufficient to compile Java files using javaFX !!!</r>
 
- 6. Copy folder: <n>jmods</n>  from <n>d:\jdk-25.0.1</n>  to the  <n>d:\jdk</n> .
+The following steps are required for the assembly with the javaFX Compilation option.
 
- 7. Copy <n>all files</n> from the folder: <n>d:\javafx-jmods-25.0.1\jmods</n> to the <n>d:\jdk\jmods</n>
-    If any file already exists while copying, select the <n>overwrite</n> option !
+ 8. Copy folder: <n>jmods</n>  from <n>d:\jdk-25.0.1</n>  to the  <n>d:\jdk</n> .
 
-After all the steps  <n>d:\jdk</n>  contains  <r>Full JDK+FX</r>  ( ~422 MB ).
+ 9. Copy <n>all files</n> from the folder: <n>d:\javafx-jmods-25.0.1\jmods</n> to the <n>d:\jdk\jmods</n>
+    If any file already exists while copying, select the <n>overwrite</n> option .
+
+After all the steps  <n>d:\jdk</n>  contains  <r>JDK+FX</r>  assembly (~422 MB).
 Folders:  <n>d:\jdk-25.0.1, d:\javafx-jmods-25.0.1</n>  can be removed.
+
+    <r>!!! WHEN USING THIS ASSEMBLY, YOU MUST COMPLY WITH THE TERMS OF THE LICENSE !!!</r>
+
 <a name='dat'></a>________________________________________________________________________________________
 
 		<o>###-format of the data: FRAME, STACK
