@@ -79,7 +79,7 @@ This feature is used to find regression, i.e. set of functions for regression ca
 __analytically in symbolic form directly in the command line__, see: pik3d/demo/regression.
 
 In addition, __jj__ can execute the __sequence of Java commands__ directly from the command line.
-__jj__ can use JVM options ( see: pik3d/usr/jep438.jj - test of Vector API ).
+__jj-scripts__ can be run with JVM options ( see: pik3d/usr/jep438.jj - test of Vector API ).
 
 In a simple case, the processing program is a script (.bat, .cmd ...).
 From command to command, data is transferred in the form of __###-files__
