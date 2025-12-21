@@ -216,8 +216,9 @@ It was tested under JAVA 21,22,25,"Early-Access Release 27".
 <n>*Build your own <r>JDK+FX</r> assembly</n>,  example: OpenJDK + javaFX v.25 for Windows.
 
  1. Download from official site: <a href="https://jdk.java.net/java-se-ri/25"> <r>jdk</r>.java.net </a>  GA Releases:
-    - <n>jdk-25_windows-x64_bin.zip</n>               - Windows/x64 JDK 25 (212 MB) ;
-    - <n>openjfx-25.0.1_windows-x64_bin-jmods.zip</n> - Windows/x64 javaFX 25 (45 MB) .
+    - <n>jdk-25_windows-x64_bin.zip</n>               - Windows/x64 JDK    25       (212 MB);
+    - <n>openjfx-25.0.1_windows-x64_bin-jmods.zip</n> - Windows/x64 javaFX 25 JMODs (45 MB) ;
+    - <n>openjfx-25.0.1_windows-x64_bin-sdk.zip</n>   - Windows/x64 javaFX 25 SDK   (52 MB) .
 
  2. Copy zip-folder:  <n>jdk-25.0.1</n>  to the disk( for example we will use <n>d:\</n> ).
 
@@ -245,7 +246,15 @@ The following steps are required for the assembly with the javaFX Compilation op
  9. Copy <n>all files</n> from the folder: <n>d:\javafx-jmods-25.0.1\jmods</n> to the <n>d:\jdk\jmods</n>
     If any file already exists while copying, select the <n>overwrite</n> option .
 
-After all the steps  <n>d:\jdk</n>  contains  <r>JDK+FX</r>  assembly (~422 MB).
+10. If you need  the source codes:
+    - copy file  <n>d:\jdk-25.0.1\lib\</n><r>src.zip</r>  to  <n>d:\jdk\lib</n> ;
+    - copy files <n>openjfx-25.0.1_windows-x64_bin-sdk.zip/javafx-sdk-25.0.1/src.zip/</n><r>*.*</r>
+           to    <n>d:\jdk\lib\</n><r>src.zip</r>,  select the <n>overwrite</n> option if the file exists.
+
+      <n>WARNING:</n>   Copying files with the <n>overwrite</n> option isn't entirely correct,
+                 but the result is satisfactory( the source code is available in IDE ).
+
+After all the steps  <n>d:\jdk</n>  contains  <r>JDK+FX</r>  assembly (~473 MB).
 Folders:  <n>d:\jdk-25.0.1, d:\javafx-jmods-25.0.1</n>  can be removed.
 
     <r>!!! WHEN USING THIS ASSEMBLY, YOU MUST COMPLY WITH THE TERMS OF THE LICENSE !!!</r>
