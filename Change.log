@@ -1,4 +1,9 @@
 
+2026-01-16  v.23.6.1
+  - fixed: > vic /blank ; 
+  - fixed 2d-WMF problems ;
+  - Linux version: 2d axes Font size .
+
 2025-12-19  v.23.6  !!! JAVA 21-27 !!!
   - recompiled with option: --release 21 ;
   - tested with JAVA: 21,22,25,27 (https://jdk.java.net/27 -Early-Access Build);
