@@ -2,8 +2,8 @@
 2026-02-12  v.23.6.2
   - 2d-graphics:
     - fix: remove all Active points ;
-	- add: function  xywh( int... xx ) - set widnow position & size ;
-	- removed: put gra-windows to front when entered ;
+    - add: function  xywh( int... xx ) - set widnow position & size ;
+    - removed: put gra-windows to front when entered ;
   - pik3d_DOC.html: small changes .
 
 2026-01-16  v.23.6.1
