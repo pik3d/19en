@@ -90,7 +90,7 @@ Launcher can be created for any __jj-script or java-file__.
 
 Additional commands can be implemented in any other convenient algorithmic language.
 To read/write ###-files in __PYTHON__: pik3d/ext/ __kadr.py package__ is included.
-To read ###-files in the __ImageJ__ editor, __###_Reader_ImageJ.jar plugin__ is implemented.
+To read ###-files in the __ImageJ__ editor, ###_Reader_ImageJ.jar __plugin__ is implemented.
 
 The framework can be installed on __Windows 7, 10, Linux__ (tested in Mint 21).
 __Current version 23.6__ is  compiled with __JAVA-21 LTS__ using __javaFX__. It can be run under __JAVA 21-27__,
