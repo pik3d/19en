@@ -9,7 +9,7 @@ Such a sequence is called a stack of images (possibly from a single frame).
 
 The framework offers a data storage/exchange standard: __###-format__ and
 base set of commands/utilities for processing and displaying stacks.
-To convert matrix text to __###-format__ all you need to do is add a header:
+To convert matrix text to __###-format__ all you need to do is to add a header:
 
     ### matrix_name [ m, n ] , where: m-number of rows, n-columns
 
