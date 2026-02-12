@@ -5,7 +5,7 @@ Framework pik3d
 
 When exploring the properties of a time-varying surface, it is convenient
 to store, process and display a set of images (frames/matrices) as a whole.
-Such a sequence is called a STACK of images ( perhaps from one frame ).
+Such a sequence is called a stack of images (possibly from a single frame).
 
 The framework offers a data storage/exchange standard: __###-format__ and
 base set of commands/utilities for processing and displaying stacks.
@@ -58,17 +58,13 @@ An overview of the technology is given in the article:
 <a href='https://habr.com/ru/articles/974088/'>__"Domain-Specific system based on console JAVA applications"__</a>.
 
 Framework commands are executable(.exe) modules and their set is not fixed.
-The __launcher technology__ is used ("launch" - to launch, start, run ). Launcher (.exe )
+The __launcher technology__ is used ("launch" - to launch, start, run ). __Launcher__ (.exe )
 encapsulates the initial path and configuration of the Java Virtual Machine for the command.
-It allows to have several versions of JAVA on the system if necessary. 
-
-The user does not encounter JAVA-programming anywhere( except expanding functionality ).
-JAVA doesn't even need to be installed. Only unpack the JAVA installation archive in some folder.
 
 The framework has simple tools to create a new command in JAVA, for example: __jj-Technology -"java-JAVA"__.
 
 __jj__ is a __preprocessor and executor__. It allows to compile/execute __.jj and .java files__. jj-file contains
-only "subject part". __File.java is generated from File.jj__ by adding header with import and main().
+only "subject part". __File.java__ is generated from __File.jj__ by adding __header__ with import and __main()__.
 __File.java__ with framework __class-path__ is submitted for execution to __JAVA__ ( jdk/javac must be present ).
 Intermediate files can be saved.
 
@@ -82,28 +78,28 @@ __jj__ can execute the sequence of __Java commands directly from the command lin
 
 In a simple case, the processing program is a script (.bat, .cmd ...).
 From command to command, data is transferred in the form of __###-files__
-or by means of __"pipe"__ (it can reduce disk usage and increase performance).
-Most commands can save intermediate pipe data to a file for further processing (add @file to the command).
+or by means of __"pipe"__. Most commands can save intermediate pipe data to a file
+for further processing (add @file to the command).
 
 __jj-technology__ supports execution of OS-commands and pipe-lines.
 This feature allows to use __jj-file__ as batch file with flexible control on JAVA !
 Such jj-script even can be compiled into the __.class__ file and run with __.exe Launcher__ !
 
 Framework has simple tool to create new comands: __crex -"CReate EXecutable"__.
-Launcher can be created for any __jj-script or java-file__, which can be executed by __jj-preprocessor__.
+Launcher can be created for any __jj-script or java-file__.
 
 Additional commands can be implemented in any other convenient algorithmic language.
 To read/write ###-files in __PYTHON__: pik3d/ext/ __kadr.py package__ is included.
-To read ###-files in the __ImageJ__ editor, ###_Reader_ImageJ.jar __plugin__ is implemented.
+To read ###-files in the __ImageJ__ editor, __###_Reader_ImageJ.jar plugin__ is implemented.
 
 The framework can be installed on __Windows 7, 10, Linux__ (tested in Mint 21).
 __Current version 23.6__ is  compiled with __JAVA-21 LTS__ using __javaFX__. It can be run under __JAVA 21-27__,
 was tested with __JAVA: 21, 22, 25, 27__ <a href='https://jdk.java.net/27/'> https://jdk.java.net/27 - Early-Access Build </a>;
 
-Description of the framework, formats and install procedure are presented in the file:
-__pik3d_DOC.html__, contained in the install archives: __pik3d.zip__ and __pik3d_Linux.zip__.
+Description of the framework, formats and install procedure is present in the file:
+__pik3d_DOC.html__ and is contained in the installation archives: __pik3d.zip__ and __pik3d_Linux.zip__.
 
-To exchange large data ###-format includes __binary representation__.
+To exchange large data __###-format__ includes __binary__ representation.
 __CSV-files__ can be converted to __###-format__.
 
 ![opacF4](/assets/images/OpacF4.jpg)
