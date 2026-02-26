@@ -1,4 +1,10 @@
 
+2026-02-26  v.23.6.2
+  - command: hist.exe (Histogram) fix focus problem of the text field: #intervals ;
+  - pik: functional interfaces: Fx and Fxx 
+  - pik: function: pressEnter() for correct close of the graphics under jj-executor;
+  - pik3d_DOC.html: small changes .
+
 2026-02-12  v.23.6.2
   - 2d-graphics:
     - fix: remove all Active points ;
