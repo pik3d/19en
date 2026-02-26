@@ -3085,8 +3085,12 @@ if you have <r>gra w</r> created by <n>simple()</n>, you can :<n>
   <r>w</r>.font(size); <r>w</r>.txt( text, x, y )   </n>// in <r>w</r>-subject coord.: x,y add String text<n>
   <r>w</r>.repaint();                        </n>// is required! after manipulation with <r>gra</r>
   
-If several <r>gra</r> windows are opened, it is recommended to complete the task with the code:
+If <r>gra</r> windows are used in <m>jj</m> or <n>java</n> program under <m>jj-executor</m>, it is recommended
+to terminate the task and gracefully close all <r>gra</r> windows by code: 
+
 <n>  ee("Press Enter ..."); io.stdin(); System.exit(0);</n>
+
+This action is performed by calling the function:  <n>pik.io.pressEnter();</n>
 ________________________________________________________________________________________
 <f>
                               author: K.A. Ilyashenko, e-mail: kilyashenko@gmail.com
