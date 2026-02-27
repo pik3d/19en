@@ -3091,6 +3091,16 @@ to terminate the task and gracefully close all <r>gra</r> windows by code:
 <n>  ee("Press Enter ..."); io.stdin(); System.exit(0);</n>
 
 This action is performed by calling the function:  <n>pik.io.pressEnter();</n>
+Try test( <m>pik3d/usr/mimaj.jj</m> ) with  <n>pressEnter()</n>  and  without it( <y>//comment it</y> ):
+<m>{
+  var tt  = Fx.xx( 0, 20* pi*2, 999 );                     <y>//create tt[ 999 ]</y>
+  <n>Fx</n>  min = t <n>-></n> sin( t ) + sin( t*<n>6/5</n> ) + sin( t*3/2 );   <y>//Functional interface</y> <n>pik.Fx</n>
+  <n>Fx</n>  maj = t <n>-></n> sin( t ) + sin( t*<y>5/4</y> ) + sin( t*3/2 );
+  <r>gra</r><n>.simple</n>("minor <> MAJOR", tt, Fx.yy( min,tt ), Fx.yy( maj,tt ) )
+     <n>.xywh</n>( -1,-1, 1600, 200 );
+
+  <n>pressEnter();</n>   <y>// try to comment this line</y>
+}</m> 
 ________________________________________________________________________________________
 <f>
                               author: K.A. Ilyashenko, e-mail: kilyashenko@gmail.com
