@@ -1,9 +1,10 @@
 
-2026-04-17  v.23.6.3
+2026-04-18  v.23.6.3
+  - Cross section mode can be activated without ^D="Map Down";
   - 2D-graphics:
     - add multiline text: "\n";
     - `Upper` _Lower_ indexes in text;
-	- fix small bugs .
+    - fix small bugs .
 
 2026-02-26  v.23.6.2
   - command: hist.exe (Histogram) fix focus problem of the text field: #intervals ;
