@@ -2,7 +2,7 @@
 <head><meta http-equiv=Content-Type content="text/html; charset=windows-1251">
 <title>pik3d_DOC</title>
 <style><!--
-body {background:white; color:Black; font-size:14px; line-height:13px; font-family:'Monospace'}
+body {background:white; color:Black; font-size:14px; line-height:13px; font-family:'Monospace'; font-weight:200;}
 a:link, a:visited {color:blue; text-decoration:none;} a{font-weight:bold;}
 o{font-weight:bold; Color:#8b218b; font-size:14px; font-style:italic;}
 r{Color:RED;font-weight:bold;}
@@ -730,9 +730,9 @@ which serves as a configuration file in accordance with the following rules:
    macro substitution.
 
 Example:  <m>Argument File</m>  to call  <m>pik3d/usr/Fxyt.jj</m>  ( see Help > jj Fxyt ):
-<n>---------------------------------------------------------------------------- ff.arg ---</n>
-  arguments  to call Fxyt.jj   - this is comment
-<y>
+<n>---------------------------------------------------------------------------- ff.arg ---</n><y>
+  arguments  to call Fxyt.jj   - this is comment since NO colon symbol
+
 <n>    0_arg Functin( x, y, t )<r>:</r>
       exp( -(x*x+y*y)/9 ) * cos( x*x + y*y - t*.2*pi )  </n># function definition
 <n>
@@ -2872,12 +2872,10 @@ and <r>"Paste"</r> the values from the clipboard( <r>&lt;Ctrl+V> or &lt;Shift+In
 
 You can select and enlarge a fragment of the chart - <r>ZOOM</r>:
 1. Press Left Mouse button and <r>"Drag" Down-Right</r> .
-2. Without releasing the mouse button, select the size of the rectangle.
-3. Release the mouse and <r>click inside the rectangle</r> - a new ZOOM window will open.
-4. Select the size and aspect ratio of the new ZOOM window.
-5. Select the position of ZOOM in the main window - <r>"Drag" rectangle</r>.
-6. The size of the rectangle can be changed: <r>"Drag" ANY corner of the rectangle</r>.
-7. The rectangle in the main window exists as long as ZOOM window is not closed.
+2. Select the size of the rectangle and <r>click inside</r> - new ZOOM window will open.
+3. Select the position of ZOOM in the main window - <r>drag rectangle</r>.
+4. The size and aspect ratio of the rectangle can be changed by <r>drag corners</r> at ANY time
+5. The rectangle in the main window exists as long as ZOOM window is not closed.
 
 You can add <r>TEXT, LINE or FIGURE( box, oval, romb )</r> anywhere in the window:
 
@@ -2885,6 +2883,11 @@ You can add <r>TEXT, LINE or FIGURE( box, oval, romb )</r> anywhere in the windo
       - in the dialog that appears, select Color, Size, enter text;
       - <r>&#8593;/&#8595;</r>  - increase/ decrease  FONT Size;
       - <r>drag</r> text to the desired location, press OK or &lt;Enter>.
+	  
+        Text can be composed of multiple lines separated by 2 characters: "<n>\n</n>".
+        Upper and Lower indexes can be used, e.g. input Text:  fun.: <n>\n</n>  F<n>`5/7`_xy_</n>
+        example consists of 2 lines with upper and lower indexes.    ^^   ^   ^^  ^
+        <n>`Upper`</n> index is separated by the <n>grave accent</n>, <n>_Lower_</n> - with underscore.
 
   - <r>&lt;Ctrl+L></r> - add  <r>LINE</r>
         A line can consist of several fragments: Bezier curves and/or straight lines.
@@ -3104,5 +3107,5 @@ Try test( <m>pik3d/usr/mimaj.jj</m> ) with  <n>pressEnter()</n>  and  without it
 ________________________________________________________________________________________
 <f>
                               author: K.A. Ilyashenko, e-mail: kilyashenko@gmail.com
-                              Error messages, comments, suggestions  are  welcome .
+                              Bug-reports, comments, suggestions  are  welcome !
 </f></pre></h5></body></html>
