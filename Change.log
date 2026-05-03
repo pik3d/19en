@@ -1,4 +1,10 @@
 
+2026-04-18  v.23.6.4
+  - 2D-graphics improovements:
+    - Add.graphics can be moved and scaled;
+    - Add.graphics can be composed of several Add.graph;
+    - several small fixes.
+
 2026-04-18  v.23.6.3
   - Cross section mode can be activated without ^D="Map Down";
   - 2D-graphics:
